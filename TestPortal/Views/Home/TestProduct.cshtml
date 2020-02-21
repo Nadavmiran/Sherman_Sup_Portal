@@ -1,0 +1,98 @@
+﻿@model TestPortal.Models.PageObject
+@{
+    /**/
+
+    ViewBag.Title = "Testing Arena";
+    Layout = "~/Views/Shared/_Layout_EN.cshtml";
+}
+
+<style>
+    .modal-title {
+        color:#01416F;
+    }
+    .form-group .control-label, .form-group > label {
+    font-size:14px;
+    }
+</style>
+<div class="section-body">
+    <h2 class="section-title">Order # @Model.objOrder.OrderNumber</h2>
+    <p class="section-lead">Please add new testing results or update an existing test.</p>
+    <div class="card">
+        <div class="card-header">
+            <h4>Test product</h4>
+        </div>
+        <div class="card-body">
+            <div class="card-body">
+                <button class="btn btn-primary" id="modal-7">New Test</button>
+            </div>
+
+            @using (Html.BeginForm("SaveTest", "Home", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new
+            {
+                @class = "needs-validation modal-part",
+                role = "form",
+                id = "modal-test-part",
+                enctype = "multipart/form-data"
+            }))
+            {
+            <div class="card-body">
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Test Code</label>
+                    <div class="col-sm-9">
+                        @*<input type="text" class="form-control" required="">*@
+                        @Html.TextBox("txtTestCode", Model.TestObject.TestCode, new { @class = "form-control", @required = "" })
+                        <div class="invalid-feedback">
+                            Please fill 'Test Code'!
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Test Type</label>
+                    <div class="col-sm-9">
+                        @Html.TextBox("txtTestType", Model.TestObject.TestType, new { @class = "form-control", @required = "" })
+                        <div class="invalid-feedback">
+                            Type is invalid.
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Test Result</label>
+                    <div class="col-sm-9">
+                        @Html.TextBox("txtTestResult", Model.TestObject.TestResult, new { @class = "form-control", @required = "" })
+                        <div class="invalid-feedback">
+                            This field is mandatory!
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group mb-0 row">
+                    <label class="col-sm-3 col-form-label">Test Comments</label>
+                    <div class="col-sm-9">
+                        @Html.TextBox("txtTestComments", Model.TestObject.TestComments, new { @class = "form-control", @maxlength = "120" })
+                    </div>
+                </div>
+                <div class="form-group row"></div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="section-body">
+                                    <h5 class="section-title" style="color:#01416F">Files Upload</h5>
+                                    <p class="section-lead">You can upload multiple files.</p>
+                                </div>
+
+                                <div class="card-body">
+                                    @*<form action="#" class="dropzone" id="mydropzone">*@
+                                    <div class="fallback">
+                                        @Html.TextBox("attachments", Model.attachments, new { @type = "file", @multiple = "multiple" })
+                                        @*<input name="file" type="file" multiple />*@
+                                    </div>
+                                    @*</form>*@
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                }
+            </div>
+    </div>
+</div>
+<!-- JS Libraies -->
+<script src="~/Scripts/dropzone.js"></script>
