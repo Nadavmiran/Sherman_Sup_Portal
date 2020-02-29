@@ -1,0 +1,24 @@
+ERROR 2020-02-29 13:36:11,182   499ms eporting Portal Logger GetSupplierOrders  - GetSupplierOrders ==> SP = LMNS_GetSupplierOrders ==> supplier = 20799
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at LMNS.Repositories.Dal.ConnectionStringByCompany(String companyName) in H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\Repositories\Dal.cs:line 221
+   at LMNS.Repositories.Dal.GetConnectionString() in H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\Repositories\Dal.cs:line 19
+   at LMNS.Repositories.Dal.GetRecordSet(String spName, SqlParameter[] p) in H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\Repositories\Dal.cs:line 77
+   at TestPortal.Models.Order.GetSupplierOrders(String supplier) in H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\Models\Order.cs:line 26
+ERROR 2020-02-29 16:54:32,744   204ms eporting Portal Logger GetOrderDetails    - OrderDetails ==> SP = LMNS_GetOrderDetails ==> ord = 114553
+System.Data.SqlClient.SqlException (0x80131904): Procedure or function 'LMNS_GetSupplierOrders' expects parameter '@supName', which was not supplied.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)
+   at LMNS.Repositories.Dal.GetRecordSet(String spName, SqlParameter[] p) in H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\Repositories\Dal.cs:line 87
+   at TestPortal.Models.Order.GetOrderDetails(Int32 orderID) in H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\Models\Order.cs:line 51
+ClientConnectionId:a6750b26-1ff6-4e0a-bf03-e00e71e59c4c
+Error Number:201,State:4,Class:16

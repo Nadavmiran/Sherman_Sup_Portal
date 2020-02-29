@@ -65,8 +65,9 @@ function showGrid()
                 autowidth: true,
                 height: null,
                 colModel: [
-                    { label: 'ProductID', name: 'ProductID', align: 'center', key: true, hidden: true, formatter: formatRPTLink, width: 75 },
-                    { label: 'Serial No.', name: 'ProductName', align: 'center', formatter: formatRPTLink, width: 100 },
+                    { label: '#', name: 'LINE', align: 'center', hidden: true, width: 75 },
+                    { label: 'ProductID', name: 'ProductID', align: 'center', key: true, hidden: true, width: 75 },
+                    { label: 'Serial No.', name: 'ProductName', align: 'center', formatter: formatProdLink, width: 100 },
                     { label: 'Description', name: 'ProductDescription', align: 'center', width: 100 },
                     { label: 'Quntity', name: 'TotalAmountInOrder', align: 'center', width: 100 },
                     { label: 'Left Quntity', name: 'LeftAmountToDeliver', align: 'center', width: 100 },
@@ -118,7 +119,22 @@ function formatRPTLink(cellValue, options, rowObject)
     var linkText = document.createTextNode(cellValue);
     a.appendChild(linkText);
     a.title = cellValue;
-    a.href = 'Home/TestProduct?' + 'OrderID=' + rowObject.OrderID + '&OrderNumber=' + rowObject.OrderNumber;
+    a.href = 'Home/TestProduct?' + 'OrderID=' + rowObject.OrderID + '&OrderNumber=' + rowObject.OrderNumber ;
+    a.classList = '.ui-state-highlight a, .ui-widget-content .ui-state-highlight a, .ui-widget-header .ui-state-highlight a';//.style.color = "#01416F";
+    console.log("setHref ==> a", a.outerHTML);
+    return a.outerHTML;
+}
+
+function formatProdLink(cellValue, options, rowObject)
+{//options.rowId
+    //rowObject.ProductID
+    console.log("formatRPTLink ==> options", options);
+    console.log("formatRPTLink ==> rowObject", rowObject);
+    var a = document.createElement('a');
+    var linkText = document.createTextNode(cellValue);
+    a.appendChild(linkText);
+    a.title = cellValue;
+    a.href = 'Home/TestProductItem?' + 'OrderID=' + rowObject.OrderID + '&prodId=' + options.rowId + '&ordLine=' + rowObject.LINE;
     a.classList = '.ui-state-highlight a, .ui-widget-content .ui-state-highlight a, .ui-widget-header .ui-state-highlight a';//.style.color = "#01416F";
     console.log("setHref ==> a", a.outerHTML);
     return a.outerHTML;

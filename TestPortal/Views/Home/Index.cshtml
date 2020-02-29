@@ -13,6 +13,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/themes/redmond/jquery-ui.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/free-jqgrid/4.15.5/css/ui.jqgrid.min.css">
+<link href="~/Content/Site.css" rel="stylesheet" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/free-jqgrid/4.15.5/jquery.jqgrid.min.js"></script>
 <script>
@@ -20,29 +21,7 @@
     $.jgrid.defaults.responsive = true;
     $.jgrid.defaults.shrinkToFit = false;
     //$.jgrid.defaults.styleUI = 'Bootstrap';
-    
-
 </script>
-<style>
-    .ui-jqgrid > .ui-jqgrid-view {
-        font-size: 14px;
-    }
-    .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
-        background: #00AEEF;
-        color:#FFF;
-    }
-    .ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight {
-        background: #01416F;
-        color:#FFF;
-    }
-    .ui-state-highlight a, .ui-widget-content .ui-state-highlight a, .ui-widget-header .ui-state-highlight a 
-        {
-            color:#FFF;
-        }
-
-    /***************/
-
-</style>
 <!-- Main Content -->
 <div class="section-body">
     <h2 class="section-title">Waiting orders to supply</h2>
@@ -75,7 +54,7 @@
         $grid.jqGrid("setGridWidth", newWidth, true);
     });
     $(document).ready(function () {
-        getData("2222");
+        getData("22149");
 
         var $grid = $("#jqGrid"),
             newWidth = $grid.parent().width();

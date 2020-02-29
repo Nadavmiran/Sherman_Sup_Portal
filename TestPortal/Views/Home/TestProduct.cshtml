@@ -13,86 +13,191 @@
     .form-group .control-label, .form-group > label {
     font-size:14px;
     }
+
 </style>
+<link href="~/Content/Site.css" rel="stylesheet" />
+<script>
+    //$.jgrid.defaults.width = null;
+    $.jgrid.defaults.responsive = true;
+    $.jgrid.defaults.shrinkToFit = false;
+    //$.jgrid.defaults.styleUI = 'Bootstrap';
+</script>
 <div class="section-body">
     <h2 class="section-title">Order # @Model.objOrder.OrderNumber</h2>
     <p class="section-lead">Please add new testing results or update an existing test.</p>
-    <div class="card">
-        <div class="card-header">
-            <h4>Test product</h4>
-        </div>
-        <div class="card-body">
-            <div class="card-body">
-                <button class="btn btn-primary" id="modal-7">New Test</button>
-            </div>
-
-            @using (Html.BeginForm("SaveTest", "Home", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new
-            {
-                @class = "needs-validation modal-part",
-                role = "form",
-                id = "modal-test-part",
-                enctype = "multipart/form-data"
-            }))
-            {
-            <div class="card-body">
-                <div class="form-group row">
-                    <label class="col-sm-3 col-form-label">Test Code</label>
-                    <div class="col-sm-9">
-                        @*<input type="text" class="form-control" required="">*@
-                        @Html.TextBox("txtTestCode", Model.TestObject.TestCode, new { @class = "form-control", @required = "" })
-                        <div class="invalid-feedback">
-                            Please fill 'Test Code'!
-                        </div>
-                    </div>
+    <div class="row">
+        <div class="col-12 col-md-6 col-lg-6">
+            <div class="card">
+                <div class="card-header">
+                    <h4><i class="fas fa-file-invoice" style="font-size: 20px;"></i> Order Details</h4>
                 </div>
-                <div class="form-group row">
-                    <label class="col-sm-3 col-form-label">Test Type</label>
-                    <div class="col-sm-9">
-                        @Html.TextBox("txtTestType", Model.TestObject.TestType, new { @class = "form-control", @required = "" })
-                        <div class="invalid-feedback">
-                            Type is invalid.
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-sm-3 col-form-label">Test Result</label>
-                    <div class="col-sm-9">
-                        @Html.TextBox("txtTestResult", Model.TestObject.TestResult, new { @class = "form-control", @required = "" })
-                        <div class="invalid-feedback">
-                            This field is mandatory!
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group mb-0 row">
-                    <label class="col-sm-3 col-form-label">Test Comments</label>
-                    <div class="col-sm-9">
-                        @Html.TextBox("txtTestComments", Model.TestObject.TestComments, new { @class = "form-control", @maxlength = "120" })
-                    </div>
-                </div>
-                <div class="form-group row"></div>
+                <div class="card-body">
                     <div class="row">
-                        <div class="col-12">
-                            <div class="card">
-                                <div class="section-body">
-                                    <h5 class="section-title" style="color:#01416F">Files Upload</h5>
-                                    <p class="section-lead">You can upload multiple files.</p>
-                                </div>
-
-                                <div class="card-body">
-                                    @*<form action="#" class="dropzone" id="mydropzone">*@
-                                    <div class="fallback">
-                                        @Html.TextBox("attachments", Model.attachments, new { @type = "file", @multiple = "multiple" })
-                                        @*<input name="file" type="file" multiple />*@
-                                    </div>
-                                    @*</form>*@
-                                </div>
+                        <form class="form-horizontal  col-sm-12">
+                            <div class="form-group">
+                                <label class="control-label" style="color:#01416F">Order&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                <label class="control-label col-sm-2">@Model.objOrder.OrderNumber</label>
+                                <label class="control-label" style="color:#01416F">&nbsp;&nbsp;Order Date</label>
+                                <label class="control-label col-sm-2">@Model.objOrder.OrderDate</label>
+                                <label class="control-label" style="color:#01416F">Order Status</label>
+                                <label class="control-label col-sm-2">@Model.objOrder.OrderStatus</label>
                             </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2">&nbsp;</label>
+                                <label class="control-label col-sm-2">&nbsp;</label>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-6 col-lg-6">
+            <div class="card">
+                
+                <div class="card-header">
+                    <h4><i class="fas fa-puzzle-piece" style="font-size: 20px;"></i> Product Information</h4>
+                    <button class="btn btn-primary" id="modal-7" style="visibility:hidden;">New Test</button>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <form class="form-horizontal  col-sm-12">
+                            <div class="form-group">
+                                <label class="control-label" style="color:#01416F">Serial No.</label>
+                                <label class="control-label col-sm-2" id="lblProductName">@Model.objProduct.ProductName</label>
+                                <input type="hidden" id="hdnOrdId" value="@Model.objOrder.OrderID" />
+                                <input type="hidden" id="hdnPrdId" value="@Model.objProduct.ProductID" />
+                                <label class="control-label" style="color:#01416F">Description</label>
+                                <label class="control-label col-sm-3">@Model.objProduct.ProductDescription</label>
+                                <label class="control-label" style="color:#01416F">Supply Date</label>
+                                <label class="control-label">@Model.objProduct.SupplyDate</label>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label" style="color:#01416F">Quntity&nbsp; &nbsp; </label>
+                                <label class="control-label col-sm-2">@Model.objProduct.TotalAmountInOrder</label>
+                                <label class="control-label" style="color:#01416F">Left Quntity</label>
+                                <label class="control-label col-sm-3">@Model.objProduct.LeftAmountToDeliver</label>
+                                <label class="control-label" style="color:#01416F">Status</label>
+                                <label class="control-label ">@Model.objProduct.LineStatus</label>
+                            </div>
+                            @*<div class="form-group">
+                        <button class="btn btn-primary" id="modal-7">New Test</button>
+                    </div>*@
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-6 col-lg-6">
+            <div class="card">
+                <div class="card-header">
+                    <h4><i class="fas fa-list" style="font-size: 20px;"></i> Order Products</h4>
+                </div>
+                <div class="card-body">
+                    <div>
+                        <table id="jqGrid"></table>
+                        <div id="jqGridPager"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-6 col-lg-6">
+            <div class="card">
+                <div class="card-header">
+                    <h4><i class="fas fa-balance-scale" style="font-size: 20px;"></i> Product Tests</h4>
+                </div>
+                <div class="card-body">
+                    <div>
+                        <table id="jqGridTest"></table>
+                        <div id="jqGridTestPager"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @using (Html.BeginForm("SaveTest", "Home", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new
+    {
+        @class = "needs-validation modal-part",
+        role = "form",
+        id = "modal-test-part",
+        enctype = "multipart/form-data"
+    }))
+    {
+        <div class="card-body">
+            <div class="form-group ">
+                <label class="col-sm-3 col-form-label">Test Code</label>
+                <div class="col-sm-9">
+                    @*<input type="text" class="form-control" required="">*@
+                    @Html.TextBox("txtTestCode", Model.TestObject.TestCode, new { @class = "form-control", @required = "" })
+                    <div class="invalid-feedback">
+                        Please fill 'Test Code'!
+                    </div>
+                </div>
+            </div>
+            <div class="form-group ">
+                <label class="col-sm-3 col-form-label">Test Type</label>
+                <div class="col-sm-9">
+                    @Html.TextBox("txtTestType", Model.TestObject.TestType, new { @class = "form-control", @required = "" })
+                    <div class="invalid-feedback">
+                        Type is invalid.
+                    </div>
+                </div>
+            </div>
+            <div class="form-group ">
+                <label class="col-sm-5 col-form-label">Test Result</label>
+                <div class="col-sm-9">
+                    @Html.TextBox("txtTestResult", Model.TestObject.TestResult, new { @class = "form-control", @required = "" })
+                    <div class="invalid-feedback">
+                        This field is mandatory!
+                    </div>
+                </div>
+            </div>
+            <div class="form-group ">
+                <label class="col-sm-5 col-form-label">Test Comments</label>
+                <div class="col-sm-12">
+                    @Html.TextArea("txtTestComments", Model.TestObject.TestComments, new { @class = "form-control", @maxlength = "120", @cols = "50", @rows = "3", style = "height:100px;" })
+                </div>
+            </div>
+            <div class="form-group row"></div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="section-body">
+                            <h5 class="section-title" style="color:#01416F">Files Upload</h5>
+                            <p class="section-lead">You can upload multiple files.</p>
+                        </div>
+
+                        <div class="card-body">
+                            @*<form action="#" class="dropzone" id="mydropzone">*@
+                            <div class="fallback">
+                                @Html.TextBox("attachments", Model.attachments, new { @type = "file", @multiple = "multiple" })
+                                @*<input name="file" type="file" multiple />*@
+                            </div>
+                            @*</form>*@
                         </div>
                     </div>
                 </div>
-                }
             </div>
-    </div>
+        </div>
+    }
 </div>
+<script type="text/javascript">
+                                    //var gridBaseWidth = 0;
+                                    //var isWidth = false;
+
+                                    //$(window).on("resize", function () {
+                                    //    var $grid = $("#jqGrid"),
+                                    //        newWidth = $grid.closest(".ui-jqgrid").parent().width();
+
+                                    //    console.log(" resize ==> newWidth ", newWidth);
+                                    //    console.log(" resize ==> gridBaseWidth ", gridBaseWidth);
+                                    //    if (newWidth > gridBaseWidth)
+                                    //        newWidth = gridBaseWidth;
+                                    //    $grid.jqGrid("setGridWidth", newWidth, true);
+                                    //});
+</script>
 <!-- JS Libraies -->
 <script src="~/Scripts/dropzone.js"></script>
+<script src="~/Scripts/TestProductOrderItems.js"></script>

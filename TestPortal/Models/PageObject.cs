@@ -8,6 +8,7 @@ namespace TestPortal.Models
     public class PageObject
     {
         public Order objOrder { get; set; }
+        public Product objProduct { get; set; }
         public Test TestObject { get; set; }
         public List<Test> lstTestObject { get; set; }
         public List<Order> lstOrderObject { get; set; }
