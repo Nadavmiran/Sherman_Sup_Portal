@@ -23,6 +23,7 @@ namespace TestPortal.Models
         public string LineStatus { get; set; }
         public string TYPE { get; set; } // P/R
         public string REVNUM { get; set; } //מהדורה
+        public int REV { get; set; } //מהדורה - קוד
 
         internal List<Product> GetOrderItems(int parentRowKey)
         {
@@ -46,6 +47,10 @@ namespace TestPortal.Models
                     obj.SupplyDate = dr["REQDATE"].ToString();
                     obj.EstimateSupplyDate = dr["ARRDATE"].ToString();
                     obj.REVNUM = dr["REVNUM"].ToString();
+                    if (string.IsNullOrEmpty(dr["REV"].ToString()))
+                        obj.REV = 0;
+                    else
+                        obj.REV = Convert.ToInt32(dr["REV"].ToString());
                     lst.Add(obj);
 			
                 }
@@ -78,6 +83,10 @@ namespace TestPortal.Models
                     obj.SupplyDate = dr["REQDATE"].ToString();
                     obj.EstimateSupplyDate = dr["ARRDATE"].ToString();
                     obj.REVNUM = dr["REVNUM"].ToString();
+                    if (string.IsNullOrEmpty(dr["REV"].ToString()))
+                        obj.REV = 0;
+                    else
+                        obj.REV = Convert.ToInt32(dr["REV"].ToString());
                 }
             }
             catch (Exception ex)

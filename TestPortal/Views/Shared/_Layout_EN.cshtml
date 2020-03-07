@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@model TestPortal.Models.PageObject
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -20,7 +21,7 @@
     <link href="~/Content/dropzone.css" rel="stylesheet" />
     <link href="~/Content/style.css" rel="stylesheet" />
     <link href="~/Content/components.css" rel="stylesheet" />
-    
+
     @*<link href="~/Content/jquery.jqGrid/ui.jqgrid.css" rel="stylesheet" />*@
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 </head>
@@ -166,7 +167,7 @@
                         </li>*@
                     <li class="dropdown">
                         <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-                            <div class="d-sm-none d-lg-inline-block">Hi, Ujang Maman</div>
+                            <div class="d-sm-none d-lg-inline-block">Hi, @Model.User.FullName, @Model.User.SupplierName</div>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
                             @*<div class="dropdown-title">Logged in 5 min ago</div>
@@ -202,7 +203,7 @@
                         <li class="nav-item dropdown active">
                             <a href="#" class="nav-link has-dropdown"><i class="fas fa-home"></i><span>Home</span></a>
                             <ul class="dropdown-menu">
-                                <li><a class="nav-link" href="@Url.Action("Index", "Home")">Dashboard</a></li>
+                                <li><a class="nav-link" href="@Url.Action("Index", "Home")">Orders</a></li>
                                 @*<li><a class="nav-link" href="index.html">Ecommerce Dashboard</a></li>*@
                             </ul>
                         </li>

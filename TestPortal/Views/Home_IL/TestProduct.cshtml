@@ -2,44 +2,38 @@
 @{
     /**/
 
-    ViewBag.Title = "Testing Arena";
-    Layout = "~/Views/Shared/_Layout_EN.cshtml";
+    ViewBag.Title = "סביבת בדיקות";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <style>
     .modal-title {
-        color: #01416F;
+        color:#01416F;
+    }
+    .form-group .control-label, .form-group > label {
+    font-size:14px;
     }
 
-    .form-group .control-label, .form-group > label {
-        font-size: 14px;
-    }
 </style>
 <link href="~/Content/Site.css" rel="stylesheet" />
-<script>
-    //$.jgrid.defaults.width = null;
-    $.jgrid.defaults.responsive = true;
-    $.jgrid.defaults.shrinkToFit = false;
-    //$.jgrid.defaults.styleUI = 'Bootstrap';
-</script>
 <div class="section-body">
-    <h2 class="section-title">Order # @Model.objOrder.OrderNumber</h2>
-    <p class="section-lead">Please add new testing results or update an existing test.</p>
+    <h2 class="section-title">הזמנה # @Model.objOrder.OrderNumber</h2>
+    <p class="section-lead">הוסף תוצאת בדיקה חדשה ו/או עדכן בדיקה קיימת</p>
     <div class="row">
         <div class="col-12 col-md-6 col-lg-6">
             <div class="card">
                 <div class="card-header">
-                    <h4><i class="fas fa-file-invoice" style="font-size: 20px;"></i> Order Details</h4>
+                    <h4><i class="fas fa-file-invoice" style="font-size: 20px;"></i> פרטי הזמנה</h4>
                 </div>
                 <div class="card-body">
                     <div class="row">
                         <form class="form-horizontal  col-sm-12">
                             <div class="form-group">
-                                <label class="control-label" style="color:#01416F">Order&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                <label class="control-label" style="color:#01416F">הזמנה&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
                                 <label class="control-label col-sm-2">@Model.objOrder.OrderNumber</label>
-                                <label class="control-label" style="color:#01416F">&nbsp;&nbsp;Order Date</label>
+                                <label class="control-label" style="color:#01416F">&nbsp;&nbsp;תאריך הזמנה</label>
                                 <label class="control-label col-sm-2">@Model.objOrder.OrderDate</label>
-                                <label class="control-label" style="color:#01416F">Order Status</label>
+                                <label class="control-label" style="color:#01416F">סטטוס הזמנה</label>
                                 <label class="control-label col-sm-2">@Model.objOrder.OrderStatus</label>
                             </div>
                             <div class="form-group">
@@ -55,28 +49,28 @@
             <div class="card">
 
                 <div class="card-header">
-                    <h4><i class="fas fa-puzzle-piece" style="font-size: 20px;"></i> Product Information</h4>
-                    <button class="btn btn-primary" id="modal-7" style="visibility:hidden;">New Test</button>
+                    <h4><i class="fas fa-puzzle-piece" style="font-size: 20px;"></i> פרטי מוצר</h4>
+                    <button class="btn btn-primary" id="modal-7" style="visibility:hidden;">בדיקה חדשה</button>
                 </div>
                 <div class="card-body">
                     <div class="row">
                         <form class="form-horizontal  col-sm-12">
                             <div class="form-group">
-                                <label class="control-label" style="color:#01416F">Serial No.</label>
+                                <label class="control-label" style="color:#01416F">מק"ט</label>
                                 <label class="control-label col-sm-2" id="lblProductName">@Model.objProduct.ProductName</label>
                                 <input type="hidden" id="hdnOrdId" value="@Model.objOrder.OrderID" />
                                 <input type="hidden" id="hdnPrdId" value="@Model.objProduct.ProductID" />
-                                <label class="control-label" style="color:#01416F">Description</label>
+                                <label class="control-label" style="color:#01416F">&nbsp; תאור</label>
                                 <label class="control-label col-sm-3" id="lblProductDescription">@Model.objProduct.ProductDescription</label>
-                                <label class="control-label" style="color:#01416F">Supply Date</label>
+                                <label class="control-label" style="color:#01416F">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; תאריך אספקה</label>
                                 <label class="control-label" id="lblSupplyDate">@Model.objProduct.SupplyDate</label>
                             </div>
                             <div class="form-group">
-                                <label class="control-label" style="color:#01416F">Quntity&nbsp; &nbsp; </label>
+                                <label class="control-label" style="color:#01416F">כמות&nbsp; &nbsp; </label>
                                 <label class="control-label col-sm-2" id="lblTotalAmountInOrder">@Model.objProduct.TotalAmountInOrder</label>
-                                <label class="control-label" style="color:#01416F">Left Quntity</label>
+                                <label class="control-label" style="color:#01416F">נותר לאספקה</label>
                                 <label class="control-label col-sm-3" id="lblLeftAmountToDeliver">@Model.objProduct.LeftAmountToDeliver</label>
-                                <label class="control-label" style="color:#01416F">Status</label>
+                                <label class="control-label" style="color:#01416F">סטטוס</label>
                                 <label class="control-label" id="lblLineStatus">@Model.objProduct.LineStatus</label>
                             </div>
                             @*<div class="form-group">
@@ -93,7 +87,7 @@
         <div class="col-12 col-md-6 col-lg-6">
             <div class="card">
                 <div class="card-header">
-                    <h4><i class="fas fa-list" style="font-size: 20px;"></i> Order Products</h4>
+                    <h4><i class="fas fa-list" style="font-size: 20px;"></i> שורות הזמנה</h4>
                 </div>
                 <div class="card-body">
                     <div>
@@ -104,7 +98,7 @@
             </div>
             <div class="card">
                 <div class="card-header">
-                    <h4><i class="fas fa-balance-scale" style="font-size: 20px;"></i> Product Tests</h4>
+                    <h4><i class="fas fa-balance-scale" style="font-size: 20px;"></i> בדיקות שבוצעו למוצר</h4>
                 </div>
                 <div class="card-body">
                     <div>
@@ -117,7 +111,7 @@
         <div class="col-12 col-md-6 col-lg-6">
             <div class="card">
                 <div class="card-header">
-                    <h4><i class="fab fa-rev" style="font-size: 20px;"></i> Product Test list</h4>
+                    <h4><i class="fab fa-rev" style="font-size: 20px;"></i> רשימת בדיקות נדרשות למוצר</h4>
                 </div>
                 <div class="card-body">
                     <div>
@@ -138,35 +132,35 @@
     {
         <div class="card-body">
             <div class="form-group ">
-                <label class="col-sm-3 col-form-label">Test Code</label>
+                <label class="col-sm-3 col-form-label">מספר בדיקה</label>
                 <div class="col-sm-9">
                     @*<input type="text" class="form-control" required="">*@
                     @Html.TextBox("txtTestCode", Model.TestObject.TestCode, new { @class = "form-control", @required = "" })
                     <div class="invalid-feedback">
-                        Please fill 'Test Code'!
+                        יש למלא מספר בדיקה
                     </div>
                 </div>
             </div>
             <div class="form-group ">
-                <label class="col-sm-3 col-form-label">Test Type</label>
+                <label class="col-sm-3 col-form-label">סוג בדיקה</label>
                 <div class="col-sm-9">
                     @Html.TextBox("txtTestType", Model.TestObject.TestType, new { @class = "form-control", @required = "" })
                     <div class="invalid-feedback">
-                        Type is invalid.
+                        סוג בדיקה שגוי
                     </div>
                 </div>
             </div>
             <div class="form-group ">
-                <label class="col-sm-5 col-form-label">Test Result</label>
+                <label class="col-sm-5 col-form-label">תוצאת בדיקה</label>
                 <div class="col-sm-9">
                     @Html.TextBox("txtTestResult", Model.TestObject.TestResult, new { @class = "form-control", @required = "" })
                     <div class="invalid-feedback">
-                        This field is mandatory!
+                        חובה למלא ערך בשדה זה
                     </div>
                 </div>
             </div>
             <div class="form-group ">
-                <label class="col-sm-5 col-form-label">Test Comments</label>
+                <label class="col-sm-5 col-form-label">הערות לבדיקה</label>
                 <div class="col-sm-12">
                     @Html.TextArea("txtTestComments", Model.TestObject.TestComments, new { @class = "form-control", @maxlength = "120", @cols = "50", @rows = "3", style = "height:100px;" })
                 </div>
@@ -176,7 +170,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="section-body">
-                            <h5 class="section-title" style="color:#01416F">Files Upload</h5>
+                            <h5 class="section-title" style="color:#01416F">קבצים מצורפים</h5>
                             <p class="section-lead">You can upload multiple files.</p>
                         </div>
 
@@ -199,6 +193,10 @@
         var data = @Html.Raw(Json.Encode(Model));
         console.log('$(document).ready ==> data = ', data);
         InitTestPageData(data);
+        //$.jgrid.defaults.width = null;
+        $.jgrid.defaults.responsive = true;
+        $.jgrid.defaults.shrinkToFit = false;
+    //$.jgrid.defaults.styleUI = 'Bootstrap';
     });
 //var gridBaseWidth = 0;
 //var isWidth = false;
@@ -216,5 +214,5 @@
 </script>
 <!-- JS Libraies -->
 <script src="~/Scripts/dropzone.js"></script>
-<script src="~/Scripts/TestProductOrderItems_EN.js"></script>
+<script src="~/Scripts/TestProductOrderItems_IL.js"></script>
 <script src="~/Scripts/TestProductOrderItems_Common.js"></script>

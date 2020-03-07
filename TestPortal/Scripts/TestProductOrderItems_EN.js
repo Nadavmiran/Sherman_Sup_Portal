@@ -1,48 +1,4 @@
-﻿$(document).ready(function () {
-    var OrdId = document.getElementById('hdnOrdId').value;
-    var pordId = document.getElementById('hdnPrdId').value;
-    console.log('hdnOrdId = ', OrdId);
-    console.log('pordId = ', pordId);
-    GetOrderProducts(OrdId);
-    if ((null != pordId) && (pordId != ''))
-        GetOrderProductTests(OrdId, pordId);
-});
-
-function GetOrderProducts(OrdId) {
-    $.ajax({
-        type: "POST",
-        url: "TestProductOrderItems",
-        data: {
-            orderId: parseInt(OrdId)
-        },
-        cache: false,
-        success: function (data) {
-            console.log("GetOrderProducts ==> data", data);
-            grid_data = data.lstItemsObject;
-            showGridProd(grid_data);
-        }
-    });
-}
-
-function GetOrderProductTests(OrdId, pordId) {
-    console.log('GetOrderProductTests ==> pordId = ', pordId);
-    $.ajax({
-        type: "POST",
-        url: "GetOrderProductTests",
-        data: {
-            orderId: parseInt(OrdId),
-            pordId: parseInt(pordId)
-        },
-        cache: false,
-        success: function (data) {
-            console.log("GetOrderProductTests ==> data", data);
-            grid_data = data.lstTestObject;
-            showGridProdTests(grid_data);
-        }
-    });
-}
-
-function showGridProd(grid_data) {
+﻿function showGridProd(grid_data) {
     console.log("showGrid ==> grid_data", grid_data);
     $("#jqGrid").jqGrid({
         guiStyle: "bootstrap",
@@ -57,7 +13,8 @@ function showGridProd(grid_data) {
             { label: 'Quntity', name: 'TotalAmountInOrder', align: 'center', width: 100 },
             { label: 'Left Quntity', name: 'LeftAmountToDeliver', align: 'center', width: 100 },
             { label: 'Supply Date', name: 'SupplyDate', align: 'center', width: 100 },
-            { label: 'Status', name: 'LineStatus', align: 'center', width: 100 }
+            { label: 'Status', name: 'LineStatus', align: 'center', width: 100 },
+            { label: 'Revision', name: 'REV', align: 'center', width: 100 }
         ],
         viewrecords: true,
         //rownumbers: true, // show row numbers
@@ -69,6 +26,41 @@ function showGridProd(grid_data) {
         rowNum: 30,
         rowList: [10, 30, 50, 100],
         pager: "#jqGridPager",
+        loadonce: true,
+        subGrid: false
+    });
+}
+
+function showGridProdRevision(grid_data) {
+    console.log("showGridProdRevision ==> grid_data", grid_data);
+    $("#jqGridRevision").jqGrid({
+        guiStyle: "bootstrap",
+        iconSet: "fontAwesome",
+        datatype: "local",
+        data: grid_data,
+        colModel: [
+            { label: 'QACODE', name: 'QACODE', align: 'center', key: true, hidden: true, width: 75 },
+            { label: 'PART', name: 'PART', align: 'center', hidden: true, width: 75 },
+            { label: 'LOCATION', name: 'LOCATION', align: 'center', hidden: true, width: 75 },
+            { label: 'MEASURECODE', name: 'MEASURECODE', align: 'center', hidden: true, width: 75 },
+            { label: 'REV', name: 'REV', align: 'center', hidden: true, width: 75 },
+            { label: 'Description', name: 'QADES', align: 'center', /*formatter: formatGetRevListLink,*/ width: 100 },
+            { label: 'Test', name: 'SHR_TEST', align: 'center', width: 100 },
+            { label: 'Measure Tool', name: 'MEASUREDES', align: 'center', width: 100 },
+            { label: 'Requird Result Quntity', name: 'REQUIRED_RESULT', align: 'center', width: 100 },
+            { label: 'Remarks', name: 'REMARKS', align: 'center', width: 100 },
+            { label: 'File', name: 'EXTFILENAME', align: 'center', width: 100 }
+        ],
+        viewrecords: true,
+        //rownumbers: true, // show row numbers
+        //rownumWidth: 35, // the width of the row numbers columns
+        altRows: true,
+        direction: 'ltr',
+        autowidth: true,
+        height: null,
+        rowNum: 30,
+        rowList: [10, 30, 50, 100],
+        pager: "#jqGridRevisionPager",
         loadonce: true,
         subGrid: false
     });
@@ -136,32 +128,4 @@ function showGridProdTests(grid_data) {
         } //End onSelectRow
     });
 
-}
-
-function formatTestProdLink(cellValue, options, rowObject) {//options.rowId
-    //rowObject.ProductID
-    console.log("formatRPTLink ==> options", options);
-    console.log("formatRPTLink ==> rowObject", rowObject);
-    var a = document.createElement('a');
-    var linkText = document.createTextNode(cellValue);
-    a.appendChild(linkText);
-    a.title = cellValue;
-    a.href = 'TestProductItem?' + 'OrderID=' + rowObject.OrderID + '&prodId=' + options.rowId + '&ordLine=' + rowObject.LINE;
-    a.classList = '.ui-state-highlight a, .ui-widget-content .ui-state-highlight a, .ui-widget-header .ui-state-highlight a';//.style.color = "#01416F";
-    console.log("setHref ==> a", a.outerHTML);
-    return a.outerHTML;
-}
-
-function formatRPTLinkTest(cellValue, options, rowObject) {//options.rowId
-    //rowObject.ProductID
-    console.log("formatRPTLink ==> options", options);
-    console.log("formatRPTLink ==> rowObject", rowObject);
-    var a = document.createElement('a');
-    var linkText = document.createTextNode(cellValue);
-    a.appendChild(linkText);
-    a.title = cellValue;
-    a.href = 'TestProductItem?' + 'OrderID=' + rowObject.OrderID + '&prodId=' + options.rowId + '&ordLine=' + rowObject.LINE;
-    a.classList = '.ui-state-highlight a, .ui-widget-content .ui-state-highlight a, .ui-widget-header .ui-state-highlight a';//.style.color = "#01416F";
-    console.log("setHref ==> a", a.outerHTML);
-    return a.outerHTML;
 }

@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TestPortal.Models;
 
 namespace TestPortal.Controllers
 {
-    public class AccountController : Controller
+    public class AccountController : CommonAccountController
     {
         // GET: Account
         public ActionResult Login()
@@ -14,10 +15,18 @@ namespace TestPortal.Controllers
             return View();
         }
 
-        public ActionResult DoLogin()
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DoLogin(PageObject po)
         {
-            Session.Add("USER_LOGIN", "111");
-            return RedirectToAction("Index", "Home");
+            LoginAction(po.User);
+            if(po.User.IsAuthenticated)
+                return RedirectToAction("Index", "Home");
+            else
+            {
+                ModelState.AddModelError(string.Empty, "Wrong User Name or Password. Please try again or mail Sherman system administrator: sales@sherman.com");
+                return View("Login", po);
+            }
         }
 
         public ActionResult LogOff()

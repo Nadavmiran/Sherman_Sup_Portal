@@ -3,22 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TestPortal.Models;
 
 namespace TestPortal.Controllers
 {
-    public class Home_ILController : Controller
+    public class Home_ILController : CommonController
     {
         public ActionResult Index()
         {
-            if(Session["USER_LOGIN"] == null)
-                return RedirectToAction("Login", "Account");
+            if (Session["USER_LOGIN"] == null)
+                return RedirectToAction("Login", "Account_IL");
             else
-                return View();
-        }
-
-        public ActionResult QA_Page()
-        {
-            return View();
+            {
+                PageObject po = new PageObject();
+                po.User = Session["USER_LOGIN"] as AppUser;
+                return View(po);
+            }
         }
     }
 }

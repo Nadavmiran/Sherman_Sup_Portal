@@ -180,9 +180,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AppUser.cs" />
+    <Compile Include="Models\CommonAccountController.cs" />
+    <Compile Include="Models\CommonController.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\PageObject.cs" />
     <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\Revision.cs" />
     <Compile Include="Models\Test.cs" />
     <Compile Include="PriorityAPI\PriorityAPI.cs" />
     <Compile Include="PriorityAPI\ResultAPI.cs" />
@@ -201,7 +205,9 @@
     <Content Include="Content\components_rtl.css" />
     <Content Include="Content\dropzone.css" />
     <Content Include="Content\Images\EF_logo.jpg" />
+    <Content Include="Content\Images\Israel-128.png" />
     <Content Include="Content\Images\Sherman_logo.png" />
+    <Content Include="Content\Images\United_Kingdom-128.png" />
     <Content Include="Content\jquery.jqGrid\ellipsis-xbl.xml" />
     <Content Include="Content\jquery.jqGrid\ui.jqgrid-bootstrap.css" />
     <Content Include="Content\jquery.jqGrid\ui.jqgrid.css" />
@@ -260,6 +266,7 @@
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\TestProductOrderItems_Common.js" />
     <Content Include="Scripts\components-multiple-upload.js" />
     <Content Include="Scripts\custom.js" />
     <Content Include="Scripts\dobpicker.js" />
@@ -312,6 +319,7 @@
     <Content Include="Scripts\i18n\grid.locale-ua.js" />
     <Content Include="Scripts\i18n\grid.locale-vi.js" />
     <Content Include="Scripts\jpGrid_EN.js" />
+    <Content Include="Scripts\jpGrid_IL.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />
     <Content Include="Scripts\index.js.flow" />
     <Content Include="Scripts\esm\popper.min.js.map" />
@@ -417,12 +425,12 @@
     <Content Include="Scripts\src\utils\setStyles.js" />
     <Content Include="Scripts\src\utils\setupEventListeners.js" />
     <Content Include="Scripts\stisla.js" />
-    <Content Include="Scripts\TestProductOrderItems.js" />
+    <Content Include="Scripts\TestProductOrderItems_EN.js" />
+    <Content Include="Scripts\TestProductOrderItems_IL.js" />
     <Content Include="Scripts\umd\popper-utils.js" />
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
-    <Content Include="Views\Account_IL\auth-login_RTL.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -453,6 +461,8 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\Account_IL\Login.cshtml" />
+    <Content Include="Views\Home_IL\TestProduct.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

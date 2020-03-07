@@ -649,7 +649,7 @@ select.form-control:not([size]):not([multiple]) {
         font-size: 16px;
         line-height: 28px;
         color: rgb(1,65,111);
-        padding-right: 10px;
+        padding-left: 0px;
         margin-bottom: 0;
     }
       .card .card-header h4 + .card-header-action,

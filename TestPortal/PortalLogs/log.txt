@@ -22,3 +22,114 @@ System.Data.SqlClient.SqlException (0x80131904): Procedure or function 'LMNS_Get
    at TestPortal.Models.Order.GetOrderDetails(Int32 orderID) in H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\Models\Order.cs:line 51
 ClientConnectionId:a6750b26-1ff6-4e0a-bf03-e00e71e59c4c
 Error Number:201,State:4,Class:16
+ERROR 2020-03-02 17:41:10,038   253ms eporting Portal Logger etProdRevisionList - GetProdRevisionList ==> SP = LMNS_GetProductTestsList ==> PART [key] = 133027 ==> @revId = 0
+System.FormatException: Input string was not in a correct format.
+   at System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   at System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   at System.Convert.ToInt32(String value)
+   at TestPortal.Models.Revision.GetProdRevisionList(Int32 prodId, String revId) in H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\Models\Revision.cs:line 35
+ERROR 2020-03-02 18:20:39,116   187ms eporting Portal Logger etProdRevisionList - GetProdRevisionList ==> SP = LMNS_GetProductTestsList ==> PART [key] = 133027 ==> @revId = 0
+System.FormatException: Input string was not in a correct format.
+   at System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   at System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   at System.Convert.ToInt32(String value)
+   at TestPortal.Models.Revision.GetProdRevisionList(Int32 prodId, String revId) in H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\Models\Revision.cs:line 35
+ERROR 2020-03-02 18:35:58,314   142ms eporting Portal Logger etProdRevisionList - GetProdRevisionList ==> SP = LMNS_GetProductTestsList ==> PART [key] = 133027 ==> @revId = A
+System.Data.SqlClient.SqlException (0x80131904): Error converting data type nvarchar to bigint.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
+   at System.Data.SqlClient.SqlDataReader.TryReadInternal(Boolean setTimeout, Boolean& more)
+   at System.Data.SqlClient.SqlDataReader.Read()
+   at TestPortal.Models.Revision.GetProdRevisionList(Int32 prodId, String revId) in H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\Models\Revision.cs:line 35
+ClientConnectionId:37a44840-9c3f-4d9d-89c5-ddafc88d65b9
+Error Number:8114,State:5,Class:16
+ERROR 2020-03-02 18:36:31,264 33093ms eporting Portal Logger etProdRevisionList - GetProdRevisionList ==> SP = LMNS_GetProductTestsList ==> PART [key] = 133027 ==> @revId = A
+System.Data.SqlClient.SqlException (0x80131904): Error converting data type nvarchar to bigint.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
+   at System.Data.SqlClient.SqlDataReader.TryReadInternal(Boolean setTimeout, Boolean& more)
+   at System.Data.SqlClient.SqlDataReader.Read()
+   at TestPortal.Models.Revision.GetProdRevisionList(Int32 prodId, String revId) in H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\Models\Revision.cs:line 35
+ClientConnectionId:5b64455e-5b81-406b-b303-a575206d6ea0
+Error Number:8114,State:5,Class:16
+ERROR 2020-03-02 18:39:45,010 226839ms eporting Portal Logger etProdRevisionList - GetProdRevisionList ==> SP = LMNS_GetProductTestsList ==> PART [key] = 133027 ==> @revId = A
+System.Data.SqlClient.SqlException (0x80131904): Error converting data type nvarchar to bigint.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
+   at System.Data.SqlClient.SqlDataReader.TryReadInternal(Boolean setTimeout, Boolean& more)
+   at System.Data.SqlClient.SqlDataReader.Read()
+   at TestPortal.Models.Revision.GetProdRevisionList(Int32 prodId, String revId) in H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\Models\Revision.cs:line 35
+ClientConnectionId:2abdb988-2ac5-4dc1-9f48-ea754f59dd93
+Error Number:8114,State:5,Class:16
+ERROR 2020-03-02 18:47:10,168   143ms eporting Portal Logger GetOrderItems      - GetOrderItems ==> SP = LMNS_GetOrderItems ==> ORD [key] = 114553
+System.IndexOutOfRangeException: REV
+   at System.Data.ProviderBase.FieldNameLookup.GetOrdinal(String fieldName)
+   at System.Data.SqlClient.SqlDataReader.GetOrdinal(String name)
+   at System.Data.SqlClient.SqlDataReader.get_Item(String name)
+   at TestPortal.Models.Product.GetOrderItems(Int32 parentRowKey) in H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\Models\Product.cs:line 50
+ERROR 2020-03-02 18:49:51,943 161919ms eporting Portal Logger GetOrderItems      - GetOrderItems ==> SP = LMNS_GetOrderItems ==> ORD [key] = 114553
+System.IndexOutOfRangeException: REV
+   at System.Data.ProviderBase.FieldNameLookup.GetOrdinal(String fieldName)
+   at System.Data.SqlClient.SqlDataReader.GetOrdinal(String name)
+   at System.Data.SqlClient.SqlDataReader.get_Item(String name)
+   at TestPortal.Models.Product.GetOrderItems(Int32 parentRowKey) in H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\Models\Product.cs:line 50
+ERROR 2020-03-02 18:50:34,236 204211ms eporting Portal Logger GetOrderItems      - GetOrderItems ==> SP = LMNS_GetOrderItems ==> ORD [key] = 114553
+System.IndexOutOfRangeException: REV
+   at System.Data.ProviderBase.FieldNameLookup.GetOrdinal(String fieldName)
+   at System.Data.SqlClient.SqlDataReader.GetOrdinal(String name)
+   at System.Data.SqlClient.SqlDataReader.get_Item(String name)
+   at TestPortal.Models.Product.GetOrderItems(Int32 parentRowKey) in H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\Models\Product.cs:line 50
+ERROR 2020-03-02 18:51:04,721 234696ms eporting Portal Logger GetOrderItems      - GetOrderItems ==> SP = LMNS_GetOrderItems ==> ORD [key] = 114553
+System.IndexOutOfRangeException: REV
+   at System.Data.ProviderBase.FieldNameLookup.GetOrdinal(String fieldName)
+   at System.Data.SqlClient.SqlDataReader.GetOrdinal(String name)
+   at System.Data.SqlClient.SqlDataReader.get_Item(String name)
+   at TestPortal.Models.Product.GetOrderItems(Int32 parentRowKey) in H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\Models\Product.cs:line 50
+ERROR 2020-03-02 18:51:55,851 285827ms eporting Portal Logger GetOrderItems      - GetOrderItems ==> SP = LMNS_GetOrderItems ==> ORD [key] = 114553
+System.IndexOutOfRangeException: REV
+   at System.Data.ProviderBase.FieldNameLookup.GetOrdinal(String fieldName)
+   at System.Data.SqlClient.SqlDataReader.GetOrdinal(String name)
+   at System.Data.SqlClient.SqlDataReader.get_Item(String name)
+   at TestPortal.Models.Product.GetOrderItems(Int32 parentRowKey) in H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\Models\Product.cs:line 50
+ERROR 2020-03-02 18:51:59,682 289657ms eporting Portal Logger GetOrderItems      - GetOrderItems ==> SP = LMNS_GetOrderItems ==> ORD [key] = 114553
+System.IndexOutOfRangeException: REV
+   at System.Data.ProviderBase.FieldNameLookup.GetOrdinal(String fieldName)
+   at System.Data.SqlClient.SqlDataReader.GetOrdinal(String name)
+   at System.Data.SqlClient.SqlDataReader.get_Item(String name)
+   at TestPortal.Models.Product.GetOrderItems(Int32 parentRowKey) in H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\Models\Product.cs:line 50
+ERROR 2020-03-02 18:52:40,987 330962ms eporting Portal Logger GetOrderItems      - GetOrderItems ==> SP = LMNS_GetOrderItems ==> ORD [key] = 114553
+System.IndexOutOfRangeException: REV
+   at System.Data.ProviderBase.FieldNameLookup.GetOrdinal(String fieldName)
+   at System.Data.SqlClient.SqlDataReader.GetOrdinal(String name)
+   at System.Data.SqlClient.SqlDataReader.get_Item(String name)
+   at TestPortal.Models.Product.GetOrderItems(Int32 parentRowKey) in H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\Models\Product.cs:line 50
+ERROR 2020-03-02 18:52:53,953 343928ms eporting Portal Logger GetOrderItems      - GetOrderItems ==> SP = LMNS_GetOrderItems ==> ORD [key] = 114553
+System.IndexOutOfRangeException: REV
+   at System.Data.ProviderBase.FieldNameLookup.GetOrdinal(String fieldName)
+   at System.Data.SqlClient.SqlDataReader.GetOrdinal(String name)
+   at System.Data.SqlClient.SqlDataReader.get_Item(String name)
+   at TestPortal.Models.Product.GetOrderItems(Int32 parentRowKey) in H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\Models\Product.cs:line 50
+ERROR 2020-03-04 15:40:15,714   188ms eporting Portal Logger GetSupplierOrders  - GetSupplierOrders ==> SP = LMNS_GetSupplierOrders ==> supplier = 22149
+System.Data.SqlClient.SqlException (0x80131904): A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server) ---> System.ComponentModel.Win32Exception (0x80004005): The network path was not found
+   at System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling, SqlAuthenticationProviderManager sqlAuthProviderManager)
+   at System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionFactory.CreateNonPooledConnection(DbConnection owningConnection, DbConnectionPoolGroup poolGroup, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at LMNS.Repositories.Dal.GetRecordSet(String spName, SqlParameter[] p) in H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\Repositories\Dal.cs:line 78
+   at TestPortal.Models.Order.GetSupplierOrders(String supplier) in H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\Models\Order.cs:line 26
+ClientConnectionId:00000000-0000-0000-0000-000000000000
+Error Number:53,State:0,Class:20
