@@ -29,6 +29,13 @@ namespace TestPortal.Controllers
             }
         }
 
+        public ActionResult UserProfile()
+        {
+            PageObject po = new PageObject();
+            po.User = Session["USER_LOGIN"] as AppUser;
+            return View(po);
+        }
+
         public ActionResult LogOff()
         {
             Session.Remove("USER_LOGIN");
