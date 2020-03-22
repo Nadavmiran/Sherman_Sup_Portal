@@ -30,11 +30,11 @@
                         <form class="form-horizontal  col-sm-12">
                             <div class="form-group">
                                 <label class="control-label" style="color:#01416F">הזמנה&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-                                <label class="control-label col-sm-2">@Model.objOrder.OrderNumber</label>
+                                <label class="control-label col-sm-2">@Model.objOrder.ORDNAME</label>
                                 <label class="control-label" style="color:#01416F">&nbsp;&nbsp;תאריך הזמנה</label>
-                                <label class="control-label col-sm-2">@Model.objOrder.OrderDate</label>
+                                <label class="control-label col-sm-2">@Model.objOrder.pageCURDATE</label>
                                 <label class="control-label" style="color:#01416F">סטטוס הזמנה</label>
-                                <label class="control-label col-sm-2">@Model.objOrder.OrderStatus</label>
+                                <label class="control-label col-sm-2">@Model.objOrder.STATDES</label>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-sm-2">&nbsp;</label>
@@ -56,26 +56,36 @@
                     <div class="row">
                         <form class="form-horizontal  col-sm-12">
                             <div class="form-group">
+                                <label class="control-label" style="color:#01416F">מספר שורה</label>
+                                <label class="control-label col-sm-2" id="lblLineNun"></label>
                                 <label class="control-label" style="color:#01416F">מק"ט</label>
-                                <label class="control-label col-sm-2" id="lblProductName">@Model.objProduct.ProductName</label>
-                                <input type="hidden" id="hdnOrdId" value="@Model.objOrder.OrderID" />
-                                <input type="hidden" id="hdnPrdId" value="@Model.objProduct.ProductID" />
+                                <label class="control-label col-sm-2" id="lblProductName">@Model.objProduct.PARTNAME</label>
+                                <input type="hidden" id="hdnOrdId" value="@Model.objOrder.ORD" />
+                                <input type="hidden" id="hdnPrdId" value="@Model.objProduct.PARTNAME" />
                                 <label class="control-label" style="color:#01416F">&nbsp; תאור</label>
-                                <label class="control-label col-sm-3" id="lblProductDescription">@Model.objProduct.ProductDescription</label>
+                                <label class="control-label col-sm-3" id="lblProductDescription">@Model.objProduct.PDES</label>
                                 <label class="control-label" style="color:#01416F">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; תאריך אספקה</label>
-                                <label class="control-label" id="lblSupplyDate">@Model.objProduct.SupplyDate</label>
+                                <label class="control-label" id="lblSupplyDate">@Model.objProduct.pageREQDATE</label>
                             </div>
                             <div class="form-group">
                                 <label class="control-label" style="color:#01416F">כמות&nbsp; &nbsp; </label>
-                                <label class="control-label col-sm-2" id="lblTotalAmountInOrder">@Model.objProduct.TotalAmountInOrder</label>
+                                <label class="control-label col-sm-2" id="lblTotalAmountInOrder">@Model.objProduct.TQUANT</label>
                                 <label class="control-label" style="color:#01416F">נותר לאספקה</label>
-                                <label class="control-label col-sm-3" id="lblLeftAmountToDeliver">@Model.objProduct.LeftAmountToDeliver</label>
+                                <label class="control-label col-sm-3" id="lblLeftAmountToDeliver">@Model.objProduct.TBALANCE</label>
                                 <label class="control-label" style="color:#01416F">סטטוס</label>
-                                <label class="control-label" id="lblLineStatus">@Model.objProduct.LineStatus</label>
+                                <label class="control-label" id="lblLineStatus">@Model.objProduct.PORDISTATUSDES</label>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label" style="color:#01416F">סיבת דחיה</label>
+                                <label class="control-label col-sm-2" id="lblReasonRejection"></label>
+                                <label class="control-label" style="color:#01416F">מהדורת מוצר</label>
+                                <label class="control-label col-sm-3" id="lblProductEdition"></label>
+                                <label class="control-label" style="color:#01416F">מה.עץ מוצר מפק"ע</label>
+                                <label class="control-label" id="lblTreeProductEdition"></label>
                             </div>
                             @*<div class="form-group">
-                                    <button class="btn btn-primary" id="modal-7">New Test</button>
-                                </div>*@
+            <button class="btn btn-primary" id="modal-7">New Test</button>
+        </div>*@
                         </form>
                     </div>
 

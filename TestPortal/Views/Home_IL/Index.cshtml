@@ -1,4 +1,4 @@
-﻿
+﻿@model TestPortal.Models.PageObject
 @{
     ViewBag.Title = "הזמנות";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -54,7 +54,7 @@
         $grid.jqGrid("setGridWidth", newWidth, true);
     });
     $(document).ready(function () {
-        getData("22149");
+        getData("@Model.User.Supplier_ID");
 
         var $grid = $("#jqGrid"),
             newWidth = $grid.parent().width();

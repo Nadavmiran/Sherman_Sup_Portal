@@ -6,15 +6,14 @@
         datatype: "local",
         data: grid_data,
         colModel: [
-            { label: '#', name: 'LINE', align: 'center', hidden: true, width: 75 },
-            { label: 'ProductID', name: 'ProductID', align: 'center', key: true, hidden: true, width: 75 },
-            { label: 'Serial No.', name: 'ProductName', align: 'center', formatter: formatTestProdLink, width: 100 },
-            { label: 'Description', name: 'ProductDescription', align: 'center', width: 100 },
-            { label: 'Quntity', name: 'TotalAmountInOrder', align: 'center', width: 100 },
-            { label: 'Left Quntity', name: 'LeftAmountToDeliver', align: 'center', width: 100 },
-            { label: 'Supply Date', name: 'SupplyDate', align: 'center', width: 100 },
-            { label: 'Status', name: 'LineStatus', align: 'center', width: 100 },
-            { label: 'Revision', name: 'REV', align: 'center', width: 100 }
+            { label: '#', name: 'ORIGLINE', align: 'center', hidden: true, width: 75 },
+            { label: 'ProductID', name: 'PARTNAME', align: 'center', key: true, hidden: true, width: 75 },
+            { label: 'Serial No.', name: 'PARTNAME', align: 'center', formatter: formatProdLink, width: 100 },
+            { label: 'Description', name: 'PDES', align: 'center', width: 100 },
+            { label: 'Quntity', name: 'TQUANT', align: 'center', width: 100 },
+            { label: 'Left Quntity', name: 'TBALANCE', align: 'center', width: 100 },
+            { label: 'Supply Date', name: 'pageREQDATE', align: 'center', width: 100 },
+            { label: 'Status', name: 'PORDISTATUSDES', align: 'center', width: 100 }
         ],
         viewrecords: true,
         //rownumbers: true, // show row numbers

@@ -6,15 +6,14 @@
         datatype: "local",
         data: grid_data,
         colModel: [
-            { label: '#', name: 'LINE', align: 'center', hidden: true, width: 75 },
-            { label: 'ProductID', name: 'ProductID', align: 'center', key: true, hidden: true, width: 75 },
-            { label: 'מק"ט.', name: 'ProductName', align: 'center', formatter: formatTestProdLink, width: 100 },
-            { label: 'תאור', name: 'ProductDescription', align: 'center', width: 100 },
-            { label: 'כמות', name: 'TotalAmountInOrder', align: 'center', width: 100 },
-            { label: 'נותר לספק', name: 'LeftAmountToDeliver', align: 'center', width: 100 },
-            { label: 'תאריך אספקה', name: 'SupplyDate', align: 'center', width: 100 },
-            { label: 'סטטוס', name: 'LineStatus', align: 'center', width: 100 },
-            { label: 'מהדורה', name: 'REV', align: 'center', width: 100 }
+            { label: '#', name: 'ORIGLINE', align: 'center', hidden: true, width: 75 },
+            { label: 'ProductID', name: 'PARTNAME', align: 'center', key: true, hidden: true, width: 75 },
+            { label: 'מק"ט', name: 'PARTNAME', align: 'center', formatter: formatProdLink, width: 100 },
+            { label: 'תאור', name: 'PDES', align: 'center', width: 100 },
+            { label: 'כמות', name: 'TQUANT', align: 'center', width: 100 },
+            { label: 'נותר לספק', name: 'TBALANCE', align: 'center', width: 100 },
+            { label: 'תאריך אספקה', name: 'pageREQDATE', align: 'center', width: 100 },
+            { label: 'סטטוס', name: 'PORDISTATUSDES', align: 'center', width: 100 }
         ],
         viewrecords: true,
         //rownumbers: true, // show row numbers

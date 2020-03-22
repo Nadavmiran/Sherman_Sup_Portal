@@ -11,5 +11,6 @@ namespace LMNS.Priority.API
         public string ErrorDescription { get; set; }
         public string ResultStatus { get; set; }
         public object ResultData { get; set; }
+        public string JsonResult { get; set; }
     }
 }

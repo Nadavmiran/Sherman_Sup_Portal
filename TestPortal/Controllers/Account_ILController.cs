@@ -20,7 +20,10 @@ namespace TestPortal.Controllers
         {
             LoginAction(po.User);
             if (po.User.IsAuthenticated)
-                return RedirectToAction("Index", "Home_IL");
+                if(po.User.Language.Equals("עברית"))
+                    return RedirectToAction("Index", "Home_IL");
+                else
+                    return RedirectToAction("Index", "Home");
             else
             {
                 ModelState.AddModelError(string.Empty, "שם משתמש ו/או סיסמה שגויים. נסה שנית או פנה לאיש הקשר בחברת 'שרמן' במייל לכתובת: sales@sherman.com");

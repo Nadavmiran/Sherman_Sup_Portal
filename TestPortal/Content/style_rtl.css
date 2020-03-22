@@ -648,7 +648,7 @@ select.form-control:not([size]):not([multiple]) {
     .card .card-header h4 {
       font-size: 16px;
       line-height: 28px;
-      color: #6777ef;
+      color: rgb(1,65,111);
       padding-right: 2px;
       margin-bottom: 0; }
       .card .card-header h4 + .card-header-action,
@@ -721,8 +721,9 @@ select.form-control:not([size]):not([multiple]) {
     background-size: 80px;
     background-repeat: no-repeat;
     background-position: center; }
-  .card.card-primary {
-    border-top: 2px solid #6777ef; }
+    .card.card-primary {
+        border-top: 2px solid #00AEEF;
+    }
   .card.card-secondary {
     border-top: 2px solid #cdd3d8; }
   .card.card-success {
@@ -1315,15 +1316,17 @@ h6 .badge {
   color: #fff !important; }
 
 .btn-primary, .btn-primary.disabled {
-  box-shadow: 0 2px 6px #acb5f6;
-  background-color: #6777ef;
-  border-color: #6777ef; }
+    box-shadow: 0 2px 6px #acb5f6;
+    background-color: #00AEEF;
+    border-color: #00AEEF;
+}
   .btn-primary:focus, .btn-primary.disabled:focus {
     background-color: #394eea !important; }
     .btn-primary:focus:active, .btn-primary.disabled:focus:active {
       background-color: #394eea !important; }
-  .btn-primary:active, .btn-primary:hover, .btn-primary.disabled:active, .btn-primary.disabled:hover {
-    background-color: #394eea !important; }
+    .btn-primary:active, .btn-primary:hover, .btn-primary.disabled:active, .btn-primary.disabled:hover {
+        background-color: #01416F !important;
+    }
 
 .btn-outline-primary, .btn-outline-primary.disabled {
   border-color: #6777ef;
@@ -2380,15 +2383,16 @@ pre {
     position: relative;
     margin: 30px 0 25px 0; }
     .section .section-title:before {
-      content: ' ';
-      border-radius: 5px;
-      height: 8px;
-      width: 30px;
-      background-color: #6777ef;
-      display: inline-block;
-      float: right;
-      margin-top: 6px;
-      margin-left: 15px; }
+        content: ' ';
+        border-radius: 5px;
+        height: 8px;
+        width: 30px;
+        background-color: rgb(1,65,111);
+        display: inline-block;
+        float: right;
+        margin-top: 6px;
+        margin-left: 15px;
+    }
   .section .section-title + .section-lead {
     margin-top: -20px; }
   .section .section-lead {
@@ -2803,9 +2807,10 @@ body.layout-3 .main-footer {
       .main-sidebar .sidebar-menu li a:hover {
         background-color: #f8fafb; }
     .main-sidebar .sidebar-menu li.active a {
-      color: #6777ef;
-      font-weight: 600;
-      background-color: #f8fafb; }
+        color: rgb(1,65,111)/*#6777ef*/;
+        font-weight: 600;
+        background-color: #f8fafb;
+    }
       .main-sidebar .sidebar-menu li.active a.has-dropdown:after {
         transform: translate(0, -50%) rotate(90deg); }
     .main-sidebar .sidebar-menu li.active ul.dropdown-menu {

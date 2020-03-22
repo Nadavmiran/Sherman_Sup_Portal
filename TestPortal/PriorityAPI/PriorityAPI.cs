@@ -7,6 +7,10 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Text;
 using System.Xml;
+using System.Security.Cryptography;
+using System.Net;
+using System.Security.Cryptography.X509Certificates;
+using System.Net.Security;
 
 namespace LMNS.Priority.API
 {
@@ -42,6 +46,13 @@ namespace LMNS.Priority.API
             return res;
         }
 
+        // **************** IMPORTENT!!!! IGNOR SSL ERRORS!!!! ****************************
+        private static bool AcceptAllCertifications(object sender, System.Security.Cryptography.X509Certificates.X509Certificate certification, System.Security.Cryptography.X509Certificates.X509Chain chain, System.Net.Security.SslPolicyErrors sslPolicyErrors)
+        {
+            return true;
+        }
+        // **************** END IMPORTENT!!!! IGNOR SSL ERRORS!!!! ****************************
+
         public string GetCustOrdersStatus(string dbName, string custName, string ordStatus)
         {
             IRestResponse response = null;
@@ -73,6 +84,34 @@ namespace LMNS.Priority.API
             return res;
         }
 
+        public string Call_Get(string query)
+        {
+            IRestResponse response = null;
+            string res = string.Empty;
+            var uri = new Uri(ConfigurationManager.AppSettings["AppAPI"].ToString());  // Replace with your Service Root URL
+
+            try
+            {
+                System.Net.ServicePointManager.ServerCertificateValidationCallback = new System.Net.Security.RemoteCertificateValidationCallback(AcceptAllCertifications);
+
+                var client = new RestClient(ConfigurationManager.AppSettings["AppAPI"].ToString() + ConfigurationManager.AppSettings["Defult_DNAME"].ToString() + "/" + query);
+                var request = new RestRequest(Method.GET);
+                request.AddHeader("cache-control", "no-cache");
+                request.AddHeader("content-type", "application/atom+xml");
+                request.AddHeader("authorization", "Basic " + Convert.ToBase64String(Encoding.ASCII.GetBytes((ConfigurationManager.AppSettings["AppAPI_U"].ToString() + ":" + (ConfigurationManager.AppSettings["AppAPI_P"].ToString())))));
+
+                response = client.Execute(request);
+                ResultAPI ra = CreateResultApi(response);
+                res = ra.JsonResult;//TransformeResultToXml(response.Content);
+            }
+            catch (Exception ex)
+            {
+                AppLogger.log.Debug(AppLogger.CreateLogText("GetCustOrdersStatus", ex.Message));
+                AppLogger.log.Debug(AppLogger.CreateLogText("GetCustOrdersStatus", response.ErrorMessage), response.ErrorException);
+            }
+
+            return res;
+        }
         #region Reporting Portal
         //public ResultAPI CreateRPT(string dbName, ProductionReport rptData, ReportData exRPT, List<ReportingDefectCodes> rdf)
         //{
@@ -487,13 +526,13 @@ namespace LMNS.Priority.API
         //    return sb.ToString();
         //} 
         #endregion
-//{
-//  "@odata.context":"https://priority.metalicone.com/odata/Priority/tabula.ini/metalic/$metadata#ALINE_ONE","value":[
-//    {
-//      "CURDATE":"2018-02-10T00:00:00+02:00","DOC":907350,"SERIALNAME":"51701906","SERQUANT":100,"MET_PRODCOSTCNAME":null,"MET_WCCOSTCNAME":"M105","PARTNAME":"H10CA341-10230","MET_START":"Y","MET_END":null,"ACTNAME":"M42-11-17","ACTDES":"MILLING DMG70-105","WORKCNAME":"1367","WORKCDES":"\u05db\u05e8\u05e1\u05d5\u05dd EVO linear 70-DMG \u05de\u05d7' 105","USERID":503872,"BNAME":"\u05d0\u05d5\u05dc\u05d2 \u05d1\u05d5\u05d2\u05d3\u05e0\u05d5\u05d1 102","EMPCODE":null,"SNAME":null,"QUANT":0,"SQUANT":0,"MQUANT":0,"UNITNAME":"\u05d9\u05d7'","STIME":"19:58","ETIME":"19:58","ASPAN":"000:00","EMPSTIME":"19:58","EMPETIME":"19:58","EMPASPAN":"000:00","RTYPEBOOL":null,"WARHSNAME":null,"LOCNAME":null,"AINVFLAG":"R","EDATE":"2018-02-10T19:58:00+02:00","MET_QC":null,"SDATE":"2018-02-10T19:58:00+02:00","REVNAME":"01","ANALYSISVALID":null,"ANALYSISNOTVALID":null,"FORMNAME":"D180000046","GENERAL":"Y","MET_ROBOT":"Y","MET_STEP":null,"MET_SUMQUANT":0,"MET_SETUP":"S","EXCNAME":null,"EXCDES":null,"MET_COSTCNAME":null,"PLS_TEXT":null,"MET_MTIME":"N","MET_WORKTIME":"N","MET_SETUPEND":"N","MET_ADDSETUP":"N","MET_WEIGHT":null,"MET_WUNITNAME":null,"PLS_PARTDES":"IMP DRUM MACH MERON CL47600003","MET_USERLOGINSIG":"reportalnew","MET_UDATESIGN":"2018-02-10T19:59:00+02:00","EFI_ENGSUTIME":"002:00","EFI_ENGSTTIME":"001:10","EFI_SERSUTIME":"002:00","EFI_SERSTTIME":"001:10","PLS_SHIFTNAME":"2","MET_REPORTDATE":"2018-02-10T00:00:00+02:00","EMPSDATE":"2018-02-10T19:58:00+02:00","EMPEDATE":"2018-02-10T19:58:00+02:00","FORM":248903,"KLINE":1
-//    }
-//  ]
-//}
+        //{
+        //  "@odata.context":"https://priority.metalicone.com/odata/Priority/tabula.ini/metalic/$metadata#ALINE_ONE","value":[
+        //    {
+        //      "CURDATE":"2018-02-10T00:00:00+02:00","DOC":907350,"SERIALNAME":"51701906","SERQUANT":100,"MET_PRODCOSTCNAME":null,"MET_WCCOSTCNAME":"M105","PARTNAME":"H10CA341-10230","MET_START":"Y","MET_END":null,"ACTNAME":"M42-11-17","ACTDES":"MILLING DMG70-105","WORKCNAME":"1367","WORKCDES":"\u05db\u05e8\u05e1\u05d5\u05dd EVO linear 70-DMG \u05de\u05d7' 105","USERID":503872,"BNAME":"\u05d0\u05d5\u05dc\u05d2 \u05d1\u05d5\u05d2\u05d3\u05e0\u05d5\u05d1 102","EMPCODE":null,"SNAME":null,"QUANT":0,"SQUANT":0,"MQUANT":0,"UNITNAME":"\u05d9\u05d7'","STIME":"19:58","ETIME":"19:58","ASPAN":"000:00","EMPSTIME":"19:58","EMPETIME":"19:58","EMPASPAN":"000:00","RTYPEBOOL":null,"WARHSNAME":null,"LOCNAME":null,"AINVFLAG":"R","EDATE":"2018-02-10T19:58:00+02:00","MET_QC":null,"SDATE":"2018-02-10T19:58:00+02:00","REVNAME":"01","ANALYSISVALID":null,"ANALYSISNOTVALID":null,"FORMNAME":"D180000046","GENERAL":"Y","MET_ROBOT":"Y","MET_STEP":null,"MET_SUMQUANT":0,"MET_SETUP":"S","EXCNAME":null,"EXCDES":null,"MET_COSTCNAME":null,"PLS_TEXT":null,"MET_MTIME":"N","MET_WORKTIME":"N","MET_SETUPEND":"N","MET_ADDSETUP":"N","MET_WEIGHT":null,"MET_WUNITNAME":null,"PLS_PARTDES":"IMP DRUM MACH MERON CL47600003","MET_USERLOGINSIG":"reportalnew","MET_UDATESIGN":"2018-02-10T19:59:00+02:00","EFI_ENGSUTIME":"002:00","EFI_ENGSTTIME":"001:10","EFI_SERSUTIME":"002:00","EFI_SERSTTIME":"001:10","PLS_SHIFTNAME":"2","MET_REPORTDATE":"2018-02-10T00:00:00+02:00","EMPSDATE":"2018-02-10T19:58:00+02:00","EMPEDATE":"2018-02-10T19:58:00+02:00","FORM":248903,"KLINE":1
+        //    }
+        //  ]
+        //}
 
         private string TransformeResultToXml(string res)
         {
@@ -657,13 +696,9 @@ namespace LMNS.Priority.API
             {
                 if ((res.ResultStatus.Equals("Created")) || res.ResultStatus.Equals("OK"))
                 {
-                    string json = response.Content;
-
-                    res.ResultData = JsonConvert.DeserializeObject<OData>(json);
-
-                    //doc = (XmlDocument)JsonConvert.DeserializeXmlNode(json, "RPT");
-                    //if (null != doc)
-                    //    res.ResultData = doc.GetElementsByTagName("DOC").Item(0).InnerText;
+                    //string json = response.Content;
+                    res.JsonResult = response.Content;
+                    //res.ResultData = JsonConvert.DeserializeObject<OData>(json);
                 }
                 else if (res.ResultStatus.Equals("Conflict"))
                 {
@@ -705,6 +740,12 @@ namespace LMNS.Priority.API
         [JsonProperty("odata.metadata")]
         public string Metadata { get; set; }
         public List<Value> Value { get; set; }
+    }
+
+    public class ODataBase
+    {
+        [JsonProperty("odata.metadata")]
+        public string Metadata { get; set; }
     }
 
     internal class Value

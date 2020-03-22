@@ -162,20 +162,22 @@
                             </div>
                         </li>*@
                     <li class="dropdown">
-                        <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
+                        @*nav-link dropdown-toggle nav-link-lg nav-link-user*@
+                        <a href="#" data-toggle="dropdown" class="nav-link nav-link-lg nav-link-user">
                             <div class="d-sm-none d-lg-inline-block">שלום, @Model.User.FullName, @Model.User.SupplierName</div>
+                            <i class="fas fa-user-cog"></i>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
-                            <div class="dropdown-title">Logged in 5 min ago</div>
-                                @*<a href="features-profile.html" class="dropdown-item has-icon">
-                                    <i class="far fa-user"></i> Profile
-                                </a>
-                                <a href="features-activities.html" class="dropdown-item has-icon">
-                                    <i class="fas fa-bolt"></i> Activities
-                                </a>*@
-                                <a href="@Url.Action("UserProfile", "Account_IL")" class="dropdown-item has-icon">
-                                    <i class="fas fa-user"></i> Profile
-                                </a>
+                            <div class="dropdown-title"><h6>הגדרות</h6></div>
+                            @*<a href="features-profile.html" class="dropdown-item has-icon">
+                <i class="far fa-user"></i> Profile
+            </a>
+            <a href="features-activities.html" class="dropdown-item has-icon">
+                <i class="fas fa-bolt"></i> Activities
+            </a>*@
+                            <a href="@Url.Action("UserProfile", "Account_IL")" class="dropdown-item has-icon">
+                                <i class="fas fa-user"></i> פרופיל
+                            </a>
                             <div class="dropdown-divider"></div>
                             <a href="@Url.Action("LogOff", "Account_IL")" class="dropdown-item has-icon text-danger">
                                 <i class="fas fa-sign-out-alt"></i> יציאה

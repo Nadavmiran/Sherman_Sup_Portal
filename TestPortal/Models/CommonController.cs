@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -11,15 +12,34 @@ namespace TestPortal.Models
     {
         public ActionResult TestProduct(int orderID, string orderNumber)
         {
-            Test t = new Test();// { TestCode = "12224", TestComments = "No Comments", TestResult = "0.0999", TestType = "89" };
-            Order o = new Order();
-            Product p = new Product();
-            PageObject po = new PageObject();
-            po.objOrder = o.GetOrderDetails(orderID);//new Order { OrderID = orderID, OrderNumber = orderNumber };
-            po.lstItemsObject = p.GetOrderItems(orderID);
-            po.objProduct = new Product();// { OrderID = 0, OrderNumber = string.Empty, LeftAmountToDeliver = 0, TotalAmountInOrder = 0, LineStatus = string.Empty, ProductDescription = string.Empty, ProductID = 0, ProductName = string.Empty, SupplyDate = string.Empty };
-            po.TestObject = t;
-            return View(po);
+            if (Session["USER_LOGIN"] == null)
+                return RedirectToAction("Login", "Account");
+            else
+            {
+                Test t = new Test();// { TestCode = "12224", TestComments = "No Comments", TestResult = "0.0999", TestType = "89" };
+                Order o = new Order();
+                Product p = new Product();
+                PageObject po = new PageObject();
+                po.User = Session["USER_LOGIN"] as AppUser;
+                po.objOrder = o.GetOrderDetails(orderID);//new Order { OrderID = orderID, OrderNumber = orderNumber };
+                if(null != po.objOrder)
+                {
+                    if (null != po.objOrder.PORDERITEMS_SUBFORM)
+                    {
+                        po.lstItemsObject = new List<OrderItems>();
+                        po.lstItemsObject.AddRange(po.objOrder.PORDERITEMS_SUBFORM);
+                        foreach (OrderItems item in po.lstItemsObject)
+                        {
+                            item.ORD = po.objOrder.ORD;
+                        }
+                    }
+                }
+                //po.lstItemsObject = new List<OrderItems>();
+                //po.lstItemsObject = p.GetOrderItems(orderID);
+                po.objProduct = new OrderItems();// { OrderID = 0, OrderNumber = string.Empty, LeftAmountToDeliver = 0, TotalAmountInOrder = 0, LineStatus = string.Empty, ProductDescription = string.Empty, ProductID = 0, ProductName = string.Empty, SupplyDate = string.Empty };
+                po.TestObject = t;
+                return View(po);
+            }
         }
 
         [HttpPost]
@@ -29,10 +49,19 @@ namespace TestPortal.Models
             PageObject po = new PageObject();
             po.TestObject = new Test();
             po.lstOrderObject = ord.GetSupplierOrders(supplier);
-            //po.lstOrderObject = new List<Order>();
-            //po.lstOrderObject.Add(new Order {OrderDate = "11-02-2020", OrderDescription = "Plag&play parts - 1", OrderID = 123, OrderNumber = "23/856", OrderStatus = "In progress" });
-            //po.lstOrderObject.Add(new Order { OrderDate = "12-02-2020", OrderDescription = "Plag&play parts - 2", OrderID = 124, OrderNumber = "23/857", OrderStatus = "Waiting" });
-            //po.lstOrderObject.Add(new Order { OrderDate = "13-02-2020", OrderDescription = "Plag&play parts - 3", OrderID = 125, OrderNumber = "23/858", OrderStatus = "Frozen" });
+            po.lstItemsObject = new List<OrderItems>();
+            foreach (Order obj in po.lstOrderObject)
+            {
+                if (null == obj.PORDERITEMS_SUBFORM)
+                    continue;
+
+                for (int i = 0; i < obj.PORDERITEMS_SUBFORM.Length; i++)
+                {
+                    obj.PORDERITEMS_SUBFORM[i].ORD = obj.ORD;
+                }
+                po.lstItemsObject.AddRange(obj.PORDERITEMS_SUBFORM);
+            }
+            //PORDERS?$filter=SUPNAME eq '22000' and (STATDES eq 'מאושרת' or STATDES eq 'נשלחה-עדכון' or STATDES eq 'נשלחה' or STATDES eq 'אישור ספק' or STATDES eq 'פתיחה חוזרת' or STATDES eq 'מוקפאת')&$expand=PORDERITEMS_SUBFORM($expand=PORDERITEMSTEXT_SUBFORM)
 
             return Json(po);
         }
@@ -50,7 +79,7 @@ namespace TestPortal.Models
         {
             Product p = new Product();
             PageObject po = new PageObject();
-            po.lstItemsObject = p.GetOrderItems(parentRowKey);
+            //po.lstItemsObject = p.GetOrderItems(parentRowKey);
             //po.lstItemsObject = new List<Product>();
             //po.lstItemsObject.Add(new Product { OrderID = 123, OrderNumber = "23/856", LeftAmountToDeliver = 1, TotalAmountInOrder = 21, LineStatus = "In Progress", ProductDescription = "פלטה 4 חורים", ProductID = 8747, ProductName = "IT8947", SupplyDate = "14-02-2020" });
             //po.lstItemsObject.Add(new Product { OrderID = 123, OrderNumber = "23/856", LeftAmountToDeliver = 2, TotalAmountInOrder = 11, LineStatus = "In Progress", ProductDescription = "פלטה 5 חורים", ProductID = 8749, ProductName = "IT8948", SupplyDate = "15-02-2020" });
@@ -59,7 +88,7 @@ namespace TestPortal.Models
             return Json(po);
         }
 
-        public ActionResult TestProductItem(int orderID, int prodId, int ordLine)
+        public ActionResult TestProductItem(int orderID, string prodName, int ordLine)
         {
             //Test t = new Test { TestCode = "12224", TestComments = "No Comments", TestResult = "0.0999", TestType = "89" };
             //Revision r = new Revision();
@@ -70,13 +99,16 @@ namespace TestPortal.Models
             //po.objProduct = p.GetProductDetailse(orderID, prodId, ordLine);//new Product { OrderID = 123, OrderNumber = "23/856", LeftAmountToDeliver = 1, TotalAmountInOrder = 21, LineStatus = "In Progress", ProductDescription = "פלטה 4 חורים", ProductID = prodId, ProductName = prodName, SupplyDate = "14-02-2020" };
             //po.lstRevision = r.GetProdRevisionList(prodId, po.objProduct.REV);
             //po.TestObject = new Test();
-            return View("TestProduct", getProductTestData(orderID, prodId, ordLine));
+            if (Session["USER_LOGIN"] == null)
+                return RedirectToAction("Login", "Account");
+
+            return View("TestProduct", getProductTestData(orderID, prodName, ordLine));
         }
 
         [HttpPost]
-        public JsonResult TestProductItemData(int orderID, int prodId, int ordLine)
+        public JsonResult TestProductItemData(int orderID, string prodName, int ordLine)
         {
-            return Json(getProductTestData(orderID, prodId, ordLine));
+            return Json(getProductTestData(orderID, prodName, ordLine));
             //Test t = new Test { TestCode = "12224", TestComments = "No Comments", TestResult = "0.0999", TestType = "89" };
             //Revision r = new Revision();
             //Order o = new Order();
@@ -89,17 +121,40 @@ namespace TestPortal.Models
             //return View("TestProduct", po);
         }
 
-        private PageObject getProductTestData(int orderID, int prodId, int ordLine)
+        private PageObject getProductTestData(int orderID, string prodName, int ordLine)
         {
             Test t = new Test { TestCode = "12224", TestComments = "No Comments", TestResult = "0.0999", TestType = "89" };
             Revision r = new Revision();
             Order o = new Order();
             Product p = new Product();
             PageObject po = new PageObject();
+            po.User = Session["USER_LOGIN"] as AppUser;
+            //string query = "/PORDERS?$filter=ORD eq " + orderID  + "&$expand=PORDERITEMS_SUBFORM($filter=LINE eq " + ordLine +")";
+            //string res = Call_Get(query);
+
+            //OrdersWarpper ow = JsonConvert.DeserializeObject<OrdersWarpper>(res);
             po.objOrder = o.GetOrderDetails(orderID);
-            po.objProduct = p.GetProductDetailse(orderID, prodId, ordLine);//new Product { OrderID = 123, OrderNumber = "23/856", LeftAmountToDeliver = 1, TotalAmountInOrder = 21, LineStatus = "In Progress", ProductDescription = "פלטה 4 חורים", ProductID = prodId, ProductName = prodName, SupplyDate = "14-02-2020" };
-            po.lstRevision = r.GetProdRevisionList(prodId, po.objProduct.REV);
-            po.TestObject = new Test();
+            po.lstItemsObject = new List<OrderItems>();
+
+            if((null != po.objOrder.PORDERITEMS_SUBFORM) && (po.objOrder.PORDERITEMS_SUBFORM.Length > 0))
+                for (int i = 0; i < po.objOrder.PORDERITEMS_SUBFORM.Length; i++)
+                {
+                    po.objOrder.PORDERITEMS_SUBFORM[i].ORD = po.objOrder.ORD;
+                }
+
+            po.lstItemsObject.AddRange(po.objOrder.PORDERITEMS_SUBFORM);
+
+            po.objProduct = new OrderItems();
+            try
+            {
+                po.objProduct = po.lstItemsObject.Where(x => x.ORD == orderID && x.LINE == ordLine).SingleOrDefault();
+            }
+            catch (Exception ex)
+            {
+            }
+            
+            //po.lstRevision = r.GetProdRevisionList(prodId, po.objProduct.REV);
+            po.TestObject = t;
             return po;
         }
 

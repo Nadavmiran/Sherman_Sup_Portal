@@ -23,7 +23,7 @@
     //$.jgrid.defaults.styleUI = 'Bootstrap';
 </script>
 <div class="section-body">
-    <h2 class="section-title">Order # @Model.objOrder.OrderNumber</h2>
+    <h2 class="section-title">Order # @Model.objOrder.ORDNAME</h2>
     <p class="section-lead">Please add new testing results or update an existing test.</p>
     <div class="row">
         <div class="col-12 col-md-6 col-lg-6">
@@ -36,11 +36,11 @@
                         <form class="form-horizontal  col-sm-12">
                             <div class="form-group">
                                 <label class="control-label" style="color:#01416F">Order&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-                                <label class="control-label col-sm-2">@Model.objOrder.OrderNumber</label>
+                                <label class="control-label col-sm-2">@Model.objOrder.ORDNAME</label>
                                 <label class="control-label" style="color:#01416F">&nbsp;&nbsp;Order Date</label>
-                                <label class="control-label col-sm-2">@Model.objOrder.OrderDate</label>
+                                <label class="control-label col-sm-2">@Model.objOrder.pageCURDATE</label>
                                 <label class="control-label" style="color:#01416F">Order Status</label>
-                                <label class="control-label col-sm-2">@Model.objOrder.OrderStatus</label>
+                                <label class="control-label col-sm-2">@Model.objOrder.STATDES</label>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-sm-2">&nbsp;</label>
@@ -63,21 +63,21 @@
                         <form class="form-horizontal  col-sm-12">
                             <div class="form-group">
                                 <label class="control-label" style="color:#01416F">Serial No.</label>
-                                <label class="control-label col-sm-2" id="lblProductName">@Model.objProduct.ProductName</label>
+                                <label class="control-label col-sm-2" id="lblProductName">@Model.objProduct.PARTNAME</label>
                                 <input type="hidden" id="hdnOrdId" value="@Model.objOrder.OrderID" />
-                                <input type="hidden" id="hdnPrdId" value="@Model.objProduct.ProductID" />
+                                <input type="hidden" id="hdnPrdId" value="@Model.objProduct.PARTNAME" />
                                 <label class="control-label" style="color:#01416F">Description</label>
-                                <label class="control-label col-sm-3" id="lblProductDescription">@Model.objProduct.ProductDescription</label>
+                                <label class="control-label col-sm-3" id="lblProductDescription">@Model.objProduct.PDES</label>
                                 <label class="control-label" style="color:#01416F">Supply Date</label>
-                                <label class="control-label" id="lblSupplyDate">@Model.objProduct.SupplyDate</label>
+                                <label class="control-label" id="lblSupplyDate">@Model.objProduct.pageREQDATE</label>
                             </div>
                             <div class="form-group">
                                 <label class="control-label" style="color:#01416F">Quntity&nbsp; &nbsp; </label>
-                                <label class="control-label col-sm-2" id="lblTotalAmountInOrder">@Model.objProduct.TotalAmountInOrder</label>
+                                <label class="control-label col-sm-2" id="lblTotalAmountInOrder">@Model.objProduct.TQUANT</label>
                                 <label class="control-label" style="color:#01416F">Left Quntity</label>
-                                <label class="control-label col-sm-3" id="lblLeftAmountToDeliver">@Model.objProduct.LeftAmountToDeliver</label>
+                                <label class="control-label col-sm-3" id="lblLeftAmountToDeliver">@Model.objProduct.TBALANCE</label>
                                 <label class="control-label" style="color:#01416F">Status</label>
-                                <label class="control-label" id="lblLineStatus">@Model.objProduct.LineStatus</label>
+                                <label class="control-label" id="lblLineStatus">@Model.objProduct.PORDISTATUSDES</label>
                             </div>
                             @*<div class="form-group">
                                     <button class="btn btn-primary" id="modal-7">New Test</button>

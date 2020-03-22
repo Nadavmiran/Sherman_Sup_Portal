@@ -1,4 +1,4 @@
-﻿
+﻿@model TestPortal.Models.PageObject
 @{
     ViewBag.Title = "Orders";
     Layout = "~/Views/Shared/_Layout_EN.cshtml";
@@ -28,8 +28,8 @@
     <p class="section-lead">Please find the following table with orders left to supply</p>
     <div class="card">
         @*<div class="card-header">
-            <h4>Orders</h4>
-        </div>*@
+                <h4>Orders</h4>
+            </div>*@
         @*<div><a href="@Url.Action("TestProduct", "Home")">QA Page</a></div>*@
         <div class="card-body">
             <div>
@@ -54,7 +54,7 @@
         $grid.jqGrid("setGridWidth", newWidth, true);
     });
     $(document).ready(function () {
-        getData("22149");
+        getData("@Model.User.Supplier_ID");
 
         var $grid = $("#jqGrid"),
             newWidth = $grid.parent().width();

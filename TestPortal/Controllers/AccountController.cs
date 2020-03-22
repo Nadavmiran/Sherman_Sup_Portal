@@ -21,7 +21,10 @@ namespace TestPortal.Controllers
         {
             LoginAction(po.User);
             if(po.User.IsAuthenticated)
-                return RedirectToAction("Index", "Home");
+                if (po.User.Language.Equals("עברית"))
+                    return RedirectToAction("Index", "Home_IL");
+                else
+                    return RedirectToAction("Index", "Home");
             else
             {
                 ModelState.AddModelError(string.Empty, "Wrong User Name or Password. Please try again or mail Sherman system administrator: sales@sherman.com");
