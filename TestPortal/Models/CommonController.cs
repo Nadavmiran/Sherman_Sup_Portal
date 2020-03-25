@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using LMNS.App.Log;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -124,15 +125,13 @@ namespace TestPortal.Models
         private PageObject getProductTestData(int orderID, string prodName, int ordLine)
         {
             Test t = new Test { TestCode = "12224", TestComments = "No Comments", TestResult = "0.0999", TestType = "89" };
-            Revision r = new Revision();
+            //Revision r = new Revision();
+            Sample s = new Sample();
             Order o = new Order();
             Product p = new Product();
             PageObject po = new PageObject();
+            po.objSamplQA = new Sample_QA();
             po.User = Session["USER_LOGIN"] as AppUser;
-            //string query = "/PORDERS?$filter=ORD eq " + orderID  + "&$expand=PORDERITEMS_SUBFORM($filter=LINE eq " + ordLine +")";
-            //string res = Call_Get(query);
-
-            //OrdersWarpper ow = JsonConvert.DeserializeObject<OrdersWarpper>(res);
             po.objOrder = o.GetOrderDetails(orderID);
             po.lstItemsObject = new List<OrderItems>();
 
@@ -148,9 +147,20 @@ namespace TestPortal.Models
             try
             {
                 po.objProduct = po.lstItemsObject.Where(x => x.ORD == orderID && x.LINE == ordLine).SingleOrDefault();
+                if(null != po.objProduct)
+                {
+                    string rev = string.IsNullOrEmpty(po.objProduct.REVNAME) ? po.objProduct.SHR_SERIAL_REVNUM : po.objProduct.REVNAME;
+                    if(string.IsNullOrEmpty(rev))
+                    {
+                        // To do: create new document
+                    }
+                    else
+                        po.objSample = s.GetProductSamples(po.User.Supplier_ID, po.objProduct.PARTNAME, po.objProduct.REVNAME, po.objProduct.LINE);
+                }
             }
             catch (Exception ex)
             {
+                AppLogger.log.Info("getProductTestData ==> exeption = ", ex);
             }
             
             //po.lstRevision = r.GetProdRevisionList(prodId, po.objProduct.REV);
@@ -167,6 +177,7 @@ namespace TestPortal.Models
         [HttpPost]
         public JsonResult GetProductRevisionList(int prodId, int revId)
         {
+            
             Revision r = new Revision();
             PageObject po = new PageObject();
             po.lstRevision = r.GetProdRevisionList(prodId, revId);
@@ -190,6 +201,7 @@ namespace TestPortal.Models
         [HttpPost]
         public ActionResult SaveTest(string data)
         {
+            
             return View();
         }
 
@@ -216,4 +228,5 @@ namespace TestPortal.Models
             return View();
         }
     }
+
 }

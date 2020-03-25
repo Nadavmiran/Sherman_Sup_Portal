@@ -16,7 +16,7 @@ namespace TestPortal.Models
         public string Email { get; set; }
         public string Password { get; set; }
         public string Language { get; set; }
-        public int Supplier_ID { get; set; }
+        public string Supplier_ID { get; set; }
         public string SupplierName { get; set; }
         public string Error { get; set; }
 
@@ -30,7 +30,7 @@ namespace TestPortal.Models
                 while (dr.Read())
                 {
                     PRIORITY_ID = Convert.ToInt32(dr["PHONE"].ToString());
-                    Supplier_ID = Convert.ToInt32(dr["SUPNAME"].ToString());
+                    Supplier_ID = dr["SUPNAME"].ToString();
                     SupplierName = dr["SUPDES"].ToString();
                     FullName = dr["NAME"].ToString();
                     Language = dr["LANGUAGE"].ToString();

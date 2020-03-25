@@ -1,5 +1,7 @@
 ﻿using LMNS.App.Log;
+using LMNS.Priority.API;
 using LMNS.Repositories;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -8,7 +10,7 @@ using System.Web;
 
 namespace TestPortal.Models
 {
-    public class Revision
+    public class Revision : PriorityAPI
     {
         public int ORD { get; set; }
         public int PART { get; set; }
@@ -53,6 +55,17 @@ namespace TestPortal.Models
                 AppLogger.log.Error("GetProdRevisionList ==> SP = LMNS_GetProductTestsList ==> PART [key] = " + prodId + " ==> @revId = " + revId, ex);
             }
             return lst;
+        }
+
+        internal List<Revision> GetProdRevisionList(string oRDNAME, string supplierName, string pARTNAME, string rEVNAME)
+        {
+            //PART?$filter=PARTNAME eq '23559000'&$expand=REVISIONS_SUBFORM($filter=REVNUM eq 'C';$expand=MED_PARTQA_R_SUBFORM)
+            //MED_SAMPLE?$filter=PARTNAME eq '" + pARTNAME + "' and SHR_SER_ORDER eq '" + oRDNAME + "' and SUPNAME eq '" + supplierName + "')"
+            string query = "/PART?$filter=PARTNAME eq '" + pARTNAME + "'&$expand=REVISIONS_SUBFORM($filter=REVNUM eq '" + rEVNAME + "';$expand=MED_PARTQA_R_SUBFORM)";
+            string res = Call_Get(query);
+
+            OrdersWarpper ow = JsonConvert.DeserializeObject<OrdersWarpper>(res);
+            return null;
         }
     }
 }
