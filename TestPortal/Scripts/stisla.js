@@ -4,7 +4,7 @@
   // Bootstrap 4 Modal
   $.fn.fireModal = function(options) {
     var options = $.extend({
-      size: 'modal-md',
+      size: 'modal-xl',
       center: false,
       animation: true,
       title: 'Modal Title',

@@ -1,4 +1,4 @@
-"use strict";
+﻿"use strict";
 
 $("#modal-1").fireModal({body: 'Modal body text goes here.'});
 $("#modal-2").fireModal({body: 'Modal body text goes here.', center: true});
@@ -93,10 +93,10 @@ $("#modal-6").fireModal({
 });
 
 $("#modal-7").fireModal({
-    title: 'Test Results',
+    title: 'בדיקת איכות לפריט',
     body: $("#modal-test-part"),
     footerClass: 'bg-whitesmoke',
-    autoFocus: false,
+    autoFocus: true,
     onFormSubmit: function (modal, e, form) {
         // Form Data
         let form_data = $(e.target).serialize();
@@ -117,9 +117,82 @@ $("#modal-7").fireModal({
                 type: "POST",
                 data:
                 {
-                    data: form_data
+                    data: decode(form_data)
                 },
                 url: "/Home/SaveTest",
+                contentType: "application/x-www-form-urlencoded;charset=ISO-8859-15",
+                success: function (response) {
+                    console.log("response", response);
+                }
+            });
+
+        $.ajax(
+            {
+                type: "POST",
+                data: fdata,
+                url: "/Home/UploadFiles",
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    console.log("response", response);
+                }
+            });
+        let fake_ajax = setTimeout(function () {
+            form.stopProgress();
+            modal.find('.modal-body').prepend('<div class="alert alert-info">הנתונים נשמרו.</div>');
+
+            clearInterval(fake_ajax);
+        }, 1500);
+
+        e.preventDefault();
+    },
+    shown: function (modal, form) {
+        console.log(form);
+    },
+    buttons: [
+        {
+            text: 'Submit',
+            submit: true,
+            class: 'btn btn-primary btn-shadow',
+            handler: function (modal) {
+            }
+        }
+    ]
+});
+function decode(str) {
+    return decodeURIComponent(str.replace(/\+/g, " "));
+}
+$("#modal-8").fireModal({
+    title: 'Test Results',
+    body: $("#modal-test-part"),
+    footerClass: 'bg-whitesmoke',
+    autoFocus: true,
+    onFormSubmit: function (modal, e, form) {
+        // Form Data
+
+        let form_data = $(e.target).serialize();
+        var fdata = new FormData();
+        var formdata = $('#attachments').prop("files");
+        console.log("files = ", formdata);
+        console.log("e = ", e);
+        console.log("modal = ", modal);
+        console.log("form = ", form);
+        for (var i = 0; i < formdata.length; i++) {
+            var sfilename = formdata[i].name;
+            let srandomid = Math.random().toString(36).substring(7);
+
+            fdata.append(sfilename, formdata[i]);
+        }
+         // DO AJAX HERE
+        $.ajax(
+            {
+                type: "POST",
+                data:
+                {
+                    data: decode(form_data)
+                },
+                url: "/Home/SaveTest",
+                contentType: "application/x-www-form-urlencoded;charset=ISO-8859-15",
                 success: function (response) {
                     console.log("response", response);
                 }
@@ -146,7 +219,7 @@ $("#modal-7").fireModal({
         e.preventDefault();
     },
     shown: function (modal, form) {
-        console.log(form)
+        console.log(form);
     },
     buttons: [
         {

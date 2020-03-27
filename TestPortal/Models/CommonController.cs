@@ -89,6 +89,7 @@ namespace TestPortal.Models
             return Json(po);
         }
 
+
         public ActionResult TestProductItem(int orderID, string prodName, int ordLine)
         {
             //Test t = new Test { TestCode = "12224", TestComments = "No Comments", TestResult = "0.0999", TestType = "89" };
@@ -104,6 +105,24 @@ namespace TestPortal.Models
                 return RedirectToAction("Login", "Account");
 
             return View("TestProduct", getProductTestData(orderID, prodName, ordLine));
+        }
+
+        [HttpPost]
+        public JsonResult PostTestProductItem(int orderID, string prodName, int ordLine)
+        {
+            //Test t = new Test { TestCode = "12224", TestComments = "No Comments", TestResult = "0.0999", TestType = "89" };
+            //Revision r = new Revision();
+            //Order o = new Order();
+            //Product p = new Product();
+            //PageObject po = new PageObject();
+            //po.objOrder = o.GetOrderDetails(orderID);
+            //po.objProduct = p.GetProductDetailse(orderID, prodId, ordLine);//new Product { OrderID = 123, OrderNumber = "23/856", LeftAmountToDeliver = 1, TotalAmountInOrder = 21, LineStatus = "In Progress", ProductDescription = "פלטה 4 חורים", ProductID = prodId, ProductName = prodName, SupplyDate = "14-02-2020" };
+            //po.lstRevision = r.GetProdRevisionList(prodId, po.objProduct.REV);
+            //po.TestObject = new Test();
+            if (Session["USER_LOGIN"] == null)
+                return Json(RedirectToAction("Login", "Account"));
+
+            return Json(getProductTestData(orderID, prodName, ordLine));
         }
 
         [HttpPost]
@@ -130,7 +149,7 @@ namespace TestPortal.Models
             Order o = new Order();
             Product p = new Product();
             PageObject po = new PageObject();
-            po.objSamplQA = new Sample_QA();
+            //po.objSamplQA = new Sample_QA();
             po.User = Session["USER_LOGIN"] as AppUser;
             po.objOrder = o.GetOrderDetails(orderID);
             po.lstItemsObject = new List<OrderItems>();

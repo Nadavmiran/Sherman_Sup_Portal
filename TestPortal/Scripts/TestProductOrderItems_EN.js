@@ -6,9 +6,10 @@
         datatype: "local",
         data: grid_data,
         colModel: [
-            { label: '#', name: 'ORIGLINE', align: 'center', hidden: true, width: 75 },
+            { label: 'ORD', name: 'ORD', align: 'center', hidden: false, width: 75 },
+            { label: '#', name: 'LINE', align: 'center', hidden: false, width: 75 },
             { label: 'ProductID', name: 'PARTNAME', align: 'center', key: true, hidden: true, width: 75 },
-            { label: 'Serial No.', name: 'PARTNAME', align: 'center', formatter: formatProdLink, width: 100 },
+            { label: 'Serial No.', name: 'PARTNAME', align: 'center', width: 100 }, //, formatter: formatProdLink
             { label: 'Description', name: 'PDES', align: 'center', width: 100 },
             { label: 'Quntity', name: 'TQUANT', align: 'center', width: 100 },
             { label: 'Left Quntity', name: 'TBALANCE', align: 'center', width: 100 },
@@ -26,11 +27,20 @@
         rowList: [10, 30, 50, 100],
         pager: "#jqGridPager",
         loadonce: true,
-        subGrid: false
+        subGrid: false,
+        onSelectRow: function (id, rowId, iCol, content, event) {
+            console.log('showGridProd ==> id ', id);
+            var rowData = $(this).getRowData(id);
+            console.log("onSelectRow rowData = ", rowData);
+            console.log('showGridProd ==> rowId ', rowId);
+            console.log('showGridProd ==> iCol ', iCol);
+            console.log('showGridProd ==> content ', content);
+            GetProductDetails(rowData);
+        }
     });
 }
 
-function showGridProdRevision(grid_data) {
+function showGridProdSamples(grid_data) {
     console.log("showGridProdRevision ==> grid_data", grid_data);
     $("#jqGridRevision").jqGrid({
         guiStyle: "bootstrap",
@@ -39,16 +49,19 @@ function showGridProdRevision(grid_data) {
         data: grid_data,
         colModel: [
             { label: 'QACODE', name: 'QACODE', align: 'center', key: true, hidden: true, width: 75 },
-            { label: 'PART', name: 'PART', align: 'center', hidden: true, width: 75 },
-            { label: 'LOCATION', name: 'LOCATION', align: 'center', hidden: true, width: 75 },
-            { label: 'MEASURECODE', name: 'MEASURECODE', align: 'center', hidden: true, width: 75 },
-            { label: 'REV', name: 'REV', align: 'center', hidden: true, width: 75 },
-            { label: 'Description', name: 'QADES', align: 'center', /*formatter: formatGetRevListLink,*/ width: 100 },
-            { label: 'Test', name: 'SHR_TEST', align: 'center', width: 100 },
-            { label: 'Measure Tool', name: 'MEASUREDES', align: 'center', width: 100 },
-            { label: 'Requird Result Quntity', name: 'REQUIRED_RESULT', align: 'center', width: 100 },
-            { label: 'Remarks', name: 'REMARKS', align: 'center', width: 100 },
-            { label: 'File', name: 'EXTFILENAME', align: 'center', width: 100 }
+            { label: 'Location', name: 'LOCATION', align: 'center', hidden: false, width: 30 },
+            { label: 'Sample', name: 'QADES', align: 'center', hidden: false, width: 250 },
+            { label: 'Sample - Text', name: 'SHR_TEST', align: 'center', hidden: false, width: 100 },
+            { label: 'Result - Min', name: 'RESULTMIN', align: 'center', hidden: false, width: 30 },
+            { label: 'Result - Max', name: 'RESULTMAX', align: 'center', /*formatter: formatGetRevListLink,*/ width: 30 },
+            { label: 'Repitition', name: 'REPETITION', align: 'center', width: 30 },
+            { label: 'Resultant', name: 'RESULTANT', align: 'center', width: 40 }, 
+            { label: 'Requird Result', name: 'REQUIRED_RESULT', align: 'center', width: 40 },
+            { label: 'Sample Qnt.', name: 'SAMPQUANT', align: 'center', width: 30 },
+            { label: 'Measure Tool', name: 'MEASUREDES', align: 'center', width: 200 },
+            { label: 'Result', name: 'RESULT', align: 'center', width: 40 },
+            { label: 'Normal', name: 'NORMAL', align: 'center', width: 30 },
+            { label: 'Remarks', name: 'REMARKS', align: 'center', width: 200 }
         ],
         viewrecords: true,
         //rownumbers: true, // show row numbers
@@ -61,7 +74,17 @@ function showGridProdRevision(grid_data) {
         rowList: [10, 30, 50, 100],
         pager: "#jqGridRevisionPager",
         loadonce: true,
-        subGrid: false
+        subGrid: false,
+        onSelectRow: function (id, rowId, iCol, content, event) {
+            console.log('jqGridRevision ==> id ', id);
+            var rowData = $(this).getRowData(id);
+            console.log("onSelectRow rowData = ", rowData);
+            console.log('jqGridRevision ==> rowId ', rowId);
+            console.log('jqGridRevision ==> iCol ', iCol);
+            console.log('jqGridRevision ==> content ', content);
+            OpenSampleModal(rowData);
+            $("#modal-8").trigger("click");
+        }
     });
 }
 

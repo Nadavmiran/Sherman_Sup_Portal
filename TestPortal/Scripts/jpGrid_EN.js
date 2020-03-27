@@ -46,6 +46,9 @@ function showGrid()
         pager: "#jqGridPager",
         loadonce: true,
         subGrid: true, // set the subGrid property to true to show expand buttons for each row
+        loadComplete: function (data) {
+            $("#loader").hide();
+        },
         subGridOptions:
         {
             // load the subgrid data only once
@@ -69,7 +72,7 @@ function showGrid()
                 autowidth: true,
                 height: null,
                 colModel: [
-                    { label: '#', name: 'LINE', align: 'center', hidden: true, width: 75 },
+                    { label: '#', name: 'LINE', align: 'center', hidden: false, width: 75 },
                     { label: 'ORD', name: 'ORD', align: 'center', key: true, hidden: true, width: 75 },
                     { label: 'Serial No.', name: 'PARTNAME', align: 'center', formatter: formatProdLink, width: 100 },
                     { label: 'Description', name: 'PDES', align: 'center', width: 100 },
@@ -150,7 +153,7 @@ function formatProdLink(cellValue, options, rowObject)
     var linkText = document.createTextNode(cellValue);
     a.appendChild(linkText);
     a.title = cellValue;
-    a.href = 'Home/TestProductItem?' + 'OrderID=' + rowObject.ORD + '&prodName="' + rowObject.PARTNAME + '"&ordLine=' + rowObject.LINE;
+    a.href = '/Home/TestProductItem?' + 'OrderID=' + rowObject.ORD + '&prodName="' + rowObject.PARTNAME + '"&ordLine=' + rowObject.LINE;
     a.classList = '.ui-state-highlight a, .ui-widget-content .ui-state-highlight a, .ui-widget-header .ui-state-highlight a';//.style.color = "#01416F";
     console.log("setHref ==> a", a.outerHTML);
     return a.outerHTML;

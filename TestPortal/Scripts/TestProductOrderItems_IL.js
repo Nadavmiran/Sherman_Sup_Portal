@@ -1,14 +1,15 @@
 ﻿function showGridProd(grid_data) {
-    console.log("showGrid ==> grid_data", grid_data);
+    console.log("showGridProd ==> grid_data", grid_data);
     $("#jqGrid").jqGrid({
         guiStyle: "bootstrap",
         iconSet: "fontAwesome",
         datatype: "local",
         data: grid_data,
         colModel: [
-            { label: '#', name: 'ORIGLINE', align: 'center', hidden: true, width: 75 },
+            { label: 'ORD', name: 'ORD', align: 'center', hidden: false, width: 75 },
+            { label: '#', name: 'LINE', align: 'center', hidden: false, width: 75 },
             { label: 'ProductID', name: 'PARTNAME', align: 'center', key: true, hidden: true, width: 75 },
-            { label: 'מק"ט', name: 'PARTNAME', align: 'center', formatter: formatProdLink, width: 100 },
+            { label: 'מק"ט', name: 'PARTNAME', align: 'center', width: 100 }, //formatter: formatProdLink, 
             { label: 'תאור', name: 'PDES', align: 'center', width: 100 },
             { label: 'כמות', name: 'TQUANT', align: 'center', width: 100 },
             { label: 'נותר לספק', name: 'TBALANCE', align: 'center', width: 100 },
@@ -26,11 +27,20 @@
         rowList: [10, 30, 50, 100],
         pager: "#jqGridPager",
         loadonce: true,
-        subGrid: false
+        subGrid: false,
+        onSelectRow: function (id, rowId, iCol, content, event) {
+            console.log('showGridProd ==> id ', id);
+            var rowData = $(this).getRowData(id);
+            console.log("onSelectRow rowData = ", rowData);
+            console.log('showGridProd ==> rowId ', rowId);
+            console.log('showGridProd ==> iCol ', iCol);
+            console.log('showGridProd ==> content ', content);
+            GetProductDetails(rowData);
+        }
     });
 }
 
-function showGridProdRevision(grid_data) {
+function showGridProdSamples(grid_data) {
     console.log("showGridProdRevision ==> grid_data", grid_data);
     $("#jqGridRevision").jqGrid({
         guiStyle: "bootstrap",
@@ -39,16 +49,19 @@ function showGridProdRevision(grid_data) {
         data: grid_data,
         colModel: [
             { label: 'QACODE', name: 'QACODE', align: 'center', key: true, hidden: true, width: 75 },
-            { label: 'PART', name: 'PART', align: 'center', hidden: true, width: 75 },
-            { label: 'LOCATION', name: 'LOCATION', align: 'center', hidden: true, width: 75 },
-            { label: 'MEASURECODE', name: 'MEASURECODE', align: 'center', hidden: true, width: 75 },
-            { label: 'REV', name: 'REV', align: 'center', hidden: true, width: 75 },
-            { label: 'תאור', name: 'QADES', align: 'center', /*formatter: formatGetRevListLink,*/ width: 200 },
-            { label: 'בדיקה', name: 'SHR_TEST', align: 'center', width: 100 },
-            { label: 'כלי בדיקה', name: 'MEASUREDES', align: 'center', width: 100 },
-            { label: 'תוצאה נדרשת', name: 'REQUIRED_RESULT', align: 'center', width: 100 },
-            { label: 'הערות', name: 'REMARKS', align: 'center', width: 100 },
-            { label: 'קובץ', name: 'EXTFILENAME', align: 'center', width: 100 }
+            { label: 'מיקום', name: 'LOCATION', align: 'center', hidden: false, width: 30 },
+            { label: 'תאור בדיקה', name: 'QADES', align: 'center', hidden: false, width: 250 },
+            { label: 'בדיקה - טקסט', name: 'SHR_TEST', align: 'center', hidden: false, width: 100 },
+            { label: 'תוצאת מינ.', name: 'RESULTMIN', align: 'center', hidden: false, width: 30 },
+            { label: 'תוצאת מקס.', name: 'RESULTMAX', align: 'center', /*formatter: formatGetRevListLink,*/ width: 30 },
+            { label: 'חזרות', name: 'REPETITION', align: 'center', width: 30 },
+            { label: 'תוצאתית (Y/N)', name: 'RESULTANT', align: 'center', width: 30 },
+            { label: 'תוצאה נדרשת', name: 'REQUIRED_RESULT', align: 'center', width: 40 }, 
+            { label: 'גודל המדגם', name: 'SAMPQUANT', align: 'center', width: 30 },
+            { label: 'כלי בדיקה', name: 'MEASUREDES', align: 'center', width: 200 },
+            { label: 'תוצאה', name: 'RESULT', align: 'center', width: 40 },
+            { label: 'תקין', name: 'NORMAL', align: 'center', width: 30 },
+            { label: 'הערות', name: 'REMARKS', align: 'center', width: 200 }
         ],
         viewrecords: true,
         //rownumbers: true, // show row numbers
@@ -61,7 +74,17 @@ function showGridProdRevision(grid_data) {
         rowList: [10, 30, 50, 100],
         pager: "#jqGridRevisionPager",
         loadonce: true,
-        subGrid: false
+        subGrid: false,
+        onSelectRow: function (id, rowId, iCol, content, event) {
+            console.log('jqGridRevision ==> id ', id);
+            var rowData = $(this).getRowData(id);
+            console.log("onSelectRow rowData = ", rowData);
+            console.log('jqGridRevision ==> rowId ', rowId);
+            console.log('jqGridRevision ==> iCol ', iCol);
+            console.log('jqGridRevision ==> content ', content);
+            OpenSampleModal(rowData);
+            $("#modal-7").trigger("click");
+        }
     });
 }
 
@@ -130,5 +153,4 @@ function showGridProdTests(grid_data) {
             $("#modal-7").trigger("click");
         } //End onSelectRow
     });
-
 }

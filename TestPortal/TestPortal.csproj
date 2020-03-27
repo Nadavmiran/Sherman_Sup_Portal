@@ -188,7 +188,9 @@
     <Compile Include="Models\OrdersItemText.cs" />
     <Compile Include="Models\PageObject.cs" />
     <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\ProductRevisionTest.cs" />
     <Compile Include="Models\Revision.cs" />
+    <Compile Include="Models\Sample.cs" />
     <Compile Include="Models\Test.cs" />
     <Compile Include="PriorityAPI\PriorityAPI.cs" />
     <Compile Include="PriorityAPI\ResultAPI.cs" />
@@ -467,6 +469,8 @@
     <Content Include="Views\Home_IL\TestProduct.cshtml" />
     <Content Include="Views\Account_IL\UserProfile.cshtml" />
     <Content Include="Views\Account\UserProfile.cshtml" />
+    <Content Include="Views\Home_IL\_Sample_QA.cshtml" />
+    <Content Include="Views\Home\_Sample_QA.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

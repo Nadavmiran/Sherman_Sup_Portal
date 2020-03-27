@@ -2479,16 +2479,18 @@ body.sidebar-mini .hide-sidebar-mini {
   display: none !important; }
 
 body.sidebar-mini .main-sidebar {
-  width: 65px;
-  overflow: initial !important;
-  position: absolute;
-  box-shadow: none; }
+    /*width: 65px;*/
+    width: 90px;
+    overflow: initial !important;
+    position: absolute;
+    box-shadow: none;
+}
   body.sidebar-mini .main-sidebar:after {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.03);
     content: ' ';
     position: fixed;
     background-color: #fff;
-    width: 65px;
+    width: 90px;
     height: 100%;
     right: 0;
     top: 0;
@@ -2580,10 +2582,14 @@ body.sidebar-mini .main-sidebar {
       padding: 0; }
 
 body.sidebar-mini .navbar {
-  right: 65px; }
+    /*right: 65px;*/
+    right: 97px;
+}
 
 body.sidebar-mini .main-content, body.sidebar-mini .main-footer {
-  padding-right: 90px; }
+    /*padding-right: 90px;*/
+    padding-right: 100px;
+}
 
 body.layout-2 .navbar-bg {
   z-index: 889;

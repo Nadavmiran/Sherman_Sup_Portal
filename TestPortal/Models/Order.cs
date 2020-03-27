@@ -33,6 +33,8 @@ namespace TestPortal.Models
         }
         public int ORD { get; set; }
         public string CODEDES { get; set; }
+        public string SUPNAME { get; set; }
+        public string CDES { get; set; }
         public string SHR_SUPTYPEDES { get; set; }
         public string OWNERLOGIN { get; set; }
         public OrderItems[] PORDERITEMS_SUBFORM { get; set; }

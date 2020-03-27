@@ -24,8 +24,8 @@
 </script>
 <!-- Main Content -->
 <div class="section-body">
-    <h2 class="section-title">הזמנות ממתינות לאספקה</h2>
-    <p class="section-lead">רשימת הזמנות ממתינות לאספקה בטבלה שלהלן</p>
+    @*<h2 class="section-title">הזמנות ממתינות לאספקה</h2>
+        <p class="section-lead">רשימת הזמנות ממתינות לאספקה בטבלה שלהלן</p>*@
     <div class="card">
         @*<div class="card-header">
                 <h4>Orders</h4>
@@ -38,6 +38,7 @@
             </div>
         </div>
     </div>
+    <div id="loader" class="loader"></div>
 </div>
 <script type="text/javascript">
     var gridBaseWidth = 0;
@@ -54,6 +55,8 @@
         $grid.jqGrid("setGridWidth", newWidth, true);
     });
     $(document).ready(function () {
+
+        $("#loader").show();
         getData("@Model.User.Supplier_ID");
 
         var $grid = $("#jqGrid"),
@@ -64,6 +67,7 @@
             isWidth = true;
         }
         $('#jqGrid').setGridParam({ direction: 'rtl' });
+        
         console.log(" onload ==> newWidth ", newWidth);
         console.log(" onload ==> gridBaseWidth ", gridBaseWidth);
     });
