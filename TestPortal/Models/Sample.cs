@@ -19,6 +19,10 @@ namespace TestPortal.Models
         /// </summary>
         public string DOCNO { get; set; }
         /// <summary>
+        /// מספר ספק
+        /// </summary>
+        public string SUPNAME { get; set; }
+        /// <summary>
         /// סטאטוס
         /// </summary>
         public string STATDES { get; set; }
@@ -87,6 +91,18 @@ namespace TestPortal.Models
     }
     public class Sample_QA
     {
+        /// <summary>
+        /// מפתח דגימה
+        /// </summary>
+        public string QA { get; set; }
+        /// <summary>
+        /// מספר דגימה
+        /// </summary>
+        public string DOCNO { get; set; }
+        /// <summary>
+        /// מספר ספק
+        /// </summary>
+        public string SUPNAME { get; set; }
         /// <summary>
         /// קוד בדיקה
         /// </summary>

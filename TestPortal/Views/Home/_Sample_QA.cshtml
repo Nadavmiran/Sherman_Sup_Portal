@@ -3,51 +3,53 @@
     <div class="card">
         <div class="col-12">
             <form id="modal-test-part" role="form" class="needs-validation">
+                <input type="hidden" id="hdnQaSUPNAME" />
+                <input type="hidden" id="hdnQaDOCNO" />
+                <input type="hidden" id="hdnQACODE" />
+                <input type="hidden" id="hdnLOCATION" />
+                <input type="hidden" id="hdnQA" />
                 <div class="card-body">
                     <div class="row">
                         <div class="form-group col-md-2 col-12">
-                            <label>QA code</label>
+                            <label style="font-weight:bolder;">QA code</label>
                             <div class="col-sm-1">
                                 <label type="text" id="txtQACODE" class="form-label"></label>
-                                @*@Html.TextBox("txtTestCode", Model.TestObject.TestCode, new { @class = "form-control", @required = "" })*@
                             </div>
                         </div>
                         <div class="form-group col-md-5 col-12">
-                            <label>QA desctiption</label>
+                            <label style="font-weight:bolder;">QA desctiption</label>
                             <div class="col-sm-12">
                                 <label type="text" id="txtQADES"></label>
-                                @*@Html.TextBox("txtTestType", Model.TestObject.TestType, new { @class = "form-control", @required = "" })*@
                             </div>
                         </div>
                         <div class="form-group col-md-2 col-12">
-                            <label>Location</label>
+                            <label style="font-weight:bolder;">Location</label>
                             <div class="col-sm-3 form-label">
                                 <label type="text" id="txtQaLOCATION"></label>
                             </div>
                         </div>
                         <div class="form-group col-md-3 col-12">
-                            <label>QA test</label>
+                            <label style="font-weight:bolder;">QA test</label>
                             <div class="col-sm-12 form-label">
                                 <label type="text" id="txtQaSHR_TEST" class=""></label>
-                                @*@Html.TextArea("txtTestComments", Model.TestObject.TestComments, new { @class = "form-control", @maxlength = "120", @cols = "50", @rows = "3", style = "height:100px;" })*@
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-md-2 col-12">
-                            <label>Result min.</label>
+                            <label style="font-weight:bolder;">Result min.</label>
                             <div class="col-sm-1">
-                                <label type="text" id="txtQaRESULTMIN" class="form-label">1.255</label>
+                                <label type="text" id="txtQaRESULTMIN" class="form-label"></label>
                             </div>
                         </div>
                         <div class="form-group col-md-5 col-12">
-                            <label>Result max.</label>
+                            <label style="font-weight:bolder;">Result max.</label>
                             <div class="col-sm-12">
-                                <label type="text" id="txtQaRESULTMAX">11.23</label>
+                                <label type="text" id="txtQaRESULTMAX"></label>
                             </div>
                         </div>
                         <div class="form-group col-md-2 col-12">
-                            <label>Repitition</label>
+                            <label style="font-weight:bolder;">Repitition</label>
                             <div class="col-sm-3 form-label">
                                 <label type="text" id="txtQaREPETITION"></label>
                             </div>
@@ -55,26 +57,25 @@
                         <div class="form-group col-md-3 col-12">
                             <label>Resultant</label>
                             <div class="col-sm-12 form-label">
-                                <label type="text" id="txtQaRESULTANT" class="">12</label>
-                                @*@Html.TextArea("txtTestComments", Model.TestObject.TestComments, new { @class = "form-control", @maxlength = "120", @cols = "50", @rows = "3", style = "height:100px;" })*@
+                                <input type="checkbox" id="txtQaRESULTANT" class="big-checkbox" readonly />
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-md-2 col-12">
-                            <label>Requierd result</label>
+                            <label style="font-weight:bolder;">Requierd result</label>
                             <div class="col-sm-1">
-                                <label type="text" id="txtQaREQUIRED_RESULT" class="form-label">1.255</label>
+                                <label type="text" id="txtQaREQUIRED_RESULT" class="form-label"></label>
                             </div>
                         </div>
                         <div class="form-group col-md-5 col-12">
-                            <label>Sample quantity</label>
+                            <label style="font-weight:bolder;">Sample quantity</label>
                             <div class="col-sm-12">
-                                <label type="text" id="txtQaSAMPQUANT">11.23</label>
+                                <label type="text" id="txtQaSAMPQUANT"></label>
                             </div>
                         </div>
                         <div class="form-group col-md-2 col-12">
-                            <label>Normal</label>
+                            <label style="font-weight:bolder;">Normal</label>
                             <div class="col-sm-3 form-label">
                                 <label type="text" id="txtQaNORMAL" class="form-group"></label>
                             </div>
@@ -82,20 +83,18 @@
                     </div>
                     <div class="row">
                         <div class="form-group col-md-6 col-12">
-                            <label>Measurment tool</label>
+                            <label style="font-weight:bolder;">Measurment tool</label>
                             <input class="form-control" type="text" name="MEASUREDES" id="txtQaMEASUREDES" />
                         </div>
                         <div class="form-group col-md-6 col-12">
-                            <label>Test result</label>
+                            <label style="font-weight:bolder;">Test result</label>
                             <input class="form-control" type="text" name="REMARK" id="txtQaRESULT" />
-                            @*@Html.TextBox("txtQaRESULT", Model.objSamplQA.RESULT, new { @class = "form-control", @maxlength = "120", @cols = "50", @rows = "3", style = "height:100px;" })*@
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-md-12 col-12">
-                            <label>Remark</label>
+                            <label style="font-weight:bolder;">Remark</label>
                             <input class="form-control" type="text" name="REMARK" id="txtQaREMARK" maxlength="120" />
-                            @*@Html.TextArea("txtQaREMARK", Model.objSamplQA.REMARK, new { @class = "form-control", @maxlength = "120", @cols = "50", @rows = "3", style = "height:100px;" })*@
                         </div>
                     </div>
                     <div class="form-group row"></div>
@@ -109,14 +108,12 @@
 
                                 <div class="card-body">
                                     <div class="fallback">
-                                        @*@Html.TextBox("attachments", Model.attachments, new { @type = "file", @multiple = "multiple" })*@
                                         <input name="attachments" id="attachments" type="file" multiple />
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
                 </div>
             </form>
         </div>

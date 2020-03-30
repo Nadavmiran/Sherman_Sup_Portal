@@ -181,6 +181,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AppUser.cs" />
+    <Compile Include="Models\Attachments.cs" />
     <Compile Include="Models\CommonAccountController.cs" />
     <Compile Include="Models\CommonController.cs" />
     <Compile Include="Models\Order.cs" />
@@ -341,6 +342,7 @@
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
     <Content Include="log4net.config" />
+    <Content Include="PriorityDocs\Test\פורטל ספקים01022020.docx" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -471,6 +473,7 @@
     <Content Include="Views\Account\UserProfile.cshtml" />
     <Content Include="Views\Home_IL\_Sample_QA.cshtml" />
     <Content Include="Views\Home\_Sample_QA.cshtml" />
+    <Content Include="Views\Home_IL\_Wizard.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

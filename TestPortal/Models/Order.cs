@@ -38,6 +38,7 @@ namespace TestPortal.Models
         public string SHR_SUPTYPEDES { get; set; }
         public string OWNERLOGIN { get; set; }
         public OrderItems[] PORDERITEMS_SUBFORM { get; set; }
+        public Attachments[] EXTFILES_SUBFORM { get; set; }
 
         internal List<Order> GetSupplierOrders(string supplier)
         {
@@ -62,33 +63,21 @@ namespace TestPortal.Models
 
         internal Order GetOrderDetails(int orderID)
         {
+            //"/PORDERS?$filter=ORD eq " + orderID + "&$expand=EXTFILES_SUBFORM,PORDERITEMS_SUBFORM($expand=PORDERITEMSTEXT_SUBFORM)";
             string query = "/PORDERS?$filter=ORD eq " + orderID + "&$expand=PORDERITEMS_SUBFORM($expand=PORDERITEMSTEXT_SUBFORM)";
-            //PORDERS ?$filter=ORD eq " + orderID + "&$expand=PORDERITEMS_SUBFORM";
             string res = Call_Get(query);
 
             OrdersWarpper ow = JsonConvert.DeserializeObject<OrdersWarpper>(res);
             return ow.Value[0];
+        }
 
-            //Dal d = new Dal();
-            //Order o = null;
-            //try
-            //{
-            //    SqlDataReader dr = d.GetRecordSet("LMNS_GetOrderDetails", new SqlParameter("@ord", orderID));
-            //    while (dr.Read())
-            //    {
-            //        o = new Order();
-            //        o.OrderID = Convert.ToInt32(dr["ORD"].ToString());
-            //        o.OrderNumber = dr["ORDNAME"].ToString();
-            //        o.OrderDate = dr["CURDATE"].ToString();
-            //        o.OrderDescription = dr["CODEDES"].ToString();
-            //        o.OrderStatus = dr["STATDES"].ToString();
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    AppLogger.log.Error("OrderDetails ==> SP = LMNS_GetOrderDetails ==> ord = " + orderID, ex);
-            //}
-            //return o;
+        internal Order GetOrderProductDetails(int orderID, string prodName)
+        {
+            string query = "/PORDERS?$filter=ORD eq  " + orderID + "&$expand=EXTFILES_SUBFORM($filter=SHR_PARTNAME eq '" + prodName + "'),PORDERITEMS_SUBFORM($filter=PARTNAME eq '" + prodName + "';$expand=PORDERITEMSTEXT_SUBFORM)";
+            string res = Call_Get(query);
+
+            OrdersWarpper ow = JsonConvert.DeserializeObject<OrdersWarpper>(res);
+            return ow.Value[0];
         }
     }
 

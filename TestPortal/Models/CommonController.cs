@@ -75,33 +75,9 @@ namespace TestPortal.Models
             return Json(po);
         }
 
-        [HttpPost]
-        public JsonResult GetOrderItems(int parentRowKey)
-        {
-            Product p = new Product();
-            PageObject po = new PageObject();
-            //po.lstItemsObject = p.GetOrderItems(parentRowKey);
-            //po.lstItemsObject = new List<Product>();
-            //po.lstItemsObject.Add(new Product { OrderID = 123, OrderNumber = "23/856", LeftAmountToDeliver = 1, TotalAmountInOrder = 21, LineStatus = "In Progress", ProductDescription = "פלטה 4 חורים", ProductID = 8747, ProductName = "IT8947", SupplyDate = "14-02-2020" });
-            //po.lstItemsObject.Add(new Product { OrderID = 123, OrderNumber = "23/856", LeftAmountToDeliver = 2, TotalAmountInOrder = 11, LineStatus = "In Progress", ProductDescription = "פלטה 5 חורים", ProductID = 8749, ProductName = "IT8948", SupplyDate = "15-02-2020" });
-            //po.lstItemsObject.Add(new Product { OrderID = 123, OrderNumber = "23/856", LeftAmountToDeliver = 3, TotalAmountInOrder = 13, LineStatus = "In Progress", ProductDescription = "פלטה 6 חורים", ProductID = 8748, ProductName = "IT8949", SupplyDate = "16-02-2020" });
-            //po.lstItemsObject.Add(new Product { OrderID = 123, OrderNumber = "23/856", LeftAmountToDeliver = 4, TotalAmountInOrder = 15, LineStatus = "In Progress", ProductDescription = "פלטה 7 חורים", ProductID = 8746, ProductName = "IT8940", SupplyDate = "17-02-2020" });
-            return Json(po);
-        }
-
-
         public ActionResult TestProductItem(int orderID, string prodName, int ordLine)
         {
-            //Test t = new Test { TestCode = "12224", TestComments = "No Comments", TestResult = "0.0999", TestType = "89" };
-            //Revision r = new Revision();
-            //Order o = new Order();
-            //Product p = new Product();
-            //PageObject po = new PageObject();
-            //po.objOrder = o.GetOrderDetails(orderID);
-            //po.objProduct = p.GetProductDetailse(orderID, prodId, ordLine);//new Product { OrderID = 123, OrderNumber = "23/856", LeftAmountToDeliver = 1, TotalAmountInOrder = 21, LineStatus = "In Progress", ProductDescription = "פלטה 4 חורים", ProductID = prodId, ProductName = prodName, SupplyDate = "14-02-2020" };
-            //po.lstRevision = r.GetProdRevisionList(prodId, po.objProduct.REV);
-            //po.TestObject = new Test();
-            if (Session["USER_LOGIN"] == null)
+           if (Session["USER_LOGIN"] == null)
                 return RedirectToAction("Login", "Account");
 
             return View("TestProduct", getProductTestData(orderID, prodName, ordLine));
@@ -122,7 +98,77 @@ namespace TestPortal.Models
             if (Session["USER_LOGIN"] == null)
                 return Json(RedirectToAction("Login", "Account"));
 
-            return Json(getProductTestData(orderID, prodName, ordLine));
+            return Json(getPostProductTestData(orderID, prodName, ordLine));
+        }
+
+        private object getPostProductTestData(int orderID, string prodName, int ordLine)
+        {
+            Test t = new Test { TestCode = "12224", TestComments = "No Comments", TestResult = "0.0999", TestType = "89" };
+            //Revision r = new Revision();
+            Sample s = new Sample();
+            Order o = new Order();
+            Product p = new Product();
+            PageObject po = new PageObject();
+            //po.objSamplQA = new Sample_QA();
+            po.lstAttachments = new List<Attachments>();
+            po.User = Session["USER_LOGIN"] as AppUser;
+            po.objOrder = o.GetOrderProductDetails(orderID, prodName);
+
+            if ((null != po.objOrder.PORDERITEMS_SUBFORM) && (po.objOrder.PORDERITEMS_SUBFORM.Length > 0))
+            {
+                po.objProduct = po.objOrder.PORDERITEMS_SUBFORM[0];
+
+                // Get order line text
+                if ((null != po.objOrder.PORDERITEMS_SUBFORM[0].PORDERITEMSTEXT_SUBFORM) && (po.objOrder.PORDERITEMS_SUBFORM[0].PORDERITEMSTEXT_SUBFORM.Length > 0))
+                {
+                    po.objItemText = po.objOrder.PORDERITEMS_SUBFORM[0].PORDERITEMSTEXT_SUBFORM[0];
+                }
+
+                string rev = string.IsNullOrEmpty(po.objProduct.REVNAME) ? po.objProduct.SHR_SERIAL_REVNUM : po.objProduct.REVNAME;
+                if (string.IsNullOrEmpty(rev))
+                {
+                    // To do: create new document
+                }
+                else
+                {
+                    // Get Sampels
+                    po.objSample = s.GetProductSamples(po.User.Supplier_ID, po.objProduct.PARTNAME, po.objProduct.REVNAME, po.objProduct.LINE);
+                    if ((null != po.objSample) && (null != po.objSample.MED_TRANSSAMPLEQA_SUBFORM) && (po.objSample.MED_TRANSSAMPLEQA_SUBFORM.Count > 0))
+                    {
+                        foreach (Sample_QA item in po.objSample.MED_TRANSSAMPLEQA_SUBFORM)
+                        {
+                            item.DOCNO = po.objSample.DOCNO;
+                            item.SUPNAME = po.objSample.SUPNAME;
+                        }
+                    }
+                }
+            }
+            // Get Attachments
+            if ((null == po.objOrder.EXTFILES_SUBFORM) || (po.objOrder.EXTFILES_SUBFORM.Length == 0))
+            {
+                GetProductAttachments(orderID, prodName, ref po);
+            }
+            else
+            {
+                po.lstAttachments = new List<Attachments>();
+                po.lstAttachments.AddRange(po.objOrder.EXTFILES_SUBFORM);
+                foreach (Attachments item in po.lstAttachments)
+                {
+                    string[] arr = item.EXTFILENAME.Split('\\'); //item.EXTFILENAME.Split(' / ');
+                    if (string.IsNullOrEmpty(arr[arr.Length - 1]))
+                    {
+                        item.FILE_NAME = arr[0];
+                        item.FOLDER = arr[1];
+                    }
+                    else
+                    {
+                        item.FILE_NAME = arr[arr.Length - 1];
+                        item.FOLDER = arr[arr.Length - 2];
+                    }
+                }
+            }
+            po.TestObject = t;
+            return po;
         }
 
         [HttpPost]
@@ -145,7 +191,7 @@ namespace TestPortal.Models
         {
             Test t = new Test { TestCode = "12224", TestComments = "No Comments", TestResult = "0.0999", TestType = "89" };
             //Revision r = new Revision();
-            Sample s = new Sample();
+            
             Order o = new Order();
             Product p = new Product();
             PageObject po = new PageObject();
@@ -154,43 +200,81 @@ namespace TestPortal.Models
             po.objOrder = o.GetOrderDetails(orderID);
             po.lstItemsObject = new List<OrderItems>();
 
-            if((null != po.objOrder.PORDERITEMS_SUBFORM) && (po.objOrder.PORDERITEMS_SUBFORM.Length > 0))
+            if ((null != po.objOrder.PORDERITEMS_SUBFORM) && (po.objOrder.PORDERITEMS_SUBFORM.Length > 0))
+            {
                 for (int i = 0; i < po.objOrder.PORDERITEMS_SUBFORM.Length; i++)
                 {
                     po.objOrder.PORDERITEMS_SUBFORM[i].ORD = po.objOrder.ORD;
                 }
+            }
 
             po.lstItemsObject.AddRange(po.objOrder.PORDERITEMS_SUBFORM);
 
+            GetProductObjAndSamples(orderID, ordLine, ref po);
+
+            // Get Attachments
+            if ((null == po.objOrder.EXTFILES_SUBFORM) || (po.objOrder.EXTFILES_SUBFORM.Length == 0))
+            {
+                GetProductAttachments(orderID, prodName, ref po);
+            }
+
+            po.TestObject = t;
+            return po;
+        }
+
+        private void GetProductObjAndSamples(int orderID, int ordLine, ref PageObject po)
+        {
+            Sample s = new Sample();
             po.objProduct = new OrderItems();
             try
             {
                 po.objProduct = po.lstItemsObject.Where(x => x.ORD == orderID && x.LINE == ordLine).SingleOrDefault();
-                if(null != po.objProduct)
+                if (null != po.objProduct)
                 {
                     string rev = string.IsNullOrEmpty(po.objProduct.REVNAME) ? po.objProduct.SHR_SERIAL_REVNUM : po.objProduct.REVNAME;
-                    if(string.IsNullOrEmpty(rev))
+                    if (string.IsNullOrEmpty(rev))
                     {
                         // To do: create new document
                     }
                     else
+                    {
                         po.objSample = s.GetProductSamples(po.User.Supplier_ID, po.objProduct.PARTNAME, po.objProduct.REVNAME, po.objProduct.LINE);
+                        if((null != po.objSample) && (null != po.objSample.MED_TRANSSAMPLEQA_SUBFORM) && (po.objSample.MED_TRANSSAMPLEQA_SUBFORM.Count > 0))
+                        {
+                            foreach (Sample_QA item in po.objSample.MED_TRANSSAMPLEQA_SUBFORM)
+                            {
+                                item.DOCNO = po.objSample.DOCNO;
+                                item.SUPNAME = po.objSample.SUPNAME;
+                            }
+                        }
+                    }
                 }
             }
             catch (Exception ex)
             {
                 AppLogger.log.Info("getProductTestData ==> exeption = ", ex);
             }
-            
-            //po.lstRevision = r.GetProdRevisionList(prodId, po.objProduct.REV);
-            po.TestObject = t;
-            return po;
         }
 
-        [HttpPost]
-        public JsonResult TestProductOrderItems(int orderId)
+        private void GetProductAttachments(int orderID, string prodName, ref PageObject po)
         {
-            return GetOrderItems(orderId);
+            Product p = new Product();
+            po.lstAttachments = new List<Attachments>();
+            po.lstAttachments = p.GetProductAttachments(orderID, prodName);
+            foreach (Attachments item in po.lstAttachments)
+            {
+                string[] arr = item.EXTFILENAME.Split('\\'); //item.EXTFILENAME.Split(' / ');
+                if (string.IsNullOrEmpty(arr[arr.Length - 1]))
+                {
+                    item.FILE_NAME = arr[0];
+                    item.FOLDER = arr[1];
+                }
+                else
+                {
+                    item.FILE_NAME = arr[arr.Length - 1];
+                    item.FOLDER = arr[arr.Length - 2];
+                }
+            }
         }
 
         [HttpPost]

@@ -26,16 +26,14 @@ function showGrid() {
         datatype: "local",
         data: grid_data,
         colModel: [
-            { label: 'OrderID', name: 'ORD', align: 'center', formatter: formatRPTLink, index: 'ORD', key: true, hidden: true, width: 75 },
-            { label: 'הזמנה', name: 'ORDNAME', align: 'center', formatter: formatRPTLink, width: 75 },
-            { label: 'תאריך הזמנה', name: 'pageCURDATE', align: 'center', width: 150, sorttype: "date" },
-            { label: 'שם ספק', name: 'SHR_SUPTYPEDES', align: 'center', width: 150 },
-            { label: 'לטיפול – שם הקניין ', name: 'OWNERLOGIN', align: 'center', width: 150 },
-            { label: 'סטטוס', name: 'STATDES', align: 'center', width: 150 }
+            { label: 'OrderID', name: 'ORD', align: 'center', index: 'ORD', key: true, hidden: true, width: 75 },//, formatter: formatRPTLink
+            { label: 'הזמנה', name: 'ORDNAME', align: 'center', width: 75, formatter: formatRPTLink },//
+            { label: 'תאריך הזמנה', name: 'pageCURDATE', align: 'center', width: 150, sorttype: "date", formatter: formatRPTLink },
+            { label: 'שם ספק', name: 'SHR_SUPTYPEDES', align: 'center', width: 150, formatter: formatRPTLink },
+            { label: 'לטיפול – שם הקניין ', name: 'OWNERLOGIN', align: 'center', width: 150, formatter: formatRPTLink },
+            { label: 'סטטוס', name: 'STATDES', align: 'center', width: 150, formatter: formatRPTLink }
         ],
         viewrecords: true,
-        //rownumbers: true, // show row numbers
-        //rownumWidth: 35, // the width of the row numbers columns
         altRows: true,
         direction: 'rtl',
         autowidth: true,
@@ -48,6 +46,11 @@ function showGrid() {
         loadComplete: function (data) {
             $("#loader").hide();
         },
+        //onSelectRow: function (id, rowId, iCol, content, event) {
+        //    var rowData = $(this).getRowData(id);
+        //    console.log("onSelectRow rowData = ", rowData);
+        //    window.location = '/Home_IL/TestProduct?' + 'OrderID=' + rowData.ORD + '&prodName="' + rowData.PARTNAME;
+        //},
         subGridOptions:
         {
             // load the subgrid data only once
@@ -71,15 +74,21 @@ function showGrid() {
                 autowidth: true,
                 height: null,
                 colModel: [
+                    { label: 'ORD', name: 'ORD', align: 'center', key: true, hidden: true, width: 75 },
                     { label: '#', name: 'LINE', align: 'center', hidden: false, width: 75 },
                     { label: 'ProductID', name: 'PARTNAME', align: 'center', key: true, hidden: true, width: 75 },
-                    { label: 'מק"ט', name: 'PARTNAME', align: 'center', formatter: formatProdLink, width: 100 },
+                    { label: 'מק"ט', name: 'PARTNAME', align: 'center', width: 100 },//, formatter: formatProdLink
                     { label: 'תאור', name: 'PDES', align: 'center', width: 100 },
                     { label: 'כמות', name: 'TQUANT', align: 'center', width: 100 },
                     { label: 'נותר לספק', name: 'TBALANCE', align: 'center', width: 100 },
                     { label: 'תאריך אספקה', name: 'pageREQDATE', align: 'center', width: 100 },
                     { label: 'סטטוס', name: 'PORDISTATUSDES', align: 'center', width: 100 }
-                ]
+                ],
+                onSelectRow: function (id, rowId, iCol, content, event) {
+                    var rowData = $(this).getRowData(id);
+                    console.log("onSelectRow rowData = ", rowData);
+                    window.location = '/Home_IL/TestProductItem?' + 'OrderID=' + rowData.ORD + '&prodName="' + rowData.PARTNAME + '"&ordLine=' + rowData.LINE;
+                }
             });
         }
     });
@@ -100,56 +109,31 @@ function GetRecord(data, parentRowKey) {
         }
     }
     return rec;
-    //$.ajax({
-    //    type: "POST",
-    //    url: "Home/GetOrderItems",
-    //    data: {
-    //        parentRowKey: parentRowKey
-    //    },
-    //    cache: false,
-    //    async: false,
-    //    success: function (data) {
-    //        console.log("GetRecord ==> data", data);
-    //        console.log("GetRecord ==> data.lstItemsObject", data.lstItemsObject);
-    //        if (null == data.lstItemsObject)
-    //            return rec;
-
-    //        if (data.lstItemsObject.length > 0) {
-    //            for (var i = 0; i < data.lstItemsObject.length; i++) {
-    //                rec.push(data.lstItemsObject[i]);
-    //            }
-    //            console.log("GetRecord ==> rec", rec);
-    //        }
-    //        return rec;
-    //    }
-    //});
-    //console.log("GetRecord ==> rec - END", rec);
-    
 }
 
 function formatRPTLink(cellValue, options, rowObject) {
-    console.log("formatRPTLink ==> options", options);
-    console.log("formatRPTLink ==> rowObject", rowObject);
+    //console.log("formatRPTLink ==> options", options);
+    //console.log("formatRPTLink ==> rowObject", rowObject);
     var a = document.createElement('a');
     var linkText = document.createTextNode(cellValue);
     a.appendChild(linkText);
     a.title = cellValue;
     a.href = 'Home_IL/TestProduct?' + 'OrderID=' + rowObject.ORD + '&OrderNumber=' + rowObject.ORDNAME;
     a.classList = '.ui-state-highlight a, .ui-widget-content .ui-state-highlight a, .ui-widget-header .ui-state-highlight a';//.style.color = "#01416F";
-    console.log("setHref ==> a", a.outerHTML);
+    //console.log("setHref ==> a", a.outerHTML);
     return a.outerHTML;
 }
 
 function formatProdLink(cellValue, options, rowObject) {//options.rowId
     //rowObject.ProductID
-    console.log("formatRPTLink ==> options", options);
-    console.log("formatRPTLink ==> rowObject", rowObject);
+    //console.log("formatRPTLink ==> options", options);
+    //console.log("formatRPTLink ==> rowObject", rowObject);
     var a = document.createElement('a');
     var linkText = document.createTextNode(cellValue);
     a.appendChild(linkText);
     a.title = cellValue;
     a.href = '/Home_IL/TestProductItem?' + 'OrderID=' + rowObject.ORD + '&prodName="' + rowObject.PARTNAME + '"&ordLine=' + rowObject.LINE;
     a.classList = '.ui-state-highlight a, .ui-widget-content .ui-state-highlight a, .ui-widget-header .ui-state-highlight a';//.style.color = "#01416F";
-    console.log("setHref ==> a", a.outerHTML);
+    //console.log("setHref ==> a", a.outerHTML);
     return a.outerHTML;
 }

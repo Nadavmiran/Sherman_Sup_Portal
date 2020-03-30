@@ -3,87 +3,79 @@
     <div class="card">
         <div class="col-12">
             <form id="modal-test-part" role="form" class="needs-validation">
-                @*@using (Html.BeginForm("SaveTest", "Home", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new
-                {
-                    @class = "needs-validation modal-part modal-xl",
-                    role = "form",
-                    id = "modal-test-part",
-                    //enctype = "multipart/form-data"
-                }))
-                {*@
-
+                <input type="hidden" id="hdnQaSUPNAME" />
+                <input type="hidden" id="hdnQaDOCNO" />
+                <input type="hidden" id="hdnQACODE" />
+                <input type="hidden" id="hdnLOCATION" />
+                <input type="hidden" id="hdnQA" />
                 <div class="card-body">
                     <div class="row">
                         <div class="form-group col-md-2 col-12">
-                            <label>קוד בדיקה</label>
+                            <label style="font-weight:bolder;">קוד בדיקה</label>
                             <div class="col-sm-1">
-                                <label type="text" id="txtQACODE" class="form-label">00008</label>
-                                @*@Html.TextBox("txtTestCode", Model.TestObject.TestCode, new { @class = "form-control", @required = "" })*@
+                                <label type="text" id="txtQACODE" class="form-label"></label>
                             </div>
                         </div>
                         <div class="form-group col-md-5 col-12">
-                            <label>תאור בדיקה</label>
+                            <label style="font-weight:bolder;">תאור בדיקה</label>
                             <div class="col-sm-12">
-                                <label type="text" id="txtQADES">BBBBBBBBBBB BBBBBBB BBBBBBBB BBBB BBBBBBBB</label>
-                                @*@Html.TextBox("txtTestType", Model.TestObject.TestType, new { @class = "form-control", @required = "" })*@
+                                <label type="text" id="txtQADES"></label>
                             </div>
                         </div>
                         <div class="form-group col-md-2 col-12">
-                            <label>מיקום</label>
+                            <label style="font-weight:bolder;">מיקום</label>
                             <div class="col-sm-3 form-label">
                                 <label type="text" id="txtQaLOCATION"></label>
                             </div>
                         </div>
                         <div class="form-group col-md-3 col-12">
-                            <label>בדיקה - טקסט</label>
+                            <label style="font-weight:bolder;">בדיקה - טקסט</label>
                             <div class="col-sm-12 form-label">
-                                <label type="text" id="txtQaSHR_TEST" class="">qqqq - qqqqqq - dddddd</label>
-                                @*@Html.TextArea("txtTestComments", Model.TestObject.TestComments, new { @class = "form-control", @maxlength = "120", @cols = "50", @rows = "3", style = "height:100px;" })*@
+                                <label type="text" id="txtQaSHR_TEST" class=""></label>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-md-2 col-12">
-                            <label>תוצאת מינימום</label>
+                            <label style="font-weight:bolder;">תוצאת מינימום</label>
                             <div class="col-sm-1">
-                                <label type="text" id="txtQaRESULTMIN" class="form-label">1.255</label>
+                                <label type="text" id="txtQaRESULTMIN" class="form-label"></label>
                             </div>
                         </div>
                         <div class="form-group col-md-5 col-12">
-                            <label>תוצאת מקסימום</label>
+                            <label style="font-weight:bolder;">תוצאת מקסימום</label>
                             <div class="col-sm-12">
                                 <label type="text" id="txtQaRESULTMAX">11.23</label>
                             </div>
                         </div>
                         <div class="form-group col-md-2 col-12">
-                            <label>חזרות</label>
+                            <label style="font-weight:bolder;">חזרות</label>
                             <div class="col-sm-3 form-label">
                                 <label type="text" id="txtQaREPETITION"></label>
                             </div>
                         </div>
                         <div class="form-group col-md-3 col-12">
-                            <label>תוצאתית</label>
+                            <label style="font-weight:bolder;">תוצאתית</label>
                             <div class="col-sm-12 form-label">
-                                <label type="text" id="txtQaRESULTANT" class="">12</label>
-                                @*@Html.TextArea("txtTestComments", Model.TestObject.TestComments, new { @class = "form-control", @maxlength = "120", @cols = "50", @rows = "3", style = "height:100px;" })*@
+                                <input type="checkbox" id="txtQaRESULTANT" class="big-checkbox" readonly />
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-md-2 col-12">
-                            <label>תוצאה נדרשת</label>
+                            <label style="font-weight:bolder;">תוצאה נדרשת</label>
                             <div class="col-sm-1">
-                                <label type="text" id="txtQaREQUIRED_RESULT" class="form-label">1.255</label>
+                                <label type="text" id="txtQaREQUIRED_RESULT" class="form-label"></label>
                             </div>
                         </div>
                         <div class="form-group col-md-5 col-12">
-                            <label>גודל המדגם</label>
+                            <label style="font-weight:bolder;">גודל המדגם</label>
                             <div class="col-sm-12">
-                                <label type="text" id="txtQaSAMPQUANT">11.23</label>
+                                <label type="text" id="txtQaSAMPQUANT"></label>
                             </div>
                         </div>
                         <div class="form-group col-md-2 col-12">
-                            <label>תקין</label>
+                            <label style="font-weight:bolder;">תקין</label>
                             <div class="col-sm-3 form-label">
                                 <label type="text" id="txtQaNORMAL" class="form-group"></label>
                             </div>
@@ -91,20 +83,18 @@
                     </div>
                     <div class="row">
                         <div class="form-group col-md-6 col-12">
-                            <label>תאור כלי מדידה</label>
+                            <label style="font-weight:bolder;">תאור כלי מדידה</label>
                             <input class="form-control" type="text" name="MEASUREDES" id="txtQaMEASUREDES" />
                         </div>
                         <div class="form-group col-md-6 col-12">
-                            <label>תוצאת בדיקה</label>
+                            <label style="font-weight:bolder;">תוצאת בדיקה</label>
                             <input class="form-control" type="text" name="RESULT" id="txtQaRESULT" />
-                            @*@Html.TextBox("txtQaRESULT", Model.objSamplQA.RESULT, new { @class = "form-control", @maxlength = "120", @cols = "50", @rows = "3", style = "height:100px;" })*@
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-md-12 col-12">
-                            <label>הערה</label>
+                            <label style="font-weight:bolder;">הערה</label>
                             <input class="form-control" type="text" name="REMARK" id="txtQaREMARK" maxlength="120" />
-                            @*@Html.TextArea("txtQaREMARK", Model.objSamplQA.REMARK, new { @class = "form-control", @maxlength = "120", @cols = "50", @rows = "3", style = "height:100px;" })*@
                         </div>
                     </div>
                     <div class="form-group row"></div>
@@ -115,22 +105,16 @@
                                     <h5 class="section-title" style="color:#01416F">קבצים מצורפים</h5>
                                     <p class="section-lead">You can upload multiple files.</p>
                                 </div>
-
                                 <div class="card-body">
                                     <div class="fallback">
-                                        @*@Html.TextBox("attachments", Model.attachments, new { @type = "file", @multiple = "multiple" })*@
                                         <input name="attachments" id="attachments" type="file" multiple />
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
                 </div>
-                @*}*@
             </form>
         </div>
     </div>
 </div>
-
-

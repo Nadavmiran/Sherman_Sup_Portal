@@ -610,9 +610,12 @@ select.form-control:not([size]):not([multiple]) {
     padding: 20px 25px; }
   .card .navbar {
     position: static; }
-  .card .card-body {
-    padding-top: 20px;
-    padding-bottom: 20px; }
+    .card .card-body {
+        /*padding-top: 20px;
+    padding-bottom: 20px; }*/
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
     .card .card-body .section-title {
       margin: 30px 0 10px 0;
       font-size: 16px; }
@@ -622,16 +625,19 @@ select.form-control:not([size]):not([multiple]) {
       margin-top: -5px; }
     .card .card-body p {
       font-weight: 500; }
-  .card .card-header {
-    border-bottom-color: #f9f9f9;
-    line-height: 30px;
-    -ms-grid-row-align: center;
-    align-self: center;
-    width: 100%;
-    min-height: 70px;
-    padding: 15px 25px;
-    display: flex;
-    align-items: center; }
+    .card .card-header {
+        border-bottom-color: #f9f9f9;
+        line-height: 30px;
+        -ms-grid-row-align: center;
+        align-self: center;
+        width: 100%;
+        /*min-height: 70px;*/
+        min-height: 40px;
+        /*padding: 15px 25px;*/
+        padding: 5px 8px;
+        display: flex;
+        align-items: center;
+    }
     .card .card-header .btn {
       margin-top: 1px;
       padding: 2px 15px; }
@@ -2868,8 +2874,8 @@ body.layout-3 .main-footer {
 
 .main-footer {
     /*padding: 20px 280px 20px 30px;*/
-    padding: 20px 10px 20px 30px;
-    margin-top: 40px;
+    /*padding: 20px 10px 20px 30px;*/
+    /*margin-top: 40px;*/
     color: #98a6ad;
     border-top: 1px solid #e3eaef;
     display: inline-block;

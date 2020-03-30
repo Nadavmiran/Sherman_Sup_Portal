@@ -3,35 +3,15 @@
     ViewBag.Title = "הזמנות";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/themes/redmond/jquery-ui.min.css">
 
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/free-jqgrid/4.15.5/jquery.jqgrid.min.js"></script>
-
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/themes/redmond/jquery-ui.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/free-jqgrid/4.15.5/css/ui.jqgrid.min.css">
-<link href="~/Content/Site.css" rel="stylesheet" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/free-jqgrid/4.15.5/jquery.jqgrid.min.js"></script>
 <script>
-    //$.jgrid.defaults.width = null;
     $.jgrid.defaults.responsive = true;
     $.jgrid.defaults.shrinkToFit = false;
-    //$.jgrid.defaults.styleUI = 'Bootstrap';
 </script>
 <!-- Main Content -->
-<div class="section-body">
-    @*<h2 class="section-title">הזמנות ממתינות לאספקה</h2>
-        <p class="section-lead">רשימת הזמנות ממתינות לאספקה בטבלה שלהלן</p>*@
+<div class="section-body" id="mainPageContent" style="overflow-y:scroll;">
     <div class="card">
-        @*<div class="card-header">
-                <h4>Orders</h4>
-            </div>*@
-        @*<div><a href="@Url.Action("TestProduct", "Home")">QA Page</a></div>*@
-        <div class="card-body">
+        <div class="card-body" >
             <div>
                 <table id="jqGrid"></table>
                 <div id="jqGridPager"></div>
@@ -54,8 +34,17 @@
             newWidth = gridBaseWidth;
         $grid.jqGrid("setGridWidth", newWidth, true);
     });
+
+    $(window).load(function () {
+
+        $('.section-body').css('height', $(document).innerHeight() - ($(document).innerHeight() / 30));
+        $('.section-body').css('height', $('.section-body').height() - ($(document).innerHeight() - $('.section-body').height()));
+    });
+
     $(document).ready(function () {
 
+
+        //$('#mainPageContent').attr('style', 'height:' + elmnt.offsetHeight - 100 +'px;)';
         $("#loader").show();
         getData("@Model.User.Supplier_ID");
 
@@ -70,6 +59,9 @@
         
         console.log(" onload ==> newWidth ", newWidth);
         console.log(" onload ==> gridBaseWidth ", gridBaseWidth);
+
+        $('.section-body').css('height', $(document).innerHeight() - ($(document).innerHeight() / 30));
+        $('.section-body').css('height', $('.section-body').height() - ($(document).innerHeight() + $('.section-body').height()));
     });
 </script>
 

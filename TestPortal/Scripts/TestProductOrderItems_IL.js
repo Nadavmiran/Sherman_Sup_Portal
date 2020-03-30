@@ -6,9 +6,9 @@
         datatype: "local",
         data: grid_data,
         colModel: [
-            { label: 'ORD', name: 'ORD', align: 'center', hidden: false, width: 75 },
+            { label: 'ORD', name: 'ORD', align: 'center', hidden: true, width: 75 },
             { label: '#', name: 'LINE', align: 'center', hidden: false, width: 75 },
-            { label: 'ProductID', name: 'PARTNAME', align: 'center', key: true, hidden: true, width: 75 },
+            { label: 'ProductID', name: 'PARTNAME', align: 'center', key: true, hidden: false, width: 75 },
             { label: 'מק"ט', name: 'PARTNAME', align: 'center', width: 100 }, //formatter: formatProdLink, 
             { label: 'תאור', name: 'PDES', align: 'center', width: 100 },
             { label: 'כמות', name: 'TQUANT', align: 'center', width: 100 },
@@ -17,8 +17,6 @@
             { label: 'סטטוס', name: 'PORDISTATUSDES', align: 'center', width: 100 }
         ],
         viewrecords: true,
-        //rownumbers: true, // show row numbers
-        //rownumWidth: 35, // the width of the row numbers columns
         altRows: true,
         direction: 'rtl',
         autowidth: true,
@@ -48,6 +46,9 @@ function showGridProdSamples(grid_data) {
         datatype: "local",
         data: grid_data,
         colModel: [
+            { label: 'QA', name: 'QA', align: 'center', key: false, hidden: true, width: 75 },
+            { label: 'DOCNO', name: 'DOCNO', align: 'center', key: false, hidden: true, width: 75 },
+            { label: 'SUPNAME', name: 'SUPNAME', align: 'center', key: false, hidden: true, width: 75 },
             { label: 'QACODE', name: 'QACODE', align: 'center', key: true, hidden: true, width: 75 },
             { label: 'מיקום', name: 'LOCATION', align: 'center', hidden: false, width: 30 },
             { label: 'תאור בדיקה', name: 'QADES', align: 'center', hidden: false, width: 250 },
@@ -152,5 +153,38 @@ function showGridProdTests(grid_data) {
 
             $("#modal-7").trigger("click");
         } //End onSelectRow
+    });
+}
+
+function showGridProdAttachments(grid_data) {
+    console.log("showGridProdAttachments ==> grid_data", grid_data);
+    $("#jqGridAttachments").jqGrid({
+        guiStyle: "bootstrap",
+        iconSet: "fontAwesome",
+        datatype: "local",
+        data: grid_data,
+        colModel: [
+            { label: '#', name: 'SHR_LINE', align: 'center', key: true, hidden: false, width: 75 }, 
+            { label: 'נושא', name: 'SHR_EXTFILEDESTEXT', align: 'center', hidden: false, width: 200 },
+            { label: 'תיקייה', name: 'FOLDER', align: 'center', hidden: false, width: 200 },
+            { label: 'שם קובץ', name: 'FILE_NAME', align: 'center', hidden: false, width: 200 },
+            { label: 'קובץ', name: 'SUFFIX', align: 'center', width: 200, formatter: formatFileIcon}, //formatter: formatProdLink, 
+            { label: 'תג רכש', name: 'SHR_PURCH_FLAG', align: 'center', width: 200}
+        ],
+        viewrecords: true,
+        altRows: true,
+        direction: 'rtl',
+        autowidth: true,
+        height: null,
+        rowNum: 30,
+        rowList: [10, 30, 50, 100],
+        pager: "#jqGridAttachmentsPager",
+        loadonce: true,
+        subGrid: false,
+        onSelectRow: function (id, rowId, iCol, content, event) {
+            var rowData = $(this).getRowData(id);
+            console.log('showGridProdAttachments ==> rowData ', rowData);
+            downloadFile(rowData.FOLDER, rowData.FILE_NAME);
+        }
     });
 }

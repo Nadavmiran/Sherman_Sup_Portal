@@ -27,16 +27,14 @@ function showGrid()
         datatype: "local",
         data: grid_data,
         colModel: [
-            { label: 'OrderID', name: 'ORD', align: 'center', formatter: formatRPTLink, index: 'ORD', key: true, hidden: true, width: 75 },
-            { label: 'Order', name: 'ORDNAME', align: 'center', formatter: formatRPTLink, width: 75 },
-            { label: 'Order Date', name: 'pageCURDATE', align: 'center', width: 150, sorttype: "date" },
-            { label: 'Supplier', name: 'SHR_SUPTYPEDES', align: 'center', width: 150 },
-            { label: 'For treatment ', name: 'OWNERLOGIN', align: 'center', width: 150 },
-            { label: 'Status', name: 'STATDES', align: 'center', width: 150 }
+            { label: 'OrderID', name: 'ORD', align: 'center', index: 'ORD', key: true, hidden: true, width: 75 },//, formatter: formatRPTLink
+            { label: 'Order', name: 'ORDNAME', align: 'center', width: 75, formatter: formatRPTLink },//
+            { label: 'Order Date', name: 'pageCURDATE', align: 'center', width: 150, sorttype: "date", formatter: formatRPTLink },
+            { label: 'Supplier', name: 'SHR_SUPTYPEDES', align: 'center', width: 150, formatter: formatRPTLink },
+            { label: 'For treatment ', name: 'OWNERLOGIN', align: 'center', width: 150, formatter: formatRPTLink },
+            { label: 'Status', name: 'STATDES', align: 'center', width: 150, formatter: formatRPTLink }
         ],
         viewrecords: true,
-        //rownumbers: true, // show row numbers
-        //rownumWidth: 35, // the width of the row numbers columns
         altRows: true,
         direction: 'ltr',
         autowidth: true,
@@ -49,6 +47,11 @@ function showGrid()
         loadComplete: function (data) {
             $("#loader").hide();
         },
+        //onSelectRow: function (id, rowId, iCol, content, event) {
+        //    var rowData = $(this).getRowData(id);
+        //    console.log("onSelectRow rowData = ", rowData);
+        //    window.location = '/Home/TestProduct?' + 'OrderID=' + rowData.ORD + '&prodName="' + rowData.PARTNAME;
+        //},
         subGridOptions:
         {
             // load the subgrid data only once
@@ -74,13 +77,18 @@ function showGrid()
                 colModel: [
                     { label: '#', name: 'LINE', align: 'center', hidden: false, width: 75 },
                     { label: 'ORD', name: 'ORD', align: 'center', key: true, hidden: true, width: 75 },
-                    { label: 'Serial No.', name: 'PARTNAME', align: 'center', formatter: formatProdLink, width: 100 },
+                    { label: 'Serial No.', name: 'PARTNAME', align: 'center', width: 100 },//, formatter: formatProdLink
                     { label: 'Description', name: 'PDES', align: 'center', width: 100 },
                     { label: 'Quntity', name: 'TQUANT', align: 'center', width: 100 },
                     { label: 'Left Quntity', name: 'TBALANCE', align: 'center', width: 100 },
                     { label: 'Supply Date', name: 'pageREQDATE', align: 'center', width: 100 },
                     { label: 'Status', name: 'PORDISTATUSDES', align: 'center', width: 100 }
-                ]
+                ],
+                onSelectRow: function (id, rowId, iCol, content, event) {
+                    var rowData = $(this).getRowData(id);
+                    console.log("onSelectRow rowData = ", rowData);
+                    window.location = '/Home/TestProductItem?' + 'OrderID=' + rowData.ORD + '&prodName="' + rowData.PARTNAME + '"&ordLine=' + rowData.LINE;
+                }
             });
         }
     });
@@ -100,61 +108,32 @@ function GetRecord(data, parentRowKey) {
         }
     }
     return rec;
-
-    //$.ajax({
-    //    type: "POST",
-    //    url: "Home/GetOrderItems",
-    //    data: {
-    //        parentRowKey: parentRowKey
-    //    },
-    //    cache: false,
-    //    async: false,
-    //    success: function (data) {
-    //        console.log("GetRecord ==> data", data);
-    //        console.log("GetRecord ==> data.lstItemsObject", data.lstItemsObject);
-    //        if (null === data.lstItemsObject)
-    //            return rec;
-
-    //        if (data.lstItemsObject.length > 0)
-    //        {
-    //            for (var i = 0; i < data.lstItemsObject.length; i++)
-    //            {
-    //                rec.push(data.lstItemsObject[i]);
-    //            }
-    //            console.log("GetRecord ==> rec", rec);
-    //        }
-    //        return rec;
-    //    }
-    //});
-    //console.log("GetRecord ==> rec - END", rec);
-    //return rec;
 }
 
 function formatRPTLink(cellValue, options, rowObject)
 {
-    console.log("formatRPTLink ==> options", options);
-    console.log("formatRPTLink ==> rowObject", rowObject);
+    //console.log("formatRPTLink ==> options", options);
+    //console.log("formatRPTLink ==> rowObject", rowObject);
     var a = document.createElement('a');
     var linkText = document.createTextNode(cellValue);
     a.appendChild(linkText);
     a.title = cellValue;
     a.href = 'Home/TestProduct?' + 'OrderID=' + rowObject.ORD + '&OrderNumber=' + rowObject.ORDNAME ;
     a.classList = '.ui-state-highlight a, .ui-widget-content .ui-state-highlight a, .ui-widget-header .ui-state-highlight a';//.style.color = "#01416F";
-    console.log("setHref ==> a", a.outerHTML);
+    //console.log("setHref ==> a", a.outerHTML);
     return a.outerHTML;
 }
 
 function formatProdLink(cellValue, options, rowObject)
-{//options.rowId
-    //rowObject.ProductID
-    console.log("formatRPTLink ==> options", options);
-    console.log("formatRPTLink ==> rowObject", rowObject);
+{
+    //console.log("formatRPTLink ==> options", options);
+    //console.log("formatRPTLink ==> rowObject", rowObject);
     var a = document.createElement('a');
     var linkText = document.createTextNode(cellValue);
     a.appendChild(linkText);
     a.title = cellValue;
     a.href = '/Home/TestProductItem?' + 'OrderID=' + rowObject.ORD + '&prodName="' + rowObject.PARTNAME + '"&ordLine=' + rowObject.LINE;
     a.classList = '.ui-state-highlight a, .ui-widget-content .ui-state-highlight a, .ui-widget-header .ui-state-highlight a';//.style.color = "#01416F";
-    console.log("setHref ==> a", a.outerHTML);
+    //console.log("setHref ==> a", a.outerHTML);
     return a.outerHTML;
 }

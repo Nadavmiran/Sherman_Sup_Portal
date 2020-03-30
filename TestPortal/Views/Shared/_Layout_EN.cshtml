@@ -17,27 +17,22 @@
     <link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
     <link href="~/Content/jquery.jqGrid/ui.jqgrid.css" rel="stylesheet" />
     <!-- Template CSS -->
-    @*<link href="~/Content/ace-rtl.min.css" class="ace-main-stylesheet" id="main-ace-style" rel="stylesheet" />*@
     <link href="~/Content/dropzone.css" rel="stylesheet" />
     <link href="~/Content/style.css" rel="stylesheet" />
     <link href="~/Content/components.css" rel="stylesheet" />
 
-    @*<link href="~/Content/jquery.jqGrid/ui.jqgrid.css" rel="stylesheet" />*@
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-    <style>
-        div.item {
-            vertical-align: top;
-            display: inline-block;
-            text-align: center;
-            width: 50px;
-        }
-
-        .caption {
-            display: block;
-        }
-    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/themes/redmond/jquery-ui.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/free-jqgrid/4.15.5/jquery.jqgrid.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/themes/redmond/jquery-ui.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/free-jqgrid/4.15.5/css/ui.jqgrid.min.css">
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/free-jqgrid/4.15.5/jquery.jqgrid.min.js"></script>
 </head>
-<body class="sidebar-mini">
+<body class="sidebar-mini" style="overflow:hidden;">
     <div id="app">
         <div class="main-wrapper">
             <div class="navbar-bg"></div>
@@ -48,7 +43,7 @@
                     </a>
                 </form>
                 <ul class="navbar-nav navbar-right">
-                     <li class="dropdown">
+                    <li class="dropdown">
                         <a href="#" data-toggle="dropdown" class="nav-link nav-link-lg nav-link-user">
                             <div class="d-sm-none d-lg-inline-block">Hi, @Model.User.FullName, @Model.User.SupplierName</div>
                             <i class="fas fa-user-cog"></i>
@@ -107,7 +102,6 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     <!-- General JS Scripts -->
-    @*<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>*@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
@@ -122,12 +116,13 @@
     <script src="~/Scripts/bootstrap-modal.js"></script>
     <script src="~/Scripts/components-multiple-upload.js"></script>
 
-    @*<script src="~/Scripts/jquery-1.10.2.min.js"></script>*@
     <script src="~/Scripts/jquery-ui-1.10.0.min.js"></script>
     <script src="~/Scripts/i18n/grid.locale-en.js"></script>
     <script src="~/Scripts/jquery.jqGrid.min.js"></script>
 
     <script src="~/Scripts/jpGrid_EN.js"></script>
+    <script src="~/Scripts/TestProductOrderItems_EN.js"></script>
+    <script src="~/Scripts/TestProductOrderItems_Common.js"></script>
     @RenderSection("scripts", required: false)
 </body>
 </html>
