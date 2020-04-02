@@ -245,3 +245,1709 @@ System.Data.SqlClient.SqlException (0x80131904): A network-related or instance-s
    at TestPortal.Models.AppUser.UserLogin() in H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\Models\AppUser.cs:line 29
 ClientConnectionId:00000000-0000-0000-0000-000000000000
 Error Number:53,State:0,Class:20
+INFO  2020-03-31 15:24:15,577   557ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"CURDATE":"2020-03-31T15:24:12.0000000+03:00",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	"{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"3",
+	"RESULT":11.25,
+	"REMARK":"bsc"
+	}
+	]}
+INFO  2020-03-31 15:26:43,130   223ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"CURDATE":"2020-03-31T15:26:37.0000000+03:00",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"3",
+	"RESULT":12.33,
+	"REMARK":"bsc"
+	}
+	]}
+INFO  2020-03-31 15:53:00,131   327ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"3",
+	"RESULT":1.24,
+	"REMARK":"???"
+	}
+	]}
+INFO  2020-03-31 15:59:29,273   440ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"3",
+	"RESULT":2.24,
+	"REMARK":"?????"
+	}
+	]}
+INFO  2020-03-31 16:02:37,069   421ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"3",
+	"RESULT":2.24,
+	"REMARK":""
+	}
+	]}
+INFO  2020-03-31 16:12:43,588   392ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"3",
+	"RESULT":2.24,
+	"REMARK":""
+	}
+	]}
+INFO  2020-03-31 16:15:36,196 173000ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"3",
+	"RESULT":4.24,
+	"REMARK":"??? ??????"
+	}
+	]}
+INFO  2020-03-31 16:18:57,637 374441ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"3",
+	"RESULT":5.24,
+	"REMARK":"ssssss"
+	}
+	]}
+INFO  2020-03-31 16:19:14,305 391109ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"3",
+	"RESULT":7.24,
+	"REMARK":""
+	}
+	]}
+INFO  2020-03-31 16:20:31,215 468019ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"3",
+	"RESULT":5.24,
+	"REMARK":"ssss"
+	}
+	]}
+INFO  2020-03-31 16:20:48,016 484820ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"",
+	"PARTNAME":"",
+	"SUPNAME":"",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"3",
+	"RESULT":11.24,
+	"REMARK":"ddasdasdasd"
+	}
+	]}
+DEBUG 2020-03-31 16:20:48,160 484964ms eporting Portal Logger CreateResultApi    - FunctionName = CreateResultApi => Response XMLExceptionMsg = <FORM
+  TYPE="MED_SAMPLE">
+  <InterfaceErrors>
+    <text>- ??? ????? ?????</text>
+  </InterfaceErrors>
+</FORM>
+INFO  2020-03-31 16:21:13,583 510388ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"3",
+	"RESULT":7.24,
+	"REMARK":"sss"
+	}
+	]}
+INFO  2020-03-31 16:21:27,770 524575ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"",
+	"PARTNAME":"",
+	"SUPNAME":"",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"3",
+	"RESULT":10.24,
+	"REMARK":""
+	}
+	]}
+DEBUG 2020-03-31 16:21:27,918 524723ms eporting Portal Logger CreateResultApi    - FunctionName = CreateResultApi => Response XMLExceptionMsg = <FORM
+  TYPE="MED_SAMPLE">
+  <InterfaceErrors>
+    <text>- ??? ????? ?????</text>
+  </InterfaceErrors>
+</FORM>
+INFO  2020-03-31 16:22:06,628 563433ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"",
+	"PARTNAME":"",
+	"SUPNAME":"",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"3",
+	"RESULT":10.24,
+	"REMARK":""
+	}
+	]}
+DEBUG 2020-03-31 16:23:01,678 618482ms eporting Portal Logger CreateResultApi    - FunctionName = CreateResultApi => Response XMLExceptionMsg = <FORM
+  TYPE="MED_SAMPLE">
+  <InterfaceErrors>
+    <text>- ??? ????? ?????</text>
+  </InterfaceErrors>
+</FORM>
+INFO  2020-03-31 16:25:15,364 752169ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"",
+	"PARTNAME":"",
+	"SUPNAME":"",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"3",
+	"RESULT":10.24,
+	"REMARK":""
+	}
+	]}
+DEBUG 2020-03-31 16:26:02,693 799498ms eporting Portal Logger CreateResultApi    - FunctionName = CreateResultApi => Response XMLExceptionMsg = <FORM
+  TYPE="MED_SAMPLE">
+  <InterfaceErrors>
+    <text>- ??? ????? ?????</text>
+  </InterfaceErrors>
+</FORM>
+INFO  2020-03-31 16:29:44,813   162ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"3",
+	"RESULT":2.24,
+	"REMARK":"ssss"
+	}
+	]}
+INFO  2020-03-31 16:30:16,215 31564ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"3",
+	"RESULT":8.24,
+	"REMARK":"'??'???'????????????????"
+	}
+	]}
+INFO  2020-03-31 16:33:04,255 199604ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"3",
+	"RESULT":8.24,
+	"REMARK":"'??'???'????????????????"
+	}
+	]}
+INFO  2020-03-31 17:37:30,117 4065466ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"3",
+	"RESULT":8.24,
+	"REMARK":"'??'???'????????????????"
+	}
+	]}
+INFO  2020-03-31 17:38:08,723 4104072ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"3",
+	"RESULT":8.24,
+	"REMARK":"'??'???'????????????????"
+	}
+	]}
+INFO  2020-03-31 17:39:26,164 4181513ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"3",
+	"RESULT":8.24,
+	"REMARK":"'??'???'????????????????"
+	}
+	]}
+INFO  2020-03-31 17:43:06,480 4401829ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"3",
+	"RESULT":8.24,
+	"REMARK":"'??'???'????????????????"
+	}
+	]}
+INFO  2020-03-31 17:43:47,082 4442431ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"3",
+	"RESULT":8.24,
+	"REMARK":"'??'???'????????????????"
+	}
+	]}
+INFO  2020-03-31 17:50:20,005 4835354ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"3",
+	"RESULT":8.24,
+	"REMARK":"'??'???'????????????????"
+	}
+	]}
+INFO  2020-03-31 17:51:25,009 4900358ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"3",
+	"RESULT":8.24,
+	"REMARK":"'??'???'????????????????"
+	}
+	]}
+INFO  2020-03-31 17:52:03,509 4938858ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"3",
+	"RESULT":8.24,
+	"REMARK":"'??'???'????????????????"
+	}
+	]}
+INFO  2020-03-31 17:52:58,082 4993431ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"3",
+	"RESULT":8.24,
+	"REMARK":"'??'???'????????????????"
+	}
+	]}
+INFO  2020-03-31 17:53:24,853 5020202ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"3",
+	"RESULT":8.24,
+	"REMARK":"'??'???'????????????????"
+	}
+	]}
+INFO  2020-03-31 17:53:52,105 5047455ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"3",
+	"RESULT":8.24,
+	"REMARK":"'??'???'????????????????"
+	}
+	]}
+INFO  2020-03-31 17:54:20,067 5075417ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"3",
+	"RESULT":8.24,
+	"REMARK":"'??'???'????????????????"
+	}
+	]}
+INFO  2020-03-31 17:54:49,290 5104639ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"3",
+	"RESULT":8.24,
+	"REMARK":"'??'???'????????????????"
+	}
+	]}
+INFO  2020-03-31 17:55:19,322 5134671ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"3",
+	"RESULT":8.24,
+	"REMARK":"'??'???'????????????????"
+	}
+	]}
+INFO  2020-03-31 17:56:41,110 5216459ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"3",
+	"RESULT":8.24,
+	"REMARK":"'??'???'????????????????"
+	}
+	]}
+INFO  2020-03-31 17:57:31,887 5267236ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"3",
+	"RESULT":8.24,
+	"REMARK":"'??'???'????????????????"
+	}
+	]}
+INFO  2020-03-31 18:15:51,989 6367338ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"3",
+	"RESULT":8.24,
+	"REMARK":"'??'???'????????????????"
+	}
+	]}
+INFO  2020-03-31 18:17:39,722 6475071ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"3",
+	"RESULT":8.24,
+	"REMARK":"'??'???'????????????????"
+	}
+	]}
+INFO  2020-03-31 18:21:14,460 6689810ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"3",
+	"RESULT":8.24,
+	"REMARK":"'??'???'????????????????"
+	}
+	]}
+INFO  2020-03-31 18:21:54,897 6730246ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"3",
+	"RESULT":8.24,
+	"REMARK":"'??'???'????????????????"
+	}
+	]}
+INFO  2020-03-31 18:23:30,223 6825572ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"3",
+	"RESULT":8.24,
+	"REMARK":"'??'???'????????????????"
+	}
+	]}
+INFO  2020-03-31 18:25:51,899 6967248ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"3",
+	"RESULT":8.24,
+	"REMARK":"'??'???'????????????????"
+	}
+	]}
+INFO  2020-03-31 18:29:47,336 7202685ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"3",
+	"RESULT":8.24,
+	"REMARK":"'??'???'????????????????"
+	}
+	]}
+INFO  2020-03-31 18:33:29,072 7424421ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"3",
+	"RESULT":8.24,
+	"REMARK":"'??'???'????????????????"
+	}
+	]}
+INFO  2020-03-31 18:34:02,913 7458262ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"3",
+	"RESULT":8.24,
+	"REMARK":"'??'???'????????????????"
+	}
+	]}
+INFO  2020-03-31 18:38:28,016 7723365ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"3",
+	"RESULT":8.24,
+	"REMARK":"'??'???'????????????????"
+	}
+	]}
+INFO  2020-03-31 18:42:09,293 7944642ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"3",
+	"RESULT":8.24,
+	"REMARK":"'??'???'????????????????"
+	}
+	]}
+INFO  2020-03-31 18:43:21,134 8016483ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"3",
+	"RESULT":8.24,
+	"REMARK":"'??'???'????????????????"
+	}
+	]}
+INFO  2020-03-31 18:44:53,806 8109155ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"3",
+	"RESULT":8.24,
+	"REMARK":"'??'???'????????????????"
+	}
+	]}
+INFO  2020-03-31 18:47:08,005 8243355ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"3",
+	"RESULT":8.24,
+	"REMARK":"'??'???'????????????????"
+	}
+	]}
+INFO  2020-03-31 18:49:13,798 8369148ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"3",
+	"RESULT":8.24,
+	"REMARK":"'??'???'????????????????"
+	}
+	]}
+INFO  2020-03-31 18:50:18,634 8433983ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"3",
+	"RESULT":8.24,
+	"REMARK":"'??'???'????????????????"
+	}
+	]}
+INFO  2020-03-31 18:52:16,630 8551979ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"3",
+	"RESULT":8.24,
+	"REMARK":"'??'???'????????????????"
+	}
+	]}
+INFO  2020-03-31 18:53:09,234 8604583ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"3",
+	"RESULT":8.24,
+	"REMARK":"'??'???'????????????????"
+	}
+	]}
+INFO  2020-03-31 18:54:29,831 8685181ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"3",
+	"RESULT":8.24,
+	"REMARK":"'??'???'????????????????"
+	}
+	]}
+INFO  2020-03-31 18:55:03,472 8718821ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"3",
+	"RESULT":8.24,
+	"REMARK":"'??'???'????????????????"
+	}
+	]}
+INFO  2020-03-31 18:56:18,318 8793667ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"3",
+	"RESULT":8.24,
+	"REMARK":"'??'???'????????????????"
+	}
+	]}
+INFO  2020-03-31 18:59:50,294 9005643ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"3",
+	"RESULT":8.24,
+	"REMARK":"'??'???'????????????????"
+	}
+	]}
+INFO  2020-03-31 19:08:15,790 9511139ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"3",
+	"RESULT":8.24,
+	"REMARK":"'??'???'????????????????"
+	}
+	]}
+INFO  2020-03-31 19:10:13,016 9628365ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"3",
+	"RESULT":8.24,
+	"REMARK":"'??'???'????????????????"
+	}
+	]}
+INFO  2020-03-31 20:22:13,703 13949052ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"3",
+	"RESULT":8.24,
+	"REMARK":"'??'???'????????????????"
+	}
+	]}
+INFO  2020-04-01 11:55:41,784   860ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":5,
+	"QACODE":"005",
+	"LOCATION":"1",
+	"RESULT":0,
+	"REMARK":"TEST NADAV"
+	}
+	]}
+INFO  2020-04-01 11:59:31,750 230826ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":5,
+	"QACODE":"005",
+	"LOCATION":"1",
+	"RESULT":0,
+	"REMARK":"TEST NADAV 11"
+	}
+	]}
+INFO  2020-04-01 12:18:00,924   147ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":5,
+	"QACODE":"005",
+	"LOCATION":"1",
+	"RESULT":0,
+	"REMARK":"TEST NADAV 12"
+	}
+	]}
+INFO  2020-04-01 12:24:52,231 411454ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"3",
+	"RESULT":8.24,
+	"REMARK":"'??'???'????????????????"
+	}
+	]}
+INFO  2020-04-01 12:26:02,130 481352ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":5,
+	"QACODE":"005",
+	"LOCATION":"1",
+	"RESULT":0,
+	"REMARK":"TEST NADAV 12"
+	}
+	]}
+INFO  2020-04-01 12:28:46,471 645693ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":5,
+	"QACODE":"005",
+	"LOCATION":"1",
+	"NORMAL":"Y",
+	"REMARK":"TEST NADAV 13"
+	}
+	]}
+INFO  2020-04-01 12:30:37,327   220ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":5,
+	"QACODE":"005",
+	"LOCATION":"1",
+	"NORMAL":"Y",
+	"REMARK":"TEST NADAV 13"
+	}
+	]}
+INFO  2020-04-01 12:34:17,272 220165ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":5,
+	"QACODE":"005",
+	"LOCATION":"1",
+	"NORMAL":"Y",
+	"REMARK":"TEST NADAV 14"
+	}
+	]}
+INFO  2020-04-01 12:39:42,295   285ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":5,
+	"QACODE":"005",
+	"LOCATION":"1",
+	"NORMAL":"Y",
+	"REMARK":"TEST NADAV 14"
+	}
+	]}
+INFO  2020-04-01 12:42:46,559 184550ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":5,
+	"QACODE":"005",
+	"LOCATION":"1",
+	"NORMAL":"Y",
+	"REMARK":"TEST NADAV 14"
+	}
+	]}
+INFO  2020-04-01 12:44:12,521 270511ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":5,
+	"QACODE":"005",
+	"LOCATION":"1",
+	"NORMAL":"N",
+	"REMARK":"TEST NADAV 14"
+	}
+	]}
+INFO  2020-04-01 12:44:26,203 284194ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":5,
+	"QACODE":"005",
+	"LOCATION":"1",
+	"NORMAL":"Y",
+	"REMARK":"TEST NADAV 14"
+	}
+	]}
+INFO  2020-04-01 12:44:34,572 292563ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":5,
+	"QACODE":"005",
+	"LOCATION":"1",
+	"NORMAL":"N",
+	"REMARK":"TEST NADAV 14"
+	}
+	]}
+INFO  2020-04-01 18:45:12,671  1191ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":7,
+	"QACODE":"007",
+	"LOCATION":"4",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":7,
+	"QACODE":"007",
+	}
+	]
+	"REMARK":"?????",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":7,
+	"QACODE":"007",
+	}
+	]
+	}
+	]}
+INFO  2020-04-01 18:48:22,196 190716ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":7,
+	"QACODE":"007",
+	"LOCATION":"4",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":7,
+	"QACODE":"007",
+	}
+	]
+	"REMARK":"?????",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":7,
+	"QACODE":"007",
+	}
+	]
+	}
+	]}
+INFO  2020-04-01 18:57:53,209 761729ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":7,
+	"QACODE":"007",
+	"LOCATION":"4",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":7,
+	"QACODE":"007",
+	}
+	]
+	"REMARK":"?????",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":7,
+	"QACODE":"007",
+	}
+	]
+	}
+	]}
+INFO  2020-04-01 19:06:10,683 1259203ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":7,
+	"QACODE":"007",
+	"LOCATION":"4",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":7,
+	"QACODE":"007",
+	}
+	]
+	"REMARK":"?????",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":7,
+	"QACODE":"007",
+	}
+	]
+	}
+	]}
+INFO  2020-04-01 19:09:47,478 1475998ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":7,
+	"QACODE":"007",
+	"LOCATION":"4",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":7,
+	"QACODE":"007",
+	}
+	]
+	"REMARK":"?????",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":7,
+	"QACODE":"007",
+	}
+	]
+	}
+	]}
+INFO  2020-04-01 19:34:29,625   120ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":7,
+	"QACODE":"007",
+	"LOCATION":"4",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":7,
+	"QACODE":"007",
+	}
+	]
+	"REMARK":"?????",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":7,
+	"QACODE":"007",
+	}
+	]
+	}
+	]}
+INFO  2020-04-01 19:37:00,371 150866ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":7,
+	"QACODE":"007",
+	"LOCATION":"4",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":7,
+	"QACODE":"007",
+	}
+	]
+	"REMARK":"?????",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":7,
+	"QACODE":"007",
+	}
+	]
+	}
+	]}
+INFO  2020-04-01 19:41:02,955   127ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":7,
+	"QACODE":"007",
+	"LOCATION":"4",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":7,
+	"QACODE":"007",
+	}
+	]
+	"REMARK":"?????",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":7,
+	"QACODE":"007",
+	}
+	]
+	}
+	]}
+INFO  2020-04-02 11:59:00,536   553ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":7,
+	"QACODE":"007",
+	"LOCATION":"4",
+	"REMARK":"TEST 1",
+	"MED_RESULTDET_SUBFORM": [,
+	{
+	"KLINE":1,
+	"RESULT":1,
+	}
+	]
+	}
+	]}
+INFO  2020-04-02 12:05:32,162   168ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":7,
+	"QACODE":"007",
+	"LOCATION":"4",
+	"REMARK":"Test 1",
+	"MED_RESULTDET_SUBFORM": [
+	{
+	"KLINE":1,
+	"RESULT":1
+	}
+	]
+	}
+	]}
+INFO  2020-04-02 12:08:03,080   157ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":7,
+	"QACODE":"007",
+	"LOCATION":"4",
+	"REMARK":"Test 1",
+	"MED_RESULTDET_SUBFORM": [
+	{
+	"KLINE":1,
+	"RESULT":23
+	}
+	]
+	}
+	]}
+INFO  2020-04-02 12:14:34,672 391750ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":7,
+	"QACODE":"007",
+	"LOCATION":"4",
+	"REMARK":"Test 2",
+	"MED_RESULTDET_SUBFORM": [
+	{
+	"KLINE":1,
+	"RESULT":23
+	}
+	{
+	"KLINE":2,
+	"RESULT":2
+	}
+	]
+	}
+	]}
+INFO  2020-04-02 12:20:58,895   140ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":7,
+	"QACODE":"007",
+	"LOCATION":"4",
+	"REMARK":"Test 1",
+	"MED_RESULTDET_SUBFORM": [
+	{
+	"KLINE":1,
+	"RESULT":23
+	},
+	{
+	"KLINE":2,
+	"RESULT":12
+	}
+	]
+	}
+	]}
+INFO  2020-04-02 12:22:17,761 79006ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":7,
+	"QACODE":"007",
+	"LOCATION":"4",
+	"REMARK":"Test 3",
+	"MED_RESULTDET_SUBFORM": [
+	{
+	"KLINE":1,
+	"RESULT":10
+	},
+	{
+	"KLINE":2,
+	"RESULT":11
+	},
+	{
+	"KLINE":3,
+	"RESULT":12
+	},
+	{
+	"KLINE":4,
+	"RESULT":13
+	}
+	]
+	}
+	]}
+INFO  2020-04-02 12:48:14,744 1635989ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":7,
+	"QACODE":"007",
+	"LOCATION":"4",
+	"REMARK":"Test 3",
+	"MED_RESULTDET_SUBFORM": [
+	{
+	"KLINE":1,
+	"RESULT":10
+	},
+	{
+	"KLINE":2,
+	"RESULT":44
+	},
+	{
+	"KLINE":3,
+	"RESULT":12
+	},
+	{
+	"KLINE":4,
+	"RESULT":13
+	}
+	]
+	}
+	]}
+INFO  2020-04-02 14:29:27,865   511ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":5,
+	"QACODE":"005",
+	"LOCATION":"1",
+	"NORMAL":"N",
+	"REMARK":"TEST NADAV 14"
+	}
+	]}
+INFO  2020-04-02 14:55:33,208   610ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":5,
+	"QACODE":"005",
+	"LOCATION":"1",
+	"NORMAL":"N",
+	"REMARK":"TEST NADAV 14"
+	}
+	]}
+INFO  2020-04-02 14:57:03,286 90688ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":5,
+	"QACODE":"005",
+	"LOCATION":"1",
+	"NORMAL":"N",
+	"REMARK":"TEST NADAV 14"
+	}
+	]}
+INFO  2020-04-02 15:00:17,530  1732ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":5,
+	"QACODE":"005",
+	"LOCATION":"1",
+	"NORMAL":"N",
+	"REMARK":"TEST NADAV 14"
+	}
+	]}
+INFO  2020-04-02 15:07:38,120 442322ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":5,
+	"QACODE":"005",
+	"LOCATION":"1",
+	"NORMAL":"N",
+	"REMARK":"TEST NADAV 14"
+	}
+	]}
+INFO  2020-04-02 15:09:50,085 574288ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":5,
+	"QACODE":"005",
+	"LOCATION":"1",
+	"NORMAL":"N",
+	"REMARK":"TEST NADAV 14"
+	}
+	]}
+INFO  2020-04-02 15:10:58,941 643144ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":5,
+	"QACODE":"005",
+	"LOCATION":"1",
+	"NORMAL":"N",
+	"REMARK":"TEST NADAV 14"
+	}
+	]}
+INFO  2020-04-02 15:15:58,158 942361ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":7,
+	"QACODE":"007",
+	"LOCATION":"4",
+	"REMARK":"Test 3",
+	"MED_RESULTDET_SUBFORM": [
+	{
+	"KLINE":1,
+	"RESULT":10
+	},
+	{
+	"KLINE":2,
+	"RESULT":44
+	},
+	{
+	"KLINE":3,
+	"RESULT":12
+	},
+	{
+	"KLINE":4,
+	"RESULT":13
+	}
+	]
+	}
+	]}
+INFO  2020-04-02 15:17:05,525 1009728ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":7,
+	"QACODE":"007",
+	"LOCATION":"4",
+	"REMARK":"Test 3",
+	"MED_RESULTDET_SUBFORM": [
+	{
+	"KLINE":1,
+	"RESULT":10
+	},
+	{
+	"KLINE":2,
+	"RESULT":44
+	},
+	{
+	"KLINE":3,
+	"RESULT":12
+	},
+	{
+	"KLINE":4,
+	"RESULT":13
+	}
+	]
+	}
+	]}
+INFO  2020-04-02 15:20:35,030   525ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":5,
+	"QACODE":"005",
+	"LOCATION":"1",
+	"NORMAL":"N",
+	"REMARK":"TEST NADAV 14"
+	}
+	]}
+INFO  2020-04-02 15:45:50,323   615ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":5,
+	"QACODE":"005",
+	"LOCATION":"1",
+	"NORMAL":"N",
+	"REMARK":"TEST NADAV 14"
+	}
+	]}
+INFO  2020-04-02 15:48:23,250   319ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":5,
+	"QACODE":"005",
+	"LOCATION":"1",
+	"NORMAL":"N",
+	"REMARK":"TEST NADAV 14"
+	}
+	]}
+INFO  2020-04-02 15:51:20,438   486ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":5,
+	"QACODE":"005",
+	"LOCATION":"1",
+	"NORMAL":"N",
+	"REMARK":"TEST NADAV 14"
+	}
+	]}
+INFO  2020-04-02 15:55:20,737   891ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":5,
+	"QACODE":"005",
+	"LOCATION":"1",
+	"NORMAL":"N",
+	"REMARK":"TEST NADAV 14"
+	}
+	]}
+INFO  2020-04-02 16:05:53,544   587ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":5,
+	"QACODE":"005",
+	"LOCATION":"1",
+	"NORMAL":"N",
+	"REMARK":"TEST NADAV 14"
+	}
+	]}
+DEBUG 2020-04-02 16:06:19,070 26113ms eporting Portal Logger CreateResultApi    - FunctionName = CreateResultApi => Response XMLExceptionMsg = <FORM
+  TYPE="MED_SAMPLE">
+  <InterfaceErrors>
+    <text>??? ????? ????? ?????? ?????? '??????'.</text>
+  </InterfaceErrors>
+</FORM>
+INFO  2020-04-02 16:11:39,105 346148ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":5,
+	"QACODE":"005",
+	"LOCATION":"1",
+	"NORMAL":"N",
+	"REMARK":"TEST NADAV 14"
+	}
+	]}
+DEBUG 2020-04-02 16:11:40,241 347285ms eporting Portal Logger CreateResultApi    - FunctionName = CreateResultApi => Response XMLExceptionMsg = <FORM
+  TYPE="MED_SAMPLE">
+  <InterfaceErrors>
+    <text>??? ????? ????? ?????? ?????? '??????'.</text>
+  </InterfaceErrors>
+</FORM>
+INFO  2020-04-02 16:14:44,076  1600ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":5,
+	"QACODE":"005",
+	"LOCATION":"1",
+	"NORMAL":"N",
+	"REMARK":"TEST NADAV 14"
+	}
+	]}
+DEBUG 2020-04-02 16:14:45,240  2763ms eporting Portal Logger CreateResultApi    - FunctionName = CreateResultApi => Response XMLExceptionMsg = <FORM
+  TYPE="MED_SAMPLE">
+  <InterfaceErrors>
+    <text>??? ????? ????? ?????? ?????? '??????'.</text>
+  </InterfaceErrors>
+</FORM>
+INFO  2020-04-02 16:19:58,777 316300ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":5,
+	"QACODE":"005",
+	"LOCATION":"1",
+	"NORMAL":"N",
+	"REMARK":"TEST NADAV 14"
+	}
+	]}
+DEBUG 2020-04-02 16:19:59,677 317201ms eporting Portal Logger CreateResultApi    - FunctionName = CreateResultApi => Response XMLExceptionMsg = <FORM
+  TYPE="MED_SAMPLE">
+  <InterfaceErrors>
+    <text>??? ????? ????? ?????? ?????? '??????'.</text>
+  </InterfaceErrors>
+</FORM>
+INFO  2020-04-02 16:23:06,287 503810ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":5,
+	"QACODE":"005",
+	"LOCATION":"1",
+	"NORMAL":"N",
+	"REMARK":"TEST NADAV 14"
+	}
+	]}
+DEBUG 2020-04-02 16:23:07,269 504792ms eporting Portal Logger CreateResultApi    - FunctionName = CreateResultApi => Response XMLExceptionMsg = <FORM
+  TYPE="MED_SAMPLE">
+  <InterfaceErrors>
+    <text>??? ????? ????? ?????? ?????? '??????'.</text>
+  </InterfaceErrors>
+</FORM>
+INFO  2020-04-02 16:31:40,243 1017767ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":5,
+	"QACODE":"005",
+	"LOCATION":"1",
+	"NORMAL":"N",
+	"REMARK":"TEST NADAV 14"
+	}
+	]}
+DEBUG 2020-04-02 16:31:41,236 1018759ms eporting Portal Logger CreateResultApi    - FunctionName = CreateResultApi => Response XMLExceptionMsg = <FORM
+  TYPE="MED_SAMPLE">
+  <InterfaceErrors>
+    <text>??? ????? ????? ?????? ?????? '??????'.</text>
+  </InterfaceErrors>
+</FORM>
+INFO  2020-04-02 16:32:23,687 1061211ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":5,
+	"QACODE":"005",
+	"LOCATION":"1",
+	"NORMAL":"N",
+	"REMARK":"TEST NADAV 14"
+	}
+	]}
+DEBUG 2020-04-02 16:32:24,747 1062271ms eporting Portal Logger CreateResultApi    - FunctionName = CreateResultApi => Response XMLExceptionMsg = <FORM
+  TYPE="MED_SAMPLE">
+  <InterfaceErrors>
+    <text>??? ????? ????? ?????? ?????? '??????'.</text>
+  </InterfaceErrors>
+</FORM>
+INFO  2020-04-02 16:34:18,689 1176213ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":5,
+	"QACODE":"005",
+	"LOCATION":"1",
+	"NORMAL":"N",
+	"REMARK":"TEST NADAV 14"
+	}
+	]}
+DEBUG 2020-04-02 16:34:19,632 1177155ms eporting Portal Logger CreateResultApi    - FunctionName = CreateResultApi => Response XMLExceptionMsg = <FORM
+  TYPE="MED_SAMPLE">
+  <InterfaceErrors>
+    <text>??? ????? ????? ?????? ?????? '??????'.</text>
+  </InterfaceErrors>
+</FORM>
+INFO  2020-04-02 16:46:38,713  1675ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":5,
+	"QACODE":"005",
+	"LOCATION":"1",
+	"NORMAL":"N",
+	"REMARK":"TEST NADAV 14"
+	}
+	]}
+INFO  2020-04-02 16:47:09,126 32089ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":5,
+	"QACODE":"005",
+	"LOCATION":"1",
+	"NORMAL":"N",
+	"REMARK":"TEST NADAV 15"
+	}
+	]}

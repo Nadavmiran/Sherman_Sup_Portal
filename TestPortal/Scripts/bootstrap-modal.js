@@ -1,6 +1,7 @@
 ﻿"use strict";
 
-$("#modal-1").fireModal({body: 'Modal body text goes here.'});
+//$("#modal-1").fireModal({body: 'Modal body text goes here.'});
+$("#modal-1").fireModal({ title: 'שגיאה בשמירת נתונים', body: $("#modal-error") });
 $("#modal-2").fireModal({body: 'Modal body text goes here.', center: true});
 
 let modal_3_body = '<p>Object to create a button on the modal.</p><pre class="language-javascript"><code>';
@@ -98,48 +99,60 @@ $("#modal-7").fireModal({
     footerClass: 'bg-whitesmoke',
     autoFocus: true,
     onFormSubmit: function (modal, e, form) {
-        // Form Data
-        let form_data = $(e.target).serialize();
-        var fdata = new FormData();
-        var formdata = $('#attachments').prop("files");
-        console.log("files = ", formdata);
-        for (var i = 0; i < formdata.length; i++) {
-            var sfilename = formdata[i].name;
-            let srandomid = Math.random().toString(36).substring(7);
+        onSubmit_TestForm(e);
+    //    // Form Data
+    //    let form_data = $(e.target);
+    //    let fd = $(e.target.elements);
+    //    var fdata = new FormData();
+    //    var formdata = $('#attachments').prop("files");
+    //    console.log("files = ", formdata);
+    //    console.log("$(e) = ", fd);
+    //    console.log("form_data = ", form_data);
+    //    for (var i = 0; i < formdata.length; i++) {
+    //        var sfilename = formdata[i].name;
+    //        let srandomid = Math.random().toString(36).substring(7);
 
-            fdata.append(sfilename, formdata[i]);
-        }
-        console.log(form_data);
-        console.log(formdata);
-        // DO AJAX HERE
-        $.ajax(
-            {
-                type: "POST",
-                data:
-                {
-                    data: decode(form_data)
-                },
-                url: "/Home/SaveTest",
-                contentType: "application/x-www-form-urlencoded;charset=ISO-8859-15",
-                success: function (response) {
-                    console.log("response", response);
-                }
-            });
+    //        fdata.append(sfilename, formdata[i]);
+    //    }
 
-        $.ajax(
-            {
-                type: "POST",
-                data: fdata,
-                url: "/Home/UploadFiles",
-                contentType: false,
-                processData: false,
-                success: function (response) {
-                    console.log("response", response);
-                }
-            });
+    //    console.log(formdata);
+    //    // DO AJAX HERE
+    //    $.ajax(
+    //        {
+    //            type: "POST",
+    //            data:
+    //            {
+    //                data: createJson(fd)//decode(form_data)
+    //            },
+    //            url: "/Home/SaveTest",
+    //            contentType: "application/x-www-form-urlencoded;charset=ISO-8859-15",
+    //            success: function (response) {
+    //                console.log("response", response);
+    //                if (null != response.MED_TRANSSAMPLEQA_SUBFORM) {
+    //                    $("#jqGridRevision").GridUnload();
+    //                    showGridProdSamples(response.MED_TRANSSAMPLEQA_SUBFORM);
+ 
+    //                }
+    //            }
+    //        });
+
+    //    $.ajax(
+    //        {
+    //            type: "POST",
+    //            data: fdata,
+    //            url: "/Home/UploadFiles",
+    //            contentType: false,
+    //            processData: false,
+    //            success: function (response) {
+    //                console.log("response", response);
+    //                form_data[0].reset();
+    //                $('.modal').modal('hide');
+    //                $('.modal').removeClass('show');
+    //            }
+    //        });
         let fake_ajax = setTimeout(function () {
             form.stopProgress();
-            modal.find('.modal-body').prepend('<div class="alert alert-info">הנתונים נשמרו.</div>');
+            modal.find('.modal-body').prepend('<div class="alert alert-info" id="divMsg">הנתונים נשמרו.</div>');
 
             clearInterval(fake_ajax);
         }, 1500);
@@ -159,9 +172,7 @@ $("#modal-7").fireModal({
         }
     ]
 });
-function decode(str) {
-    return decodeURIComponent(str.replace(/\+/g, " "));
-}
+
 $("#modal-8").fireModal({
     title: 'Test Results',
     body: $("#modal-test-part"),
@@ -169,49 +180,52 @@ $("#modal-8").fireModal({
     autoFocus: true,
     onFormSubmit: function (modal, e, form) {
         // Form Data
+        onSubmit_TestForm(e);
+        //let form_data = $(e.target).serialize();
+        //let fd = $(e.target.elements);
+        //var fdata = new FormData();
+        //var formdata = $('#attachments').prop("files");
+        //console.log("files = ", formdata);
+        //console.log("e = ", e);
+        //console.log("modal = ", modal);
+        //console.log("form = ", form);
+        //for (var i = 0; i < formdata.length; i++) {
+        //    var sfilename = formdata[i].name;
+        //    let srandomid = Math.random().toString(36).substring(7);
 
-        let form_data = $(e.target).serialize();
-        var fdata = new FormData();
-        var formdata = $('#attachments').prop("files");
-        console.log("files = ", formdata);
-        console.log("e = ", e);
-        console.log("modal = ", modal);
-        console.log("form = ", form);
-        for (var i = 0; i < formdata.length; i++) {
-            var sfilename = formdata[i].name;
-            let srandomid = Math.random().toString(36).substring(7);
+        //    fdata.append(sfilename, formdata[i]);
+        //}
+        // // DO AJAX HERE
+        //$.ajax(
+        //    {
+        //        type: "POST",
+        //        data:
+        //        {
+        //            data: createJson(fd)//decode(form_data)
+        //        },
+        //        url: "/Home/SaveTest",
+        //        contentType: "application/x-www-form-urlencoded;charset=ISO-8859-15",
+        //        success: function (response) {
+        //            console.log("response", response);
+        //        }
+        //    });
 
-            fdata.append(sfilename, formdata[i]);
-        }
-         // DO AJAX HERE
-        $.ajax(
-            {
-                type: "POST",
-                data:
-                {
-                    data: decode(form_data)
-                },
-                url: "/Home/SaveTest",
-                contentType: "application/x-www-form-urlencoded;charset=ISO-8859-15",
-                success: function (response) {
-                    console.log("response", response);
-                }
-            });
-
-        $.ajax(
-            {
-                type: "POST",
-                data: fdata,
-                url: "/Home/UploadFiles",
-                contentType: false,
-                processData: false,
-                success: function (response) {
-                    console.log("response", response);
-                }
-            });
+        //$.ajax(
+        //    {
+        //        type: "POST",
+        //        data: fdata,
+        //        url: "/Home/UploadFiles",
+        //        contentType: false,
+        //        processData: false,
+        //        success: function (response) {
+        //            console.log("response", response);
+        //            $('.modal').modal('hide');
+        //            $('.modal').removeClass('show');
+        //        }
+        //    });
         let fake_ajax = setTimeout(function () {
             form.stopProgress();
-            modal.find('.modal-body').prepend('<div class="alert alert-info">Data submited.</div>')
+            modal.find('.modal-body').prepend('<div class="alert alert-info" id="divMsg">Data submited.</div>');
 
             clearInterval(fake_ajax);
         }, 1500);
@@ -236,3 +250,75 @@ $('.oh-my-modal').fireModal({
   title: 'My Modal',
   body: 'This is cool plugin!'
 });
+
+//$("#modal-8").fireModal({
+//    title: 'Test Results',
+//    body: $("#modal-test-part"),
+//    footerClass: 'bg-whitesmoke',
+//    autoFocus: true,
+//    onFormSubmit: function (modal, e, form) {
+        // Form Data
+        //let form_data = $(e.target).serialize();
+        //let fd = $(e.target.elements);
+        //var fdata = new FormData();
+        //var formdata = $('#attachments').prop("files");
+        //console.log("files = ", formdata);
+        //console.log("e = ", e);
+        //console.log("modal = ", modal);
+        //console.log("form = ", form);
+        //for (var i = 0; i < formdata.length; i++) {
+        //    var sfilename = formdata[i].name;
+        //    let srandomid = Math.random().toString(36).substring(7);
+
+        //    fdata.append(sfilename, formdata[i]);
+        //}
+        // // DO AJAX HERE
+        //$.ajax(
+        //    {
+        //        type: "POST",
+        //        data:
+        //        {
+        //            data: createJson(fd)//decode(form_data)
+        //        },
+        //        url: "/Home/SaveTest",
+        //        contentType: "application/x-www-form-urlencoded;charset=ISO-8859-15",
+        //        success: function (response) {
+        //            console.log("response", response);
+        //        }
+        //    });
+
+        //$.ajax(
+        //    {
+        //        type: "POST",
+        //        data: fdata,
+        //        url: "/Home/UploadFiles",
+        //        contentType: false,
+        //        processData: false,
+        //        success: function (response) {
+        //            console.log("response", response);
+        //            $('.modal').modal('hide');
+        //            $('.modal').removeClass('show');
+        //        }
+        //    });
+//        let fake_ajax = setTimeout(function () {
+//            form.stopProgress();
+//            modal.find('.modal-body').prepend('<div class="alert alert-info" id="divMsg">Data submited.</div>');
+
+//            clearInterval(fake_ajax);
+//        }, 1500);
+
+//        e.preventDefault();
+//    },
+//    shown: function (modal, form) {
+//        console.log(form);
+//    },
+//    buttons: [
+//        {
+//            text: 'Submit',
+//            submit: true,
+//            class: 'btn btn-primary btn-shadow',
+//            handler: function (modal) {
+//            }
+//        }
+//    ]
+//});

@@ -112,6 +112,37 @@ namespace LMNS.Priority.API
 
             return res;
         }
+
+        public ResultAPI Call_PATCH(string query)
+        {
+            IRestResponse response = null;
+            var uri = new Uri(ConfigurationManager.AppSettings["AppAPI"].ToString());  // Replace with your Service Root URL
+            ResultAPI ra = null;
+
+            try
+            {
+                System.Net.ServicePointManager.ServerCertificateValidationCallback = new System.Net.Security.RemoteCertificateValidationCallback(AcceptAllCertifications);
+
+                var client = new RestClient(ConfigurationManager.AppSettings["AppAPI"].ToString() + ConfigurationManager.AppSettings["Defult_DNAME"].ToString() + "/MED_SAMPLE");
+                var request = new RestRequest(Method.PATCH);
+                request.AddHeader("cache-control", "no-cache");
+                request.AddHeader("content-type", "application/atom+xml");
+                request.AddHeader("authorization", "Basic " + Convert.ToBase64String(Encoding.ASCII.GetBytes((ConfigurationManager.AppSettings["AppAPI_U"].ToString() + ":" + (ConfigurationManager.AppSettings["AppAPI_P"].ToString())))));
+                request.AddHeader("content-type", "application/json");
+                request.AddParameter("application/json", query, ParameterType.RequestBody);
+
+                response = client.Execute(request);
+                ra = CreateResultApi(response);
+            }
+            catch (Exception ex)
+            {
+                AppLogger.log.Debug(AppLogger.CreateLogText("GetCustOrdersStatus", ex.Message));
+                AppLogger.log.Debug(AppLogger.CreateLogText("GetCustOrdersStatus", response.ErrorMessage), response.ErrorException);
+            }
+
+            return ra;
+        }
+        
         #region Reporting Portal
         //public ResultAPI CreateRPT(string dbName, ProductionReport rptData, ReportData exRPT, List<ReportingDefectCodes> rdf)
         //{

@@ -21,7 +21,7 @@
         direction: 'rtl',
         autowidth: true,
         height: null,
-        rowNum: 30,
+        rowNum: 10,
         rowList: [10, 30, 50, 100],
         pager: "#jqGridPager",
         loadonce: true,
@@ -49,20 +49,21 @@ function showGridProdSamples(grid_data) {
             { label: 'QA', name: 'QA', align: 'center', key: false, hidden: true, width: 75 },
             { label: 'DOCNO', name: 'DOCNO', align: 'center', key: false, hidden: true, width: 75 },
             { label: 'SUPNAME', name: 'SUPNAME', align: 'center', key: false, hidden: true, width: 75 },
+            { label: 'PARTNAME', name: 'PARTNAME', align: 'center', key: false, hidden: true, width: 75 },
             { label: 'QACODE', name: 'QACODE', align: 'center', key: true, hidden: true, width: 75 },
             { label: 'מיקום', name: 'LOCATION', align: 'center', hidden: false, width: 30 },
             { label: 'תאור בדיקה', name: 'QADES', align: 'center', hidden: false, width: 250 },
-            { label: 'בדיקה - טקסט', name: 'SHR_TEST', align: 'center', hidden: false, width: 100 },
-            { label: 'תוצאת מינ.', name: 'RESULTMIN', align: 'center', hidden: false, width: 30 },
-            { label: 'תוצאת מקס.', name: 'RESULTMAX', align: 'center', /*formatter: formatGetRevListLink,*/ width: 30 },
-            { label: 'חזרות', name: 'REPETITION', align: 'center', width: 30 },
+            { label: 'בדיקה - טקסט', name: 'SHR_TEST', align: 'center', hidden: true, width: 100 },
+            { label: 'תוצאת מינ.', name: 'RESULTMIN', align: 'center', hidden: true, width: 30 },
+            { label: 'תוצאת מקס.', name: 'RESULTMAX', align: 'center', hidden: true,  width: 30 },/*formatter: formatGetRevListLink,*/
+            { label: 'חזרות', name: 'REPETITION', align: 'center', width: 50 },
             { label: 'תוצאתית (Y/N)', name: 'RESULTANT', align: 'center', width: 30 },
-            { label: 'תוצאה נדרשת', name: 'REQUIRED_RESULT', align: 'center', width: 40 }, 
+            { label: 'תוצאה נדרשת', name: 'REQUIRED_RESULT', align: 'center', hidden: true, width: 40 },
             { label: 'גודל המדגם', name: 'SAMPQUANT', align: 'center', width: 30 },
-            { label: 'כלי בדיקה', name: 'MEASUREDES', align: 'center', width: 200 },
+            { label: 'כלי בדיקה', name: 'MEASUREDES', align: 'center', hidden: true, width: 200 },
             { label: 'תוצאה', name: 'RESULT', align: 'center', width: 40 },
             { label: 'תקין', name: 'NORMAL', align: 'center', width: 30 },
-            { label: 'הערות', name: 'REMARKS', align: 'center', width: 200 }
+            { label: 'הערות', name: 'REMARK', align: 'center', width: 200 }
         ],
         viewrecords: true,
         //rownumbers: true, // show row numbers
@@ -71,19 +72,44 @@ function showGridProdSamples(grid_data) {
         direction: 'rtl',
         autowidth: true,
         height: null,
-        rowNum: 30,
+        rowNum: 10,
         rowList: [10, 30, 50, 100],
         pager: "#jqGridRevisionPager",
         loadonce: true,
-        subGrid: false,
+        subGrid: true,
+        subGridOptions:
+        {
+            // load the subgrid data only once
+            // and the just show/hide
+            reloadOnExpand: false,
+            // select the row when the expand column is clicked
+            selectOnExpand: true,
+            plusicon: "fa fa-plus center bigger-110 blue",
+            minusicon: "fa fa-minus center bigger-110 blue",
+            openicon: "fa fa-chevron-right center orange"
+        },
+        subGridRowExpanded: function (subgridDivId, rowId) {
+            var subgridTableId = subgridDivId + "_t";
+            $("#" + subgridDivId).html("<table id='" + subgridTableId + "'></table>");
+            $("#" + subgridTableId).jqGrid({
+                guiStyle: "bootstrap",
+                iconSet: "fontAwesome",
+                direction: 'rtl',
+                datatype: 'local',
+                data: GetResultRecord(grid_data, rowId),
+                autowidth: true,
+                height: null,
+                colModel: [
+                    { label: 'שורה', name: 'KLINE', align: 'center', key: true, hidden: false, width: 75 },
+                    { label: 'תוצאה', name: 'RESULT', align: 'center', width: 100 }
+                ]
+            });
+        },
         onSelectRow: function (id, rowId, iCol, content, event) {
-            console.log('jqGridRevision ==> id ', id);
-            var rowData = $(this).getRowData(id);
-            console.log("onSelectRow rowData = ", rowData);
-            console.log('jqGridRevision ==> rowId ', rowId);
-            console.log('jqGridRevision ==> iCol ', iCol);
-            console.log('jqGridRevision ==> content ', content);
-            OpenSampleModal(rowData);
+            if (iCol == undefined)
+                return;
+            onSelectRow_ProdSamples(id, rowId, iCol, content, event);
+
             $("#modal-7").trigger("click");
         }
     });

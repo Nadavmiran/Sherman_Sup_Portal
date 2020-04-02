@@ -28,11 +28,11 @@ function showGrid()
         data: grid_data,
         colModel: [
             { label: 'OrderID', name: 'ORD', align: 'center', index: 'ORD', key: true, hidden: true, width: 75 },//, formatter: formatRPTLink
-            { label: 'Order', name: 'ORDNAME', align: 'center', width: 75, formatter: formatRPTLink },//
-            { label: 'Order Date', name: 'pageCURDATE', align: 'center', width: 150, sorttype: "date", formatter: formatRPTLink },
-            { label: 'Supplier', name: 'SHR_SUPTYPEDES', align: 'center', width: 150, formatter: formatRPTLink },
-            { label: 'For treatment ', name: 'OWNERLOGIN', align: 'center', width: 150, formatter: formatRPTLink },
-            { label: 'Status', name: 'STATDES', align: 'center', width: 150, formatter: formatRPTLink }
+            { label: 'Order', name: 'ORDNAME', align: 'center', width: 75 },//
+            { label: 'Order Date', name: 'pageCURDATE', align: 'center', width: 150, sorttype: "date" },
+            { label: 'Supplier', name: 'SHR_SUPTYPEDES', align: 'center', width: 150 },
+            { label: 'For treatment ', name: 'OWNERLOGIN', align: 'center', width: 150 },
+            { label: 'Status', name: 'STATDES', align: 'center', width: 150 }
         ],
         viewrecords: true,
         altRows: true,
@@ -47,11 +47,12 @@ function showGrid()
         loadComplete: function (data) {
             $("#loader").hide();
         },
-        //onSelectRow: function (id, rowId, iCol, content, event) {
-        //    var rowData = $(this).getRowData(id);
-        //    console.log("onSelectRow rowData = ", rowData);
-        //    window.location = '/Home/TestProduct?' + 'OrderID=' + rowData.ORD + '&prodName="' + rowData.PARTNAME;
-        //},
+        onCellSelect: function (row, col, content, event) {
+            var id = jQuery("#jqGrid").jqGrid('getCell', row, 'ORD');
+            var rowData = $(this).getRowData(id);
+            console.log("onSelectRow rowData = ", rowData);
+            window.location = '/Home/TestProduct?' + 'OrderID=' + rowData.ORD + '&orderNumber=' + rowData.ORDNAME;
+        },
         subGridOptions:
         {
             // load the subgrid data only once
@@ -94,21 +95,21 @@ function showGrid()
     });
 }
 
-function GetRecord(data, parentRowKey) {
-    console.log("GetRecord ==> parentRowKey", parentRowKey);
-    console.log("GetRecord ==> data", data);
-    var rec = [];
-    for (var i = 0; i < data.length; i++) {
-        if (data[i].ORD == parentRowKey) {
-            for (var x = 0; x < data[i].PORDERITEMS_SUBFORM.length; x++) {
-                rec.push(data[i].PORDERITEMS_SUBFORM[x]);
-            }
-            console.log("GetRecord ==> rec", rec);
-            return rec;
-        }
-    }
-    return rec;
-}
+//function GetRecord(data, parentRowKey) {
+//    console.log("GetRecord ==> parentRowKey", parentRowKey);
+//    console.log("GetRecord ==> data", data);
+//    var rec = [];
+//    for (var i = 0; i < data.length; i++) {
+//        if (data[i].ORD == parentRowKey) {
+//            for (var x = 0; x < data[i].PORDERITEMS_SUBFORM.length; x++) {
+//                rec.push(data[i].PORDERITEMS_SUBFORM[x]);
+//            }
+//            console.log("GetRecord ==> rec", rec);
+//            return rec;
+//        }
+//    }
+//    return rec;
+//}
 
 function formatRPTLink(cellValue, options, rowObject)
 {
