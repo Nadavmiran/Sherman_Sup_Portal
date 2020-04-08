@@ -259,7 +259,9 @@ function showGridSampleList(grid_data) {
         subGrid: false,
         multiselect: true,
         //multiPageSelection: true,
-        onSelectRow: updateIdsOfSelectedRows,
+        onSelectRow: function () {
+            updateIdsOfSelectedRows();
+        },
         gridComplete: function () {
             currids = $(this).jqGrid('getDataIDs');
         },
@@ -280,9 +282,9 @@ function showGridSampleList(grid_data) {
         //inlineEditing: {
         //    keys: true
         //},
-       // singleSelectClickMode: "selectonly", // prevent unselect once selected rows
+        // singleSelectClickMode: "selectonly", // prevent unselect once selected rows
     });
-    $("#jqGridSampleQA").jqGrid('navGrid', '#jqGridSampleQAPager', { edit: false, save: true, add: false, del: false }, {}, {}, {},{ multipleSearch: true, overlay: false });
+    $("#jqGridSampleQA").jqGrid('navGrid', '#jqGridSampleQAPager', { edit: false, save: true, add: false, del: false }, {}, {}, {}, { multipleSearch: true, overlay: false });
     jQuery("#jqGridSampleQA").jqGrid('inlineNav', "#jqGridSampleQAPager", { edit: true, save: true, add: false, del: false }, {}, {}, {}, { multipleSearch: true, overlay: false });
 }
 

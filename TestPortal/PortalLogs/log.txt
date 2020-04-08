@@ -2110,3 +2110,73 @@ INFO  2020-04-08 15:27:37,932 616295ms eporting Portal Logger reateUpdateTestMsg
 	]
 	}
 	]}
+INFO  2020-04-08 16:27:41,765  1137ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001496",
+	"PARTNAME":"22773036",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":5,
+	"QACODE":"005",
+	"LOCATION":"0",
+	"NORMAL":"N",
+	"REMARK":""
+	}
+	]}
+DEBUG 2020-04-08 16:30:23,773 163144ms eporting Portal Logger CreateResultApi    - FunctionName = CreateResultApi => Response XMLExceptionMsg = <FORM
+  TYPE="MED_SAMPLE">
+  <InterfaceErrors>
+    <text>- ??? ??'?</text>
+  </InterfaceErrors>
+</FORM>
+DEBUG 2020-04-08 16:32:38,929 298300ms eporting Portal Logger CreateResultApi    - FunctionName = CreateResultApi => Response XMLExceptionMsg = <FORM
+  TYPE="MED_SAMPLE">
+  <InterfaceErrors>
+    <text>- ??? ??'?</text>
+  </InterfaceErrors>
+</FORM>
+DEBUG 2020-04-08 16:34:00,884 380256ms eporting Portal Logger CreateResultApi    - FunctionName = CreateResultApi => Response XMLExceptionMsg = <FORM
+  TYPE="MED_SAMPLE">
+  <InterfaceErrors>
+    <text>- ??? ??'?</text>
+  </InterfaceErrors>
+</FORM>
+DEBUG 2020-04-08 16:38:12,245 631616ms eporting Portal Logger CreateResultApi    - FunctionName = CreateResultApi => Response XMLExceptionMsg = <FORM
+  TYPE="MED_SAMPLE">
+  <InterfaceErrors>
+    <text>- ??? ??'?</text>
+  </InterfaceErrors>
+</FORM>
+INFO  2020-04-08 16:52:37,771 1497142ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"",
+	"PARTNAME":"",
+	"SUPNAME":"",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":20,
+	"QACODE":"009",
+	"LOCATION":"2",
+	"NORMAL":"N",
+	"REMARK":""
+	}
+	]}
+DEBUG 2020-04-08 16:52:37,930 1497301ms eporting Portal Logger CreateResultApi    - FunctionName = CreateResultApi => Response XMLExceptionMsg = <FORM
+  TYPE="MED_SAMPLE">
+  <InterfaceErrors>
+    <text>- ??? ????? ?????</text>
+  </InterfaceErrors>
+</FORM>
+ERROR 2020-04-08 17:49:47,069   158ms eporting Portal Logger UserLogin          - UserLogin ==> SP = LMNS_UserLogin ==> @email = osnat@chrom.co.il @pass = 1234
+System.Data.SqlClient.SqlException (0x80131904): A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server) ---> System.ComponentModel.Win32Exception (0x80004005): The network path was not found
+   at System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling, SqlAuthenticationProviderManager sqlAuthProviderManager)
+   at System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionFactory.CreateNonPooledConnection(DbConnection owningConnection, DbConnectionPoolGroup poolGroup, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at LMNS.Repositories.Dal.GetRecordSet(String spName, SqlParameter[] p) in H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\Repositories\Dal.cs:line 78
+   at TestPortal.Models.AppUser.UserLogin() in H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\Models\AppUser.cs:line 84
+ClientConnectionId:00000000-0000-0000-0000-000000000000
+Error Number:53,State:0,Class:20

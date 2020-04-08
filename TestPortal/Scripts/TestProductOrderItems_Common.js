@@ -27,6 +27,8 @@
                 document.getElementById('hdnQaListSUPNAME').value = data.objOrder.SUPNAME;
                 document.getElementById('hdnQaListPARTNAME').value = data.objProduct.PARTNAME;
                 var x = document.getElementsByTagName("html")[0].getAttribute("dir");
+    
+                document.getElementById('divTLMsg').style.display = 'none';
                 if(x == 'rtl')
                     $("#modal-9").trigger("click");
                 else
@@ -79,7 +81,7 @@ function OpentestList() {
         {
             supName: supName,
             partName: partName            },
-        url: "/Home/GetSampleTestList",
+            url: $('#navGetSampleTestList').data('url'),//"/Home/GetSampleTestList",
         contentType: "application/x-www-form-urlencoded;charset=ISO-8859-15",
         success: function (response) {
             console.log("response", response);
@@ -114,7 +116,7 @@ function GetProductDetails(rowData) {
     $("#loader").show();
     $.ajax({
         type: "POST",
-        url: "/Home_IL/PostTestProductItem",
+        url: $('#navPostTestProductItem').data('url'),//"/Home_IL/PostTestProductItem",
         data: {
             orderID: parseInt(rowData.ORD),
             prodName: rowData.PARTNAME,
@@ -179,8 +181,8 @@ function GetProductDetails(rowData) {
 
 function GetOrderProducts(OrdId) {
     $.ajax({
-        type: "POST",
-        url: "TestProductOrderItems",
+        type: "POST", 
+        url: $('#navTestProductOrderItems').data('url'),//"TestProductOrderItems",
         data: {
             orderId: parseInt(OrdId)
         },
@@ -200,7 +202,7 @@ function GetOrderProductTests(prodName, supplier, qaCode, REPETITION) {
     //console.log('GetOrderProductTests ==> prodName = ', prodName);
     $.ajax({
         type: "POST",
-        url: "GetOrderProductTests",
+        url: $('#navGetOrderProductTests').data('url'),//"GetOrderProductTests",
         data: {
             prodName: prodName,
             supplier: supplier,
@@ -361,7 +363,7 @@ function GetProductAndRevision(OrderID, prodId, ordLine) {
     jQuery("#jqGridRevision").jqGrid("GridUnload");
     $.ajax({
         type: "POST",
-        url: "TestProductItemData",
+        url: $('#navTestProductItemData').data('url'),//"TestProductItemData",
         data: {
             orderID: OrderID,
             prodId: prodId,
@@ -389,7 +391,7 @@ function GetProductAndRevision(OrderID, prodId, ordLine) {
 function GetRevision(cellValue, options, rowObject) {
     $.ajax({
         type: "POST",
-        url: "GetProductRevisionList",
+        url: $('#navGetProductRevisionList').data('url'),//"GetProductRevisionList",
         data: {
             prodId: options.rowId,
             revId: rowObject.REVNUM
@@ -420,7 +422,7 @@ function downloadFile(filefolder, filename) {
                 fileFolder: filefolder,
                 fileName: filename
             },
-            url: "/Home/Download",
+            url: $('#navDownload').data('url'),//"/Home/Download",
             success: function (response) {
                 //
                 console.log("downloadFile ==> Downlod => url", $('#downLoadFile').data('url'));
@@ -440,7 +442,7 @@ function DoDownlod(filefolder, filename) {
             fileFolder: filefolder,
             fileName: filename
         },
-        url: "/Home/DownloadFile",
+        url: $('#navDownloadFile').data('url'),//"/Home/DownloadFile",
         success: function (response) {
             console.log("DoDownlod ==> DownloadFile => response", response);
             //window.location.href = "@Url.RouteUrl(new { Controller = "Home", Action = "DownloadFile" })/?fileFolder=" + filefolder + "&fileName=" + filename;
@@ -570,7 +572,7 @@ function onSubmit_TestForm(e) {
             {
                 data: createJson(fd)//decode(form_data)
             },
-            url: "/Home/SaveTest",
+            url: $('#navSaveTest').data('url'),//"/Home/SaveTest",
             contentType: "application/x-www-form-urlencoded;charset=ISO-8859-15",
             success: function (response) {
                 console.log("response", response);
@@ -597,7 +599,7 @@ function onSubmit_TestForm(e) {
         {
             type: "POST",
             data: fdata,
-            url: "/Home/UploadFiles",
+            url: $('#navUploadFiles').data('url'),//"/Home/UploadFiles",
             contentType: false,
             processData: false,
             success: function (response) {
@@ -665,7 +667,7 @@ function onSubmitCreateSampleList(e) {
             partName: PARTNAME,
             qaCode: JSON.stringify(jsonObj)
         },
-        url: "/Home/CreateTest",
+            url: $('#navCreateTest').data('url'),//"/Home/CreateTest",
         contentType: "application/x-www-form-urlencoded;charset=ISO-8859-15",
         success: function (response) {
             console.log("response", response);

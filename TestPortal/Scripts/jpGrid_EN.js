@@ -51,7 +51,8 @@ function showGrid()
             var id = jQuery("#jqGrid").jqGrid('getCell', row, 'ORD');
             var rowData = $(this).getRowData(id);
             console.log("onSelectRow rowData = ", rowData);
-            window.location = '/Home/TestProduct?' + 'OrderID=' + rowData.ORD + '&orderNumber=' + rowData.ORDNAME;
+            window.location.href += 'Home/TestProduct/?OrderID=' + rowData.ORD + '&orderNumber=' + rowData.ORDNAME;
+
         },
         subGridOptions:
         {
@@ -91,7 +92,7 @@ function showGrid()
                     console.log("onSelectRow rowId = ", rowId);
                     var rowData = $(this).getRowData(id);
                     console.log("onSelectRow rowData = ", rowData);
-                    window.location = '/Home/TestProductItem?' + 'OrderID=' + rowData.ORD + '&prodName="' + rowData.PARTNAME + '"&ordLine=' + rowData.LINE;
+                    window.location.href += 'Home/TestProductItem/?OrderID=' + rowData.ORD + '&prodName="' + rowData.PARTNAME + '"&ordLine=' + rowData.LINE;
                 }
             });
         }

@@ -10,7 +10,7 @@ using System.Web.Mvc;
 
 namespace TestPortal.Models
 {
-    public abstract class CommonController : Controller
+    public partial class CommonController : Controller
     {
         public ActionResult TestProduct(int orderID, string orderNumber)
         {

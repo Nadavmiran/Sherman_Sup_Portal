@@ -133,7 +133,7 @@ $("#modal-8").fireModal({
         onSubmit_TestForm(e);
          let fake_ajax = setTimeout(function () {
             form.stopProgress();
-            modal.find('.modal-body').prepend('<div class="alert alert-info" id="divMsg">Data submited.</div>');
+            //modal.find('.modal-body').prepend('<div class="alert alert-info" id="divMsg">Data submited.</div>');
 
             clearInterval(fake_ajax);
         }, 1500);
@@ -164,7 +164,7 @@ $("#modal-9").fireModal({
         onSubmitCreateSampleList(e);
         let fake_ajax = setTimeout(function () {
             form.stopProgress();
-            modal.find('.modal-body').prepend('<div class="alert alert-info" id="divMsg">הנתונים נשמרו.</div>');
+            //modal.find('.modal-body').prepend('<div class="alert alert-info" id="divTLMsg">הנתונים נשמרו.</div>');
 
             clearInterval(fake_ajax);
         }, 1500);
@@ -186,7 +186,7 @@ $("#modal-9").fireModal({
 });
 
 $("#modal-10").fireModal({
-    title: 'Sשצפךק ךןדא',
+    title: 'Test list',
     body: $("#modal-QA-part"),
     footerClass: 'bg-whitesmoke',
     autoFocus: true,
@@ -195,7 +195,7 @@ $("#modal-10").fireModal({
         onSubmitCreateSampleList(e);
         let fake_ajax = setTimeout(function () {
             form.stopProgress();
-            modal.find('.modal-body').prepend('<div class="alert alert-info" id="divMsg">Data submited.</div>');
+            modal.find('.modal-body').prepend('<div class="alert alert-info" id="divTLMsg">Data submited.</div>');
 
             clearInterval(fake_ajax);
         }, 1500);
