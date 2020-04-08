@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using LMNS.Priority.API;
+using System.Web.Mvc;
 
 namespace TestPortal.Models
 {
@@ -8,11 +9,26 @@ namespace TestPortal.Models
         [ValidateAntiForgeryToken]
         public void LoginAction(AppUser user)
         {
+
             user.UserLogin();
             if (user.IsAuthenticated)
             {
                 Session.Add("USER_LOGIN", user);
             }
+        }
+
+        [HttpPost]
+        public ActionResult SaveUserProfile(string lang, string fullName)
+        {
+            ResultAPI ra = null;
+            if (Session["USER_LOGIN"] == null)
+                return RedirectToAction("Login", "Account");
+            else
+            {
+                AppUser au = Session["USER_LOGIN"] as AppUser;
+                ra = au.SaveUserProfile(lang, fullName);
+            }
+            return Json(ra);
         }
     }
 }

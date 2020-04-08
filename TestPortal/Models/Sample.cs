@@ -15,6 +15,7 @@ namespace TestPortal.Models
         /// <summary>
         ///תאריך דגימה
         /// </summary>
+        public string pageCURDATE { get; set; }
         public DateTime CURDATE { get; set; }
         /// <summary>
         /// מספר דגימה
@@ -75,7 +76,7 @@ namespace TestPortal.Models
         internal Sample GetProductSamples(string supplierName, string partName, string revName, int ordLine)
         {
             // MED_SAMPLE ?$filter = PARTNAME eq '23559000' and SUPNAME eq '20523' &$expand = MED_TRANSSAMPLEQA_SUBFORM
-            string query = "MED_SAMPLE?$filter=PARTNAME eq '" + partName + "' and SUPNAME eq '" + supplierName + "'&$expand=MED_TRANSSAMPLEQA_SUBFORM($expand=MED_RESULTDET_SUBFORM)";
+            string query = "MED_SAMPLE?$filter=PARTNAME eq '" + partName + "' and SUPNAME eq '" + supplierName + "'&$select=CURDATE,DOCNO,SUPNAME,STATDES,PARTNAME,PARTDES,SERIALNAME,SHR_SERIAL_QUANT,SHR_QUANT,SHR_SAMPLE_STD_CODE,QUANT,SHR_DRAW,SHR_RAR,MAX_REJECT &$expand=MED_TRANSSAMPLEQA_SUBFORM($expand=MED_RESULTDET_SUBFORM)";
             string res = Call_Get(query);
 
             SamplesWarpper ow = JsonConvert.DeserializeObject<SamplesWarpper>(res);
@@ -258,119 +259,67 @@ namespace TestPortal.Models
             }
             return new Sample();
         }
+
+        internal ResultAPI Createtest(string supName, string partName, List<CreateSampleTestMsg> form, bool isNewSample, string DOCNO = "")
+        {
+            string reqBody = CreateNewsampleMsg(supName, partName, form, isNewSample);
+            ResultAPI ra = Call_POST(reqBody);
+            return ra;
+        }
+
+        private string CreateNewsampleMsg(string supName, string partName, List<CreateSampleTestMsg> form, bool isNewSample, string DOCNO = "")
+        {
+            int indx = 0;
+            StringBuilder sb = new StringBuilder();
+            sb.Append("{");
+            if (isNewSample)
+            {
+                sb.Append("\r\n\t\"CURDATE\":");
+                sb.Append("\"" + GetDateTimeOffset(DateTime.Now.ToString(), "00:00") + "\",");
+            }
+            else
+            {
+                if(!string.IsNullOrEmpty(DOCNO))
+                {
+                    sb.Append("\r\n\t\"DOCNO\":");
+                    sb.Append("\"" + DOCNO + "\",");
+                }
+            }
+            sb.Append("\r\n\t\"PARTNAME\":");
+            sb.Append("\"" + partName + "\",");
+            sb.Append("\r\n\t\"SUPNAME\":");
+            sb.Append("\"" + supName + "\",");
+            sb.Append("\r\n\t\"MED_TRANSSAMPLEQA_SUBFORM\": [");
+            foreach (CreateSampleTestMsg item in form)
+            {
+                indx++;
+                sb.Append("\r\n\t{");
+                sb.Append("\r\n\t\"QACODE\":");
+                sb.Append("\"" + item.QACODE + "\",");
+                sb.Append("\r\n\t\"RESULTMIN\":");
+                sb.Append(Convert.ToDecimal(item.RESULTMIN) + ",");
+                sb.Append("\r\n\t\"RESULTMAX\":");
+                sb.Append(Convert.ToDecimal(item.RESULTMAX) +",");
+                sb.Append("\r\n\t\"REPETITION\":");
+                sb.Append(Convert.ToInt32(item.REPETITION));
+                sb.Append("\r\n\t}");
+                if (indx < form.Count)
+                    sb.Append("\r\n\t,");
+            }
+            sb.Append("\r\n\t]}");
+            return sb.ToString();
+        }
+
+        internal ResultAPI AddSampleTests(string supName, string partName, List<CreateSampleTestMsg> form, bool isNewSample, string DOCNO = "")
+        {
+            string reqBody = CreateNewsampleMsg(supName, partName, form, isNewSample, DOCNO);
+            ResultAPI ra = Call_PATCH(reqBody);
+            return ra;
+        }
     }
 
     public class SamplesWarpper : ODataBase
     {
         public List<Sample> Value { get; set; }
     }
-
-    public class Sample_QA
-    {
-        /// <summary>
-        /// מפתח דגימה
-        /// </summary>
-        public string QA { get; set; }
-        /// <summary>
-        /// מספר דגימה
-        /// </summary>
-        public string DOCNO { get; set; }
-        /// <summary>
-        /// מספר ספק
-        /// </summary>
-        public string SUPNAME { get; set; }
-        /// <summary>
-        /// קוד בדיקה
-        /// </summary>
-        public string QACODE { get; set; }
-        /// <summary>
-        /// תאור בדיקה
-        /// </summary>
-        public string QADES { get; set; }
-        /// <summary>
-        /// מיקום
-        /// </summary>
-        public string LOCATION { get; set; }
-        /// <summary>
-        /// בדיקה - טקסט
-        /// </summary>
-        public string SHR_TEST { get; set; }
-        /// <summary>
-        /// תוצאת מינימום
-        /// </summary>
-        public decimal RESULTMIN { get; set; }
-        /// <summary>
-        /// תוצאת מקסימום
-        /// </summary>
-        public decimal RESULTMAX { get; set; }
-        /// <summary>
-        /// חזרות
-        /// </summary>
-        public int REPETITION { get; set; }
-        /// <summary>
-        /// תוצאתית
-        /// </summary>
-        public string RESULTANT { get; set; }
-        /// <summary>
-        /// תוצאה נדרשת
-        /// </summary>
-        public decimal REQUIRED_RESULT { get; set; }
-        /// <summary>
-        /// גודל המדגם
-        /// </summary>
-        public int SAMPQUANT { get; set; }
-        /// <summary>
-        /// תאור כלי מדידה
-        /// </summary>
-        public string MEASUREDES { get; set; }
-        /// <summary>
-        /// תוצאת בדיקה
-        /// </summary>
-        public decimal RESULT { get; set; }
-        /// <summary>
-        /// תקין
-        /// </summary>
-        public string NORMAL { get; set; }
-        /// <summary>
-        /// הערה
-        /// </summary>
-        public string REMARK { get; set; }
-        /// <summary>
-        /// מק"ט
-        /// </summary>
-        public string PARTNAME { get; set; }
-        public List<Sample_QA_Resultdet> MED_RESULTDET_SUBFORM { get; set; }
-    }
-
-    public class Sample_QA_Resultdet
-    {
-        public int? KLINE { get; set; }
-        public decimal? RESULT { get; set; }
-    }
-
-    public class SampleTestMsgWarpper
-    {
-        public List<SampleTestMsg> form { get; set; }
-        public List<Sample_QA_Resultdet> SUB_RES { get; set; }
-        public List<Attachments> files { get; set; }
-    }
-
-    public class SampleTestMsg
-    {
-        public string hdnQA { get; set; }
-        public string hdnQaSUPNAME { get; set; }
-        public string hdnQaDOCNO { get; set; }
-        public string hdnQACODE { get; set; }
-        public string hdnLOCATION { get; set; }
-        public string txtQaRESULTANT { get; set; }
-        public string txtQaNORMAL { get; set; }
-        public string txtQaMEASUREDES { get; set; }
-        public string txtQaRESULT { get; set; }
-        public string txtQaREMARK { get; set; }
-        public string hdnQaPARTNAME { get; set; }
-        public string hdnQaREPETITION { get; set; }
-        public string hdnQaSAMPQUANT { get; set; }
-        //[{"":"20523"},{"":"C2000001488"},{"":"007"},{"":"2"},{"":"7"},{"":"on"},{"":"on"},{"txtQaMEASUREDES":"מדיד הברגה"},{"":"12"},{"":""},{"attachments":""},{"fire-modal-1-submit":""}]
-    }
-
 }

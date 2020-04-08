@@ -192,6 +192,7 @@
     <Compile Include="Models\ProductRevisionTest.cs" />
     <Compile Include="Models\Revision.cs" />
     <Compile Include="Models\Sample.cs" />
+    <Compile Include="Models\Sample_QA.cs" />
     <Compile Include="Models\Test.cs" />
     <Compile Include="PriorityAPI\PriorityAPI.cs" />
     <Compile Include="PriorityAPI\ResultAPI.cs" />
@@ -271,6 +272,11 @@
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\grid.celledit.js" />
+    <Content Include="Scripts\grid.filter.js" />
+    <Content Include="Scripts\grid.formedit.js" />
+    <Content Include="Scripts\jquery.searchFilter.js" />
+    <Content Include="Scripts\LMNS-Site.js" />
     <Content Include="Scripts\TestProductOrderItems_Common.js" />
     <Content Include="Scripts\components-multiple-upload.js" />
     <Content Include="Scripts\custom.js" />
@@ -450,7 +456,6 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home_IL\Index.cshtml" />
     <Content Include="Views\Shared\_LayoutLogin.cshtml" />
-    <Content Include="Views\Home_IL\QA_Page.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_Layout_EN.cshtml" />
     <Content Include="Views\Home\QA_Page.cshtml" />
@@ -474,6 +479,8 @@
     <Content Include="Views\Home_IL\_Sample_QA.cshtml" />
     <Content Include="Views\Home\_Sample_QA.cshtml" />
     <Content Include="Views\Home_IL\_Wizard.cshtml" />
+    <Content Include="Views\Home_IL\_SampleQA_List.cshtml" />
+    <Content Include="Views\Home\_SampleQA_List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

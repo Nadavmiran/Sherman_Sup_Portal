@@ -59,7 +59,8 @@ function showGrid()
             // and the just show/hide
             reloadOnExpand: false,
             // select the row when the expand column is clicked
-            selectOnExpand: true,
+            //selectOnExpand: true,
+            autoselecting: false,
             plusicon: "fa fa-plus center bigger-110 blue",
             minusicon: "fa fa-minus center bigger-110 blue",
             openicon: "fa fa-chevron-right center orange"
@@ -76,8 +77,8 @@ function showGrid()
                 autowidth: true,
                 height: null,
                 colModel: [
-                    { label: '#', name: 'LINE', align: 'center', hidden: false, width: 75 },
-                    { label: 'ORD', name: 'ORD', align: 'center', key: true, hidden: true, width: 75 },
+                    { label: '#', name: 'LINE', align: 'center', key: true, hidden: false, width: 75 },
+                    { label: 'ORD', name: 'ORD', align: 'center', hidden: true, width: 75 },
                     { label: 'Serial No.', name: 'PARTNAME', align: 'center', width: 100 },//, formatter: formatProdLink
                     { label: 'Description', name: 'PDES', align: 'center', width: 100 },
                     { label: 'Quntity', name: 'TQUANT', align: 'center', width: 100 },
@@ -85,7 +86,9 @@ function showGrid()
                     { label: 'Supply Date', name: 'pageREQDATE', align: 'center', width: 100 },
                     { label: 'Status', name: 'PORDISTATUSDES', align: 'center', width: 100 }
                 ],
-                onSelectRow: function (id, rowId, iCol, content, event) {
+                onCellSelect: function (id, rowId, iCol, content, event) {
+                    console.log("onSelectRow id = ", id);
+                    console.log("onSelectRow rowId = ", rowId);
                     var rowData = $(this).getRowData(id);
                     console.log("onSelectRow rowData = ", rowData);
                     window.location = '/Home/TestProductItem?' + 'OrderID=' + rowData.ORD + '&prodName="' + rowData.PARTNAME + '"&ordLine=' + rowData.LINE;

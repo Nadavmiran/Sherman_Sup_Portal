@@ -17,7 +17,7 @@ namespace TestPortal.Models
         public string OrderDescription { get; set; }
         public string OrderDate { get; set; }
         public string OrderStatus { get; set; }
-
+        
         public string ORDNAME { get; set; }
         public string STATDES { get; set; }
         public DateTime? CURDATE { get; set; }
@@ -45,7 +45,7 @@ namespace TestPortal.Models
             OrdersWarpper ow = null;
             try
             {
-                string query = "/PORDERS?$filter=SUPNAME eq '" + supplier + "' and(STATDES eq 'מאושרת' or STATDES eq 'נשלחה-עדכון' or STATDES eq 'נשלחה' or STATDES eq 'אישור ספק' or STATDES eq 'פתיחה חוזרת' or STATDES eq 'מוקפאת')&$expand=PORDERITEMS_SUBFORM($expand=PORDERITEMSTEXT_SUBFORM)";
+                string query = "/PORDERS?$filter=SUPNAME eq '" + supplier + "' and(STATDES eq 'מאושרת' or STATDES eq 'נשלחה-עדכון' or STATDES eq 'נשלחה' or STATDES eq 'אישור ספק' or STATDES eq 'פתיחה חוזרת' or STATDES eq 'מוקפאת')&$select=ORDNAME,STATDES,CURDATE,ORD,CODEDES,SUPNAME,CDES,SHR_SUPTYPEDES,OWNERLOGIN&$expand=PORDERITEMS_SUBFORM($expand=PORDERITEMSTEXT_SUBFORM)";
                 string res = Call_Get(query);
 
                 ow = JsonConvert.DeserializeObject<OrdersWarpper>(res);
@@ -64,7 +64,7 @@ namespace TestPortal.Models
         internal Order GetOrderDetails(int orderID)
         {
             //"/PORDERS?$filter=ORD eq " + orderID + "&$expand=EXTFILES_SUBFORM,PORDERITEMS_SUBFORM($expand=PORDERITEMSTEXT_SUBFORM)";
-            string query = "/PORDERS?$filter=ORD eq " + orderID + "&$expand=PORDERITEMS_SUBFORM($expand=PORDERITEMSTEXT_SUBFORM)";
+            string query = "/PORDERS?$filter=ORD eq " + orderID + "&$select=ORDNAME,STATDES,CURDATE,ORD,CODEDES,SUPNAME,CDES,SHR_SUPTYPEDES,OWNERLOGIN&$expand=PORDERITEMS_SUBFORM($expand=PORDERITEMSTEXT_SUBFORM)";
             string res = Call_Get(query);
 
             OrdersWarpper ow = JsonConvert.DeserializeObject<OrdersWarpper>(res);
@@ -73,7 +73,7 @@ namespace TestPortal.Models
 
         internal Order GetOrderProductDetails(int orderID, string prodName)
         {
-            string query = "/PORDERS?$filter=ORD eq  " + orderID + "&$expand=EXTFILES_SUBFORM($filter=SHR_PARTNAME eq '" + prodName + "'),PORDERITEMS_SUBFORM($filter=PARTNAME eq '" + prodName + "';$expand=PORDERITEMSTEXT_SUBFORM)";
+            string query = "/PORDERS?$filter=ORD eq  " + orderID + "&$select=ORDNAME,STATDES,CURDATE,ORD,CODEDES,SUPNAME,CDES,SHR_SUPTYPEDES,OWNERLOGIN&$expand=EXTFILES_SUBFORM($filter=SHR_PARTNAME eq '" + prodName + "'),PORDERITEMS_SUBFORM($filter=PARTNAME eq '" + prodName + "';$expand=PORDERITEMSTEXT_SUBFORM)";
             string res = Call_Get(query);
 
             OrdersWarpper ow = JsonConvert.DeserializeObject<OrdersWarpper>(res);

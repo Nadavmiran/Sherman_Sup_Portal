@@ -1951,3 +1951,162 @@ INFO  2020-04-02 16:47:09,126 32089ms eporting Portal Logger reateUpdateTestMsg 
 	"REMARK":"TEST NADAV 15"
 	}
 	]}
+INFO  2020-04-03 14:44:50,956  1453ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":5,
+	"QACODE":"005",
+	"LOCATION":"1",
+	"NORMAL":"Y",
+	"REMARK":"TEST NADAV 16"
+	}
+	]}
+DEBUG 2020-04-03 14:44:52,175  2672ms eporting Portal Logger CreateResultApi    - FunctionName = CreateResultApi => Response XMLExceptionMsg = <FORM
+  TYPE="MED_SAMPLE">
+  <InterfaceErrors>
+    <text>??? ????? ????? ?????? ?????? '??????'.</text>
+  </InterfaceErrors>
+</FORM>
+INFO  2020-04-03 14:47:07,302 137799ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":5,
+	"QACODE":"005",
+	"LOCATION":"1",
+	"NORMAL":"Y",
+	"REMARK":"TEST NADAV 16"
+	}
+	]}
+DEBUG 2020-04-03 14:50:03,028 313525ms eporting Portal Logger CreateResultApi    - FunctionName = CreateResultApi => Response XMLExceptionMsg = <FORM
+  TYPE="MED_SAMPLE">
+  <InterfaceErrors>
+    <text>??? ????? ????? ?????? ?????? '??????'.</text>
+  </InterfaceErrors>
+</FORM>
+INFO  2020-04-03 14:55:00,370 610866ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":5,
+	"QACODE":"005",
+	"LOCATION":"1",
+	"NORMAL":"Y",
+	"REMARK":"TEST NADAV 16"
+	}
+	]}
+DEBUG 2020-04-03 14:55:11,786 622282ms eporting Portal Logger CreateResultApi    - FunctionName = CreateResultApi => Response XMLExceptionMsg = <FORM
+  TYPE="MED_SAMPLE">
+  <InterfaceErrors>
+    <text>??? ????? ????? ?????? ?????? '??????'.</text>
+  </InterfaceErrors>
+</FORM>
+ERROR 2020-04-05 14:43:48,523   165ms eporting Portal Logger UserLogin          - UserLogin ==> SP = LMNS_UserLogin ==> @email = osnat@chrom.co.il @pass = 1234
+System.Data.SqlClient.SqlException (0x80131904): A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server) ---> System.ComponentModel.Win32Exception (0x80004005): The network path was not found
+   at System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling, SqlAuthenticationProviderManager sqlAuthProviderManager)
+   at System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionFactory.CreateNonPooledConnection(DbConnection owningConnection, DbConnectionPoolGroup poolGroup, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at LMNS.Repositories.Dal.GetRecordSet(String spName, SqlParameter[] p) in H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\Repositories\Dal.cs:line 78
+   at TestPortal.Models.AppUser.UserLogin() in H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\Models\AppUser.cs:line 84
+ClientConnectionId:00000000-0000-0000-0000-000000000000
+Error Number:53,State:0,Class:20
+DEBUG 2020-04-07 15:44:39,153   159ms eporting Portal Logger CreateResultApi    - FunctionName = CreateResultApi => Response XMLExceptionMsg = <FORM
+  TYPE="MED_SAMPLE">
+  <InterfaceErrors>
+    <text>- ??? ????? ?????</text>
+  </InterfaceErrors>
+</FORM>
+DEBUG 2020-04-07 15:47:16,851 157857ms eporting Portal Logger CreateResultApi    - FunctionName = CreateResultApi => Response XMLExceptionMsg = <FORM
+  TYPE="MED_SAMPLE">
+  <InterfaceErrors>
+    <text>- ??? ????? ?????</text>
+  </InterfaceErrors>
+</FORM>
+DEBUG 2020-04-07 15:51:17,362 398369ms eporting Portal Logger CreateResultApi    - FunctionName = CreateResultApi => Response XMLExceptionMsg = <FORM
+  TYPE="MED_SAMPLE">
+  <InterfaceErrors>
+    <text>- ??? ????? ?????</text>
+  </InterfaceErrors>
+</FORM>
+DEBUG 2020-04-07 15:54:08,566 569573ms eporting Portal Logger CreateResultApi    - FunctionName = CreateResultApiExceptionMsg = Root element is missing.
+INFO  2020-04-08 10:40:25,265  1662ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001498",
+	"PARTNAME":"32559004",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":12,
+	"QACODE":"013",
+	"LOCATION":"4",
+	"REMARK":"",
+	"MED_RESULTDET_SUBFORM": [
+	{
+	"KLINE":1,
+	"RESULT":1.5
+	},
+	{
+	"KLINE":2,
+	"RESULT":1.5
+	}
+	]
+	}
+	]}
+INFO  2020-04-08 15:17:22,095   457ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001488",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":10,
+	"QACODE":"011",
+	"LOCATION":"5",
+	"NORMAL":"N",
+	"REMARK":"Files1"
+	}
+	]}
+DEBUG 2020-04-08 15:18:02,413 40776ms eporting Portal Logger CreateResultApi    - FunctionName = CreateResultApi => Response XMLExceptionMsg = <FORM
+  TYPE="MED_SAMPLE">
+  <InterfaceErrors>
+    <text>??? ????? ????? ?????? ?????? '??????'.</text>
+  </InterfaceErrors>
+</FORM>
+INFO  2020-04-08 15:18:52,989 91352ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001495",
+	"PARTNAME":"23417000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":2,
+	"QACODE":"002",
+	"LOCATION":"0",
+	"NORMAL":"N",
+	"REMARK":"Files2"
+	}
+	]}
+INFO  2020-04-08 15:27:37,932 616295ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001494",
+	"PARTNAME":"4700000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":7,
+	"QACODE":"007",
+	"LOCATION":"0",
+	"REMARK":"",
+	"MED_RESULTDET_SUBFORM": [
+	]
+	}
+	]}

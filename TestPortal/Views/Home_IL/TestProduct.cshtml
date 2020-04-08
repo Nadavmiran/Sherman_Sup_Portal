@@ -7,7 +7,7 @@
 }
 <div class="section-body" id="mainPageContent" style="overflow-y:scroll;">
     <div class="row">
-        <div class="col-12 col-md-12 col-lg-12">
+        <div class="col-6 col-md-6 col-lg-6">
             <div class="card">
                 <div class="col-12">
                     <form>
@@ -16,48 +16,113 @@
                         </div>
                         <div class="card-body">
                             <div class="row">
-                                <div class="form-group col-md-2 col-12">
+                                <div class="form-group col-md-3 col-12">
                                     <label class="control-label" style="color:#01416F; font-weight:bolder;">הזמנה #</label>
-                                    <div class="col-sm-1">
+                                    <div class="col-sm-3">
                                         <label class="control-label" id="lbl_ORDNAME">@Model.objOrder.ORDNAME</label>
                                     </div>
                                 </div>
-                                <div class="form-group col-md-2 col-12">
+                                <div class="form-group col-md-3 col-12">
                                     <label class="control-label" style="color:#01416F; font-weight:bolder;">תאריך הזמנה</label>
-                                    <div class="col-sm-1">
+                                    <div class="col-sm-3">
                                         <label class="control-label" id="lbl_pageCURDATE">@Model.objOrder.pageCURDATE</label>
                                     </div>
                                 </div>
-                                <div class="form-group col-md-2 col-12">
+                                <div class="form-group col-md-3 col-12">
                                     <label class="control-label" style="color:#01416F; font-weight:bolder;">סטטוס הזמנה</label>
-                                    <div class="col-sm-1">
+                                    <div class="col-sm-3">
                                         <label class="control-label" id="lbl_STATDESE">@Model.objOrder.STATDES</label>
                                     </div>
                                 </div>
-                                <div class="form-group col-md-2 col-12">
-                                    <label class="control-label" style="color:#01416F; font-weight:bolder;">לטיפול – שם הקניין </label>
-                                    <div class="col-sm-1">
+                                <div class="form-group col-md-3 col-12">
+                                    <label class="control-label" style="color:#01416F; font-weight:bolder;">לטיפול(קניין) </label>
+                                    <div class="col-sm-3">
                                         <label class="control-label" id="lbl_OWNERLOGIN">@Model.objOrder.OWNERLOGIN</label>
-                                    </div>
-                                </div>
-                                <div class="form-group col-md-4 col-12">
-                                    <label class="control-label" style="color:#01416F; font-weight:bolder;">שם ספק</label>
-                                    <div class="col-sm-5">
-                                        <label class="control-label" id="lbl_CDES">@Model.objOrder.CDES</label>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="form-group col-md-2 col-12">
+                                <div class="form-group col-md-3 col-12">
+                                    <label class="control-label" style="color:#01416F; font-weight:bolder;">תאור סוג ספק</label>
+                                    <div class="col-sm-3">
+                                        <label class="control-label" id="SHR_SUPTYPEDES">@Model.objOrder.SHR_SUPTYPEDES</label>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-3 col-12">
                                     <label class="control-label" style="color:#01416F; font-weight:bolder;">ספק #</label>
-                                    <div class="col-sm-2">
+                                    <div class="col-sm-3">
                                         <label class="control-label" id="lbl_SUPNAME">@Model.objOrder.SUPNAME</label>
                                     </div>
                                 </div>
-                                <div class="form-group col-md-2 col-12">
-                                    <label class="control-label" style="color:#01416F; font-weight:bolder;">תאור סוג ספק</label>
-                                    <div class="col-sm-2">
-                                        <label class="control-label" id="SHR_SUPTYPEDES">@Model.objOrder.SHR_SUPTYPEDES</label>
+                                <div class="form-group col-md-6 col-12">
+                                    <label class="control-label" style="color:#01416F; font-weight:bolder;">שם ספק</label>
+                                    <div class="col-sm-6">
+                                        <label class="control-label" id="lbl_CDES">@Model.objOrder.CDES</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-md-6 col-lg-6">
+            <div class="card">
+                <div class="col-12">
+                    <form>
+                        <div class="card-header">
+                            <h4><i class="fas fa-file-invoice" style="font-size: 20px;"></i> תעודת דגימה</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="form-group col-md-3 col-12">
+                                    <label class="control-label" style="color:#01416F; font-weight:bolder;">דגימה #</label>
+                                    <div class="col-sm-3">
+                                        <label class="control-label" id="lbl_S_DOCNO">@Model.objSample.DOCNO</label>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-3 col-12">
+                                    <label class="control-label" style="color:#01416F; font-weight:bolder;">תאריך דגימה</label>
+                                    <div class="col-sm-3">
+                                        <label class="control-label" id="lbl_S_CURDATE">@Convert.ToDateTime(Model.objSample.CURDATE).ToShortDateString()</label>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-3 col-12">
+                                    <label class="control-label" style="color:#01416F; font-weight:bolder;">כמות</label>
+                                    <div class="col-sm-3">
+                                        <label class="control-label" id="lbl_S_QUANT">@Model.objSample.QUANT</label>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-3 col-12">
+                                    <label class="control-label" style="color:#01416F; font-weight:bolder;">מק"ט </label>
+                                    <div class="col-sm-3">
+                                        <label class="control-label" id="lbl_S_SERIALNAME">@Model.objSample.SERIALNAME</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-3 col-12">
+                                    <label class="control-label" style="color:#01416F; font-weight:bolder;">רמת איכות</label>
+                                    <div class="col-sm-3">
+                                        <label class="control-label" id="lbl_S_SHR_RAR">@Model.objSample.SHR_RAR</label>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-3 col-12">
+                                    <label class="control-label" style="color:#01416F; font-weight:bolder;">כמות הפק"ע</label>
+                                    <div class="col-sm-3">
+                                        <label class="control-label" id="lbl_S_SHR_SERIAL_QUANT">@Model.objSample.SHR_SERIAL_QUANT</label>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-3 col-12">
+                                    <label class="control-label" style="color:#01416F; font-weight:bolder;">סטטוס</label>
+                                    <div class="col-sm-3">
+                                        <label class="control-label" id="lbl_S_STATDES">@Model.objSample.STATDES</label>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-3 col-12">
+                                    <label class="control-label" style="color:#01416F; font-weight:bolder;">תקן דגימה</label>
+                                    <div class="col-sm-3">
+                                        <label class="control-label" id="lbl_S_SHR_SAMPLE_STD_CODE">@Model.objSample.SHR_SAMPLE_STD_CODE</label>
                                     </div>
                                 </div>
                             </div>
@@ -77,6 +142,8 @@
                         <div class="card-header">
                             <h4><i class="fas fa-puzzle-piece" style="font-size: 20px;"></i> פרטי מוצר</h4>
                             <button class="btn btn-primary" id="modal-7" style="visibility:hidden;">בדיקה חדשה</button>
+                            <button class="btn btn-danger" id="modal-1" style="visibility:hidden;">שגיאה</button>
+                            <button class="btn btn-danger" id="modal-9" style="visibility:hidden;">רשימת דגימות</button>
                         </div>
                         <div class="card-body">
                             <div class="row">
@@ -182,21 +249,6 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-12 col-md-12 col-lg-12">
-            <div class="card">
-                <div class="card-header">
-                    <h4><i class="fas fa-download" style="font-size: 20px;"></i> קבצים למק"ט</h4>
-                </div>
-                <div class="card-body">
-                    <div>
-                        <table id="jqGridAttachments"></table>
-                        <div id="jqGridAttachmentsPager"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
         <div class="col-12 col-md-6 col-lg-6">
             <div class="card">
                 <div class="card-header">
@@ -211,15 +263,26 @@
             </div>
             <div class="card">
                 <div class="card-header">
-                    <h4><i class="fas fa-balance-scale" style="font-size: 20px;"></i> בדיקות שבוצעו למוצר</h4>
+                    <h4><i class="fas fa-download" style="font-size: 20px;"></i> קבצים למק"ט</h4>
                 </div>
                 <div class="card-body">
                     <div>
-                        <table id="jqGridTest"></table>
-                        <div id="jqGridTestPager"></div>
+                        <table id="jqGridAttachments"></table>
+                        <div id="jqGridAttachmentsPager"></div>
                     </div>
                 </div>
             </div>
+            @*<div class="card">
+                    <div class="card-header">
+                        <h4><i class="fas fa-balance-scale" style="font-size: 20px;"></i> בדיקות שבוצעו למוצר</h4>
+                    </div>
+                    <div class="card-body">
+                        <div>
+                            <table id="jqGridTest"></table>
+                            <div id="jqGridTestPager"></div>
+                        </div>
+                    </div>
+                </div>*@
         </div>
         <div class="col-12 col-md-6 col-lg-6">
             <div class="card">
@@ -236,7 +299,11 @@
         </div>
     </div>
     @Html.Partial("_Sample_QA")
+    @Html.Partial("_SampleQA_List")
     @*FORM WAS HERE **@
+    <div id="modal-error" class="card">
+        <p id="modal-error-text"></p>
+    </div>
     <div id="loader" class="loader"></div>
     <div id="downLoadFile" data-url="@Url.Action("DownloadFile", "Home")"></div>
     <div id="Logoff" data-url="@Url.Action("LogOff", "Account")"></div>

@@ -22,6 +22,7 @@ namespace TestPortal.Models
                 Order o = new Order();
                 Product p = new Product();
                 PageObject po = new PageObject();
+                po.objSample = new Sample();
                 po.User = Session["USER_LOGIN"] as AppUser;
                 po.objOrder = o.GetOrderDetails(orderID);//new Order { OrderID = orderID, OrderNumber = orderNumber };
                 if(null != po.objOrder)
@@ -65,14 +66,6 @@ namespace TestPortal.Models
 
             return Json(po);
         }
-        [HttpPost]
-        public JsonResult GetProductTestToEdit(int orderId, int pordId, string test)
-        {
-            PageObject po = new PageObject();
-
-            po.TestObject = new Test { TestCode = test, TestComments = "No Comments - Edit", TestResult = "222", TestType = "XX" };
-            return Json(po);
-        }
 
         public ActionResult TestProductItem(int orderID, string prodName, int ordLine)
         {
@@ -85,15 +78,6 @@ namespace TestPortal.Models
         [HttpPost]
         public JsonResult PostTestProductItem(int orderID, string prodName, int ordLine)
         {
-            //Test t = new Test { TestCode = "12224", TestComments = "No Comments", TestResult = "0.0999", TestType = "89" };
-            //Revision r = new Revision();
-            //Order o = new Order();
-            //Product p = new Product();
-            //PageObject po = new PageObject();
-            //po.objOrder = o.GetOrderDetails(orderID);
-            //po.objProduct = p.GetProductDetailse(orderID, prodId, ordLine);//new Product { OrderID = 123, OrderNumber = "23/856", LeftAmountToDeliver = 1, TotalAmountInOrder = 21, LineStatus = "In Progress", ProductDescription = "פלטה 4 חורים", ProductID = prodId, ProductName = prodName, SupplyDate = "14-02-2020" };
-            //po.lstRevision = r.GetProdRevisionList(prodId, po.objProduct.REV);
-            //po.TestObject = new Test();
             if (Session["USER_LOGIN"] == null)
                 return Json(RedirectToAction("Login", "Account"));
 
@@ -134,9 +118,10 @@ namespace TestPortal.Models
                 else
                 {
                     // Get Sampels
-                    po.objSample = s.GetProductSamples(po.User.Supplier_ID, po.objProduct.PARTNAME, po.objProduct.REVNAME, po.objProduct.LINE);
+                    //po.objSample = s.GetProductSamples(po.User.Supplier_ID, po.objProduct.PARTNAME, po.objProduct.REVNAME, po.objProduct.LINE);
                     if ((null != po.objSample) && (null != po.objSample.MED_TRANSSAMPLEQA_SUBFORM) && (po.objSample.MED_TRANSSAMPLEQA_SUBFORM.Count > 0))
                     {
+                        po.objSample.pageCURDATE = po.objSample.CURDATE.ToShortDateString();
                         foreach (Sample_QA item in po.objSample.MED_TRANSSAMPLEQA_SUBFORM)
                         {
                             item.DOCNO = po.objSample.DOCNO;
@@ -182,9 +167,6 @@ namespace TestPortal.Models
 
         private PageObject getProductTestData(int orderID, string prodName, int ordLine)
         {
-            Test t = new Test { TestCode = "12224", TestComments = "No Comments", TestResult = "0.0999", TestType = "89" };
-            //Revision r = new Revision();
-            
             Order o = new Order();
             Product p = new Product();
             PageObject po = new PageObject();
@@ -212,7 +194,6 @@ namespace TestPortal.Models
                 GetProductAttachments(orderID, prodName, ref po);
             }
 
-            po.TestObject = t;
             return po;
         }
 
@@ -221,24 +202,24 @@ namespace TestPortal.Models
             Sample s = new Sample();
             try
             {
-                string rev = string.IsNullOrEmpty(po.objProduct.REVNAME) ? po.objProduct.SHR_SERIAL_REVNUM : po.objProduct.REVNAME;
-                if (string.IsNullOrEmpty(rev))
+                po.objSample = s.GetProductSamples(po.User.Supplier_ID, po.objProduct.PARTNAME, po.objProduct.REVNAME, po.objProduct.LINE);
+                
+                if ((null != po.objSample) && (!string.IsNullOrEmpty(po.objSample.DOCNO)) && (null != po.objSample.MED_TRANSSAMPLEQA_SUBFORM) && (po.objSample.MED_TRANSSAMPLEQA_SUBFORM.Count > 0))
                 {
-                    // To do: create new document
+                    po.objSample.pageCURDATE = po.objSample.CURDATE.ToShortDateString();
+                    foreach (Sample_QA item in po.objSample.MED_TRANSSAMPLEQA_SUBFORM)
+                    {
+                        item.DOCNO = po.objSample.DOCNO;
+                        item.SUPNAME = po.objSample.SUPNAME;
+                        item.PARTNAME = po.objSample.PARTNAME;
+                    }
                 }
                 else
                 {
-                    po.objSample = s.GetProductSamples(po.User.Supplier_ID, po.objProduct.PARTNAME, po.objProduct.REVNAME, po.objProduct.LINE);
-                    if ((null != po.objSample) && (null != po.objSample.MED_TRANSSAMPLEQA_SUBFORM) && (po.objSample.MED_TRANSSAMPLEQA_SUBFORM.Count > 0))
-                    {
-                        foreach (Sample_QA item in po.objSample.MED_TRANSSAMPLEQA_SUBFORM)
-                        {
-                            item.DOCNO = po.objSample.DOCNO;
-                            item.SUPNAME = po.objSample.SUPNAME;
-                            item.PARTNAME = po.objSample.PARTNAME;
-                        }
-                    }
+                    Sample_QA sq = new Sample_QA();
+                    po.lstSamplQA = sq.GetCommonSamplesList();
                 }
+                //}
             }
             catch (Exception ex)
             {
@@ -267,15 +248,15 @@ namespace TestPortal.Models
             }
         }
 
-        [HttpPost]
-        public JsonResult GetProductRevisionList(int prodId, int revId)
-        {
-            
-            Revision r = new Revision();
-            PageObject po = new PageObject();
-            po.lstRevision = r.GetProdRevisionList(prodId, revId);
-            return Json(po);
-        }
+        //[HttpPost]
+        //public JsonResult GetProductRevisionList(int prodId, int revId)
+        //{
+
+        //    Revision r = new Revision();
+        //    PageObject po = new PageObject();
+        //    po.lstRevision = r.GetProdRevisionList(prodId, revId);
+        //    return Json(po);
+        //}
 
         [HttpPost]
         public JsonResult GetOrderProductTests(string prodName, string supplier, string qaCode)
@@ -316,6 +297,7 @@ namespace TestPortal.Models
         {
             HttpFileCollectionBase files = Request.Files;
             SampleTestMsgWarpper ow = JsonConvert.DeserializeObject<SampleTestMsgWarpper>(Request.Form[0]);
+            
             ResultAPI ra = null;
             //string decodedUrl = HttpUtility.UrlDecode();
             ow.files = new List<Attachments>();
@@ -330,7 +312,11 @@ namespace TestPortal.Models
                     if (file != null && file.ContentLength > 0)
                     {
                         string fileName = Path.GetFileName(file.FileName);
-                        var path = Path.Combine(Server.MapPath("~/Images/"), fileName);
+                        string dir = Path.Combine(Server.MapPath("~/PortalDocs/" + ow.form[0].hdnQaSUPNAME + "/" + ow.form[0].hdnQaDOCNO));
+                        var path = Path.Combine(Server.MapPath("~/PortalDocs/" + ow.form[0].hdnQaSUPNAME + "/" + ow.form[0].hdnQaDOCNO + "/"), fileName);
+                        if (!Directory.Exists(dir))
+                            Directory.CreateDirectory(dir);
+
                         a.FILE_NAME = fileName.Split('.')[0];
                         a.EXTFILENAME = path;
                        // file.SaveAs(path);
@@ -343,10 +329,42 @@ namespace TestPortal.Models
             return Json(ra);
         }
 
+        [HttpPost]
+        public JsonResult CreateTest(string supName, string partName, string qaCode)
+        {
+            ResultAPI ra = null;
+            Sample s = null;
+            PageObject po = new PageObject();
+            CreateSampleTestMsgWarpper ow = JsonConvert.DeserializeObject<CreateSampleTestMsgWarpper>(qaCode);
+            if(null != ow)
+            {
+                s = new Sample();
+                po.objSample = s.GetProductSamples(supName, partName, string.Empty, 0);
+                if ((null == po.objSample) || (string.IsNullOrEmpty(po.objSample.DOCNO)))
+                    ra = s.Createtest(supName, partName, ow.form, true);
+                else
+                    ra = s.AddSampleTests(supName, partName, ow.form, false, po.objSample.DOCNO);
+                //Get the test list after creation or update
+                po.objSample = s.GetProductSamples(supName, partName, string.Empty, 0);
+            }
+            return Json(po);
+        }
+
+        [HttpPost]
+        public JsonResult GetSampleTestList(string supName, string partName)
+        {
+            Sample s = new Sample();
+            PageObject po = new PageObject();
+            Sample_QA sq = new Sample_QA();
+            po.lstSamplQA = sq.GetCommonSamplesList();
+            po.objSample = s.GetProductSamples(supName, partName, string.Empty, 0);
+            return Json(po);
+        }
+
         public ActionResult QA_Page()
         {
             return View();
         }
-    }
 
+    }
 }

@@ -42,9 +42,7 @@
     });
 
     $(document).ready(function () {
-
-
-        //$('#mainPageContent').attr('style', 'height:' + elmnt.offsetHeight - 100 +'px;)';
+        document.getElementById('mnuSampleList').style.display = 'none';
         $("#loader").show();
         getData("@Model.User.Supplier_ID");
 

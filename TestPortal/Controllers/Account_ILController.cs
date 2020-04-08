@@ -33,9 +33,14 @@ namespace TestPortal.Controllers
 
         public ActionResult UserProfile()
         {
-            PageObject po = new PageObject();
-            po.User = Session["USER_LOGIN"] as AppUser;
-            return View( po);
+            if (Session["USER_LOGIN"] == null)
+                return RedirectToAction("Login", "Account");
+            else
+            {
+                PageObject po = new PageObject();
+                po.User = Session["USER_LOGIN"] as AppUser;
+                return View(po);
+            }
         }
 
         public ActionResult LogOff()

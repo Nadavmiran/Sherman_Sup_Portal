@@ -1,4 +1,5 @@
 ﻿function InitTestPageData(data) {
+    document.getElementById('mnuSampleList').style.display = 'inline-block';
     var OrdId = document.getElementById('hdnOrdId').value;
     var pordId = document.getElementById('hdnPrdId').value;
     console.log('hdnOrdId = ', OrdId);
@@ -10,18 +11,102 @@
         GetOrderProducts(OrdId);
     else
         showGridProd(data.lstItemsObject);
-    if (null != data.objSample) {
+
+    if (null != data.objSample && data.objSample.DOCNO != null)
+    {
+        fillSampleSection(data.objSample);
         if (null != data.objSample.MED_TRANSSAMPLEQA_SUBFORM)
             showGridProdSamples(data.objSample.MED_TRANSSAMPLEQA_SUBFORM);
+    }
+    else
+    {
+        if (null != data.lstSamplQA)
+            if (data.lstSamplQA.length > 0) {
+                console.log('data.lstSamplQA ==> data.lstSamplQA = ', data.lstSamplQA);
+                showGridSampleList(data.lstSamplQA);
+                document.getElementById('hdnQaListSUPNAME').value = data.objOrder.SUPNAME;
+                document.getElementById('hdnQaListPARTNAME').value = data.objProduct.PARTNAME;
+                var x = document.getElementsByTagName("html")[0].getAttribute("dir");
+                if(x == 'rtl')
+                    $("#modal-9").trigger("click");
+                else
+                    $("#modal-10").trigger("click");
+            }
     }
 
     if (null != data.lstAttachments)
         showGridProdAttachments(data.lstAttachments);
 
-    //if (null != data.lstTestObject)
-    //    showGridProdTests(data.lstTestObject);
-    //else if ((null != pordId) && (pordId != ''))
-    //    GetOrderProductTests(OrdId, pordId);
+}
+
+function fillSampleSection(objSample) {
+    console.log('fillSampleSection ==> objSample.CURDATE = ', objSample.CURDATE);
+    document.getElementById('lbl_S_DOCNO').innerText = objSample.DOCNO;
+    document.getElementById('lbl_S_CURDATE').innerText = objSample.pageCURDATE;
+    document.getElementById('lbl_S_QUANT').innerText = objSample.QUANT;
+    document.getElementById('lbl_S_SERIALNAME').innerText = objSample.SERIALNAME;
+    document.getElementById('lbl_S_SHR_RAR').innerText = objSample.SHR_RAR;
+    document.getElementById('lbl_S_SHR_SERIAL_QUANT').innerText = objSample.SHR_SERIAL_QUANT;
+    document.getElementById('lbl_S_STATDES').innerText = objSample.STATDES;
+    document.getElementById('lbl_S_SHR_SAMPLE_STD_CODE').innerText = objSample.SHR_SAMPLE_STD_CODE;
+}
+
+function getFormattedDate(date) {
+    var dDate = new Date(date);
+    var year = dDate.getFullYear();
+
+    var month = (1 + dDate.getMonth()).toString();
+    month = month.length > 1 ? month : '0' + month;
+
+    var day = dDate.getDate().toString();
+    day = day.length > 1 ? day : '0' + day;
+
+    return day + '/' + month + '/' + year;
+}
+
+function OpentestList() {
+    var supName = document.getElementById('lbl_SUPNAME').innerText;
+    var partName = document.getElementById('lblProductName').innerText;
+    console.log('OpentestList ==> supName = ', supName);
+    console.log('OpentestList ==> partName = ', partName);
+
+    document.getElementById('hdnQaListSUPNAME').value = supName;
+    document.getElementById('hdnQaListPARTNAME').value = partName;
+    $.ajax(
+    {
+        type: "POST",
+        data:
+        {
+            supName: supName,
+            partName: partName            },
+        url: "/Home/GetSampleTestList",
+        contentType: "application/x-www-form-urlencoded;charset=ISO-8859-15",
+        success: function (response) {
+            console.log("response", response);
+            if (null != response && null != response.lstSamplQA && response.lstSamplQA.length > 0)
+            {
+                showGridSampleList(response.lstSamplQA);
+
+                if (null != response.objSample && null != response.objSample.MED_TRANSSAMPLEQA_SUBFORM && response.objSample.MED_TRANSSAMPLEQA_SUBFORM.length > 0)
+                    showSelectedSampleQA(response.objSample.MED_TRANSSAMPLEQA_SUBFORM);
+
+                var x = document.getElementsByTagName("html")[0].getAttribute("dir");
+                if (x == 'rtl')
+                    $("#modal-9").trigger("click");
+                else
+                    $("#modal-10").trigger("click");
+            }
+            else {
+                if (response.ErrorDescription != '') {
+                    form_data[0].reset();
+                    $('.modal').modal('hide');
+                    $('.modal').removeClass('show');
+                    $("#modal-error-text").html(response.ErrorDescription);
+                    $("#modal-1").trigger("click");
+                }
+            }
+        }
+    });
 }
 
 function GetProductDetails(rowData) {
@@ -68,11 +153,13 @@ function GetProductDetails(rowData) {
                 if (null == data.objSample.DOCNO) {
                     /****** To Do: ****************/
                     /* Opan new saple             */
+                    OpentestList();
                     /*****************************/
                     $("#jqGridRevision").GridUnload();
                 }
                 else {
                     // Fill sample data
+                    fillSampleSection(data.objSample);
                     $("#jqGridRevision").GridUnload();
                     console.log("data.objSample.MED_TRANSSAMPLEQA_SUBFORM", data.objSample.MED_TRANSSAMPLEQA_SUBFORM);
                     if (null != data.objSample.MED_TRANSSAMPLEQA_SUBFORM) {
@@ -107,6 +194,7 @@ function GetOrderProducts(OrdId) {
 }
 
 function GetOrderProductTests(prodName, supplier, qaCode, REPETITION) {
+    console.log('GetOrderProductTests ==> REPETITION = ', REPETITION);
     if (REPETITION == 0)
         return;
     //console.log('GetOrderProductTests ==> prodName = ', prodName);
@@ -120,19 +208,28 @@ function GetOrderProductTests(prodName, supplier, qaCode, REPETITION) {
         },
         cache: false,
         success: function (resData) {
+            console.log("GetOrderProductTests ==> resData", resData);
             let isRESULTDET_SUBFORM = false;
 
-            if (null != resData.objSample)
-                if (null != resData.objSample.MED_TRANSSAMPLEQA_SUBFORM)
-                    if ((null != resData.objSample.MED_TRANSSAMPLEQA_SUBFORM[0].MED_RESULTDET_SUBFORM) && (resData.objSample.MED_TRANSSAMPLEQA_SUBFORM[0].MED_RESULTDET_SUBFORM.length > 0)) {
-                        isRESULTDET_SUBFORM = true;
-                        document.getElementById("testRepitition").style.display = 'inline';
-                    }
-                    else
-                        document.getElementById("testRepitition").style.display = 'none';
+            //if (null != resData.objSample)
+            //    if (null != resData.objSample.MED_TRANSSAMPLEQA_SUBFORM)
+            //        if ((null != resData.objSample.MED_TRANSSAMPLEQA_SUBFORM[0].MED_RESULTDET_SUBFORM) && (resData.objSample.MED_TRANSSAMPLEQA_SUBFORM[0].MED_RESULTDET_SUBFORM.length > 0)) {
+            //            isRESULTDET_SUBFORM = true;
+            //            document.getElementById("testRepitition").style.display = 'inline';
+            //        }
+            //        else
+            //            document.getElementById("testRepitition").style.display = 'none';
 
             //console.log("GetOrderProductTests ==> data", resData);
-            //console.log("GetOrderProductTests ==> REPETITION", REPETITION);
+            console.log("GetOrderProductTests ==> REPETITION", REPETITION);
+            document.getElementById("testRepitition").style.display = 'none';
+            if (null != resData.objSample && REPETITION > 0)
+                if (null != resData.objSample.MED_TRANSSAMPLEQA_SUBFORM && resData.objSample.MED_TRANSSAMPLEQA_SUBFORM.length > 0)
+                    if (resData.objSample.MED_TRANSSAMPLEQA_SUBFORM[0].RESULTANT == 'Y') {
+                        isRESULTDET_SUBFORM = true;
+                        document.getElementById("testRepitition").style.display = 'inline';
+                    }                
+            console.log("GetOrderProductTests ==> isRESULTDET_SUBFORM", isRESULTDET_SUBFORM);
             var continer = document.getElementById("repititionTest");
             continer.innerHTML = '';
             for (var i = 0; i < REPETITION ; i++)
@@ -371,7 +468,7 @@ function OpenSampleModal(rowData) {
     $('#divMsg').remove();
 
     var rasData = GetOrderProductTests(rowData.PARTNAME, rowData.SUPNAME, rowData.QACODE, rowData.REPETITION);
-
+    document.getElementById('attachments').value = '';
     document.getElementById('txtQACODE').innerText = rowData.QACODE;
     document.getElementById('txtQADES').innerText = rowData.QADES;
     document.getElementById('txtQaLOCATION').innerText = rowData.LOCATION;
@@ -383,8 +480,6 @@ function OpenSampleModal(rowData) {
         document.getElementById("txtQaRESULTANT").setAttribute('disabled', 'disabled');
         document.getElementById('txtQaRESULTANT').checked = true;
         document.getElementById('txtQaRESULTANT').value = 'on';
-
-        //document.getElementById('txtQaNORMAL').checked = false;
         document.getElementById("txtQaNORMAL").removeAttribute('disabled');
         document.getElementById('txtQaRESULT').setAttribute('disabled', 'disabled');
     }
@@ -404,17 +499,6 @@ function OpenSampleModal(rowData) {
     document.getElementById('txtQaREPETITION').innerText = rowData.REPETITION;
     document.getElementById('txtQaREQUIRED_RESULT').innerText = rowData.REQUIRED_RESULT;
     document.getElementById('txtQaSAMPQUANT').innerText = rowData.SAMPQUANT;
-    //if (rowData.NORMAL == 'Y') //  אם תקין
-    //{
-    //    document.getElementById('txtQaNORMAL').checked = true;
-    //    document.getElementById("txtQaNORMAL").setAttribute('disabled', 'disabled');
-    //    document.getElementById('txtQaRESULT').removeAttribute('disabled');
-    //}
-    //else {
-    //    document.getElementById('txtQaNORMAL').checked = false;
-    //    document.getElementById("txtQaNORMAL").removeAttribute('disabled');
-    //    document.getElementById('txtQaRESULT').setAttribute('disabled', 'disabled');
-    //}
     document.getElementById('txtQaMEASUREDES').innerText = rowData.MEASUREDES;
     document.getElementById('txtQaRESULT').value = rowData.RESULT;
     document.getElementById('txtQaREMARK').value = rowData.REMARK;
@@ -426,36 +510,6 @@ function OpenSampleModal(rowData) {
     document.getElementById('hdnQaPARTNAME').value = rowData.PARTNAME;
     document.getElementById('hdnQaREPETITION').value = rowData.REPETITION;
     document.getElementById('hdnQaSAMPQUANT').value = rowData.SAMPQUANT;
-
-    //setTimeout(function () {
-
-    //    if (null != resData) {
-    //        if (null != resData.objSample) {
-    //            if (null != resData.objSample.MED_TRANSSAMPLEQA_SUBFORM) {
-    //                if ((null != resData.objSample.MED_RESULTDET_SUBFORM) && (resData.objSample.MED_RESULTDET_SUBFORM.length > 0)) {
-    //                    for (var i = 0; i < resData.objSample.MED_RESULTDET_SUBFORM.length; i++) {
-    //                        document.getElementById("testRepitition").style.display = 'inline';
-
-    //                        var continer = document.getElementById("repititionTest");
-    //                        var text = document.createElement('label');
-    //                        text.id = 'additem_' + addid;
-    //                        text.style.fontWeight = 'bolder';
-    //                        text.title = 'תוצאה';
-    //                        continer.appendChild(text);
-
-    //                        text = document.createElement('input');
-    //                        text.type = 'text';
-    //                        text.class = 'form-control';
-    //                        text.name = 'AAAAA';
-    //                        text.id = 'XXXX';
-    //                        continer.appendChild(text);
-    //                    }
-    //                }
-    //            }
-    //        }
-    //    }
-    //}, 1000);
-    
 }
 
 function GetRecord(data, parentRowKey) {
@@ -548,16 +602,96 @@ function onSubmit_TestForm(e) {
             processData: false,
             success: function (response) {
                 console.log("UploadFiles - response", response);
-                
-                form_data[0].reset();
-                $('.modal').modal('hide');
-                $('.modal').removeClass('show');
                 if (response.ErrorDescription != '') {
                     $("#modal-error-text").html(response.ErrorDescription);
                     $("#modal-1").trigger("click");
                 }
             }
         });
+}
+
+function onSubmitCreateSampleList(e) {
+    let fd = $(e.target.elements);
+    console.log("fd", fd);
+    console.log('selected row data:', $('#jqGridSampleQA'));
+    var grid = $("#jqGridSampleQA");
+    var rowKey = grid.getGridParam("selrow");
+
+    if (!rowKey)
+        alert("No rows are selected");
+    else {
+        var selectedIDs = grid.getGridParam("selarrrow");
+        var rowData = '';
+        console.log('selectedIDs:', selectedIDs);
+        var jsonObj = {
+            "form": []
+        };
+        var item = {};
+        var result = "";
+        for (var i = 0; i < selectedIDs.length; i++) {
+            rowData = $("#jqGridSampleQA").getRowData(selectedIDs[i]);
+            item["RESULTMIN"] = rowData.RESULTMIN;
+            item["RESULTMAX"] = rowData.RESULTMAX;
+            item["REPETITION"] = rowData.REPETITION;
+            item["QACODE"] = selectedIDs[i];
+
+            console.log('rowData:', rowData);
+            result += selectedIDs[i] + ",";
+            console.log("item", item);
+            jsonObj.form.push(item);
+            item = {};
+        }
+    }
+    result = jsonObj;
+    console.log("result", JSON.stringify(jsonObj));
+    let SUPNAME = '';
+    let PARTNAME = '';
+    for (i = 0; i < fd.length; i++) {
+        if (fd[i].id.includes('hdnQaListSUPNAME'))
+            SUPNAME = fd[i].value;
+        if (fd[i].id.includes('hdnQaListPARTNAME'))
+            PARTNAME = fd[i].value;
+    }
+
+    console.log("SUPNAME", SUPNAME);
+    console.log("PARTNAME", PARTNAME);
+    // DO AJAX HERE
+    $.ajax(
+    {
+        type: "POST",
+        data:
+        {
+            supName: SUPNAME,
+            partName: PARTNAME,
+            qaCode: JSON.stringify(jsonObj)
+        },
+        url: "/Home/CreateTest",
+        contentType: "application/x-www-form-urlencoded;charset=ISO-8859-15",
+        success: function (response) {
+            console.log("response", response);
+            if (null != response.objSample.MED_TRANSSAMPLEQA_SUBFORM) {
+                //$("#jqGridSampleQA").GridUnload();
+
+                $("#jqGridRevision").GridUnload(); 
+
+                fillSampleSection(response.objSample);
+                showGridProdSamples(response.objSample.MED_TRANSSAMPLEQA_SUBFORM);
+
+                jQuery('#jqGridSelectedSampleQA').jqGrid('clearGridData');
+                jQuery('#jqGridSelectedSampleQA').jqGrid('setGridParam', { data: response.objSample.MED_TRANSSAMPLEQA_SUBFORM });
+                jQuery('#jqGridSelectedSampleQA').trigger('reloadGrid');
+            }
+            else {
+                if (response.ErrorDescription != '') {
+                    form_data[0].reset();
+                    $('.modal').modal('hide');
+                    $('.modal').removeClass('show');
+                    $("#modal-error-text").html(response.ErrorDescription);
+                    $("#modal-1").trigger("click");
+                }
+            }
+        }
+    });
 }
 
 function decode(str) {

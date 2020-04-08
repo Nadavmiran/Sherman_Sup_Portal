@@ -76,6 +76,14 @@
                                 </div>
                             </a>
                         </li>
+                        <li id="mnuSampleList" class="nav-item dropdown active" style="display:none;">
+                            <a href="#" onclick="OpentestList();" class="nav-link" style="background-color:rgb(1,65,111);height:60px;width:70px;">
+                                <div class="item">
+                                    <i class="far fa-list-alt"></i>
+                                    <div class="caption" style="color:#FFF;">Tests</div>
+                                </div>
+                            </a>
+                        </li>
                     </ul>
                 </aside>
             </div>
@@ -119,13 +127,15 @@
     <script src="~/Scripts/bootstrap-modal.js"></script>
     <script src="~/Scripts/components-multiple-upload.js"></script>
 
-    <script src="~/Scripts/jquery-ui-1.10.0.min.js"></script>
+    @*<script src="~/Scripts/jquery-ui-1.10.0.min.js"></script>*@
     <script src="~/Scripts/i18n/grid.locale-en.js"></script>
     <script src="~/Scripts/jquery.jqGrid.min.js"></script>
 
     <script src="~/Scripts/jpGrid_EN.js"></script>
     <script src="~/Scripts/TestProductOrderItems_EN.js"></script>
     <script src="~/Scripts/TestProductOrderItems_Common.js"></script>
+    <script src="~/Scripts/LMNS-Site.js"></script>
+
     @RenderSection("scripts", required: false)
 </body>
 </html>

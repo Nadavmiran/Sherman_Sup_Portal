@@ -7,6 +7,7 @@ namespace TestPortal.Models
 {
     public class OrderItems
     {
+        #region Properties
         /// <summary>
         /// הזמנה
         /// </summary>
@@ -95,7 +96,8 @@ namespace TestPortal.Models
         /// סטטוס שורת הזמנה
         /// </summary>
         public string PORDISTATUSDES { get; set; }
-        public OrdersItemText[] PORDERITEMSTEXT_SUBFORM { get; set; }
+        public OrdersItemText[] PORDERITEMSTEXT_SUBFORM { get; set; } 
+        #endregion
 
         // TO ADD LATER
         /// <summary>

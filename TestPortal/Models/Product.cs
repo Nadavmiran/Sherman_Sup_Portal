@@ -98,27 +98,6 @@ namespace TestPortal.Models
             return obj;
         }
 
-        internal List<Attachments> GetProductAttachments(int orderID, string prodName)
-        {
-            string query = "/PORDERS?$filter=ORD eq " + orderID + "&$expand=EXTFILES_SUBFORM($filter=SHR_PARTNAME eq '" + prodName + "')";
-            query = query.Replace("\"", "");
-
-            string res = Call_Get(query);
-            List<Attachments> lst = null;
-
-            OrdersWarpper ow = JsonConvert.DeserializeObject<OrdersWarpper>(res);
-            if (null == ow)
-                return lst;
-
-            if(null == ow.Value[0].EXTFILES_SUBFORM)
-                return lst;
-
-            lst = new List<Attachments>();
-            foreach (Attachments item in ow.Value[0].EXTFILES_SUBFORM)
-            {
-                lst.Add(item);
-            }
-            return lst;
-        }
+        
     }
 }

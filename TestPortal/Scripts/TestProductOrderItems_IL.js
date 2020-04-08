@@ -50,19 +50,19 @@ function showGridProdSamples(grid_data) {
             { label: 'DOCNO', name: 'DOCNO', align: 'center', key: false, hidden: true, width: 75 },
             { label: 'SUPNAME', name: 'SUPNAME', align: 'center', key: false, hidden: true, width: 75 },
             { label: 'PARTNAME', name: 'PARTNAME', align: 'center', key: false, hidden: true, width: 75 },
-            { label: 'QACODE', name: 'QACODE', align: 'center', key: true, hidden: true, width: 75 },
-            { label: 'מיקום', name: 'LOCATION', align: 'center', hidden: false, width: 30 },
+            { label: 'קוד בדיקה', name: 'QACODE', align: 'center', key: true, hidden: false, width: 80 },
+            { label: 'מיקום', name: 'LOCATION', align: 'center', hidden: false, width: 80 },
             { label: 'תאור בדיקה', name: 'QADES', align: 'center', hidden: false, width: 250 },
             { label: 'בדיקה - טקסט', name: 'SHR_TEST', align: 'center', hidden: true, width: 100 },
-            { label: 'תוצאת מינ.', name: 'RESULTMIN', align: 'center', hidden: true, width: 30 },
-            { label: 'תוצאת מקס.', name: 'RESULTMAX', align: 'center', hidden: true,  width: 30 },/*formatter: formatGetRevListLink,*/
+            { label: 'תוצאת מינ.', name: 'RESULTMIN', align: 'center', hidden: true, width: 80 },
+            { label: 'תוצאת מקס.', name: 'RESULTMAX', align: 'center', hidden: true, width: 80 },/*formatter: formatGetRevListLink,*/
             { label: 'חזרות', name: 'REPETITION', align: 'center', width: 50 },
-            { label: 'תוצאתית (Y/N)', name: 'RESULTANT', align: 'center', width: 30 },
-            { label: 'תוצאה נדרשת', name: 'REQUIRED_RESULT', align: 'center', hidden: true, width: 40 },
-            { label: 'גודל המדגם', name: 'SAMPQUANT', align: 'center', width: 30 },
+            { label: 'תוצאתית (Y/N)', name: 'RESULTANT', align: 'center', width: 80 },
+            { label: 'תוצאה נדרשת', name: 'REQUIRED_RESULT', align: 'center', hidden: true, width: 80 },
+            { label: 'גודל המדגם', name: 'SAMPQUANT', align: 'center', width: 80 },
             { label: 'כלי בדיקה', name: 'MEASUREDES', align: 'center', hidden: true, width: 200 },
-            { label: 'תוצאה', name: 'RESULT', align: 'center', width: 40 },
-            { label: 'תקין', name: 'NORMAL', align: 'center', width: 30 },
+            { label: 'תוצאה', name: 'RESULT', align: 'center', width: 80 },
+            { label: 'תקין', name: 'NORMAL', align: 'center', width: 60 },
             { label: 'הערות', name: 'REMARK', align: 'center', width: 200 }
         ],
         viewrecords: true,
@@ -212,5 +212,108 @@ function showGridProdAttachments(grid_data) {
             console.log('showGridProdAttachments ==> rowData ', rowData);
             downloadFile(rowData.FOLDER, rowData.FILE_NAME);
         }
+    });
+}
+
+function showGridSampleList(grid_data) {
+    console.log("showGridSampleList ==> grid_data", grid_data);
+    var $grid = $("#jqGridSampleQA"), idsOfSelectedRows = [],
+        updateIdsOfSelectedRows = function (id, isSelected) {
+            $(this).jqGrid("editRow", id);
+            var index = $.inArray(id, idsOfSelectedRows);
+            if (!isSelected && index >= 0) {
+                idsOfSelectedRows.splice(index, 1); // remove id from the list
+            } else if (index < 0) {
+                idsOfSelectedRows.push(id);
+                console.log('IN idsOfSelectedRows');
+            }
+        };
+
+    $("#jqGridSampleQA").jqGrid({
+        guiStyle: "bootstrap",
+        iconSet: "fontAwesome",
+        datatype: "local",
+        data: grid_data,
+        colModel: [
+            { label: 'QA', name: 'QA', align: 'center', key: false, hidden: true, width: 75 },
+            { label: 'DOCNO', name: 'DOCNO', align: 'center', key: false, hidden: true, width: 75 },
+            { label: 'SUPNAME', name: 'SUPNAME', align: 'center', key: false, hidden: true, width: 75 },
+            { label: 'PARTNAME', name: 'PARTNAME', align: 'center', key: false, hidden: true, width: 75 },
+            { label: 'קוד בדיקה', name: 'QACODE', key: true, hidden: false, width: 85 },
+            { label: 'תאור בדיקה', name: 'QADES', align: 'right', hidden: false, width: 250 },
+            { label: 'תוצאת מינ.', name: 'RESULTMIN', align: 'center', editable: true, hidden: false, width: 80 },
+            { label: 'תוצאת מקס.', name: 'RESULTMAX', align: 'center', editable: true, hidden: false, width: 80 },/*formatter: formatGetRevListLink,*/
+            { label: 'חזרות', name: 'REPETITION', align: 'center', editable: true, width: 50 },
+            { label: 'תוצאתית (Y/N)', name: 'RESULTANT', align: 'center', width: 80 },
+            { label: 'גודל המדגם', name: 'SAMPQUANT', align: 'center', width: 80 }
+        ],
+        viewrecords: true,
+        altRows: true,
+        direction: 'rtl',
+        autowidth: true,
+        height: null,
+        rowNum: 20,
+        //rowList: [10, 30, 50, 100],
+        pager: "#jqGridSampleQAPager",
+        loadonce: true,
+        subGrid: false,
+        multiselect: true,
+        //multiPageSelection: true,
+        onSelectRow: updateIdsOfSelectedRows,
+        gridComplete: function () {
+            currids = $(this).jqGrid('getDataIDs');
+        },
+        onSelectAll: function (aRowids, isSelected) {
+            var i, count, id;
+            for (i = 0, count = aRowids.length; i < count; i++) {
+                id = aRowids[i];
+                updateIdsOfSelectedRows(id, isSelected);
+            }
+        },
+        loadComplete: function () {
+            console.log('IN loadComplete');
+            var $this = $(this), i, count;
+            for (i = 0, count = idsOfSelectedRows.length; i < count; i++) {
+                $this.jqGrid('setSelection', idsOfSelectedRows[i], false);
+            }
+        },
+        //inlineEditing: {
+        //    keys: true
+        //},
+       // singleSelectClickMode: "selectonly", // prevent unselect once selected rows
+    });
+    $("#jqGridSampleQA").jqGrid('navGrid', '#jqGridSampleQAPager', { edit: false, save: true, add: false, del: false }, {}, {}, {},{ multipleSearch: true, overlay: false });
+    jQuery("#jqGridSampleQA").jqGrid('inlineNav', "#jqGridSampleQAPager", { edit: true, save: true, add: false, del: false }, {}, {}, {}, { multipleSearch: true, overlay: false });
+}
+
+function showSelectedSampleQA(grid_data) {
+    $("#jqGridSelectedSampleQA").jqGrid({
+        guiStyle: "bootstrap",
+        iconSet: "fontAwesome",
+        datatype: "local",
+        data: grid_data,
+        colModel: [
+            { label: 'QA', name: 'QA', align: 'center', key: false, hidden: true, width: 75 },
+            { label: 'DOCNO', name: 'DOCNO', align: 'center', key: false, hidden: true, width: 75 },
+            { label: 'SUPNAME', name: 'SUPNAME', align: 'center', key: false, hidden: true, width: 75 },
+            { label: 'PARTNAME', name: 'PARTNAME', align: 'center', key: false, hidden: true, width: 75 },
+            { label: 'קוד בדיקה', name: 'QACODE', align: 'center', key: true, hidden: false, width: 85 },
+            { label: 'תאור בדיקה', name: 'QADES', align: 'right', hidden: false, width: 250 },
+            { label: 'תוצאת מינ.', name: 'RESULTMIN', align: 'center', hidden: false, width: 80 },
+            { label: 'תוצאת מקס.', name: 'RESULTMAX', align: 'center', hidden: false, width: 80 },/*formatter: formatGetRevListLink,*/
+            { label: 'חזרות', name: 'REPETITION', align: 'center', width: 50 },
+            { label: 'תוצאתית (Y/N)', name: 'RESULTANT', align: 'center', width: 80 },
+            { label: 'גודל המדגם', name: 'SAMPQUANT', align: 'center', width: 80 }
+        ],
+        viewrecords: true,
+        altRows: true,
+        direction: 'rtl',
+        autowidth: true,
+        height: null,
+        rowNum: 20,
+        //rowList: [10, 30, 50, 100],
+        pager: "#jqGridSelectedSampleQAPager",
+        loadonce: true,
+        subGrid: false
     });
 }

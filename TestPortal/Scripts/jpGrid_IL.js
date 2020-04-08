@@ -75,8 +75,8 @@ function showGrid() {
                 autowidth: true,
                 height: null,
                 colModel: [
-                    { label: 'ORD', name: 'ORD', align: 'center', key: true, hidden: true, width: 75 },
-                    { label: '#', name: 'LINE', align: 'center', hidden: false, width: 75 },
+                    { label: '#', name: 'LINE', align: 'center', key: true, hidden: false, width: 75 },
+                    { label: 'ORD', name: 'ORD', align: 'center', hidden: true, width: 75 },
                     { label: 'ProductID', name: 'PARTNAME', align: 'center', key: true, hidden: true, width: 75 },
                     { label: 'מק"ט', name: 'PARTNAME', align: 'center', width: 100 },//, formatter: formatProdLink
                     { label: 'תאור', name: 'PDES', align: 'center', width: 100 },
@@ -94,23 +94,6 @@ function showGrid() {
         }
     });
 }
-
-//function GetRecord(data, parentRowKey) {
-//    console.log("GetRecord ==> parentRowKey", parentRowKey);
-//    console.log("GetRecord ==> data", data);
-//    var rec = [];
-//    for (var i = 0; i < data.length; i++) {
-//        if (data[i].ORD == parentRowKey)
-//        {
-//            for (var x = 0; x < data[i].PORDERITEMS_SUBFORM.length; x++) {
-//                rec.push(data[i].PORDERITEMS_SUBFORM[x]);
-//            }
-//            console.log("GetRecord ==> rec", rec);
-//            return rec;
-//        }
-//    }
-//    return rec;
-//}
 
 function formatRPTLink(cellValue, options, rowObject) {
     //console.log("formatRPTLink ==> options", options);

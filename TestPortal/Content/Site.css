@@ -17,7 +17,30 @@
     .ui-state-highlight a, .ui-widget-content .ui-state-highlight a, .ui-widget-header .ui-state-highlight a {
         color: #FFF;
     }
+th.ui-th-column div {
+    white-space: normal !important;
+    height: auto !important;
+    padding: 2px;
+}
+.ui-state-default .ui-icon {
+    background-image: url('themes/base/images/ui-icons_ffffff_256x240.png');
+    /*background-image: url(~/images/ui-icons_ffffff_256x240.png);*/
+}
 /********************END GRID STYLES***************/
+.field-icon {
+    float: right;
+    margin-left: -25px;
+    margin-top: -25px;
+    position: relative;
+    z-index: 2;
+}
+.field-icon-rtl {
+    float: left;
+    margin-left: 25px;
+    margin-top: -25px;
+    position: relative;
+    z-index: 2;
+}
 .big-checkbox {
     width: 30px;
     height: 30px;
