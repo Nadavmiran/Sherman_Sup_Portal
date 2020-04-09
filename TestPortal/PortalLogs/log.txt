@@ -2180,3 +2180,27 @@ System.Data.SqlClient.SqlException (0x80131904): A network-related or instance-s
    at TestPortal.Models.AppUser.UserLogin() in H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\Models\AppUser.cs:line 84
 ClientConnectionId:00000000-0000-0000-0000-000000000000
 Error Number:53,State:0,Class:20
+INFO  2020-04-09 14:06:40,674   150ms eporting Portal Logger Download           - Function => Download ==> ReadAllBytes = H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\PriorityDocs\MM602085C.pdf
+INFO  2020-04-09 14:06:40,718   194ms eporting Portal Logger Download           - filePath ==> ReadAllBytes ==> Exception
+System.IO.DirectoryNotFoundException: Could not find a part of the path 'H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\PriorityDocs\MM602085C.pdf'.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at TestPortal.Models.CommonController.Download(String fileFolder, String fileName) in H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\Models\CommonController.cs:line 317
+INFO  2020-04-09 14:25:08,694   134ms eporting Portal Logger Download           - Function => Download ==> ReadAllBytes = H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\PriorityDocs\MM602085C.pdf
+INFO  2020-04-09 14:25:08,730   170ms eporting Portal Logger Download           - filePath ==> ReadAllBytes ==> Exception
+System.IO.DirectoryNotFoundException: Could not find a part of the path 'H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\PriorityDocs\MM602085C.pdf'.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at TestPortal.Models.CommonController.Download(String fileFolder, String fileName) in H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\Models\CommonController.cs:line 321
+INFO  2020-04-09 14:57:10,746   161ms eporting Portal Logger Download           - Function => Download ==> ReadAllBytes = H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\PriorityDocs\MM602085C.pdf
+INFO  2020-04-09 14:57:10,794   209ms eporting Portal Logger Download           - filePath ==> ReadAllBytes ==> Exception
+System.IO.DirectoryNotFoundException: Could not find a part of the path 'H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\PriorityDocs\MM602085C.pdf'.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at TestPortal.Models.CommonController.Download(String fileFolder, String fileName) in H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\Models\CommonController.cs:line 321

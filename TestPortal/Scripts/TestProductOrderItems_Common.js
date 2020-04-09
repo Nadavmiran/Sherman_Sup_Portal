@@ -409,11 +409,12 @@ function GetRevision(cellValue, options, rowObject) {
 
 function downloadFile(filefolder, filename) {
     console.log("filefolder", filefolder);
-    filefolder = 'Test';
-    filename = 'פורטל ספקים01022020.docx';
+    //filefolder = 'Test';
+    //filename = 'פורטל ספקים01022020.docx';
 
     console.log("downloadFile ==> filefolder", filefolder);
     console.log("downloadFile ==> filename", filename);
+
     $.ajax(
         {
             type: "POST",
@@ -429,8 +430,7 @@ function downloadFile(filefolder, filename) {
                 //DoDownlod(filefolder, filename);
                 
                 window.location.href = $('#downLoadFile').data('url') + "/?fileFolder=" + filefolder + "&fileName=" + filename;
-                //window.location = '~../../../../PriorityDocs/' + filefolder + '/' + filename;
-            }
+           }
         });
 }
 

@@ -243,7 +243,11 @@ namespace TestPortal.Models
                 else
                 {
                     item.FILE_NAME = arr[arr.Length - 1];
-                    item.FOLDER = arr[arr.Length - 2];
+                    for (int i = 1; i < arr.Length - 1; i++)
+                    {
+                        item.FOLDER += arr[i] + "\\";
+                    }
+                    //item.FOLDER = arr[arr.Length - 2];
                 }
             }
         }
@@ -293,6 +297,110 @@ namespace TestPortal.Models
         }
 
         [HttpPost]
+        public ActionResult Download(string fileFolder, string fileName)
+        {
+            AppLogger.log.Info("Function => Download ==> fileFolder = " + fileFolder);
+            AppLogger.log.Info("Function => Download ==> fileName = " + fileName);
+            string filePath = string.Empty;
+            string fpath = string.Empty;
+            try
+            {
+                fpath = Server.MapPath("~/PriorityDocs/" + fileFolder + "//" + fileName);
+                filePath = Path.Combine(Server.MapPath("~/PriorityDocs/" + fileFolder), fileName);
+                AppLogger.log.Info("Function => Download ==> fpath = " + fpath);
+                AppLogger.log.Info("Function => Download ==> FIlePath = " + filePath);
+            }
+            catch (Exception ex)
+            {
+                AppLogger.log.Info("filePath = Exception", ex);
+                return Json(new { status = "error", message = "error creating folder path" });
+            }
+
+            string filename = fileName;
+            byte[] filedata = null;
+
+            try
+            {
+                filedata = System.IO.File.ReadAllBytes(filePath);
+                //return View();
+            }
+            catch (Exception ex)
+            {
+                AppLogger.log.Info("Function => Download ==> ReadAllBytes = " + filePath);
+                AppLogger.log.Info("filePath ==> ReadAllBytes ==> Exception", ex);
+                return Json(new { status = "error", message = "error reading from folder" });
+            }
+
+            string contentType = MimeMapping.GetMimeMapping(filePath);
+            var content_type = "";
+            var cd = new System.Net.Mime.ContentDisposition
+            {
+                FileName = fileName,
+                Inline = true,
+            };
+
+            Response.Clear();
+            Response.ClearContent();
+            Response.Buffer = true;
+            Response.ClearHeaders();
+
+            if (filePath.Contains(".doc"))
+            {
+                content_type = "application/msword";
+            }
+            else if (filePath.Contains(".docx"))
+            {
+                content_type = "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
+            }
+            else if (filePath.Contains(".pdf"))
+            {
+                content_type = "application/pdf";
+            }
+            else if (filePath.Contains(".xsl"))
+            {
+                content_type = "application/vnd.ms-excel";
+            }
+            else if (filePath.Contains(".jpeg") || filePath.Contains(".jpg"))
+            {
+                content_type = "image/jpeg";
+            }
+            else if (filePath.Contains(".xsl"))
+            {
+                content_type = "application/vnd.ms-excel";
+            }
+            else if (filePath.Contains(".csv"))
+            {
+                content_type = "text/csv";
+            }
+            else if (filePath.Contains(".bmp"))
+            {
+                content_type = "image/x-windows-bmp";
+            }
+            else if (filePath.Contains(".xlsx"))
+            {
+                content_type = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+            }
+            else
+                content_type = "text/plain";
+
+            Response.ContentType = content_type;
+            Response.AppendHeader("Content-Disposition", "attachment; " + cd.ToString());
+
+            Response.TransmitFile(filePath);
+            Response.End();
+
+            return File(filedata, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
+        }
+
+        [HttpGet]//
+        public virtual ActionResult DownloadFile(string fileFolder, string fileName)
+        {
+            AppLogger.log.Info("Function => DownloadFile ==> Server.MapPath = " + Server.MapPath("~/PriorityDocs/" + fileFolder));
+            string filePath = Path.Combine(Server.MapPath("~/PriorityDocs/" + fileFolder), fileName);
+            return File(filePath, "application/force-download", fileName);
+        }
+
+        [HttpPost]
         public JsonResult UploadFiles()
         {
             HttpFileCollectionBase files = Request.Files;
@@ -319,7 +427,7 @@ namespace TestPortal.Models
 
                         a.FILE_NAME = fileName.Split('.')[0];
                         a.EXTFILENAME = path;
-                       // file.SaveAs(path);
+                       file.SaveAs(path);
                         ow.files.Add(a);
                     }
                 }
