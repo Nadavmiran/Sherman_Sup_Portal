@@ -28,7 +28,7 @@ namespace TestPortal.Models
                 if (!CURDATE.HasValue)
                     return string.Empty;
 
-                return new DateTime(CURDATE.Value.Year, CURDATE.Value.Month, CURDATE.Value.Day).ToShortDateString();
+                return pageDateFormat(CURDATE);
             }
         }
         public int ORD { get; set; }

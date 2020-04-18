@@ -30,9 +30,9 @@ function showGrid()
             { label: 'OrderID', name: 'ORD', align: 'center', index: 'ORD', key: true, hidden: true, width: 75 },//, formatter: formatRPTLink
             { label: 'Order', name: 'ORDNAME', align: 'center', width: 75 },//
             { label: 'Order Date', name: 'pageCURDATE', align: 'center', width: 150, sorttype: "date" },
-            { label: 'Supplier', name: 'SHR_SUPTYPEDES', align: 'center', width: 150 },
+            { label: 'Supplier', name: 'SHR_SUPTYPEDES', align: 'center', hidden: true, width: 150 },
             { label: 'For treatment ', name: 'OWNERLOGIN', align: 'center', width: 150 },
-            { label: 'Status', name: 'STATDES', align: 'center', width: 150 }
+            { label: 'Order ststus', name: 'STATDES', align: 'center', width: 150 }
         ],
         viewrecords: true,
         altRows: true,

@@ -81,6 +81,7 @@
     <Reference Include="Microsoft.Net.Http.Headers, Version=2.2.8.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Net.Http.Headers.2.2.8\lib\netstandard2.0\Microsoft.Net.Http.Headers.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Web.Administration, Version=7.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -272,6 +273,7 @@
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\FileDownload.js" />
     <Content Include="Scripts\grid.celledit.js" />
     <Content Include="Scripts\grid.filter.js" />
     <Content Include="Scripts\grid.formedit.js" />
@@ -516,8 +518,6 @@
           <DevelopmentServerPort>51668</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost/TestPortal</IISUrl>
-          <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
-          <IISAppRootUrl>http://localhost/TestPortal</IISAppRootUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

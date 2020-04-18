@@ -5,8 +5,10 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Web.Hosting;
 using System.Web;
 using System.Web.Mvc;
+using System.Net;
 
 namespace TestPortal.Models
 {
@@ -305,23 +307,23 @@ namespace TestPortal.Models
             string fpath = string.Empty;
             try
             {
-                fpath = Server.MapPath("~/PriorityDocs/" + fileFolder + "//" + fileName);
-                filePath = Path.Combine(Server.MapPath("~/PriorityDocs/" + fileFolder), fileName);
-                AppLogger.log.Info("Function => Download ==> fpath = " + fpath);
-                AppLogger.log.Info("Function => Download ==> FIlePath = " + filePath);
-            }
+                filePath = Path.Combine(Server.MapPath("~/PriorityDocs"), fileFolder  + "/" + fileName);
+                AppLogger.log.Info("Function => Download ==> filePath = " + filePath);
+                            }
             catch (Exception ex)
             {
                 AppLogger.log.Info("filePath = Exception", ex);
                 return Json(new { status = "error", message = "error creating folder path" });
             }
-
             string filename = fileName;
             byte[] filedata = null;
 
             try
             {
-                filedata = System.IO.File.ReadAllBytes(filePath);
+                
+                
+                FileStream fs = System.IO.File.OpenRead(filePath);
+                filedata = new byte[fs.Length];
                 //return View();
             }
             catch (Exception ex)
@@ -396,7 +398,7 @@ namespace TestPortal.Models
         public virtual ActionResult DownloadFile(string fileFolder, string fileName)
         {
             AppLogger.log.Info("Function => DownloadFile ==> Server.MapPath = " + Server.MapPath("~/PriorityDocs/" + fileFolder));
-            string filePath = Path.Combine(Server.MapPath("~/PriorityDocs/" + fileFolder), fileName);
+            string filePath = Path.Combine(Server.MapPath("~/Docs/PriorityDocs/"), fileFolder + "/" + fileName);
             return File(filePath, "application/force-download", fileName);
         }
 

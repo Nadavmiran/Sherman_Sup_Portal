@@ -1,6 +1,7 @@
 ﻿using LMNS.App.Log;
 using LMNS.Priority.API;
 using LMNS.Repositories;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -21,6 +22,36 @@ namespace TestPortal.Models
         public string Language { get; set; }
         public string Supplier_ID { get; set; }
         public string SupplierName { get; set; }
+
+        public int PHONE { get; set; }
+        public string NAME { get; set; }
+        public string ENAME { get; set; }
+        public string SUPNAME { get; set; }
+        public string SUPDES { get; set; }
+        //public string EMAIL { get; set; }
+        public List<LoginData> EFI_PORTALDEF_SUBFORM { get; set; }
+
+        internal void DoLogin()
+        {
+            IsAuthenticated = false;
+            string query = "/PHONEBOOK?$filter=EMAIL eq '" + Email + "'&$expand=EFI_PORTALDEF_SUBFORM($filter=USEREMAIL eq '" + Email + "' and PASSWORD eq '" + Password + "')";
+            ResultAPI ra = Do_Call_Get(query);
+            AppUserWarpper ow = JsonConvert.DeserializeObject<AppUserWarpper>(ra.JsonResult);
+            if (null != ow)
+            {
+                if(null != ow.Value[0].EFI_PORTALDEF_SUBFORM && ow.Value[0].EFI_PORTALDEF_SUBFORM.Count > 0)
+                {
+                    ENAME = ow.Value[0].ENAME;
+                    FullName = ow.Value[0].NAME;
+                    SupplierName = ow.Value[0].SUPDES;
+                    Supplier_ID = ow.Value[0].SUPNAME;
+                    PRIORITY_ID = ow.Value[0].PHONE;
+                    Language = ow.Value[0].EFI_PORTALDEF_SUBFORM[0].LANGUAGE;
+                    LINE = ow.Value[0].EFI_PORTALDEF_SUBFORM[0].DEF;
+                    IsAuthenticated = true;
+                }
+            }
+        }
 
         internal ResultAPI SaveUserProfile(string language, string fullName)
         {
@@ -98,5 +129,19 @@ namespace TestPortal.Models
                 AppLogger.log.Error("UserLogin ==> SP = LMNS_UserLogin ==> @email = " + Email + " @pass = " + Password, ex);
             }
         }
+    }
+
+    public class AppUserWarpper : ODataBase
+    {
+        public List<AppUser> Value { get; set; }
+    }
+
+    public class LoginData
+    {
+        public int KLINE { get; set; }
+        public int DEF { get; set; }
+        public string USEREMAIL { get; set; }
+        public string PASSWORD { get; set; }
+        public string LANGUAGE { get; set; }
     }
 }

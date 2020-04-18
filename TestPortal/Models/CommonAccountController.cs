@@ -9,8 +9,8 @@ namespace TestPortal.Models
         [ValidateAntiForgeryToken]
         public void LoginAction(AppUser user)
         {
-
-            user.UserLogin();
+            //user.UserLogin();
+            user.DoLogin();
             if (user.IsAuthenticated)
             {
                 Session.Add("USER_LOGIN", user);

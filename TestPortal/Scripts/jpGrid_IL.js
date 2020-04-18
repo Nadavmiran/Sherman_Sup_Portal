@@ -29,9 +29,9 @@ function showGrid() {
             { label: 'OrderID', name: 'ORD', align: 'center', index: 'ORD', key: true, hidden: true, width: 75 },//, formatter: formatRPTLink
             { label: 'הזמנה', name: 'ORDNAME', align: 'center', width: 75 },//, formatter: formatRPTLink
             { label: 'תאריך הזמנה', name: 'pageCURDATE', align: 'center', width: 150, sorttype: "date" },//, formatter: formatRPTLink
-            { label: 'שם ספק', name: 'SHR_SUPTYPEDES', align: 'center', width: 150 },//, formatter: formatRPTLink
-            { label: 'לטיפול – שם הקניין ', name: 'OWNERLOGIN', align: 'center', width: 150 },//, formatter: formatRPTLink
-            { label: 'סטטוס', name: 'STATDES', align: 'center', width: 150 }//, formatter: formatRPTLink
+            { label: 'שם ספק', name: 'SHR_SUPTYPEDES', align: 'center', hidden: true, width: 150 },//, formatter: formatRPTLink
+            { label: 'שם הקניין', name: 'OWNERLOGIN', align: 'center', width: 150 },//, formatter: formatRPTLink
+            { label: 'ססטוס הזמנה', name: 'STATDES', align: 'center', width: 150 }//, formatter: formatRPTLink
         ],
         viewrecords: true,
         altRows: true,

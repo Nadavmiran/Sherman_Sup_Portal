@@ -1,11 +1,12 @@
-﻿using System;
+﻿using LMNS.Priority.API;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
 namespace TestPortal.Models
 {
-    public class OrderItems
+    public class OrderItems : PriorityAPI
     {
         #region Properties
         /// <summary>
@@ -43,7 +44,7 @@ namespace TestPortal.Models
                 if (!REQDATE.HasValue)
                     return string.Empty;
 
-                return new DateTime(REQDATE.Value.Year, REQDATE.Value.Month, REQDATE.Value.Day).ToShortDateString();
+                return pageDateFormat(REQDATE);
             }
         }
         /// <summary>
@@ -81,7 +82,7 @@ namespace TestPortal.Models
                 if (!REQDATE2.HasValue)
                     return string.Empty;
 
-                return new DateTime(REQDATE2.Value.Year, REQDATE2.Value.Month, REQDATE2.Value.Day).ToShortDateString();
+                return pageDateFormat(REQDATE2);
             }
         }
         /// <summary>
