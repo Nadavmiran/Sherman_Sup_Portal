@@ -86,33 +86,8 @@ namespace LMNS.Priority.API
 
         public string Call_Get(string query)
         {
-            //IRestResponse response = null;
-            //string res = string.Empty;
             ResultAPI ra = Do_Call_Get(query);
             return ra.JsonResult;
-            //var uri = new Uri(ConfigurationManager.AppSettings["AppAPI"].ToString());  // Replace with your Service Root URL
-
-            //try
-            //{
-            //    System.Net.ServicePointManager.ServerCertificateValidationCallback = new System.Net.Security.RemoteCertificateValidationCallback(AcceptAllCertifications);
-
-            //    var client = new RestClient(ConfigurationManager.AppSettings["AppAPI"].ToString() + ConfigurationManager.AppSettings["Defult_DNAME"].ToString() + "/" + query);
-            //    var request = new RestRequest(Method.GET);
-            //    request.AddHeader("cache-control", "no-cache");
-            //    request.AddHeader("content-type", "application/atom+xml");
-            //    request.AddHeader("authorization", "Basic " + Convert.ToBase64String(Encoding.ASCII.GetBytes((ConfigurationManager.AppSettings["AppAPI_U"].ToString() + ":" + (ConfigurationManager.AppSettings["AppAPI_P"].ToString())))));
-
-            //    response = client.Execute(request);
-            //    ResultAPI ra = CreateResultApi(response);
-            //    res = ra.JsonResult;//TransformeResultToXml(response.Content);
-            //}
-            //catch (Exception ex)
-            //{
-            //    AppLogger.log.Debug(AppLogger.CreateLogText("Call_Get", ex.Message));
-            //    AppLogger.log.Debug(AppLogger.CreateLogText("Call_Get", response.ErrorMessage), response.ErrorException);
-            //}
-
-            //return res;
         }
 
         public ResultAPI Do_Call_Get(string query)
@@ -213,7 +188,7 @@ namespace LMNS.Priority.API
             {
                 System.Net.ServicePointManager.ServerCertificateValidationCallback = new System.Net.Security.RemoteCertificateValidationCallback(AcceptAllCertifications);
 
-                var client = new RestClient(ConfigurationManager.AppSettings["AppAPI"].ToString() + ConfigurationManager.AppSettings["Defult_DNAME"].ToString() + "/SUPPLIERS");
+                var client = new RestClient(ConfigurationManager.AppSettings["AppAPI"].ToString() + ConfigurationManager.AppSettings["Defult_DNAME"].ToString() + "/PHONEBOOK");
                 var request = new RestRequest(Method.PATCH);
                 request.AddHeader("cache-control", "no-cache");
                 request.AddHeader("content-type", "application/atom+xml");

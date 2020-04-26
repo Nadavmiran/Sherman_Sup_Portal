@@ -1,74 +1,18 @@
 ﻿@model TestPortal.Models.PageObject
 @{
-    ViewBag.Title = "Testing Arena";
+    ViewBag.Title = "Order products";
     Layout = "~/Views/Shared/_Layout_EN.cshtml";
 }
 <script>
     $.jgrid.defaults.responsive = true;
     $.jgrid.defaults.shrinkToFit = false;
 </script>
-<div class="section-body" id="mainPageContent" style="overflow-y:scroll;">
-    <div class="row">
-        <div class="col-6 col-md-6 col-lg-6">
-            <div class="card">
-                <div class="col-12">
-                    <form>
-                        <div class="card-header">
-                            <h4><i class="fas fa-file-invoice" style="font-size: 20px;"></i> Order details</h4>
-                        </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="form-group col-md-3 col-12">
-                                    <label class="control-label" style="color:#01416F; font-weight:bolder;">Order #</label>
-                                    <div class="col-sm-3">
-                                        <label class="control-label" id="lbl_ORDNAME">@Model.objOrder.ORDNAME</label>
-                                    </div>
-                                </div>
-                                <div class="form-group col-md-3 col-12">
-                                    <label class="control-label" style="color:#01416F; font-weight:bolder;">Order date</label>
-                                    <div class="col-sm-3">
-                                        <label class="control-label" id="lbl_pageCURDATE">@Model.objOrder.pageCURDATE</label>
-                                    </div>
-                                </div>
-                                <div class="form-group col-md-3 col-12">
-                                    <label class="control-label" style="color:#01416F; font-weight:bolder;">Order status</label>
-                                    <div class="col-sm-3">
-                                        <label class="control-label" id="lbl_STATDESE">@Model.objOrder.STATDES</label>
-                                    </div>
-                                </div>
-                                <div class="form-group col-md-3 col-12">
-                                    <label class="control-label" style="color:#01416F; font-weight:bolder;">For treatment </label>
-                                    <div class="col-sm-3">
-                                        <label class="control-label" id="lbl_OWNERLOGIN">@Model.objOrder.OWNERLOGIN</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="form-group col-md-3 col-12">
-                                    <label class="control-label" style="color:#01416F; font-weight:bolder;">Supplier type</label>
-                                    <div class="col-sm-3">
-                                        <label class="control-label" id="SHR_SUPTYPEDES">@Model.objOrder.SHR_SUPTYPEDES</label>
-                                    </div>
-                                </div>
-                                <div class="form-group col-md-3 col-12">
-                                    <label class="control-label" style="color:#01416F; font-weight:bolder;">Supplier #</label>
-                                    <div class="col-sm-3">
-                                        <label class="control-label" id="lbl_SUPNAME">@Model.objOrder.SUPNAME</label>
-                                    </div>
-                                </div>
-                                <div class="form-group col-md-6 col-12">
-                                    <label class="control-label" style="color:#01416F; font-weight:bolder;">Supplier</label>
-                                    <div class="col-sm-6">
-                                        <label class="control-label" id="lbl_CDES">@Model.objOrder.CDES</label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <div class="col-6 col-md-6 col-lg-6">
+<div class="section-body" id="mainPageContent">
+    @*style="overflow-y:scroll;"*@
+
+<div class="row">
+    @Html.Partial("_OrderDetails")
+    @*<div class="col-6 col-md-6 col-lg-6">
             <div class="card">
                 <div class="col-12">
                     <form>
@@ -132,8 +76,8 @@
                     </form>
                 </div>
             </div>
-        </div>
-        <div class="col-12 col-md-12 col-lg-12">
+        </div>*@
+    @*<div class="col-12 col-md-12 col-lg-12">
             <div class="card">
                 <div class="col-12">
                     <form>
@@ -246,49 +190,35 @@
                     </form>
                 </div>
             </div>
+        </div>*@
+</div>
+<div class="row">
+    <div class="col-12 col-md-12 col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h4><i class="fas fa-list" style="font-size: 20px;"></i> Order products</h4>
+            </div>
+            <div class="card-body">
+                <div>
+                    <table id="jqGrid"></table>
+                    <div id="jqGridPager"></div>
+                </div>
+            </div>
         </div>
+        @*<div class="card">
+                <div class="card-header">
+                    <h4><i class="fas fa-download" style="font-size: 20px;"></i> Serial files</h4>
+                </div>
+                <div class="card-body">
+                    <div>
+                        <table id="jqGridAttachments"></table>
+                        <div id="jqGridAttachmentsPager"></div>
+                    </div>
+                </div>
+            </div>*@
     </div>
-    @*<div class="row">
-        <div class="col-12 col-md-12 col-lg-12">
-            <div class="card">
-                <div class="card-header">
-                    <h4><i class="fas fa-download" style="font-size: 20px;"></i> Serial files</h4>
-                </div>
-                <div class="card-body">
-                    <div>
-                        <table id="jqGridAttachments"></table>
-                        <div id="jqGridAttachmentsPager"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>*@
-    <div class="row">
-        <div class="col-12 col-md-6 col-lg-6">
-            <div class="card">
-                <div class="card-header">
-                    <h4><i class="fas fa-list" style="font-size: 20px;"></i> Order products</h4>
-                </div>
-                <div class="card-body">
-                    <div>
-                        <table id="jqGrid"></table>
-                        <div id="jqGridPager"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-header">
-                    <h4><i class="fas fa-download" style="font-size: 20px;"></i> Serial files</h4>
-                </div>
-                <div class="card-body">
-                    <div>
-                        <table id="jqGridAttachments"></table>
-                        <div id="jqGridAttachmentsPager"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-12 col-md-6 col-lg-6">
+</div>
+    @*<div class="col-12 col-md-6 col-lg-6">
             <div class="card">
                 <div class="card-header">
                     <h4><i class="fab fa-rev" style="font-size: 20px;"></i> Product samples list</h4>
@@ -300,17 +230,17 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    @Html.Partial("_Sample_QA")
-    @Html.Partial("_SampleQA_List")
-    @*FORM WAS HERE **@
+        </div>*@
+    @*</div>*@
+@*FORM WAS HERE **@
     <div id="modal-error" class="card">
         <p id="modal-error-text"></p>
     </div>
     <div id="loader" class="loader"></div>
     <div id="downLoadFile" data-url="@Url.Action("DownloadFile", "Home")"></div>
     <div id="Logoff" data-url="@Url.Action("LogOff", "Account")"></div>
+
+    <div id="navQA_Page" data-url="@Url.Action("QA_Page", "Home")"></div>
 
     <div id="navPostTestProductItem" data-url="@Url.Action("PostTestProductItem", "Home")"></div>
     <div id="navTestProductOrderItems" data-url="@Url.Action("TestProductOrderItems", "Home")"></div>
@@ -321,7 +251,6 @@
     <div id="navDownloadFile" data-url="@Url.Action("GetProductRevisionList", "Home")"></div>
     <div id="navSaveTest" data-url="@Url.Action("SaveTest", "Home")"></div>
     <div id="navUploadFiles" data-url="@Url.Action("UploadFiles", "Home")"></div>
-    <div id="navCreateTest" data-url="@Url.Action("CreateTest", "Home")"></div>
     <div id="navGetSampleTestList" data-url="@Url.Action("GetSampleTestList", "Home")"></div>
 </div>
 <script type="text/javascript">

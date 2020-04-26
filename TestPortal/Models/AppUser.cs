@@ -64,12 +64,12 @@ namespace TestPortal.Models
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("{");
-            sb.Append("\r\n\t\"SUPNAME\":");
-            sb.Append("\"" + this.Supplier_ID + "\",");
-            sb.Append("\r\n\t\"SUPPERSONNEL_SUBFORM\": [");
-            sb.Append("\r\n\t{");
             sb.Append("\r\n\t\"NAME\":");
             sb.Append("\"" + this.FullName + "\",");
+            sb.Append("\r\n\t\"SUPNAME\":");
+            sb.Append("\"" + this.Supplier_ID + "\",");
+            sb.Append("\r\n\t\"EMAIL\":");
+            sb.Append("\"" + this.Email + "\",");
             sb.Append("\r\n\t\"EFI_PORTALDEF_SUBFORM\": ["); 
             sb.Append("\r\n\t{");
             sb.Append("\r\n\t\"DEF\":");
@@ -80,8 +80,6 @@ namespace TestPortal.Models
             sb.Append("\"" + language + "\"");
             sb.Append("\r\n\t}");
             sb.Append("\r\n\t]"); //END EFI_PORTALDEF_SUBFORM
-            sb.Append("\r\n\t}");
-            sb.Append("\r\n\t]");//END SUPPERSONNEL_SUBFORM
             sb.Append("\r\n\t}");// END form
             return sb.ToString();
 

@@ -51,6 +51,7 @@ function showGrid()
             var id = jQuery("#jqGrid").jqGrid('getCell', row, 'ORD');
             var rowData = $(this).getRowData(id);
             console.log("onSelectRow rowData = ", rowData);
+            console.log("onSelectRow col = ", col);
             window.location.href += 'Home/TestProduct/?OrderID=' + rowData.ORD + '&orderNumber=' + rowData.ORDNAME;
 
         },
@@ -85,60 +86,52 @@ function showGrid()
                     { label: 'Quntity', name: 'TQUANT', align: 'center', width: 100 },
                     { label: 'Left Quntity', name: 'TBALANCE', align: 'center', width: 100 },
                     { label: 'Supply Date', name: 'pageREQDATE', align: 'center', width: 100 },
-                    { label: 'Status', name: 'PORDISTATUSDES', align: 'center', width: 100 }
+                    { label: 'Status', name: 'PORDISTATUSDES', align: 'center', width: 100 },
+                    { label: '', name: 'Information', align: 'center', width: 150, formatter: formatBTNLink }
                 ],
-                onCellSelect: function (id, rowId, iCol, content, event) {
+                onCellSelect: function (id, col, iCol, event) {
+                    if (col == 8) return;
+                    console.log("onSelectRow col = ", col);
+                    console.log("onSelectRow iCol = ", iCol);
                     console.log("onSelectRow id = ", id);
-                    console.log("onSelectRow rowId = ", rowId);
+                    //console.log("onSelectRow rowId = ", rowId);
                     var rowData = $(this).getRowData(id);
                     console.log("onSelectRow rowData = ", rowData);
-                    window.location.href += 'Home/TestProductItem/?OrderID=' + rowData.ORD + '&prodName="' + rowData.PARTNAME + '"&ordLine=' + rowData.LINE;
+                    window.location.href += 'Home/QA_Page/?orderID=' + rowData.ORD + '&orderName=' + rowData.ORDNAME + '&prodName=' + rowData.PARTNAME + '&ordLine=' + rowData.LINE;
+                    //window.location.href += 'Home/TestProductItem/?OrderID=' + rowData.ORD + '&prodName="' + rowData.PARTNAME + '"&ordLine=' + rowData.LINE;
                 }
             });
         }
     });
 }
 
-//function GetRecord(data, parentRowKey) {
-//    console.log("GetRecord ==> parentRowKey", parentRowKey);
-//    console.log("GetRecord ==> data", data);
-//    var rec = [];
-//    for (var i = 0; i < data.length; i++) {
-//        if (data[i].ORD == parentRowKey) {
-//            for (var x = 0; x < data[i].PORDERITEMS_SUBFORM.length; x++) {
-//                rec.push(data[i].PORDERITEMS_SUBFORM[x]);
-//            }
-//            console.log("GetRecord ==> rec", rec);
-//            return rec;
-//        }
-//    }
-//    return rec;
+function formatBTNLink(cellValue, options, rowObject) {
+    return '<i class="fas fa-info-circle" style="font-size:14px;" onclick="showSalesorderDetail(\'' + rowObject.PARTNAME + '\',' + rowObject.ORD + ',' + rowObject.LINE + ')"></i>';
+}
+//function formatRPTLink(cellValue, options, rowObject)
+//{
+//    //console.log("formatRPTLink ==> options", options);
+//    //console.log("formatRPTLink ==> rowObject", rowObject);
+//    var a = document.createElement('a');
+//    var linkText = document.createTextNode(cellValue);
+//    a.appendChild(linkText);
+//    a.title = cellValue;
+//    a.href = 'Home/TestProduct?' + 'OrderID=' + rowObject.ORD + '&OrderNumber=' + rowObject.ORDNAME ;
+//    a.classList = '.ui-state-highlight a, .ui-widget-content .ui-state-highlight a, .ui-widget-header .ui-state-highlight a';//.style.color = "#01416F";
+//    //console.log("setHref ==> a", a.outerHTML);
+//    return a.outerHTML;
 //}
 
-function formatRPTLink(cellValue, options, rowObject)
-{
-    //console.log("formatRPTLink ==> options", options);
-    //console.log("formatRPTLink ==> rowObject", rowObject);
-    var a = document.createElement('a');
-    var linkText = document.createTextNode(cellValue);
-    a.appendChild(linkText);
-    a.title = cellValue;
-    a.href = 'Home/TestProduct?' + 'OrderID=' + rowObject.ORD + '&OrderNumber=' + rowObject.ORDNAME ;
-    a.classList = '.ui-state-highlight a, .ui-widget-content .ui-state-highlight a, .ui-widget-header .ui-state-highlight a';//.style.color = "#01416F";
-    //console.log("setHref ==> a", a.outerHTML);
-    return a.outerHTML;
-}
-
-function formatProdLink(cellValue, options, rowObject)
-{
-    //console.log("formatRPTLink ==> options", options);
-    //console.log("formatRPTLink ==> rowObject", rowObject);
-    var a = document.createElement('a');
-    var linkText = document.createTextNode(cellValue);
-    a.appendChild(linkText);
-    a.title = cellValue;
-    a.href = '/Home/TestProductItem?' + 'OrderID=' + rowObject.ORD + '&prodName="' + rowObject.PARTNAME + '"&ordLine=' + rowObject.LINE;
-    a.classList = '.ui-state-highlight a, .ui-widget-content .ui-state-highlight a, .ui-widget-header .ui-state-highlight a';//.style.color = "#01416F";
-    //console.log("setHref ==> a", a.outerHTML);
-    return a.outerHTML;
-}
+//function formatProdLink(cellValue, options, rowObject)
+//{
+//    //console.log("formatRPTLink ==> options", options);
+//    //console.log("formatRPTLink ==> rowObject", rowObject);
+//    var a = document.createElement('a');
+//    var linkText = document.createTextNode(cellValue);
+//    a.appendChild(linkText);
+//    a.title = cellValue;
+//    a.href = '/Home/TestProductItem?' + 'OrderID=' + rowObject.ORD + '&prodName="' + rowObject.PARTNAME + '"&ordLine=' + rowObject.LINE;
+//    a.classList = '.ui-state-highlight a, .ui-widget-content .ui-state-highlight a, .ui-widget-header .ui-state-highlight a';//.style.color = "#01416F";
+//    //console.log("setHref ==> a", a.outerHTML);
+//    return a.outerHTML;
+//}

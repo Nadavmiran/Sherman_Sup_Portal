@@ -1,44 +1,193 @@
 ﻿function InitTestPageData(data) {
-    document.getElementById('mnuSampleList').style.display = 'inline-block';
     var OrdId = document.getElementById('hdnOrdId').value;
     var pordId = document.getElementById('hdnPrdId').value;
+
+    document.getElementById('mnuSampleList').style.display = 'none';
+    document.getElementById('mnuPartsList').style.display = 'none';
+
     console.log('hdnOrdId = ', OrdId);
     console.log('pordId = ', pordId);
     console.log('$(document).ready ==> data = ', data);
     console.log('$(document).ready ==> data.lstAttachments = ', data.lstAttachments);
 
+    showOrderDetail(data.objOrder);
     if (null == data.lstItemsObject)
         GetOrderProducts(OrdId);
     else
         showGridProd(data.lstItemsObject);
 
-    if (null != data.objSample && data.objSample.DOCNO != null)
-    {
-        fillSampleSection(data.objSample);
-        if (null != data.objSample.MED_TRANSSAMPLEQA_SUBFORM)
-            showGridProdSamples(data.objSample.MED_TRANSSAMPLEQA_SUBFORM);
-    }
-    else
-    {
-        if (null != data.lstSamplQA)
-            if (data.lstSamplQA.length > 0) {
-                console.log('data.lstSamplQA ==> data.lstSamplQA = ', data.lstSamplQA);
-                showGridSampleList(data.lstSamplQA);
-                document.getElementById('hdnQaListSUPNAME').value = data.objOrder.SUPNAME;
-                document.getElementById('hdnQaListPARTNAME').value = data.objProduct.PARTNAME;
-                var x = document.getElementsByTagName("html")[0].getAttribute("dir");
+    //if (null != data.objSample && data.objSample.DOCNO != null)
+    //{
+    //    fillSampleSection(data.objSample);
+    //    if (null != data.objSample.MED_TRANSSAMPLEQA_SUBFORM)
+    //        showGridProdSamples(data.objSample.MED_TRANSSAMPLEQA_SUBFORM);
+    //}
+    //else
+    //{
+    //    if (null != data.lstSamplQA)
+    //        if (data.lstSamplQA.length > 0) {
+    //            console.log('data.lstSamplQA ==> data.lstSamplQA = ', data.lstSamplQA);
+    //            showGridSampleList(data.lstSamplQA);
+    //            document.getElementById('hdnQaListSUPNAME').value = data.objOrder.SUPNAME;
+    //            document.getElementById('hdnQaListPARTNAME').value = data.objProduct.PARTNAME;
+    //            var x = document.getElementsByTagName("html")[0].getAttribute("dir");
     
-                document.getElementById('divTLMsg').style.display = 'none';
-                if(x == 'rtl')
-                    $("#modal-9").trigger("click");
-                else
-                    $("#modal-10").trigger("click");
-            }
+    //            document.getElementById('divTLMsg').style.display = 'none';
+    //            if(x == 'rtl')
+    //                $("#modal-9").trigger("click");
+    //            else
+    //                $("#modal-10").trigger("click");
+    //        }
+    //}
+
+    //if (null != data.lstAttachments)
+    //    showGridProdAttachments(data.lstAttachments);
+
+}
+
+function InitQAPageData(data) {
+    document.getElementById('mnuSampleList').style.display = 'inline-block';
+    document.getElementById('mnuPartsList').style.display = 'inline-block';
+    document.getElementById('divSampleQA').style.display = 'inline-block';
+    document.getElementById('hdnOrdId').value = data.objOrder.ORD;
+    document.getElementById('hdnSUPNAME').value = data.objOrder.SUPNAME;
+    document.getElementById('hdnPrdId').value = data.objProduct.PARTNAME;
+
+    document.getElementById('hdnQaListORDNAME').value = data.objOrder.ORDNAME;
+
+    showOrderLineDetail(data.objProduct);
+    if (null != data.lstSampleObject && data.lstSampleObject.length > 0)
+        showPartSampls(data.lstSampleObject);
+    else {
+        console.log('data.lstSampleObject = ', data.lstSampleObject);
+        //if (x == 'rtl')
+        //    $("#modal-9").trigger("click");
+        //else
+        $("#modal-21").trigger("click");
+        $("#modal-error-text").html('Sample document was not found. Click "Tests" button to create sample document.');
     }
 
     if (null != data.lstAttachments)
         showGridProdAttachments(data.lstAttachments);
 
+    $("#loader").hide();
+}
+
+function navigateTestPage() {
+    window.location = '/Home/TestProduct/?OrderID=' + document.getElementById('hdnOrdId').value + '&orderNumber=' + document.getElementById('hdnPrdId').value;
+}
+
+function showSalesorderDetail(PARTNAME, ORD, LINE) {
+    console.log('showSalesorderDetail ==> ORD = ', ORD);
+    console.log('showSalesorderDetail ==> LINE = ', LINE);
+    console.log('showSalesorderDetail ==> PARTNAME = ', PARTNAME);
+    $.ajax({
+        type: "POST",
+        url: $('#navOrder').data('url'),//"PostTestProduct",
+        data: {
+            orderID: ORD,
+            prodName: PARTNAME,
+            ordLine: LINE
+        },
+        cache: false,
+        success: function (data) {
+            console.log("showSalesorderDetail ==> data", data);
+            showOrderDetail(data.objOrder);
+            showOrderLineDetail(data.objProduct);
+
+            if (null != data.objSample.MED_TRANSSAMPLEQA_SUBFORM)
+                showGridProdSamples(data.objSample.MED_TRANSSAMPLEQA_SUBFORM);
+            if (null != data.lstAttachments)
+                showGridProdAttachments(data.lstAttachments);
+
+            //if (x == 'rtl')
+            //    $("#modal-9").trigger("click");
+            //else
+            $("#modal-12").trigger("click");
+        }
+    });
+}
+
+function showOrderDetail(objOrder) {
+    document.getElementById('lbl_ORDNAME').innerText = objOrder.ORDNAME;
+    document.getElementById('lbl_pageCURDATE').innerText = objOrder.pageCURDATE;
+    document.getElementById('lbl_STATDESE').innerText = objOrder.STATDESE;
+    document.getElementById('lbl_OWNERLOGIN').innerText = objOrder.OWNERLOGIN;
+    document.getElementById('SHR_SUPTYPEDES').innerText = objOrder.SUPTYPEDES;
+    document.getElementById('lbl_SUPNAME').innerText = objOrder.SUPNAME;
+    document.getElementById('lbl_CDES').innerText = objOrder.CDES;
+}
+
+function showOrderLineDetail(objProduct) {
+    document.getElementById('lbl_LINE').innerText = objProduct.LINE;
+    document.getElementById('lbl_PARTNAME').innerText = objProduct.PARTNAME;
+    document.getElementById('lbl_pageREQDATE').innerText = objProduct.pageREQDATE;
+    document.getElementById('lbl_REQDATE2').innerText = objProduct.REQDATE2;
+    document.getElementById('lbl_PDES').innerText = objProduct.PDES;
+    document.getElementById('lbl_SERIALNAME').innerText = objProduct.SERIALNAME;
+    document.getElementById('lbl_TQUANT').innerText = objProduct.TQUANT;
+    document.getElementById('lbl_TBALANCE').innerText = objProduct.TBALANCE;
+    document.getElementById('lbl_ACTNAME').innerText = objProduct.ACTNAME;
+    document.getElementById('lbl_SHR_DRAW').innerText = objProduct.SHR_DRAW;
+    document.getElementById('lbl_SHR_MNFDES').innerText = objProduct.SHR_MNFDES;
+    document.getElementById('lbl_SHR_MNFPARTNAME').innerText = objProduct.SHR_MNFPARTNAME;
+    document.getElementById('lbl_SHR_SERIAL_REVNUM').innerText = objProduct.SHR_SERIAL_REVNUM;
+    document.getElementById('lbl_REVNAME').innerText = objProduct.REVNAME;
+}
+
+function showSampleDetails(objSample) {
+    console.log('showSampleDetails ==> objSample', objSample);
+    if (null == objSample || null == objSample.DOCNO) {
+        $("#modal-21").trigger("click");
+        $("#modal-error-text").html('Sample document was not found. Click "Tests" button to create sample document.');
+    }
+    else {
+        document.getElementById('lbl_DOCNO').innerText = objSample.DOCNO;
+        document.getElementById('lbl_CURDATE').innerText = objSample.pageCURDATE;
+        document.getElementById('lbl_QUANT').innerText = objSample.QUANT;
+        document.getElementById('lbl_SERIALNAME').innerText = objSample.SERIALNAME;
+        document.getElementById('lbl_SHR_RAR').innerText = objSample.SHR_RAR;
+        document.getElementById('lbl_SHR_SERIAL_QUANT').innerText = objSample.SHR_SERIAL_QUANT;
+        document.getElementById('lbl_STATDES').innerText = objSample.STATDES;
+        document.getElementById('lbl_SHR_SAMPLE_STD_CODE').innerText = objSample.SHR_SAMPLE_STD_CODE;
+    }
+}
+
+function GetSampleTests(rowData) {
+    $.ajax(
+        {
+            type: "POST",
+            data:
+            {
+                DOCNO: rowData.DOCNO
+            },
+            url: $('#navGetSampleTest').data('url'),//"/Home/GetSampleTestList",
+            contentType: "application/x-www-form-urlencoded;charset=ISO-8859-15",
+            success: function (response) {
+                console.log("GetSampleTests ==> response", response);
+                if (null != response && null != response.objSample) {
+                    //showGridSampleList(response.lstSamplQA);
+                    $("#jqGridRevision").GridUnload();
+                    if (null != response.objSample && null != response.objSample.MED_TRANSSAMPLEQA_SUBFORM && response.objSample.MED_TRANSSAMPLEQA_SUBFORM.length > 0)
+                        showGridProdSamples(response.objSample.MED_TRANSSAMPLEQA_SUBFORM);
+
+                    //var x = document.getElementsByTagName("html")[0].getAttribute("dir");
+                    //if (x == 'rtl')
+                    //    $("#modal-9").trigger("click");
+                    //else
+                    //    $("#modal-10").trigger("click");
+                }
+                else {
+                    if (response.ErrorDescription != '') {
+                        form_data[0].reset();
+                        $('.modal').modal('hide');
+                        $('.modal').removeClass('show');
+                        $("#modal-error-text").html(response.ErrorDescription);
+                        $("#modal-1").trigger("click");
+                    }
+                }
+            }
+        });
 }
 
 function fillSampleSection(objSample) {
@@ -66,49 +215,61 @@ function getFormattedDate(date) {
     return day + '/' + month + '/' + year;
 }
 
-function OpentestList() {
-    var supName = document.getElementById('lbl_SUPNAME').innerText;
-    var partName = document.getElementById('lblProductName').innerText;
+function doNext() {
+    var supName = document.getElementById('hdnSUPNAME').value;
+    var partName = document.getElementById('hdnPrdId').value;
     console.log('OpentestList ==> supName = ', supName);
     console.log('OpentestList ==> partName = ', partName);
 
     document.getElementById('hdnQaListSUPNAME').value = supName;
     document.getElementById('hdnQaListPARTNAME').value = partName;
+    
     $.ajax(
-    {
-        type: "POST",
-        data:
         {
-            supName: supName,
-            partName: partName            },
-            url: $('#navGetSampleTestList').data('url'),//"/Home/GetSampleTestList",
-        contentType: "application/x-www-form-urlencoded;charset=ISO-8859-15",
-        success: function (response) {
-            console.log("response", response);
-            if (null != response && null != response.lstSamplQA && response.lstSamplQA.length > 0)
+            type: "POST",
+            data:
             {
-                showGridSampleList(response.lstSamplQA);
+                supName: supName,
+                partName: partName
+            },
+            url: $('#navGetSampleTestList').data('url'),//"/Home/GetSampleTestList",
+            contentType: "application/x-www-form-urlencoded;charset=ISO-8859-15",
+            success: function (response) {
+                console.log("response", response);
+                if (null != response && null != response.lstSamplQA && response.lstSamplQA.length > 0) {
+                    showGridSampleList(response.lstSamplQA);
 
-                if (null != response.objSample && null != response.objSample.MED_TRANSSAMPLEQA_SUBFORM && response.objSample.MED_TRANSSAMPLEQA_SUBFORM.length > 0)
-                    showSelectedSampleQA(response.objSample.MED_TRANSSAMPLEQA_SUBFORM);
+                    if (null != response.objSample && null != response.objSample.MED_TRANSSAMPLEQA_SUBFORM && response.objSample.MED_TRANSSAMPLEQA_SUBFORM.length > 0)
+                        showSelectedSampleQA(response.objSample.MED_TRANSSAMPLEQA_SUBFORM);
 
-                var x = document.getElementsByTagName("html")[0].getAttribute("dir");
-                if (x == 'rtl')
-                    $("#modal-9").trigger("click");
-                else
-                    $("#modal-10").trigger("click");
-            }
-            else {
-                if (response.ErrorDescription != '') {
-                    form_data[0].reset();
-                    $('.modal').modal('hide');
-                    $('.modal').removeClass('show');
-                    $("#modal-error-text").html(response.ErrorDescription);
-                    $("#modal-1").trigger("click");
+                    var x = document.getElementsByTagName("html")[0].getAttribute("dir");
+                    if (x == 'rtl')
+                        $("#modal-9").trigger("click");
+                    else
+                        $("#modal-10").trigger("click");
+                }
+                else {
+                    if (response.ErrorDescription != '') {
+                        //form_data[0].reset();
+                        $('.modal').modal('hide');
+                        $('.modal').removeClass('show');
+                        $("#modal-error-text").html(response.ErrorDescription);
+                        $("#modal-1").trigger("click");
+                    }
                 }
             }
-        }
-    });
+        });
+}
+function OpentestList() {
+    //Open message : do you want to create a new sample document?
+    
+    var x = document.getElementsByTagName("html")[0].getAttribute("dir");
+    document.getElementById('hdnIsNewDocument').value = -1;
+    if (x == 'rtl')
+        $("#modal-3").trigger("click");
+    else {
+        $("#modal-31").trigger("click");
+    }
 }
 
 function GetProductDetails(rowData) {
@@ -414,7 +575,8 @@ function downloadFile(filefolder, filename) {
 
     console.log("downloadFile ==> filefolder", filefolder);
     console.log("downloadFile ==> filename", filename);
-
+    //$.fileDownload('http://192.168.0.125/SherPortal/PriorityDocs/MM602085C.pdf');
+    //I:/23559000/23559000_C/MM602085C.pdf
     $.ajax(
         {
             type: "POST",
@@ -648,15 +810,21 @@ function onSubmitCreateSampleList(e) {
     console.log("result", JSON.stringify(jsonObj));
     let SUPNAME = '';
     let PARTNAME = '';
+    let ORDNAME = '';
+    let isNewDocument = false;
     for (i = 0; i < fd.length; i++) {
         if (fd[i].id.includes('hdnQaListSUPNAME'))
             SUPNAME = fd[i].value;
         if (fd[i].id.includes('hdnQaListPARTNAME'))
             PARTNAME = fd[i].value;
+        if (fd[i].id.includes('hdnQaListORDNAME'))
+            ORDNAME = fd[i].value;
     }
 
     console.log("SUPNAME", SUPNAME);
     console.log("PARTNAME", PARTNAME);
+    if (document.getElementById('hdnIsNewDocument').value == '1')
+        isNewDocument = true;
     // DO AJAX HERE
     $.ajax(
     {
@@ -665,6 +833,8 @@ function onSubmitCreateSampleList(e) {
         {
             supName: SUPNAME,
             partName: PARTNAME,
+            isNewDoc: isNewDocument,
+            ordName: ORDNAME,
             qaCode: JSON.stringify(jsonObj)
         },
             url: $('#navCreateTest').data('url'),//"/Home/CreateTest",
@@ -672,12 +842,11 @@ function onSubmitCreateSampleList(e) {
         success: function (response) {
             console.log("response", response);
             if (null != response.objSample.MED_TRANSSAMPLEQA_SUBFORM) {
-                //$("#jqGridSampleQA").GridUnload();
-
-                $("#jqGridRevision").GridUnload(); 
-
-                fillSampleSection(response.objSample);
-                showGridProdSamples(response.objSample.MED_TRANSSAMPLEQA_SUBFORM);
+                $("#jqGridRevision").GridUnload();
+                $("#jqGridPartSampls").GridUnload();
+                showPartSampls(response.lstSampleObject);
+                //show test for sample doc
+                //showGridProdSamples(response.objSample.MED_TRANSSAMPLEQA_SUBFORM);
 
                 jQuery('#jqGridSelectedSampleQA').jqGrid('clearGridData');
                 jQuery('#jqGridSelectedSampleQA').jqGrid('setGridParam', { data: response.objSample.MED_TRANSSAMPLEQA_SUBFORM });

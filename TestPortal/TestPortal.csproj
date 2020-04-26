@@ -483,6 +483,9 @@
     <Content Include="Views\Home_IL\_Wizard.cshtml" />
     <Content Include="Views\Home_IL\_SampleQA_List.cshtml" />
     <Content Include="Views\Home\_SampleQA_List.cshtml" />
+    <Content Include="Views\Home\_OrderDetails.cshtml" />
+    <Content Include="Views\Home\_OrderLineDetails.cshtml" />
+    <Content Include="Views\Home\_SampleDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

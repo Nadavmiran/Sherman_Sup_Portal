@@ -35,7 +35,8 @@
             console.log('showGridProd ==> rowId ', rowId);
             console.log('showGridProd ==> iCol ', iCol);
             console.log('showGridProd ==> content ', content);
-            GetProductDetails(rowData);
+           // GetProductDetails(rowData);
+            window.location = '/Home/QA_Page/?orderID=' + rowData.ORD + '&orderName=' + document.getElementById('lbl_ORDNAME').innerText +'&prodName=' + rowData.PARTNAME + '&ordLine=' + rowData.LINE;
         }
     });
 }
@@ -189,16 +190,16 @@ function showGridProdAttachments(grid_data) {
         datatype: "local",
         data: grid_data,
         colModel: [
-            { label: 'Purchase tag', name: 'SHR_PURCH_FLAG', align: 'center', width: 200 },
-            { label: 'File type', name: 'SUFFIX', align: 'center', width: 200, formatter: formatFileIcon }, //formatter: formatProdLink, 
-            { label: 'File name', name: 'FILE_NAME', align: 'center', hidden: false, width: 200 },
-            { label: 'Folder', name: 'FOLDER', align: 'center', hidden: true, width: 200 },
+            { label: '#', name: 'SHR_LINE', align: 'center', key: true, hidden: false, width: 75 },
             { label: 'Subject', name: 'SHR_EXTFILEDESTEXT', align: 'center', hidden: false, width: 200 },
-            { label: '#', name: 'SHR_LINE', align: 'center', key: true, hidden: false, width: 75 }
+            { label: 'Folder', name: 'FOLDER', align: 'center', hidden: true, width: 200 },
+            { label: 'File name', name: 'FILE_NAME', align: 'center', hidden: true, width: 200 },
+            { label: 'File type', name: 'SUFFIX', align: 'center', width: 200, formatter: formatFileIcon }, //formatter: formatProdLink, 
+            { label: 'Purchase tag', name: 'SHR_PURCH_FLAG', align: 'center', hidden: true,width: 200 }
         ],
         viewrecords: true,
         altRows: true,
-        direction: 'rtl',
+        direction: 'ltr',
         autowidth: true,
         height: null,
         rowNum: 30,
@@ -214,7 +215,7 @@ function showGridProdAttachments(grid_data) {
     });
 }
 
-function showGridSampleList(grid_data) {
+function showGridTestList(grid_data) {
     console.log("showGridSampleList ==> grid_data", grid_data);
     var $grid = $("#jqGridSampleQA"), idsOfSelectedRows = [],
         updateIdsOfSelectedRows = function (id, isSelected) {
@@ -243,7 +244,7 @@ function showGridSampleList(grid_data) {
             { label: 'Result Min.', name: 'RESULTMIN', align: 'center', editable: true, hidden: false, width: 80 },
             { label: 'Result Max.', name: 'RESULTMAX', align: 'center', editable: true, hidden: false, width: 80 },/*formatter: formatGetRevListLink,*/
             { label: 'Repitition', name: 'REPETITION', align: 'center', editable: true, width: 50 },
-            { label: 'resultant (Y/N)', name: 'RESULTANT', align: 'center', width: 80 },
+            { label: 'Resultant (Y/N)', name: 'RESULTANT', align: 'center', width: 80 },
             { label: 'Sample Qnt.', name: 'SAMPQUANT', align: 'center', width: 80 }
         ],
         viewrecords: true,
@@ -318,4 +319,117 @@ function showSelectedSampleQA(grid_data) {
         loadonce: true,
         subGrid: false
     });
+}
+
+function showPartSampls(grid_data) {
+    $("#jqGridPartSampls").jqGrid({
+        guiStyle: "bootstrap",
+        iconSet: "fontAwesome",
+        datatype: "local",
+        data: grid_data,
+        colModel: [
+            { label: 'PARTNAME', name: 'PARTNAME', align: 'center', key: false, hidden: true, width: 75 },
+            { label: 'SUPNAME', name: 'SUPNAME', align: 'center', key: false, hidden: true, width: 75 },
+            { label: 'SERIALNAME', name: 'SERIALNAME', align: 'center', key: false, hidden: true, width: 75 },
+            { label: 'DOCNO', name: 'DOCNO', align: 'center', key: true, hidden: false, width: 120 },
+            { label: 'Date', name: 'pageCURDATE', align: 'center', key: false, hidden: false, width: 100 }, 
+            { label: 'Status', name: 'STATDES', align: 'center', hidden: false, width: 150 },
+            { label: 'Sampling standard', name: 'SHR_SAMPLE_STD_CODE', align: 'center', hidden: false, width: 150 },
+            { label: 'Quantity', name: 'QUANT', align: 'center', hidden: false, width: 90 },
+            { label: 'Request quality', name: 'SHR_RAR', align: 'center', hidden: false, width: 150 },
+            { label: 'Max. reject', name: 'MAX_REJECT', align: 'center', hidden: false, width: 150 },
+            { label: 'Serial quantity', name: 'SHR_SERIAL_QUANT', align: 'center', hidden: false, width: 150 },/*formatter: formatGetRevListLink,*/
+            { label: 'Sample portion', name: 'SHR_QUANT', align: 'center', width: 150 }
+        ],
+        viewrecords: true,
+        altRows: true,
+        direction: 'ltr',
+        autowidth: true,
+        height: null,
+        width: 500,
+        rowNum: 20,
+        //rowList: [10, 30, 50, 100],
+        pager: "#jqGridSelectedSampleQAPager",
+        loadonce: true,
+        subGrid: false,
+        onSelectRow: function (id, rowId, iCol, content, event) {
+            console.log('showGridProd ==> id ', id);
+            var rowData = $(this).getRowData(id);
+            console.log("jqGridSelectedSample ==> onSelectRow rowData = ", rowData);
+            GetSampleTests(rowData);
+        }
+    });
+}
+
+function showGridSampleList(grid_data) {
+    console.log("showGridSampleList ==> grid_data", grid_data);
+    var $grid = $("#jqGridSampleQA"), idsOfSelectedRows = [],
+        updateIdsOfSelectedRows = function (id, isSelected) {
+            $(this).jqGrid("editRow", id);
+            var index = $.inArray(id, idsOfSelectedRows);
+            if (!isSelected && index >= 0) {
+                idsOfSelectedRows.splice(index, 1); // remove id from the list
+            } else if (index < 0) {
+                idsOfSelectedRows.push(id);
+                console.log('IN idsOfSelectedRows');
+            }
+        };
+
+    $("#jqGridSampleQA").jqGrid({
+        guiStyle: "bootstrap",
+        iconSet: "fontAwesome",
+        datatype: "local",
+        data: grid_data,
+        colModel: [
+            { label: 'QA', name: 'QA', align: 'center', key: false, hidden: true, width: 75 },
+            { label: 'DOCNO', name: 'DOCNO', align: 'center', key: false, hidden: true, width: 75 },
+            { label: 'SUPNAME', name: 'SUPNAME', align: 'center', key: false, hidden: true, width: 75 },
+            { label: 'PARTNAME', name: 'PARTNAME', align: 'center', key: false, hidden: true, width: 75 },
+            { label: 'Test code', name: 'QACODE', key: true, hidden: false, width: 85 },
+            { label: 'Description', name: 'QADES', align: 'right', hidden: false, width: 250 },
+            { label: 'Result Min.', name: 'RESULTMIN', align: 'center', editable: true, hidden: false, width: 80 },
+            { label: 'Result Max.', name: 'RESULTMAX', align: 'center', editable: true, hidden: false, width: 80 },/*formatter: formatGetRevListLink,*/
+            { label: 'Repitition', name: 'REPETITION', align: 'center', editable: true, width: 50 },
+            { label: 'Resultant (Y/N)', name: 'RESULTANT', align: 'center', width: 80 },
+            { label: 'Sample Qnt.', name: 'SAMPQUANT', align: 'center', width: 80 }
+        ],
+        viewrecords: true,
+        altRows: true,
+        direction: 'ltr',
+        autowidth: true,
+        height: null,
+        rowNum: 20,
+        //rowList: [10, 30, 50, 100],
+        pager: "#jqGridSampleQAPager",
+        loadonce: true,
+        subGrid: false,
+        multiselect: true,
+        //multiPageSelection: true,
+        onSelectRow: function () {
+            updateIdsOfSelectedRows();
+        },
+        gridComplete: function () {
+            currids = $(this).jqGrid('getDataIDs');
+        },
+        onSelectAll: function (aRowids, isSelected) {
+            var i, count, id;
+            for (i = 0, count = aRowids.length; i < count; i++) {
+                id = aRowids[i];
+                updateIdsOfSelectedRows(id, isSelected);
+            }
+        },
+        loadComplete: function () {
+            console.log('IN loadComplete');
+            var $this = $(this), i, count;
+            for (i = 0, count = idsOfSelectedRows.length; i < count; i++) {
+                $this.jqGrid('setSelection', idsOfSelectedRows[i], false);
+            }
+        },
+        //inlineEditing: {
+        //    keys: true
+        //},
+        // singleSelectClickMode: "selectonly", // prevent unselect once selected rows
+    });
+    $("#jqGridSampleQA").jqGrid('navGrid', '#jqGridSampleQAPager', { edit: false, save: true, add: false, del: false }, {}, {}, {}, { multipleSearch: true, overlay: false });
+    jQuery("#jqGridSampleQA").jqGrid('inlineNav', "#jqGridSampleQAPager", { edit: true, save: true, add: false, del: false }, {}, {}, {}, { multipleSearch: true, overlay: false });
 }

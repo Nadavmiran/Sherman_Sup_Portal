@@ -62,7 +62,7 @@
                     </li>
                 </ul>
             </nav>
-            <div class="main-sidebar sidebar-mini">
+            @*<div class="main-sidebar sidebar-mini">
                 <aside id="sidebar-wrapper">
                     <ul class="sidebar-menu">
                         <li class="menu-header">&nbsp;</li>
@@ -84,11 +84,32 @@
                         </li>
                     </ul>
                 </aside>
-            </div>
+            </div>*@
 
             <div class="main-content">
                 <section class="section">
                     <div class="section-header">
+                        <nav class="navbar navbar-expand-lg main-navbar">
+                            <form class="form-inline mr-auto"></form>
+                            <ul class="navbar-nav navbar-right">
+                                <li class="nav-item dropdown active">
+                                    <a href="@Url.Action("Index", "Home")" class="nav-link" style="background-color:rgb(1,65,111);height:60px;">
+                                        <div class="item">
+                                            <i class="fas fa-home"></i>
+                                            <div class="caption" style="color:#FFF;">Orders</div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li id="mnuSampleList" class="nav-item dropdown active" style="display:none;">
+                                    <a href="#" onclick="OpentestList();" class="nav-link" style="background-color:rgb(1,65,111);height:60px;width:70px;">
+                                        <div class="item">
+                                            <i class="far fa-list-alt"></i>
+                                            <div class="caption" style="color:#FFF;">Tests</div>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
                         <h1>@ViewBag.Title</h1>
                     </div>
                     @RenderBody()

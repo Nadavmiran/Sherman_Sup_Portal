@@ -39,7 +39,7 @@
           body = body.removeAttr('id').clone().removeClass('modal-part');
           part.remove();
         }else{
-          body = '<div class="text-danger">Modal part element not found!</div>';
+            body = '<div class="text-danger" id="modal-error-text" style="font-size:16px;">Modal part element not found!</div>';
         }
       }
 
@@ -76,8 +76,8 @@
         // get option 'id'
         let id = "id" in item ? item.id : '';
 
-        // Button template
-        this_button = '<button type="'+ ("submit" in item && item.submit == true ? 'submit' : 'button') +'" class="'+ item.class +'" id="'+ id +'">'+ item.text +'</button>';
+        // Button template "
+          this_button = '<button type="' + ("submit" in item && item.submit == true ? 'submit' : 'button') +'" data-dismiss="modal" class="'+ item.class +'" id="'+ id +'">'+ item.text +'</button>';
 
         // add click event to the button
         this_button = $(this_button).off('click').on("click", function() {
@@ -156,8 +156,10 @@
       $(document).on("click", '.' + trigger_class, function() {
         let modal = $('#' + id).modal(options.modal);
 
-        if(options.removeOnDismiss) {
-          modal.on('hidden.bs.modal', function() {
+          if (options.removeOnDismiss) {
+            alert('aaaa')
+              modal.on('hidden.bs.modal', function () {
+                  alert('bbb')
             modal.remove();
           });
         }
@@ -168,9 +170,11 @@
   }
 
   // Bootstrap Modal Destroyer
-  $.destroyModal = function(modal) {
+    $.destroyModal = function (modal) {
+        alert('cccc')
     modal.modal('hide');
-    modal.on('hidden.bs.modal', function() {
+        modal.on('hidden.bs.modal', function () {
+            alert('dddd')
     });
   }
 

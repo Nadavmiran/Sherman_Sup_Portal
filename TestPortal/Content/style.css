@@ -1646,7 +1646,9 @@ h6 .badge {
         border-radius: 50%; }
   .navbar .active .nav-link {
     color: #fff;
-    font-weight: 700; }
+    font-weight: 700; 
+    margin-right:10px;
+  }
   .navbar .navbar-text {
     color: #fff; }
   .navbar .nav-link {
@@ -2350,7 +2352,7 @@ pre {
   position: relative;
   z-index: 1; }
   .section > *:first-child {
-    margin-top: -7px; }
+    margin-top: -89px; }
   .section .section-header {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.03);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.03);

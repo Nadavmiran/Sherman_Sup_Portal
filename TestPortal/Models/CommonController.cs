@@ -20,29 +20,39 @@ namespace TestPortal.Models
                 return RedirectToAction("Login", "Account");
             else
             {
-                Test t = new Test();// { TestCode = "12224", TestComments = "No Comments", TestResult = "0.0999", TestType = "89" };
-                Order o = new Order();
-                Product p = new Product();
-                PageObject po = new PageObject();
-                po.objSample = new Sample();
-                po.User = Session["USER_LOGIN"] as AppUser;
-                po.objOrder = o.GetOrderDetails(orderID);//new Order { OrderID = orderID, OrderNumber = orderNumber };
-                if(null != po.objOrder)
+                return View(GetOrder(orderID, orderNumber));
+            }
+        }
+
+        [HttpPost]
+        public JsonResult PostTestProduct(int orderID, string orderNumber)
+        {
+            return Json(GetOrder(orderID, orderNumber));
+        }
+
+        private PageObject GetOrder(int orderID, string orderNumber)
+        {
+            Order o = new Order();
+            Product p = new Product();
+            PageObject po = new PageObject();
+            po.objSample = new Sample();
+            po.User = Session["USER_LOGIN"] as AppUser;
+            po.objOrder = o.GetOrderDetails(orderID);//new Order { OrderID = orderID, OrderNumber = orderNumber };
+            if (null != po.objOrder)
+            {
+                if (null != po.objOrder.PORDERITEMS_SUBFORM)
                 {
-                    if (null != po.objOrder.PORDERITEMS_SUBFORM)
+                    po.lstItemsObject = new List<OrderItems>();
+                    po.lstItemsObject.AddRange(po.objOrder.PORDERITEMS_SUBFORM);
+                    foreach (OrderItems item in po.lstItemsObject)
                     {
-                        po.lstItemsObject = new List<OrderItems>();
-                        po.lstItemsObject.AddRange(po.objOrder.PORDERITEMS_SUBFORM);
-                        foreach (OrderItems item in po.lstItemsObject)
-                        {
-                            item.ORD = po.objOrder.ORD;
-                        }
+                        item.ORD = po.objOrder.ORD;
+                        item.ORDNAME = po.objOrder.ORDNAME;
                     }
                 }
-                po.objProduct = new OrderItems();// { OrderID = 0, OrderNumber = string.Empty, LeftAmountToDeliver = 0, TotalAmountInOrder = 0, LineStatus = string.Empty, ProductDescription = string.Empty, ProductID = 0, ProductName = string.Empty, SupplyDate = string.Empty };
-                po.TestObject = t;
-                return View(po);
             }
+            po.objProduct = new OrderItems();// { OrderID = 0, OrderNumber = string.Empty, LeftAmountToDeliver = 0, TotalAmountInOrder = 0, LineStatus = string.Empty, ProductDescription = string.Empty, ProductID = 0, ProductName = string.Empty, SupplyDate = string.Empty };
+            return po;
         }
 
         [HttpPost]
@@ -88,7 +98,6 @@ namespace TestPortal.Models
 
         private object getPostProductTestData(int orderID, string prodName, int ordLine)
         {
-            Test t = new Test { TestCode = "12224", TestComments = "No Comments", TestResult = "0.0999", TestType = "89" };
             Sample s = new Sample();
             Order o = new Order();
             Product p = new Product();
@@ -100,7 +109,8 @@ namespace TestPortal.Models
             if ((null != po.objOrder.PORDERITEMS_SUBFORM) && (po.objOrder.PORDERITEMS_SUBFORM.Length > 0))
             {
                 po.objProduct = po.objOrder.PORDERITEMS_SUBFORM[0];
-
+                po.objProduct.ORD = po.objOrder.ORD;
+                po.objProduct.ORDNAME = po.objOrder.ORDNAME;
                 // Get order line text
                 if ((null != po.objOrder.PORDERITEMS_SUBFORM[0].PORDERITEMSTEXT_SUBFORM) && (po.objOrder.PORDERITEMS_SUBFORM[0].PORDERITEMSTEXT_SUBFORM.Length > 0))
                 {
@@ -109,7 +119,7 @@ namespace TestPortal.Models
 
                 if (null != po.objProduct)
                 {
-                    GetProductObjAndSamples(orderID, ordLine, ref po);
+                    GetProductObjAndSamples(po.objOrder.OrderID, po.objOrder.OrderNumber, po.objProduct.PARTNAME, ordLine, ref po);
                 }
 
                 string rev = string.IsNullOrEmpty(po.objProduct.REVNAME) ? po.objProduct.SHR_SERIAL_REVNUM : po.objProduct.REVNAME;
@@ -120,10 +130,9 @@ namespace TestPortal.Models
                 else
                 {
                     // Get Sampels
-                    //po.objSample = s.GetProductSamples(po.User.Supplier_ID, po.objProduct.PARTNAME, po.objProduct.REVNAME, po.objProduct.LINE);
                     if ((null != po.objSample) && (null != po.objSample.MED_TRANSSAMPLEQA_SUBFORM) && (po.objSample.MED_TRANSSAMPLEQA_SUBFORM.Count > 0))
                     {
-                        po.objSample.pageCURDATE = po.objSample.CURDATE.ToShortDateString();
+                        //po.objSample.pageCURDATE = po.objSample.CURDATE.ToShortDateString();
                         foreach (Sample_QA item in po.objSample.MED_TRANSSAMPLEQA_SUBFORM)
                         {
                             item.DOCNO = po.objSample.DOCNO;
@@ -157,7 +166,6 @@ namespace TestPortal.Models
                     }
                 }
             }
-            po.TestObject = t;
             return po;
         }
 
@@ -181,6 +189,7 @@ namespace TestPortal.Models
                 for (int i = 0; i < po.objOrder.PORDERITEMS_SUBFORM.Length; i++)
                 {
                     po.objOrder.PORDERITEMS_SUBFORM[i].ORD = po.objOrder.ORD;
+                    po.objOrder.PORDERITEMS_SUBFORM[i].ORDNAME = po.objOrder.ORDNAME;
                 }
             }
 
@@ -188,7 +197,7 @@ namespace TestPortal.Models
             po.objProduct = po.lstItemsObject.Where(x => x.ORD == orderID && x.LINE == ordLine).SingleOrDefault();
             if (null != po.objProduct)
             {
-                GetProductObjAndSamples(orderID, ordLine, ref po);
+                GetProductObjAndSamples(po.objOrder.OrderID, po.objOrder.OrderNumber, po.objProduct.PARTNAME, ordLine, ref po);
             }
             // Get Attachments
             if ((null == po.objOrder.EXTFILES_SUBFORM) || (po.objOrder.EXTFILES_SUBFORM.Length == 0))
@@ -199,33 +208,37 @@ namespace TestPortal.Models
             return po;
         }
 
-        private void GetProductObjAndSamples(int orderID, int ordLine, ref PageObject po)
+        private void GetProductObjAndSamples(int orderID, string orderName, string prodName, int ordLine, ref PageObject po)
         {
             Sample s = new Sample();
-            try
+            Order o = new Order();
+            if (null != po.objOrder)
             {
-                po.objSample = s.GetProductSamples(po.User.Supplier_ID, po.objProduct.PARTNAME, po.objProduct.REVNAME, po.objProduct.LINE);
-                
-                if ((null != po.objSample) && (!string.IsNullOrEmpty(po.objSample.DOCNO)) && (null != po.objSample.MED_TRANSSAMPLEQA_SUBFORM) && (po.objSample.MED_TRANSSAMPLEQA_SUBFORM.Count > 0))
+                try
                 {
-                    po.objSample.pageCURDATE = po.objSample.CURDATE.ToShortDateString();
-                    foreach (Sample_QA item in po.objSample.MED_TRANSSAMPLEQA_SUBFORM)
+                    if ((null != po.objOrder.PORDERITEMS_SUBFORM) && (po.objOrder.PORDERITEMS_SUBFORM.Length > 0))
                     {
-                        item.DOCNO = po.objSample.DOCNO;
-                        item.SUPNAME = po.objSample.SUPNAME;
-                        item.PARTNAME = po.objSample.PARTNAME;
+                        po.objProduct = po.objOrder.PORDERITEMS_SUBFORM[0];
+                        po.objProduct.ORD = po.objOrder.ORD;
+                        po.objProduct.ORDNAME = po.objOrder.ORDNAME;
+                        po.objSample = s.GetProductSamples(po.User.Supplier_ID, po.objOrder.ORDNAME, po.objProduct.PARTNAME, ordLine);
+
+                        if ((null != po.objSample) && (!string.IsNullOrEmpty(po.objSample.DOCNO)))
+                        {
+                            //po.objSample.pageCURDATE = po.objSample.CURDATE.ToShortDateString();
+                            foreach (Sample_QA item in po.objSample.MED_TRANSSAMPLEQA_SUBFORM)
+                            {
+                                item.DOCNO = po.objSample.DOCNO;
+                                item.SUPNAME = po.objSample.SUPNAME;
+                                item.PARTNAME = po.objSample.PARTNAME;
+                            }
+                        }
                     }
                 }
-                else
+                catch (Exception ex)
                 {
-                    Sample_QA sq = new Sample_QA();
-                    po.lstSamplQA = sq.GetCommonSamplesList();
+                    AppLogger.log.Info("GetProductObjAndSamples ==> exeption = ", ex);
                 }
-                //}
-            }
-            catch (Exception ex)
-            {
-                AppLogger.log.Info("GetProductObjAndSamples ==> exeption = ", ex);
             }
         }
 
@@ -440,22 +453,30 @@ namespace TestPortal.Models
         }
 
         [HttpPost]
-        public JsonResult CreateTest(string supName, string partName, string qaCode)
+        public JsonResult CreateTest(string supName, string partName, bool isNewDoc, string ordName, string qaCode)
         {
             ResultAPI ra = null;
-            Sample s = null;
+            Sample s = new Sample();
             PageObject po = new PageObject();
             CreateSampleTestMsgWarpper ow = JsonConvert.DeserializeObject<CreateSampleTestMsgWarpper>(qaCode);
             if(null != ow)
             {
-                s = new Sample();
-                po.objSample = s.GetProductSamples(supName, partName, string.Empty, 0);
-                if ((null == po.objSample) || (string.IsNullOrEmpty(po.objSample.DOCNO)))
-                    ra = s.Createtest(supName, partName, ow.form, true);
+                if (isNewDoc)
+                {
+                    ra = s.Createtest(supName, ordName, partName, ow.form, true);
+                }
                 else
-                    ra = s.AddSampleTests(supName, partName, ow.form, false, po.objSample.DOCNO);
+                {
+                    po.objSample = s.GetProductSamples(supName, ordName, partName, 0);
+                    if ((null == po.objSample) || (string.IsNullOrEmpty(po.objSample.DOCNO)))
+                        ra = s.Createtest(supName, ordName, partName, ow.form, true);
+                    else
+                        ra = s.AddSampleTests(supName, ordName, partName, ow.form, false, po.objSample.DOCNO);
+
+                }
                 //Get the test list after creation or update
-                po.objSample = s.GetProductSamples(supName, partName, string.Empty, 0);
+                po.objSample = s.GetProductSamples(supName, ordName, partName, 0);
+                po.lstSampleObject = s.GetOrderSamples(ordName, supName, partName);
             }
             return Json(po);
         }
@@ -471,10 +492,68 @@ namespace TestPortal.Models
             return Json(po);
         }
 
-        public ActionResult QA_Page()
+        public ActionResult QA_Page(int orderID, string orderName, string prodName, int ordLine)
         {
-            return View();
+            if (Session["USER_LOGIN"] == null)
+                return RedirectToAction("Login", "Account");
+            return View(getProductQaData(orderID, orderName, prodName, ordLine));
         }
 
+        private PageObject getProductQaData(int orderID, string orderName, string prodName, int ordLine)
+        {
+            OrderItems oi = new OrderItems();
+            PageObject po = new PageObject();
+            Sample s = new Sample();
+            po.User = Session["USER_LOGIN"] as AppUser;
+
+            if (string.IsNullOrEmpty(orderName) || (orderName.Equals("undefined")))
+            {
+                Order o = new Order();
+                po.objOrder = o.GetOrderDetails(orderID);
+                if (null != po.objOrder)
+                    orderName = po.objOrder.ORDNAME;
+            }
+            //GetProductObjAndSamples(orderID, orderName, prodName, ordLine, ref po);
+            po.objOrder = oi.GetProductDetailse(po.User.Supplier_ID, orderName, prodName);
+            if(null == po.objOrder)
+                return po;
+            po.objProduct = po.objOrder.PORDERITEMS_SUBFORM[0];
+            po.lstSampleObject = s.GetOrderSamples(orderName, po.User.Supplier_ID, prodName);
+            // Get Attachments
+            if ((null == po.objOrder.EXTFILES_SUBFORM) || (po.objOrder.EXTFILES_SUBFORM.Length == 0))
+            {
+                GetProductAttachments(orderID, prodName, ref po);
+            }
+            else
+            {
+                po.lstAttachments = new List<Attachments>();
+                po.lstAttachments.AddRange(po.objOrder.EXTFILES_SUBFORM);
+                foreach (Attachments item in po.lstAttachments)
+                {
+                    string[] arr = item.EXTFILENAME.Split('\\'); //item.EXTFILENAME.Split(' / ');
+                    if (string.IsNullOrEmpty(arr[arr.Length - 1]))
+                    {
+                        item.FILE_NAME = arr[0];
+                        item.FOLDER = arr[1];
+                    }
+                    else
+                    {
+                        item.FILE_NAME = arr[arr.Length - 1];
+                        item.FOLDER = arr[arr.Length - 2];
+                    }
+                }
+            }
+
+            return po;
+        }
+
+        [HttpPost]
+        public JsonResult GetSampleTests(string DOCNO)
+        {
+            Sample s = new Sample();
+            PageObject po = new PageObject();
+            po.objSample = s.GetProductSamples(DOCNO);
+            return Json(po);
+        }
     }
 }

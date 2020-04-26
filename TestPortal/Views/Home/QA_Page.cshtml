@@ -1,159 +1,90 @@
-﻿
+﻿@model TestPortal.Models.PageObject
 @{
-    ViewBag.Title = "QA Page";
+    ViewBag.Title = "Testing Arena";
     Layout = "~/Views/Shared/_Layout_EN.cshtml";
 }
 
-<link href="~/Content/style_Wizard_EN.css" rel="stylesheet" />
-<div class="main">
-
-    <div class="container">
-        <h2>Sign up to great new account </h2>
-        <form method="POST" id="signup-form" class="signup-form">
-            <h3>
-                <span class="title_text">Account Infomation</span>
-            </h3>
-            <fieldset>
-                <div class="fieldset-content">
-                    <div class="form-group">
-                        <label for="username" class="form-label">Username</label>
-                        <input type="text" name="username" id="username" placeholder="User Name" />
-                    </div>
-                    <div class="form-group">
-                        <label for="email" class="form-label">Email</label>
-                        <input type="email" name="email" id="email" placeholder="Your Email" />
-                    </div>
-                    <div class="form-group form-password">
-                        <label for="password" class="form-label">Password</label>
-                        <input type="password" name="password" id="password" data-indicator="pwindicator" />
-                        <div id="pwindicator">
-                            <div class="bar-strength">
-                                <div class="bar-process">
-                                    <div class="bar"></div>
-                                </div>
-                            </div>
-                            <div class="label"></div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="your_avatar" class="form-label">Select avatar</label>
-                        <div class="form-file">
-                            <input type="file" name="your_avatar" id="your_avatar" class="custom-file-input" />
-                            <span id='val'></span>
-                            <span id='button'>Select File</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="fieldset-footer">
-                    <span>Step 1 of 3</span>
-                </div>
-            </fieldset>
-
-            <h3>
-                <span class="title_text">Personal Information</span>
-            </h3>
-            <fieldset>
-
-                <div class="fieldset-content">
-                    <div class="form-group">
-                        <label for="full_name" class="form-label">Full name</label>
-                        <input type="text" name="full_name" id="full_name" placeholder="Full Name" />
-                    </div>
-
-                    <div class="form-select">
-                        <label for="country" class="form-label">Country</label>
-                        <select name="country" id="country">
-                            <option value="">Country</option>
-                            <option value="Australia">Australia</option>
-                            <option value="USA">America</option>
-                        </select>
-                    </div>
-
-                    <div class="form-radio">
-                        <label for="gender" class="form-label">Gender</label>
-                        <div class="form-radio-item">
-                            <input type="radio" name="gender" value="male" id="male" checked="checked" />
-                            <label for="male">Male</label>
-
-                            <input type="radio" name="gender" value="female" id="female" />
-                            <label for="female">Female</label>
-                        </div>
-                    </div>
-
-                    <div class="form-textarea">
-                        <label for="about_us" class="form-label">About us</label>
-                        <textarea name="about_us" id="about_us" placeholder="Who are you ..."></textarea>
-                    </div>
-                </div>
-
-                <div class="fieldset-footer">
-                    <span>Step 2 of 3</span>
-                </div>
-
-            </fieldset>
-
-            <h3>
-                <span class="title_text">Payment Details</span>
-            </h3>
-            <fieldset>
-                <div class="fieldset-content">
-                    <div class="form-radio">
-                        <label for="payment_type">Payment Type</label>
-                        <div class="form-radio-flex">
-                            <input type="radio" name="payment_type" id="payment_visa" value="payment_visa" checked="checked" />
-                            <label for="payment_visa"><img src="images/icon-visa.png" alt=""></label>
-
-                            <input type="radio" name="payment_type" id="payment_master" value="payment_master" />
-                            <label for="payment_master"><img src="images/icon-master.png" alt=""></label>
-
-                            <input type="radio" name="payment_type" id="payment_paypal" value="payment_paypal" />
-                            <label for="payment_paypal"><img src="images/icon-paypal.png" alt=""></label>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="credit_card" class="form-label">Credit Card</label>
-                            <input type="text" name="credit_card" id="credit_card" />
-                        </div>
-                        <div class="form-group">
-                            <label for="cvc" class="form-label">CVC</label>
-                            <input type="text" name="cvc" id="cvc" />
-                        </div>
-                    </div>
-                    <div class="form-date">
-                        <label for="expiry_date">Expiration Date</label>
-                        <div class="form-flex">
-                            <div class="form-date-item">
-                                <select id="expiry_date" name="expiry_date"></select>
-                                <span class="select-icon"><i class="zmdi zmdi-chevron-down"></i></span>
-                            </div>
-                            <div class="form-date-item">
-                                <select id="expiry_year" name="expiry_year"></select>
-                                <span class="select-icon"><i class="zmdi zmdi-chevron-down"></i></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="name_of_card" class="form-label">Name of card</label>
-                        <input type="text" name="name_of_card" id="name_of_card" />
-                    </div>
-                </div>
-
-                <div class="fieldset-footer">
-                    <span>Step 3 of 3</span>
-                </div>
-            </fieldset>
-        </form>
+<script>
+    $.jgrid.defaults.responsive = true;
+    $.jgrid.defaults.shrinkToFit = false;
+</script>
+<div class="section-body" id="mainPageContent" style="overflow-y:scroll; overflow-x:hidden;">
+    <div class="row">
+        @Html.Partial("_OrderLineDetails")
     </div>
+    @*@Html.Partial("_SampleDetails")*@
+    <div class="row">
+        <div class="col-8 col-md-8 col-lg-8">
+            <div class="card">
+                <div class="card-header">
+                    <h4><i class="fas fa-certificate" style="font-size: 20px;"></i> Product samples list</h4>
+                </div>
+                <div class="card-body">
+                    <div>
+                        <table id="jqGridPartSampls"></table>
+                        <div id="jqGridPartSamplsPager"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-4 col-md-4 col-lg-4">
+            <div class="card">
+                <div class="card-header">
+                    <h4><i class="fas fa-download" style="font-size: 20px;"></i> Serial files</h4>
+                </div>
+                <div class="card-body">
+                    <div>
+                        <table id="jqGridAttachments"></table>
+                        @*<div id="jqGridAttachmentsPager"></div>*@
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-12 col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4><i class="fab fa-rev" style="font-size: 20px;"></i> Product test list</h4>
+                </div>
+                <div class="card-body">
+                    <div>
+                        <table id="jqGridRevision"></table>
+                        <div id="jqGridRevisionPager"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button class="btn btn-primary" id="modal-8" style="visibility:hidden;">New Test</button>
+    <button class="btn btn-danger" id="modal-1" style="visibility:hidden;">Error</button>
+    <button class="btn btn-danger" id="modal-10" style="visibility:hidden;">Sample list</button>
+    <button class="btn btn-danger" id="modal-21" style="visibility:hidden;">System message</button>
+    <div id="modal-error" class="card"></div>
 
+    <div id="navGetSampleTest" data-url="@Url.Action("GetSampleTests", "Home")"></div>
+    <div id="navGetSampleTestList" data-url="@Url.Action("GetSampleTestList", "Home")"></div>
+    <div id="navCreateTest" data-url="@Url.Action("CreateTest", "Home")"></div>
+    @Html.Partial("_Sample_QA")
+    @Html.Partial("_SampleQA_List")
 </div>
-<!-- JS -->
-<script src="~/Scripts/jquery.min.js"></script>
-<script src="~/Scripts/jquery.validate.min.js"></script>
-<script src="~/Scripts/additional-methods.min.js"></script>
-<script src="~/Scripts/jquery.steps.min.js"></script>
-<script src="~/Scripts/dobpicker.js"></script>
-<script src="~/Scripts/jquery.pwstrength.min.js"></script>
-<script src="~/Scripts/main.js"></script>
+<script type="text/javascript">
+    $.jgrid.defaults.responsive = true;
+    $.jgrid.defaults.shrinkToFit = false;
+$(window).load(function () {
 
+    $('.section-body').css('height', $(document).innerHeight() - ($(document).innerHeight() / 30));
+    $('.section-body').css('height', $('.section-body').height() - ($(document).innerHeight() - $('.section-body').height()));
+});
 
+$(document).ready(function () {
+    $("#loader").show();
+    var data = @Html.Raw(Json.Encode(Model));
+    console.log('$(document).ready ==> data = ', data);
+    InitQAPageData(data);
+
+    $('.section-body').css('height', $(document).innerHeight() - ($(document).innerHeight() / 30));
+    $('.section-body').css('height', $('.section-body').height() - ($(document).innerHeight() + $('.section-body').height()));
+});
+
+</script>

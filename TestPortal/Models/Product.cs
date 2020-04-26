@@ -63,40 +63,8 @@ namespace TestPortal.Models
             }
             return lst;
         }
+        
 
-        internal Product GetProductDetailse(int orderID, int prodId, int ordLine)
-        {
-            Dal d = new Dal();
-            Product obj = null;
-            try
-            {
-                SqlDataReader dr = d.GetRecordSet("LMNS_GetProductDetails", new SqlParameter("@ord", orderID), new SqlParameter("@prodId", prodId), new SqlParameter("@ordeLine", ordLine));
-                while (dr.Read())
-                {
-                    obj = new Product();
-                    obj.OrderID = orderID;
-                    obj.ProductID = prodId;
-                    obj.LINE = ordLine;
-                    obj.ProductName = dr["PARTNAME"].ToString();
-                    obj.TYPE = dr["TYPE"].ToString();
-                    obj.ProductDescription = dr["PARTDES"].ToString();
-                    obj.TotalAmountInOrder = Convert.ToInt32(dr["TQUANT"].ToString());
-                    obj.LeftAmountToDeliver = Convert.ToInt32(dr["TBALANCE"].ToString());
-                    obj.SupplyDate = dr["REQDATE"].ToString();
-                    obj.EstimateSupplyDate = dr["ARRDATE"].ToString();
-                    obj.REVNUM = dr["REVNUM"].ToString();
-                    if (string.IsNullOrEmpty(dr["REV"].ToString()))
-                        obj.REV = 0;
-                    else
-                        obj.REV = Convert.ToInt32(dr["REV"].ToString());
-                }
-            }
-            catch (Exception ex)
-            {
-                AppLogger.log.Error("GetProductDetailse ==> SP = LMNS_GetProductDetails ==> ORD [key] = " + orderID + " ==> @prodId = " + prodId + " Line = " + ordLine, ex);
-            }
-            return obj;
-        }
 
         
     }

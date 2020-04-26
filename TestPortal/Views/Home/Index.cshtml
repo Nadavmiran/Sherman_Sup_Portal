@@ -18,9 +18,18 @@
         </div>
     </div>
     <div id="loader" class="loader"></div>
+
+    <form>
+        <button class="btn btn-danger" id="modal-12" style="visibility:hidden;">Order Details</button>
+    </form>
+    <form id="modal-order-part" role="form" class="">
+        @Html.Partial("_OrderDetails")
+        @Html.Partial("_OrderLineDetails")
+        
+    </form>
 </div>
-@*<div id="navOrder" data-url="@Url.Action("TestProduct", "Home")"></div>
-<div id="navProdItem" data-url="@Url.Action("TestProductItem", "Home")"></div>*@
+<div id="navOrder" data-url="@Url.Action("PostTestProductItem", "Home")"></div>
+@*<div id="navProdItem" data-url="@Url.Action("TestProductItem", "Home")"></div>*@
 <script type="text/javascript">
     var gridBaseWidth = 0;
     var isWidth = false;
@@ -44,6 +53,7 @@
 
     $(document).ready(function () {
         document.getElementById('mnuSampleList').style.display = 'none';
+        document.getElementById('mnuPartsList').style.display = 'none';
         $("#loader").show();
         getData("@Model.User.Supplier_ID");
 
@@ -61,6 +71,6 @@
         $('.section-body').css('height', $(document).innerHeight() - ($(document).innerHeight() / 30));
         $('.section-body').css('height', $('.section-body').height() - ($(document).innerHeight() + $('.section-body').height()));
     });
-</script>
+        </script>
 
 

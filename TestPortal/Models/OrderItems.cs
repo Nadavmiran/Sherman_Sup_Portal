@@ -1,4 +1,5 @@
 ﻿using LMNS.Priority.API;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,10 @@ namespace TestPortal.Models
         /// הזמנה
         /// </summary>
         public int ORD { get; set; }
+        /// <summary>
+        /// הזמנה
+        /// </summary>
+        public string ORDNAME { get; set; }
         /// <summary>
         /// שורה
         /// </summary>
@@ -97,7 +102,7 @@ namespace TestPortal.Models
         /// סטטוס שורת הזמנה
         /// </summary>
         public string PORDISTATUSDES { get; set; }
-        public OrdersItemText[] PORDERITEMSTEXT_SUBFORM { get; set; } 
+        public OrdersItemText[] PORDERITEMSTEXT_SUBFORM { get; set; }
         #endregion
 
         // TO ADD LATER
@@ -105,5 +110,18 @@ namespace TestPortal.Models
         /// סיבת דחייה
         /// </summary>
         //public string XXXXX { get; set; }
+
+        internal Order GetProductDetailse(string SUPNAME, string ORDNAME, string PARTNAME)
+        {
+            string query = "PORDERS?$filter=SUPNAME eq '" + SUPNAME + "' and ORDNAME eq '" + ORDNAME + "'&$expand=PORDERITEMS_SUBFORM($filter=PARTNAME eq '" + PARTNAME + "')";
+            string res = Call_Get(query);
+
+            OrdersWarpper ow = JsonConvert.DeserializeObject<OrdersWarpper>(res);
+            if ((null != ow) && (null != ow.Value) && (ow.Value.Count > 0))
+            {
+                return ow.Value[0];
+            }
+            return null;
+        }
     }
 }

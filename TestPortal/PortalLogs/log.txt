@@ -118,3 +118,7 @@ System.IO.DirectoryNotFoundException: Could not find a part of the path 'H:\DEV\
    at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
    at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
    at TestPortal.Models.CommonController.Download(String fileFolder, String fileName) in H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\Models\CommonController.cs:line 328
+INFO  2020-04-22 10:12:28,893   513ms eporting Portal Logger oductObjAndSamples - GetProductObjAndSamples ==> exeption = 
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at TestPortal.Models.CommonController.GetProductObjAndSamples(String orderName, String prodName, Int32 ordLine, PageObject& po) in H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\Models\CommonController.cs:line 216
+DEBUG 2020-04-23 13:56:55,307   221ms eporting Portal Logger CreateResultApi    - FunctionName = CreateResultApiExceptionMsg = Object reference not set to an instance of an object.
