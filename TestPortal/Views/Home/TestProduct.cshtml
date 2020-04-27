@@ -8,189 +8,8 @@
     $.jgrid.defaults.shrinkToFit = false;
 </script>
 <div class="section-body" id="mainPageContent">
-    @*style="overflow-y:scroll;"*@
-
 <div class="row">
     @Html.Partial("_OrderDetails")
-    @*<div class="col-6 col-md-6 col-lg-6">
-            <div class="card">
-                <div class="col-12">
-                    <form>
-                        <div class="card-header">
-                            <h4><i class="fas fa-certificate" style="font-size: 20px;"></i> Sample</h4>
-                        </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="form-group col-md-3 col-12">
-                                    <label class="control-label" style="color:#01416F; font-weight:bolder;">Sample #</label>
-                                    <div class="col-sm-3">
-                                        <label class="control-label" id="lbl_S_DOCNO">@Model.objSample.DOCNO</label>
-                                    </div>
-                                </div>
-                                <div class="form-group col-md-3 col-12">
-                                    <label class="control-label" style="color:#01416F; font-weight:bolder;">Sample date</label>
-                                    <div class="col-sm-3">
-                                        <label class="control-label" id="lbl_S_CURDATE">@Convert.ToDateTime(Model.objSample.CURDATE).ToShortDateString()</label>
-                                    </div>
-                                </div>
-                                <div class="form-group col-md-3 col-12">
-                                    <label class="control-label" style="color:#01416F; font-weight:bolder;">Quantity</label>
-                                    <div class="col-sm-3">
-                                        <label class="control-label" id="lbl_S_QUANT">@Model.objSample.QUANT</label>
-                                    </div>
-                                </div>
-                                <div class="form-group col-md-3 col-12">
-                                    <label class="control-label" style="color:#01416F; font-weight:bolder;">Serial </label>
-                                    <div class="col-sm-3">
-                                        <label class="control-label" id="lbl_S_SERIALNAME">@Model.objSample.SERIALNAME</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="form-group col-md-3 col-12">
-                                    <label class="control-label" style="color:#01416F; font-weight:bolder;">Request quality</label>
-                                    <div class="col-sm-3">
-                                        <label class="control-label" id="lbl_S_SHR_RAR">@Model.objSample.SHR_RAR</label>
-                                    </div>
-                                </div>
-                                <div class="form-group col-md-3 col-12">
-                                    <label class="control-label" style="color:#01416F; font-weight:bolder;">Serial quant.</label>
-                                    <div class="col-sm-3">
-                                        <label class="control-label" id="lbl_S_SHR_SERIAL_QUANT">@Model.objSample.SHR_SERIAL_QUANT</label>
-                                    </div>
-                                </div>
-                                <div class="form-group col-md-3 col-12">
-                                    <label class="control-label" style="color:#01416F; font-weight:bolder;">Status</label>
-                                    <div class="col-sm-3">
-                                        <label class="control-label" id="lbl_S_STATDES">@Model.objSample.STATDES</label>
-                                    </div>
-                                </div>
-                                <div class="form-group col-md-3 col-12">
-                                    <label class="control-label" style="color:#01416F; font-weight:bolder;">Sampling standard</label>
-                                    <div class="col-sm-3">
-                                        <label class="control-label" id="lbl_S_SHR_SAMPLE_STD_CODE">@Model.objSample.SHR_SAMPLE_STD_CODE</label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>*@
-    @*<div class="col-12 col-md-12 col-lg-12">
-            <div class="card">
-                <div class="col-12">
-                    <form>
-                        <input type="hidden" id="hdnOrdId" value="@Model.objOrder.ORD" />
-                        <input type="hidden" id="hdnPrdId" value="@Model.objProduct.PARTNAME" />
-                        <div class="card-header">
-                            <h4><i class="fas fa-puzzle-piece" style="font-size: 20px;"></i> Product information</h4>
-                            <button class="btn btn-primary" id="modal-8" style="visibility:hidden;">New Test</button>
-                            <button class="btn btn-danger" id="modal-1" style="visibility:hidden;">Error</button>
-                            <button class="btn btn-danger" id="modal-10" style="visibility:hidden;">Sample list</button>
-                        </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="form-group col-md-2 col-12">
-                                    <label class="control-label" style="color:#01416F; font-weight:bolder;">Line #</label>
-                                    <div class="col-sm-2">
-                                        <label class="control-label" id="lblLineNun">@Model.objProduct.LINE</label>
-                                    </div>
-                                </div>
-                                <div class="form-group col-md-2 col-12">
-                                    <label class="control-label" style="color:#01416F; font-weight:bolder;">Catalog number</label>
-                                    <div class="col-sm-2">
-                                        <label class="control-label" id="lblProductName">@Model.objProduct.PARTNAME</label>
-                                    </div>
-                                </div>
-                                <div class="form-group col-md-2 col-12">
-                                    <label class="control-label" style="color:#01416F; font-weight:bolder;">Supply date</label>
-                                    <div class="col-sm-2">
-                                        <label class="control-label" id="lblSupplyDate">@Model.objProduct.pageREQDATE</label>
-                                    </div>
-                                </div>
-                                <div class="form-group col-md-2 col-12">
-                                    <label class="control-label " style="color:#01416F; font-weight:bolder;">Serial</label>
-                                    <div class="col-sm-2">
-                                        <label class="control-label" id="lbl_SERIALNAME">@Model.objProduct.SERIALNAME</label>
-                                    </div>
-                                </div>
-                                <div class="form-group col-md-4 col-12">
-                                    <label class="control-label" style="color:#01416F; font-weight:bolder;">Pro. description</label>
-                                    <div class="col-sm-4">
-                                        <label class="control-label" id="lblProductDescription">@Model.objProduct.PDES</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="form-group col-md-2 col-12">
-                                    <label class="control-label" style="color:#01416F; font-weight:bolder;">req. supply date</label>
-                                    <div class="col-sm-2">
-                                        <label class="control-label" id="lbl_REQDATE2">@Model.objProduct.REQDATE2</label>
-                                    </div>
-                                </div>
-                                <div class="form-group col-md-2 col-12">
-                                    <label class="control-label" style="color:#01416F; font-weight:bolder;">Quantity</label>
-                                    <div class="col-sm-2">
-                                        <label class="control-label" id="lblTotalAmountInOrder">@Model.objProduct.TQUANT</label>
-                                    </div>
-                                </div>
-                                <div class="form-group col-md-2 col-12">
-                                    <label class="control-label" style="color:#01416F; font-weight:bolder;">Balance for supply</label>
-                                    <div class="col-sm-2">
-                                        <label class="control-label" id="lblLeftAmountToDeliver">@Model.objProduct.TBALANCE</label>
-                                    </div>
-                                </div>
-                                <div class="form-group col-md-2 col-12">
-                                    <label class="control-label" style="color:#01416F; font-weight:bolder;">Action</label>
-                                    <div class="col-sm-2">
-                                        <label class="control-label" id="lbl_ACTNAME">@Model.objProduct.ACTNAME</label>
-                                    </div>
-                                </div>
-                                <div class="form-group col-md-4 col-12">
-                                    <label class="control-label" style="color:#01416F; font-weight:bolder;">Drow</label>
-                                    <div class="col-sm-4">
-                                        <label class="control-label" id="lbl_SHR_DRAW">@Model.objProduct.SHR_DRAW</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="form-group col-md-2 col-12">
-                                    <label class="control-label" style="color:#01416F; font-weight:bolder;">Manufacturer name</label>
-                                    <div class="col-sm-2">
-                                        <label class="control-label" id="lbl_SHR_MNFDES">@Model.objProduct.SHR_MNFDES</label>
-                                    </div>
-                                </div>
-                                <div class="form-group col-md-2 col-12">
-                                    <label class="control-label" style="color:#01416F; font-weight:bolder;">Manufacturer catalog</label>
-                                    <div class="col-sm-2">
-                                        <label class="control-label" id="lbl_SHR_MNFPARTNAME">@Model.objProduct.SHR_MNFPARTNAME</label>
-                                    </div>
-                                </div>
-                                <div class="form-group col-md-2 col-12">
-                                    <label class="control-label" style="color:#01416F; font-weight:bolder;">Product tree edition</label>
-                                    <div class="col-sm-2">
-                                        <label class="control-label" id="lbl_SHR_SERIAL_REVNUM">@Model.objProduct.SHR_SERIAL_REVNUM</label>
-                                    </div>
-                                </div>
-                                <div class="form-group col-md-2 col-12">
-                                    <label class="control-label" style="color:#01416F; font-weight:bolder;">Product edition</label>
-                                    <div class="col-sm-2">
-                                        <label class="control-label" id="lbl_REVNAME">@Model.objProduct.REVNAME</label>
-                                    </div>
-                                </div>
-                                <div class="form-group col-md-4 col-12">
-                                    <label class="control-label" style="color:#01416F; font-weight:bolder;">Reason for rejection</label>
-                                    <div class="col-sm-4">
-                                        <label class="control-label" id="lblReasonRejection"></label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>*@
 </div>
 <div class="row">
     <div class="col-12 col-md-12 col-lg-12">
@@ -205,34 +24,9 @@
                 </div>
             </div>
         </div>
-        @*<div class="card">
-                <div class="card-header">
-                    <h4><i class="fas fa-download" style="font-size: 20px;"></i> Serial files</h4>
-                </div>
-                <div class="card-body">
-                    <div>
-                        <table id="jqGridAttachments"></table>
-                        <div id="jqGridAttachmentsPager"></div>
-                    </div>
-                </div>
-            </div>*@
     </div>
 </div>
-    @*<div class="col-12 col-md-6 col-lg-6">
-            <div class="card">
-                <div class="card-header">
-                    <h4><i class="fab fa-rev" style="font-size: 20px;"></i> Product samples list</h4>
-                </div>
-                <div class="card-body">
-                    <div>
-                        <table id="jqGridRevision"></table>
-                        <div id="jqGridRevisionPager"></div>
-                    </div>
-                </div>
-            </div>
-        </div>*@
-    @*</div>*@
-@*FORM WAS HERE **@
+
     <div id="modal-error" class="card">
         <p id="modal-error-text"></p>
     </div>
@@ -247,10 +41,7 @@
     <div id="navGetOrderProductTests" data-url="@Url.Action("GetOrderProductTests", "Home")"></div>
     <div id="navTestProductItemData" data-url="@Url.Action("TestProductItemData", "Home")"></div>
     <div id="navGetProductRevisionList" data-url="@Url.Action("GetProductRevisionList", "Home")"></div>
-    <div id="navDownload" data-url="@Url.Action("Download", "Home_IL")"></div>
-    <div id="navDownloadFile" data-url="@Url.Action("GetProductRevisionList", "Home")"></div>
-    <div id="navSaveTest" data-url="@Url.Action("SaveTest", "Home")"></div>
-    <div id="navUploadFiles" data-url="@Url.Action("UploadFiles", "Home")"></div>
+
     <div id="navGetSampleTestList" data-url="@Url.Action("GetSampleTestList", "Home")"></div>
 </div>
 <script type="text/javascript">

@@ -11,7 +11,7 @@
 <!-- Main Content -->
 <div class="section-body" id="mainPageContent" style="overflow-y:scroll;">
     <div class="card">
-        <div class="card-body" >
+        <div class="card-body">
             <div>
                 <table id="jqGrid"></table>
                 <div id="jqGridPager"></div>
@@ -19,9 +19,18 @@
         </div>
     </div>
     <div id="loader" class="loader"></div>
+
+    <form>
+        <button class="btn btn-danger" id="modal-11" style="visibility:hidden;">פרטי הזמנה</button>
+    </form>
+    <form id="modal-order-part" role="form" class="">
+        @Html.Partial("_OrderDetails")
+        @Html.Partial("_OrderLineDetails")
+
+    </form>
 </div>
-@*<div id="navOrder" data-url="@Url.Action("TestProduct")"></div>
-<div id="navProdItem" data-url="@Url.Action("TestProductItem", "Home_IL")"></div>*@
+
+<div id="navOrder" data-url="@Url.Action("PostTestProductItem", "Home")"></div>
 <script type="text/javascript">
     var gridBaseWidth = 0;
     var isWidth = false;
@@ -57,7 +66,7 @@
             isWidth = true;
         }
         $('#jqGrid').setGridParam({ direction: 'rtl' });
-        
+
         console.log(" onload ==> newWidth ", newWidth);
         console.log(" onload ==> gridBaseWidth ", gridBaseWidth);
 

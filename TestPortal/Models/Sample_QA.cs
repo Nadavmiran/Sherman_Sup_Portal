@@ -118,6 +118,7 @@ namespace TestPortal.Models
     public class SampleTestMsg
     {
         public string hdnQA { get; set; }
+        public string hdnQaORDNAME { get; set; }
         public string hdnQaSUPNAME { get; set; }
         public string hdnQaDOCNO { get; set; }
         public string hdnQACODE { get; set; }

@@ -122,3 +122,263 @@ INFO  2020-04-22 10:12:28,893   513ms eporting Portal Logger oductObjAndSamples 
 System.NullReferenceException: Object reference not set to an instance of an object.
    at TestPortal.Models.CommonController.GetProductObjAndSamples(String orderName, String prodName, Int32 ordLine, PageObject& po) in H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\Models\CommonController.cs:line 216
 DEBUG 2020-04-23 13:56:55,307   221ms eporting Portal Logger CreateResultApi    - FunctionName = CreateResultApiExceptionMsg = Object reference not set to an instance of an object.
+INFO  2020-04-27 09:15:07,862   194ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"",
+	"PARTNAME":"",
+	"SUPNAME":"",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"0",
+	"RESULT":0,
+	"REMARK":"OK"
+	}
+	]}
+DEBUG 2020-04-27 09:15:08,197   529ms eporting Portal Logger CreateResultApi    - FunctionName = CreateResultApi => Response XMLExceptionMsg = <FORM
+  TYPE="MED_SAMPLE">
+  <InterfaceErrors>
+    <text>- ??? ????? ?????</text>
+  </InterfaceErrors>
+</FORM>
+INFO  2020-04-27 09:23:55,655 527987ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"",
+	"PARTNAME":"",
+	"SUPNAME":"",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"0",
+	"RESULT":0,
+	"REMARK":"OK"
+	}
+	]}
+DEBUG 2020-04-27 09:23:56,233 528565ms eporting Portal Logger CreateResultApi    - FunctionName = CreateResultApi => Response XMLExceptionMsg = <FORM
+  TYPE="MED_SAMPLE">
+  <InterfaceErrors>
+    <text>- ??? ????? ?????</text>
+  </InterfaceErrors>
+</FORM>
+INFO  2020-04-27 09:33:14,205 1086537ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"",
+	"PARTNAME":"",
+	"SUPNAME":"",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"0",
+	"RESULT":0,
+	"REMARK":"Ok"
+	}
+	]}
+DEBUG 2020-04-27 09:33:14,438 1086770ms eporting Portal Logger CreateResultApi    - FunctionName = CreateResultApi => Response XMLExceptionMsg = <FORM
+  TYPE="MED_SAMPLE">
+  <InterfaceErrors>
+    <text>- ??? ????? ?????</text>
+  </InterfaceErrors>
+</FORM>
+INFO  2020-04-27 09:36:28,436   151ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"",
+	"CURDATE":"2020-04-27T09:36:28.0000000+03:00",
+	"PARTNAME":"",
+	"SUPNAME":"",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"0",
+	"RESULT":0,
+	"REMARK":"Ok"
+	}
+	]}
+DEBUG 2020-04-27 09:36:28,721   437ms eporting Portal Logger CreateResultApi    - FunctionName = CreateResultApi => Response XMLExceptionMsg = <FORM
+  TYPE="MED_SAMPLE">
+  <InterfaceErrors>
+    <text>- ??? ??'?</text>
+  </InterfaceErrors>
+</FORM>
+INFO  2020-04-27 09:37:17,877 49592ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"",
+	"CURDATE":"2020-04-27T09:37:17.0000000+03:00",
+	"PARTNAME":"",
+	"SUPNAME":"",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"0",
+	"RESULT":0,
+	"REMARK":"Ok"
+	}
+	]}
+DEBUG 2020-04-27 09:45:46,780 558496ms eporting Portal Logger CreateResultApi    - FunctionName = CreateResultApiExceptionMsg = Object reference not set to an instance of an object.
+INFO  2020-04-27 09:46:28,204 599920ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"",
+	"CURDATE":"2020-04-27T09:46:28.0000000+03:00",
+	"PARTNAME":"",
+	"SUPNAME":"",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"0",
+	"RESULT":0,
+	"REMARK":"Ok"
+	}
+	]}
+DEBUG 2020-04-27 09:46:28,306 600021ms eporting Portal Logger CreateResultApi    - FunctionName = CreateResultApiExceptionMsg = Object reference not set to an instance of an object.
+INFO  2020-04-27 09:46:54,249 625964ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"",
+	"CURDATE":"2020-04-27T09:46:54.0000000+03:00",
+	"PARTNAME":"",
+	"SUPNAME":"",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"0",
+	"RESULT":0,
+	"REMARK":"Ok"
+	}
+	]}
+DEBUG 2020-04-27 09:48:01,775 693490ms eporting Portal Logger CreateResultApi    - FunctionName = CreateResultApi => Response XMLExceptionMsg = <FORM
+  TYPE="MED_SAMPLE">
+  <InterfaceErrors>
+    <text>- ??? ??'?</text>
+  </InterfaceErrors>
+</FORM>
+INFO  2020-04-27 09:50:16,151 827866ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"",
+	"CURDATE":"2020-04-27T09:50:16.0000000+03:00",
+	"PARTNAME":"",
+	"SUPNAME":"",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"0",
+	"RESULT":0,
+	"REMARK":""
+	}
+	]}
+DEBUG 2020-04-27 09:50:16,411 828126ms eporting Portal Logger CreateResultApi    - FunctionName = CreateResultApi => Response XMLExceptionMsg = <FORM
+  TYPE="MED_SAMPLE">
+  <InterfaceErrors>
+    <text>- ??? ??'?</text>
+  </InterfaceErrors>
+</FORM>
+INFO  2020-04-27 10:13:25,952   153ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001527",
+	"CURDATE":"2020-04-27T10:13:25.0000000+03:00",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"0",
+	"RESULT":0,
+	"REMARK":"Ok"
+	}
+	]}
+INFO  2020-04-27 10:25:31,914 726115ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001527",
+	"CURDATE":"2020-04-27T10:25:31.0000000+03:00",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"0",
+	"RESULT":0,
+	"REMARK":""
+	}
+	]}
+DEBUG 2020-04-27 10:25:32,038 726239ms eporting Portal Logger CreateResultApi    - FunctionName = CreateResultApiExceptionMsg = Object reference not set to an instance of an object.
+INFO  2020-04-27 10:27:09,386 823587ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001527",
+	"CURDATE":"2020-04-27T10:27:09.0000000+03:00",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"0",
+	"RESULT":0,
+	"REMARK":""
+	}
+	]}
+INFO  2020-04-27 10:46:14,593   132ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001527",
+	"CURDATE":"2020-04-27T10:46:14.0000000+03:00",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"0",
+	"RESULT":0,
+	"REMARK":"ZZ"
+	}
+	]}
+INFO  2020-04-27 10:47:26,113 71652ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001527",
+	"CURDATE":"2020-04-27T10:47:26.0000000+03:00",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"0",
+	"RESULT":0,
+	"REMARK":"ZZ"
+	}
+	]}
+INFO  2020-04-27 10:59:50,444 815983ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001527",
+	"CURDATE":"2020-04-27T10:59:50.0000000+03:00",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"0",
+	"RESULT":0,
+	"REMARK":"YY"
+	}
+	]}
+INFO  2020-04-27 12:14:18,835   486ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001527",
+	"CURDATE":"2020-04-27T12:14:18.0000000+03:00",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"0",
+	"RESULT":0,
+	"REMARK":"MM"
+	}
+	]}
+INFO  2020-04-27 12:15:00,618 42270ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001527",
+	"CURDATE":"2020-04-27T12:15:00.0000000+03:00",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":2,
+	"QACODE":"002",
+	"LOCATION":"1",
+	"NORMAL":"Y",
+	"REMARK":"AA"
+	}
+	]}

@@ -1,4 +1,5 @@
-﻿function InitTestPageData(data) {
+﻿var x = document.getElementsByTagName("html")[0].getAttribute("dir");
+function InitTestPageData(data) {
     var OrdId = document.getElementById('hdnOrdId').value;
     var pordId = document.getElementById('hdnPrdId').value;
 
@@ -49,10 +50,11 @@ function InitQAPageData(data) {
     document.getElementById('mnuSampleList').style.display = 'inline-block';
     document.getElementById('mnuPartsList').style.display = 'inline-block';
     document.getElementById('divSampleQA').style.display = 'inline-block';
+    document.getElementById('sampleQaList').style.display = 'inline-block';
     document.getElementById('hdnOrdId').value = data.objOrder.ORD;
     document.getElementById('hdnSUPNAME').value = data.objOrder.SUPNAME;
     document.getElementById('hdnPrdId').value = data.objProduct.PARTNAME;
-
+    document.getElementById('hdnORDNAME').value = data.objOrder.ORDNAME;
     document.getElementById('hdnQaListORDNAME').value = data.objOrder.ORDNAME;
 
     showOrderLineDetail(data.objProduct);
@@ -60,9 +62,9 @@ function InitQAPageData(data) {
         showPartSampls(data.lstSampleObject);
     else {
         console.log('data.lstSampleObject = ', data.lstSampleObject);
-        //if (x == 'rtl')
-        //    $("#modal-9").trigger("click");
-        //else
+        if (x == 'rtl')
+            $("#modal-2").trigger("click");
+        else
         $("#modal-21").trigger("click");
         $("#modal-error-text").html('Sample document was not found. Click "Tests" button to create sample document.');
     }
@@ -74,7 +76,10 @@ function InitQAPageData(data) {
 }
 
 function navigateTestPage() {
-    window.location = '/Home/TestProduct/?OrderID=' + document.getElementById('hdnOrdId').value + '&orderNumber=' + document.getElementById('hdnPrdId').value;
+    if (x == 'rtl')
+        window.location = '/Home_IL/TestProduct/?OrderID=' + document.getElementById('hdnOrdId').value + '&orderNumber=' + document.getElementById('hdnPrdId').value;
+    else
+        window.location = '/Home/TestProduct/?OrderID=' + document.getElementById('hdnOrdId').value + '&orderNumber=' + document.getElementById('hdnPrdId').value;
 }
 
 function showSalesorderDetail(PARTNAME, ORD, LINE) {
@@ -100,9 +105,9 @@ function showSalesorderDetail(PARTNAME, ORD, LINE) {
             if (null != data.lstAttachments)
                 showGridProdAttachments(data.lstAttachments);
 
-            //if (x == 'rtl')
-            //    $("#modal-9").trigger("click");
-            //else
+            if (x == 'rtl')
+                $("#modal-11").trigger("click");
+            else
             $("#modal-12").trigger("click");
         }
     });
@@ -159,6 +164,8 @@ function GetSampleTests(rowData) {
             type: "POST",
             data:
             {
+                PARTNAME: rowData.PARTNAME,
+                SUPNAME: rowData.SUPNAME,
                 DOCNO: rowData.DOCNO
             },
             url: $('#navGetSampleTest').data('url'),//"/Home/GetSampleTestList",
@@ -622,7 +629,6 @@ function onSelectRow_ProdSamples(id, rowId, iCol, content) {
     console.log('jqGridRevision ==> iCol ', iCol);
     console.log('jqGridRevision ==> content ', content);
 
-    
     OpenSampleModal(rowData);
 }
 
@@ -660,6 +666,7 @@ function OpenSampleModal(rowData) {
             document.getElementById('txtQaNORMAL').checked = false;
         }
     }
+    document.getElementById('hdnQaORDNAME').value = document.getElementById('hdnORDNAME').value;
     document.getElementById('txtQaREPETITION').innerText = rowData.REPETITION;
     document.getElementById('txtQaREQUIRED_RESULT').innerText = rowData.REQUIRED_RESULT;
     document.getElementById('txtQaSAMPQUANT').innerText = rowData.SAMPQUANT;
@@ -738,18 +745,37 @@ function onSubmit_TestForm(e) {
             contentType: "application/x-www-form-urlencoded;charset=ISO-8859-15",
             success: function (response) {
                 console.log("response", response);
-                if (null != response.ResultData.MED_TRANSSAMPLEQA_SUBFORM) {
-                    $("#jqGridRevision").GridUnload();
-                    showGridProdSamples(response.ResultData.MED_TRANSSAMPLEQA_SUBFORM);
+                if (null != response && null != response.ResultData)
+                {
+                    if (null != response.ResultData.MED_TRANSSAMPLEQA_SUBFORM) {
+                        $("#jqGridRevision").GridUnload();
+                        showGridProdSamples(response.ResultData.MED_TRANSSAMPLEQA_SUBFORM);
 
+                    }
+                    else {
+                        if (response.ErrorDescription != '') {
+                            form_data[0].reset();
+                            $('.modal').modal('hide');
+                            $('.modal').removeClass('show');
+                            $("#modal-error-text").html(response.ErrorDescription);
+                            $("#modal-1").trigger("click");
+                            if (x == 'rtl')
+                                $("#modal-1").trigger("click");
+                            else
+                                $("#modal-21").trigger("click");
+                        }
+                    }
                 }
                 else {
                     if (response.ErrorDescription != '') {
                         form_data[0].reset();
                         $('.modal').modal('hide');
                         $('.modal').removeClass('show');
+                        if (x == 'rtl')
+                            $("#modal-1").trigger("click");
+                        else
+                            $("#modal-21").trigger("click");
                         $("#modal-error-text").html(response.ErrorDescription);
-                        $("#modal-1").trigger("click");
                     }
                 }
             }
@@ -766,9 +792,14 @@ function onSubmit_TestForm(e) {
             processData: false,
             success: function (response) {
                 console.log("UploadFiles - response", response);
-                if (response.ErrorDescription != '') {
-                    $("#modal-error-text").html(response.ErrorDescription);
-                    $("#modal-1").trigger("click");
+                if (null != response && null != response.ResultData) {
+                    if (response.ResultStatus == 'OK')
+                        return;
+
+                    if (response.ErrorDescription != '') {
+                        $("#modal-error-text").html(response.ErrorDescription);
+                        $("#modal-1").trigger("click");
+                    }
                 }
             }
         });

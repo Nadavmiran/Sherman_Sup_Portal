@@ -172,8 +172,8 @@ namespace TestPortal.Models
             sb.Append("{");
             sb.Append("\r\n\t\"DOCNO\":");
             sb.Append("\"" + data.hdnQaDOCNO + "\",");
-            //sb.Append("\r\n\t\"CURDATE\":");
-            //sb.Append("\"" + GetDateTimeOffset(DateTime.Now.ToString(), "00:00") + "\",");
+            sb.Append("\r\n\t\"CURDATE\":");
+            sb.Append("\"" + GetDateTimeOffset(DateTime.Now.ToString(), "00:00") + "\",");
             sb.Append("\r\n\t\"PARTNAME\":");
             sb.Append("\"" + data.hdnQaPARTNAME + "\",");
             sb.Append("\r\n\t\"SUPNAME\":");

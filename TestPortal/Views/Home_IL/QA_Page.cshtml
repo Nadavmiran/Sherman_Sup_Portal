@@ -1,7 +1,7 @@
 ﻿@model TestPortal.Models.PageObject
 @{
-    ViewBag.Title = "Testing Arena";
-    Layout = "~/Views/Shared/_Layout_EN.cshtml";
+    ViewBag.Title = "בדיקות איכות";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <script>
@@ -17,7 +17,7 @@
         <div class="col-8 col-md-8 col-lg-8">
             <div class="card">
                 <div class="card-header">
-                    <h4><i class="fas fa-certificate" style="font-size: 20px;"></i> Product samples list</h4>
+                    <h4><i class="fas fa-certificate" style="font-size: 20px;"></i> דגימות למק"ט</h4>
                 </div>
                 <div class="card-body">
                     <div>
@@ -30,7 +30,7 @@
         <div class="col-4 col-md-4 col-lg-4">
             <div class="card">
                 <div class="card-header">
-                    <h4><i class="fas fa-download" style="font-size: 20px;"></i> Serial files</h4>
+                    <h4><i class="fas fa-download" style="font-size: 20px;"></i> קבצים למק"ט</h4>
                 </div>
                 <div class="card-body">
                     <div>
@@ -45,7 +45,7 @@
         <div class="col-12 col-md-12 col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    <h4><i class="fab fa-rev" style="font-size: 20px;"></i> Product test list</h4>
+                    <h4><i class="fab fa-rev" style="font-size: 20px;"></i> בדיקות למק"ט </h4>
                 </div>
                 <div class="card-body">
                     <div>
@@ -56,10 +56,10 @@
             </div>
         </div>
     </div>
-    <button class="btn btn-primary" id="modal-8" style="visibility:hidden;">New Test</button>
-    <button class="btn btn-danger" id="modal-1" style="visibility:hidden;">Error</button>
-    <button class="btn btn-danger" id="modal-10" style="visibility:hidden;">Sample list</button>
-    <button class="btn btn-danger" id="modal-21" style="visibility:hidden;">System message</button>
+    <button class="btn btn-primary" id="modal-7" style="visibility:hidden;">בדיקה חדשה</button>
+    <button class="btn btn-danger" id="modal-1" style="visibility:hidden;">שגיאה</button>
+    <button class="btn btn-danger" id="modal-9" style="visibility:hidden;">רשימת דגימות</button>
+    <button class="btn btn-danger" id="modal-2" style="visibility:hidden;">System message</button>
     <div id="modal-error" class="card"></div>
     @Html.Partial("_Sample_QA")
     @Html.Partial("_SampleQA_List")

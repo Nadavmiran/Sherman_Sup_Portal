@@ -296,7 +296,7 @@ namespace TestPortal.Models
 
             if (ra.ResultStatus.ToUpper().Equals("OK"))
             {
-                s = s.GetProductSamples(ow.form[0].hdnQaSUPNAME, ow.form[0].hdnQaPARTNAME, string.Empty, 0);
+                s = s.GetProductSamples(ow.form[0].hdnQaSUPNAME, ow.form[0].hdnQaORDNAME, ow.form[0].hdnQaPARTNAME, 0);
                 if ((null != s) && (null != s.MED_TRANSSAMPLEQA_SUBFORM) && (s.MED_TRANSSAMPLEQA_SUBFORM.Count > 0))
                 {
                     foreach (Sample_QA item in s.MED_TRANSSAMPLEQA_SUBFORM)
@@ -548,11 +548,20 @@ namespace TestPortal.Models
         }
 
         [HttpPost]
-        public JsonResult GetSampleTests(string DOCNO)
+        public JsonResult GetSampleTests(string PARTNAME, string SUPNAME, string DOCNO)
         {
             Sample s = new Sample();
             PageObject po = new PageObject();
             po.objSample = s.GetProductSamples(DOCNO);
+            if(null != po.objSample && null != po.objSample.MED_TRANSSAMPLEQA_SUBFORM)
+            {
+                foreach (Sample_QA item in po.objSample.MED_TRANSSAMPLEQA_SUBFORM)
+                {
+                    item.DOCNO = DOCNO;
+                    item.SUPNAME = SUPNAME;
+                    item.PARTNAME = PARTNAME;
+                }
+            }
             return Json(po);
         }
     }

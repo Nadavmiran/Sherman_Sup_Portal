@@ -4,7 +4,7 @@
 $("#modal-1").fireModal({ title: 'שגיאה בשמירת נתונים', body: $("#modal-error") });
 $("#modal-2").fireModal({ title: 'הודעת מערכת', body: $("#modal-error"), center: true});
 $("#modal-21").fireModal({ title: 'System message', body: $("#modal-error"), center: true });
-
+let modal_3_body = '<p>Do you want to create a new sample document</p>';
 let modal_31_body = '<p>Do you want to create a new sample document</p>';
 //let modal_31_body = '<p>Do you want to create a new sample document</p><pre class="language-javascript"><code>';
 //modal_31_body += '[\n';
@@ -18,6 +18,28 @@ let modal_31_body = '<p>Do you want to create a new sample document</p>';
 //modal_31_body += ' }\n';
 //modal_31_body += ']';
 //modal_31_body += '</code></pre>';
+$("#modal-3").fireModal({
+    title: 'דגימה חדשה?',
+    body: modal_3_body,
+    buttons: [
+        {
+            text: 'כן',
+            class: 'btn btn-primary btn-shadow',
+            handler: function (modal) {
+                document.getElementById("hdnIsNewDocument").value = 1;
+                doNext();
+            }
+        },
+        {
+            text: 'לא',
+            class: 'btn btn-primary btn-danger',
+            handler: function (modal) {
+                document.getElementById("hdnIsNewDocument").value = 0;
+                doNext();
+            }
+        }
+    ]
+});
 $("#modal-31").fireModal({
   title: 'New sample document?',
   body: modal_31_body,
@@ -227,6 +249,36 @@ $("#modal-10").fireModal({
     ]
 });
 
+$("#modal-11").fireModal({
+    title: 'פרטי שורת הזמנה',
+    body: $("#modal-order-part"),
+    footerClass: 'bg-whitesmoke',
+    autoFocus: true,
+    onFormSubmit: function (modal, e, form) {
+        // Form Data
+        onSubmitCreateSampleList(e);
+        let fake_ajax = setTimeout(function () {
+            form.stopProgress();
+            //modal.find('.modal-body').prepend('<div class="alert alert-info" id="divTLMsg">Data submited.</div>');
+
+            clearInterval(fake_ajax);
+        }, 1500);
+
+        e.preventDefault();
+    },
+    shown: function (modal, form) {
+        console.log(form);
+    },
+    buttons: [
+        {
+            text: 'Submit',
+            submit: true,
+            class: 'btn btn-primary btn-shadow',
+            handler: function (modal) {
+            }
+        }
+    ]
+});
 
 $("#modal-12").fireModal({
     title: 'Order Line',

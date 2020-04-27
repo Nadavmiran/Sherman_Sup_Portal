@@ -1,11 +1,11 @@
-﻿@model TestPortal.Models.PageObject
-<div class="col-12 col-md-12 col-lg-12">
+﻿<div id="divSampleQA" class="col-12 col-md-12 col-lg-12" style="display:none;">
     <div class="card">
         <div class="col-12">
             <form id="modal-test-part" role="form" class="">
                 <input type="hidden" id="hdnQaSUPNAME" />
                 <input type="hidden" id="hdnQaDOCNO" />
                 <input type="hidden" id="hdnQaPARTNAME" />
+                <input type="hidden" id="hdnQaORDNAME" />
                 <input type="hidden" id="hdnQACODE" />
                 <input type="hidden" id="hdnLOCATION" />
                 <input type="hidden" id="hdnQA" />
@@ -95,7 +95,7 @@
                             <label style="font-weight:bolder;">תוצאת בדיקה</label>
                             <input class="form-control" type="number" pattern="^\d*(\.\d{0,6})?$" step="any" name="RESULT" id="txtQaRESULT" />
                         </div>
-                    <div class="form-group col-md-10 col-12">
+                        <div class="form-group col-md-10 col-12">
                             <label style="font-weight:bolder;">הערה</label>
                             <input class="form-control" type="text" name="REMARK" id="txtQaREMARK" maxlength="120" />
                         </div>

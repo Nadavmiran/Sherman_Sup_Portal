@@ -33,7 +33,7 @@
             console.log('showGridProd ==> rowId ', rowId);
             console.log('showGridProd ==> iCol ', iCol);
             console.log('showGridProd ==> content ', content);
-            GetProductDetails(rowData);
+            window.location = '/Home_IL/QA_Page/?orderID=' + rowData.ORD + '&orderName=' + document.getElementById('lbl_ORDNAME').innerText + '&prodName=' + rowData.PARTNAME + '&ordLine=' + rowData.LINE;
         }
     });
 }
@@ -317,5 +317,45 @@ function showSelectedSampleQA(grid_data) {
         pager: "#jqGridSelectedSampleQAPager",
         loadonce: true,
         subGrid: false
+    });
+}
+
+function showPartSampls(grid_data) {
+    $("#jqGridPartSampls").jqGrid({
+        guiStyle: "bootstrap",
+        iconSet: "fontAwesome",
+        datatype: "local",
+        data: grid_data,
+        colModel: [
+            { label: 'PARTNAME', name: 'PARTNAME', align: 'center', key: false, hidden: true, width: 75 },
+            { label: 'SUPNAME', name: 'SUPNAME', align: 'center', key: false, hidden: true, width: 75 },
+            { label: 'SERIALNAME', name: 'SERIALNAME', align: 'center', key: false, hidden: true, width: 75 },
+            { label: 'תעודת דגימה', name: 'DOCNO', align: 'center', key: true, hidden: false, width: 120 },
+            { label: 'תאריך דגימה', name: 'pageCURDATE', align: 'center', key: false, hidden: false, width: 100 },
+            { label: 'סטטוס', name: 'STATDES', align: 'center', hidden: false, width: 150 },
+            { label: 'תקן דגימה', name: 'SHR_SAMPLE_STD_CODE', align: 'center', hidden: false, width: 150 },
+            { label: 'כמות', name: 'QUANT', align: 'center', hidden: false, width: 90 },
+            { label: 'כמות מבוקשת', name: 'SHR_RAR', align: 'center', hidden: false, width: 150 },
+            { label: 'מקס. דחויים', name: 'MAX_REJECT', align: 'center', hidden: false, width: 150 },
+            { label: 'כמות הפק"ע', name: 'SHR_SERIAL_QUANT', align: 'center', hidden: false, width: 150 },/*formatter: formatGetRevListLink,*/
+            { label: 'כמות המדגם', name: 'SHR_QUANT', align: 'center', width: 150 }
+        ],
+        viewrecords: true,
+        altRows: true,
+        direction: 'rtl',
+        autowidth: true,
+        height: null,
+        width: 500,
+        rowNum: 20,
+        //rowList: [10, 30, 50, 100],
+        pager: "#jqGridSelectedSampleQAPager",
+        loadonce: true,
+        subGrid: false,
+        onSelectRow: function (id, rowId, iCol, content, event) {
+            console.log('showGridProd ==> id ', id);
+            var rowData = $(this).getRowData(id);
+            console.log("jqGridSelectedSample ==> onSelectRow rowData = ", rowData);
+            GetSampleTests(rowData);
+        }
     });
 }

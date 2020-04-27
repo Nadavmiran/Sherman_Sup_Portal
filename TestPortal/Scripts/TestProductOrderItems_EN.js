@@ -424,7 +424,7 @@ function showGridSampleList(grid_data) {
             for (i = 0, count = idsOfSelectedRows.length; i < count; i++) {
                 $this.jqGrid('setSelection', idsOfSelectedRows[i], false);
             }
-        },
+        }
         //inlineEditing: {
         //    keys: true
         //},
