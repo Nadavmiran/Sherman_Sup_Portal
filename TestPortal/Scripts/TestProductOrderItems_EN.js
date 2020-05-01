@@ -8,7 +8,7 @@
         colModel: [
             { label: 'ORD', name: 'ORD', align: 'center', hidden: true, width: 75 },
             { label: '#', name: 'LINE', align: 'center', hidden: false, width: 75 },
-            { label: 'ProductID', name: 'PARTNAME', align: 'center', key: true, hidden: false, width: 75 },
+            { label: 'ProductID', name: 'PARTNAME', align: 'center', key: true, hidden: true, width: 75 },
             { label: 'Serial No.', name: 'PARTNAME', align: 'center', width: 100 }, //, formatter: formatProdLink
             { label: 'Description', name: 'PDES', align: 'center', width: 100 },
             { label: 'Quntity', name: 'TQUANT', align: 'center', width: 100 },
@@ -36,7 +36,7 @@
             console.log('showGridProd ==> iCol ', iCol);
             console.log('showGridProd ==> content ', content);
            // GetProductDetails(rowData);
-            window.location = '/Home/QA_Page/?orderID=' + rowData.ORD + '&orderName=' + document.getElementById('lbl_ORDNAME').innerText +'&prodName=' + rowData.PARTNAME + '&ordLine=' + rowData.LINE;
+            window.location = window.location.origin + $('#navQA_Page').data('url') + '/?orderID=' + rowData.ORD + '&orderName=' + document.getElementById('lbl_ORDNAME').innerText +'&prodName=' + rowData.PARTNAME + '&ordLine=' + rowData.LINE;
         }
     });
 }

@@ -7,7 +7,7 @@
 $.ajax(
     {
         type: "POST",
-        url: "/Account/SaveUserProfile",
+        url: window.location.origin + $('#navSaveUserProfile').data('url'), //'/SherPortal/Account/SaveUserProfile',
        data: {
                 lang: lang,
                 fullName: name

@@ -382,3 +382,197 @@ INFO  2020-04-27 12:15:00,618 42270ms eporting Portal Logger reateUpdateTestMsg 
 	"REMARK":"AA"
 	}
 	]}
+DEBUG 2020-04-30 21:45:41,199   236ms eporting Portal Logger CreateResultApi    - FunctionName = CreateResultApiExceptionMsg = Object reference not set to an instance of an object.
+INFO  2020-05-01 11:09:07,415   690ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001539",
+	"CURDATE":"2020-05-01T11:09:06.0000000+03:00",
+	"PARTNAME":"23417000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":18,
+	"QACODE":"019",
+	"LOCATION":"0",
+	"RESULT":2,
+	"REMARK":"test 1"
+	}
+	]}
+INFO  2020-05-01 11:11:43,785 157061ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001539",
+	"CURDATE":"2020-05-01T11:11:43.0000000+03:00",
+	"PARTNAME":"23417000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":18,
+	"QACODE":"019",
+	"LOCATION":"0",
+	"RESULT":3,
+	"REMARK":"test 2"
+	}
+	]}
+INFO  2020-05-01 11:16:42,139 455414ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001539",
+	"CURDATE":"2020-05-01T11:16:42.0000000+03:00",
+	"PARTNAME":"23417000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":18,
+	"QACODE":"019",
+	"LOCATION":"0",
+	"RESULT":4,
+	"REMARK":"test 3"
+	}
+	]}
+INFO  2020-05-01 11:28:34,466   499ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001527",
+	"CURDATE":"2020-05-01T11:28:33.0000000+03:00",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"0",
+	"RESULT":1,
+	"REMARK":"t1"
+	}
+	]}
+INFO  2020-05-01 11:29:31,845 57878ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001539",
+	"CURDATE":"2020-05-01T11:29:31.0000000+03:00",
+	"PARTNAME":"23417000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":18,
+	"QACODE":"019",
+	"LOCATION":"0",
+	"RESULT":4,
+	"REMARK":"test 4"
+	}
+	]}
+INFO  2020-05-01 11:29:51,146 77178ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001539",
+	"CURDATE":"2020-05-01T11:29:51.0000000+03:00",
+	"PARTNAME":"23417000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":18,
+	"QACODE":"019",
+	"LOCATION":"0",
+	"RESULT":5,
+	"REMARK":"test 5"
+	}
+	]}
+INFO  2020-05-01 11:30:58,893 144926ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001540",
+	"CURDATE":"2020-05-01T11:30:58.0000000+03:00",
+	"PARTNAME":"23417000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":12,
+	"QACODE":"013",
+	"LOCATION":"3",
+	"RESULT":0,
+	"REMARK":"1"
+	}
+	]}
+INFO  2020-05-01 11:58:55,702   637ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001540",
+	"CURDATE":"2020-05-01T11:58:55.0000000+03:00",
+	"PARTNAME":"23417000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"4",
+	"REMARK":"test 3",
+	"MED_RESULTDET_SUBFORM": [
+	{
+	"KLINE":1,
+	"RESULT":1
+	},
+	{
+	"KLINE":2,
+	"RESULT":2
+	},
+	{
+	"KLINE":3,
+	"RESULT":3
+	}
+	]
+	}
+	]}
+INFO  2020-05-01 12:02:13,641 198576ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001540",
+	"CURDATE":"2020-05-01T12:02:13.0000000+03:00",
+	"PARTNAME":"23417000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"4",
+	"REMARK":"test 3",
+	"MED_RESULTDET_SUBFORM": [
+	{
+	"KLINE":1,
+	"RESULT":2
+	},
+	{
+	"KLINE":2,
+	"RESULT":3
+	},
+	{
+	"KLINE":3,
+	"RESULT":4
+	}
+	]
+	}
+	]}
+INFO  2020-05-01 12:03:32,468 277404ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001540",
+	"CURDATE":"2020-05-01T12:03:32.0000000+03:00",
+	"PARTNAME":"23417000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"4",
+	"REMARK":"test 3",
+	"MED_RESULTDET_SUBFORM": [
+	{
+	"KLINE":1,
+	"RESULT":1.5
+	},
+	{
+	"KLINE":2,
+	"RESULT":1.2
+	},
+	{
+	"KLINE":3,
+	"RESULT":1.4
+	}
+	]
+	}
+	]}
+INFO  2020-05-01 12:04:03,252 308187ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001540",
+	"CURDATE":"2020-05-01T12:04:03.0000000+03:00",
+	"PARTNAME":"23417000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":11,
+	"QACODE":"012",
+	"LOCATION":"2",
+	"NORMAL":"Y",
+	"REMARK":""
+	}
+	]}

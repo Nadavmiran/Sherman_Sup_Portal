@@ -1,21 +1,21 @@
-﻿function getData(supplier)
-{
-    $.ajax({
-        type: "POST",
-        url: "Home/GetOrdersData",
-        data: {
-            supplier: supplier
-        },
-        cache: false,
-        success: function (data) {
-            console.log("data", data);
-            grid_data = data.lstOrderObject;
-            if ((null === grid_data) || (grid_data === ''))
-                return;
-            showGrid();
-        }
-    });
-}
+﻿//function getData(supplier)
+//{
+//    $.ajax({
+//        type: "POST",
+//        url: "Home/GetOrdersData",
+//        data: {
+//            supplier: supplier
+//        },
+//        cache: false,
+//        success: function (data) {
+//            console.log("data", data);
+//            grid_data = data.lstOrderObject;
+//            if ((null === grid_data) || (grid_data === ''))
+//                return;
+//            showGrid();
+//        }
+//    });
+//}
 
 function showGrid()
 {
@@ -32,6 +32,7 @@ function showGrid()
             { label: 'Order Date', name: 'pageCURDATE', align: 'center', width: 150, sorttype: "date" },
             { label: 'Supplier', name: 'SHR_SUPTYPEDES', align: 'center', hidden: true, width: 150 },
             { label: 'For treatment ', name: 'OWNERLOGIN', align: 'center', width: 150 },
+            { label: 'Order type ', name: 'TYPEDES', align: 'center', width: 150 },
             { label: 'Order ststus', name: 'STATDES', align: 'center', width: 150 }
         ],
         viewrecords: true,
@@ -52,8 +53,8 @@ function showGrid()
             var rowData = $(this).getRowData(id);
             console.log("onSelectRow rowData = ", rowData);
             console.log("onSelectRow col = ", col);
-            window.location.href += 'Home/TestProduct/?OrderID=' + rowData.ORD + '&orderNumber=' + rowData.ORDNAME;
-
+            //window.location.href = window.location.origin + '/SherPortal/Home/TestProduct/?OrderID=' + rowData.ORD + '&orderNumber=' + rowData.ORDNAME;
+            window.location = window.location.origin + $('#navTestProduct').data('url') + '/?OrderID=' + rowData.ORD + '&orderNumber=' + rowData.ORDNAME;
         },
         subGridOptions:
         {
@@ -82,12 +83,13 @@ function showGrid()
                     { label: '#', name: 'LINE', align: 'center', key: true, hidden: false, width: 75 },
                     { label: 'ORD', name: 'ORD', align: 'center', hidden: true, width: 75 },
                     { label: 'Serial No.', name: 'PARTNAME', align: 'center', width: 100 },//, formatter: formatProdLink
+                    { label: 'Draw', name: 'SHR_DRAW', align: 'center', width: 100 },
                     { label: 'Description', name: 'PDES', align: 'center', width: 100 },
                     { label: 'Quntity', name: 'TQUANT', align: 'center', width: 100 },
                     { label: 'Left Quntity', name: 'TBALANCE', align: 'center', width: 100 },
                     { label: 'Supply Date', name: 'pageREQDATE', align: 'center', width: 100 },
                     { label: 'Status', name: 'PORDISTATUSDES', align: 'center', width: 100 },
-                    { label: '', name: 'Information', align: 'center', width: 150, formatter: formatBTNLink }
+                    { label: 'Order details', name: 'Information', align: 'center', width: 150, formatter: formatBTNLink }
                 ],
                 onCellSelect: function (id, col, iCol, event) {
                     if (col == 8) return;
@@ -97,8 +99,8 @@ function showGrid()
                     //console.log("onSelectRow rowId = ", rowId);
                     var rowData = $(this).getRowData(id);
                     console.log("onSelectRow rowData = ", rowData);
-                    window.location.href += 'Home/QA_Page/?orderID=' + rowData.ORD + '&orderName=' + rowData.ORDNAME + '&prodName=' + rowData.PARTNAME + '&ordLine=' + rowData.LINE;
-                    //window.location.href += 'Home/TestProductItem/?OrderID=' + rowData.ORD + '&prodName="' + rowData.PARTNAME + '"&ordLine=' + rowData.LINE;
+                    //window.location.href = window.location.origin + '/SherPortal/Home/QA_Page/?orderID=' + rowData.ORD + '&orderName=' + rowData.ORDNAME + '&prodName=' + rowData.PARTNAME + '&ordLine=' + rowData.LINE;
+                    window.location = window.location.origin + $('#navQA_Page').data('url') + '/?orderID=' + rowData.ORD + '&orderName=' + rowData.ORDNAME + '&prodName=' + rowData.PARTNAME + '&ordLine=' + rowData.LINE;
                 }
             });
         }

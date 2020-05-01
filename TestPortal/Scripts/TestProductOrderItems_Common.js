@@ -1,4 +1,27 @@
 ﻿var x = document.getElementsByTagName("html")[0].getAttribute("dir");
+
+var pageSampleobject = '';
+
+function getData(supplier) {
+    $.ajax({
+
+        type: "POST",
+        url: $('#navGetOrdersData').data('url'), //"Home/GetOrdersData",
+        data: {
+            supplier: supplier
+        },
+        cache: false,
+        success: function (data) {
+            console.log("data", data);
+            grid_data = data.lstOrderObject;
+            if ((null === grid_data) || (grid_data === ''))
+                return;
+
+            showGrid();
+        }
+    });
+}
+
 function InitTestPageData(data) {
     var OrdId = document.getElementById('hdnOrdId').value;
     var pordId = document.getElementById('hdnPrdId').value;
@@ -16,41 +39,18 @@ function InitTestPageData(data) {
         GetOrderProducts(OrdId);
     else
         showGridProd(data.lstItemsObject);
-
-    //if (null != data.objSample && data.objSample.DOCNO != null)
-    //{
-    //    fillSampleSection(data.objSample);
-    //    if (null != data.objSample.MED_TRANSSAMPLEQA_SUBFORM)
-    //        showGridProdSamples(data.objSample.MED_TRANSSAMPLEQA_SUBFORM);
-    //}
-    //else
-    //{
-    //    if (null != data.lstSamplQA)
-    //        if (data.lstSamplQA.length > 0) {
-    //            console.log('data.lstSamplQA ==> data.lstSamplQA = ', data.lstSamplQA);
-    //            showGridSampleList(data.lstSamplQA);
-    //            document.getElementById('hdnQaListSUPNAME').value = data.objOrder.SUPNAME;
-    //            document.getElementById('hdnQaListPARTNAME').value = data.objProduct.PARTNAME;
-    //            var x = document.getElementsByTagName("html")[0].getAttribute("dir");
-    
-    //            document.getElementById('divTLMsg').style.display = 'none';
-    //            if(x == 'rtl')
-    //                $("#modal-9").trigger("click");
-    //            else
-    //                $("#modal-10").trigger("click");
-    //        }
-    //}
-
-    //if (null != data.lstAttachments)
-    //    showGridProdAttachments(data.lstAttachments);
-
 }
 
 function InitQAPageData(data) {
+    pageSampleobject = data;
     document.getElementById('mnuSampleList').style.display = 'inline-block';
     document.getElementById('mnuPartsList').style.display = 'inline-block';
     document.getElementById('divSampleQA').style.display = 'inline-block';
     document.getElementById('sampleQaList').style.display = 'inline-block';
+    document.getElementById('hdnQaListSUPNAME').value = '';
+    document.getElementById('hdnQaListORDNAME').value = '';
+    document.getElementById('hdnQaListPARTNAME').value = '';
+    document.getElementById('hdnQaListDOCNO').value = '';
     document.getElementById('hdnOrdId').value = data.objOrder.ORD;
     document.getElementById('hdnSUPNAME').value = data.objOrder.SUPNAME;
     document.getElementById('hdnPrdId').value = data.objProduct.PARTNAME;
@@ -62,11 +62,14 @@ function InitQAPageData(data) {
         showPartSampls(data.lstSampleObject);
     else {
         console.log('data.lstSampleObject = ', data.lstSampleObject);
-        if (x == 'rtl')
+        if (x == 'rtl') {
             $("#modal-2").trigger("click");
-        else
-        $("#modal-21").trigger("click");
-        $("#modal-error-text").html('Sample document was not found. Click "Tests" button to create sample document.');
+            $("#modal-error-text").html('לא נמצאה תעודת דגימה. לחץ על הכפתור "בדיקות" בתפריט ליצירת תעודת דגימה.');
+        }
+        else {
+            $("#modal-21").trigger("click");
+            $("#modal-error-text").html('Sample document was not found. Click "Tests" button to create sample document.');
+        }
     }
 
     if (null != data.lstAttachments)
@@ -77,9 +80,9 @@ function InitQAPageData(data) {
 
 function navigateTestPage() {
     if (x == 'rtl')
-        window.location = '/Home_IL/TestProduct/?OrderID=' + document.getElementById('hdnOrdId').value + '&orderNumber=' + document.getElementById('hdnPrdId').value;
+        window.location = window.location.origin + $('#navTestProduct').data('url') + '/?OrderID=' + document.getElementById('hdnOrdId').value + '&orderNumber=' + document.getElementById('hdnPrdId').value;
     else
-        window.location = '/Home/TestProduct/?OrderID=' + document.getElementById('hdnOrdId').value + '&orderNumber=' + document.getElementById('hdnPrdId').value;
+        window.location = window.location.origin + $('#navTestProduct').data('url') + '/?OrderID=' + document.getElementById('hdnOrdId').value + '&orderNumber=' + document.getElementById('hdnPrdId').value;
 }
 
 function showSalesorderDetail(PARTNAME, ORD, LINE) {
@@ -114,30 +117,33 @@ function showSalesorderDetail(PARTNAME, ORD, LINE) {
 }
 
 function showOrderDetail(objOrder) {
-    document.getElementById('lbl_ORDNAME').innerText = objOrder.ORDNAME;
-    document.getElementById('lbl_pageCURDATE').innerText = objOrder.pageCURDATE;
-    document.getElementById('lbl_STATDESE').innerText = objOrder.STATDESE;
-    document.getElementById('lbl_OWNERLOGIN').innerText = objOrder.OWNERLOGIN;
-    document.getElementById('SHR_SUPTYPEDES').innerText = objOrder.SUPTYPEDES;
-    document.getElementById('lbl_SUPNAME').innerText = objOrder.SUPNAME;
-    document.getElementById('lbl_CDES').innerText = objOrder.CDES;
+    console.log('showOrderDetail ==> objOrder', objOrder);
+    document.getElementById('lbl_ORDNAME').innerText = null == objOrder.ORDNAME ? '' : objOrder.ORDNAME;
+    document.getElementById('lbl_pageCURDATE').innerText = null == objOrder.pageCURDATE ? '' : objOrder.pageCURDATE;
+    document.getElementById('lbl_STATDESE').innerText = null == objOrder.STATDESE ? '' : objOrder.STATDESE;
+    document.getElementById('lbl_OWNERLOGIN').innerText = null == objOrder.OWNERLOGIN ? '' : objOrder.OWNERLOGIN;
+    document.getElementById('SHR_SUPTYPEDES').innerText = null == objOrder.SUPTYPEDES ? '' : objOrder.SUPTYPEDES;
+    document.getElementById('lbl_SUPNAME').innerText = null == objOrder.SUPNAME ? '' : objOrder.SUPNAME;
+    document.getElementById('lbl_CDES').innerText = null == objOrder.CDES ? '' : objOrder.CDES;
+    document.getElementById('lbl_TYPEDES').innerText = null == objOrder.TYPEDES ? '' : objOrder.TYPEDES;
+    
 }
 
 function showOrderLineDetail(objProduct) {
-    document.getElementById('lbl_LINE').innerText = objProduct.LINE;
-    document.getElementById('lbl_PARTNAME').innerText = objProduct.PARTNAME;
-    document.getElementById('lbl_pageREQDATE').innerText = objProduct.pageREQDATE;
-    document.getElementById('lbl_REQDATE2').innerText = objProduct.REQDATE2;
-    document.getElementById('lbl_PDES').innerText = objProduct.PDES;
-    document.getElementById('lbl_SERIALNAME').innerText = objProduct.SERIALNAME;
-    document.getElementById('lbl_TQUANT').innerText = objProduct.TQUANT;
-    document.getElementById('lbl_TBALANCE').innerText = objProduct.TBALANCE;
-    document.getElementById('lbl_ACTNAME').innerText = objProduct.ACTNAME;
-    document.getElementById('lbl_SHR_DRAW').innerText = objProduct.SHR_DRAW;
-    document.getElementById('lbl_SHR_MNFDES').innerText = objProduct.SHR_MNFDES;
-    document.getElementById('lbl_SHR_MNFPARTNAME').innerText = objProduct.SHR_MNFPARTNAME;
-    document.getElementById('lbl_SHR_SERIAL_REVNUM').innerText = objProduct.SHR_SERIAL_REVNUM;
-    document.getElementById('lbl_REVNAME').innerText = objProduct.REVNAME;
+    document.getElementById('lbl_LINE').innerText = null == objProduct.LINE ? '' : objProduct.LINE;
+    document.getElementById('lbl_PARTNAME').innerText = null == objProduct.PARTNAME ? '' : objProduct.PARTNAME;
+    document.getElementById('lbl_pageREQDATE').innerText = null == objProduct.pageREQDATE ? '' : objProduct.pageREQDATE;
+    document.getElementById('lbl_REQDATE2').innerText = null == objProduct.REQDATE2 ? '' : objProduct.pageREQDATE2;
+    document.getElementById('lbl_PDES').innerText = null == objProduct.PDES ? '' : objProduct.PDES;
+    document.getElementById('lbl_SERIALNAME').innerText = null == objProduct.SERIALNAME ? '' : objProduct.SERIALNAME;
+    document.getElementById('lbl_TQUANT').innerText = null == objProduct.TQUANT ? '' : objProduct.TQUANT;
+    document.getElementById('lbl_TBALANCE').innerText = null == objProduct.TBALANCE ? '' : objProduct.TBALANCE;
+    document.getElementById('lbl_ACTNAME').innerText = null == objProduct.ACTNAME ? '' : objProduct.ACTNAME;
+    document.getElementById('lbl_SHR_DRAW').innerText = null == objProduct.SHR_DRAW ? '' : objProduct.SHR_DRAW;
+    document.getElementById('lbl_SHR_MNFDES').innerText = null == objProduct.SHR_MNFDES ? '' : objProduct.SHR_MNFDES;
+    document.getElementById('lbl_SHR_MNFPARTNAME').innerText = null == objProduct.SHR_MNFPARTNAME ? '' : objProduct.SHR_MNFPARTNAME;
+    document.getElementById('lbl_SHR_SERIAL_REVNUM').innerText = null == objProduct.SHR_SERIAL_REVNUM ? '' : objProduct.SHR_SERIAL_REVNUM;
+    document.getElementById('lbl_REVNAME').innerText = null == objProduct.REVNAME ? '' : objProduct.REVNAME;
 }
 
 function showSampleDetails(objSample) {
@@ -147,18 +153,26 @@ function showSampleDetails(objSample) {
         $("#modal-error-text").html('Sample document was not found. Click "Tests" button to create sample document.');
     }
     else {
-        document.getElementById('lbl_DOCNO').innerText = objSample.DOCNO;
-        document.getElementById('lbl_CURDATE').innerText = objSample.pageCURDATE;
-        document.getElementById('lbl_QUANT').innerText = objSample.QUANT;
-        document.getElementById('lbl_SERIALNAME').innerText = objSample.SERIALNAME;
-        document.getElementById('lbl_SHR_RAR').innerText = objSample.SHR_RAR;
-        document.getElementById('lbl_SHR_SERIAL_QUANT').innerText = objSample.SHR_SERIAL_QUANT;
-        document.getElementById('lbl_STATDES').innerText = objSample.STATDES;
-        document.getElementById('lbl_SHR_SAMPLE_STD_CODE').innerText = objSample.SHR_SAMPLE_STD_CODE;
+        document.getElementById('lbl_DOCNO').innerText = null == objSample.DOCNO ? '' : objSample.DOCNO;
+        document.getElementById('lbl_CURDATE').innerText = null == objSample.pageCURDATE ? '' : objSample.pageCURDATE;
+        document.getElementById('lbl_QUANT').innerText = null == objSample.QUANT ? '' : objSample.QUANT;
+        document.getElementById('lbl_SERIALNAME').innerText = null == objSample.SERIALNAME ? '' : objSample.SERIALNAME;
+        document.getElementById('lbl_SHR_RAR').innerText = null == objSample.SHR_RAR ? '' : objSample.SHR_RAR;
+        document.getElementById('lbl_SHR_SERIAL_QUANT').innerText = null == objSample.SHR_SERIAL_QUANT ? '' : objSample.SHR_SERIAL_QUANT;
+        document.getElementById('lbl_STATDES').innerText = null == objSample.STATDES ? '' : objSample.STATDES;
+        document.getElementById('lbl_SHR_SAMPLE_STD_CODE').innerText = null == objSample.SHR_SAMPLE_STD_CODE ? '' : objSample.SHR_SAMPLE_STD_CODE;
     }
 }
 
 function GetSampleTests(rowData) {
+    
+    console.log("GetSampleTests ==> rowData", rowData);
+    /***********  Fill Qa test list pop-up hidden fields **************/
+    document.getElementById('hdnQaListSUPNAME').value = rowData.SUPNAME;
+    document.getElementById('hdnQaListORDNAME').value = document.getElementById('hdnORDNAME').value;
+    document.getElementById('hdnQaListPARTNAME').value = rowData.PARTNAME;
+    document.getElementById('hdnQaListDOCNO').value = rowData.DOCNO;
+    /******************************************************************/
     $.ajax(
         {
             type: "POST",
@@ -173,6 +187,7 @@ function GetSampleTests(rowData) {
             success: function (response) {
                 console.log("GetSampleTests ==> response", response);
                 if (null != response && null != response.objSample) {
+                    pageSampleobject.objSample = response.objSample;
                     //showGridSampleList(response.lstSamplQA);
                     $("#jqGridRevision").GridUnload();
                     if (null != response.objSample && null != response.objSample.MED_TRANSSAMPLEQA_SUBFORM && response.objSample.MED_TRANSSAMPLEQA_SUBFORM.length > 0)
@@ -223,27 +238,41 @@ function getFormattedDate(date) {
 }
 
 function doNext() {
-    var supName = document.getElementById('hdnSUPNAME').value;
-    var partName = document.getElementById('hdnPrdId').value;
+    let supName = document.getElementById('hdnSUPNAME').value;
+    let partName = document.getElementById('hdnPrdId').value;
+    let ordNAME = document.getElementById('hdnORDNAME').value;
+    let ordLINE = document.getElementById('lbl_LINE').innerText;
+    let inNewDoc = document.getElementById('hdnIsNewDocument').value;
     console.log('OpentestList ==> supName = ', supName);
     console.log('OpentestList ==> partName = ', partName);
+    console.log('OpentestList ==> ordNAME = ', ordNAME);
+    console.log('OpentestList ==> ordLINE = ', ordLINE);
+    console.log('OpentestList ==> inNewDoc = ', inNewDoc);
 
     document.getElementById('hdnQaListSUPNAME').value = supName;
     document.getElementById('hdnQaListPARTNAME').value = partName;
-    
+
+    if (inNewDoc == 1) {
+        createNewSampleDocument(supName, ordNAME, partName, ordLINE);
+    }
+
     $.ajax(
         {
             type: "POST",
             data:
             {
                 supName: supName,
-                partName: partName
+                partName: partName,
+                ordName: ordNAME,
+                ordLine: ordLINE
             },
             url: $('#navGetSampleTestList').data('url'),//"/Home/GetSampleTestList",
             contentType: "application/x-www-form-urlencoded;charset=ISO-8859-15",
             success: function (response) {
                 console.log("response", response);
                 if (null != response && null != response.lstSamplQA && response.lstSamplQA.length > 0) {
+                    pageSampleobject.objSample = response.objSample;
+                    pageSampleobject.lstSamplQA = response.lstSamplQA;
                     showGridSampleList(response.lstSamplQA);
 
                     if (null != response.objSample && null != response.objSample.MED_TRANSSAMPLEQA_SUBFORM && response.objSample.MED_TRANSSAMPLEQA_SUBFORM.length > 0)
@@ -267,84 +296,77 @@ function doNext() {
             }
         });
 }
-function OpentestList() {
-    //Open message : do you want to create a new sample document?
-    
+function OpentestList()
+{
     var x = document.getElementsByTagName("html")[0].getAttribute("dir");
-    document.getElementById('hdnIsNewDocument').value = -1;
-    if (x == 'rtl')
-        $("#modal-3").trigger("click");
-    else {
-        $("#modal-31").trigger("click");
+    console.log("GetSampleTests ==> pageSampleobject", pageSampleobject);
+    console.log("OpentestList ==> DOCNO", document.getElementById('hdnQaListDOCNO').value);
+    console.log("OpentestList ==> x(isRTL)", x);
+    if (document.getElementById('hdnQaListDOCNO').value == '' && pageSampleobject.lstSampleObject != null && pageSampleobject.lstSampleObject.length > 0)
+    {
+        if (x == 'rtl') {
+            $("#modal-2").trigger("click");
+            $("#modal-error-text").html('יש לבחור תעודת דגימה מרשימת הדגימות ואז להוסיף בדיקות.');
+        }
+        else {
+            $("#modal-21").trigger("click");
+            $("#modal-error-text").html('No sample document was selected. Please select document from the list below and then add tests.');
+        }
+    }
+    else
+    {
+        //Open message : do you want to create a new sample document?
+        $("#jqGridSampleQA").GridUnload();
+        var x = document.getElementsByTagName("html")[0].getAttribute("dir");
+        document.getElementById('hdnIsNewDocument').value = -1;
+        if (x == 'rtl')
+            $("#modal-3").trigger("click");
+        else {
+            $("#modal-31").trigger("click");
+        }
     }
 }
 
-function GetProductDetails(rowData) {
-    console.log("IN GetProductDetails ==> rowData", rowData);
-    $("#loader").show();
-    $.ajax({
-        type: "POST",
-        url: $('#navPostTestProductItem').data('url'),//"/Home_IL/PostTestProductItem",
-        data: {
-            orderID: parseInt(rowData.ORD),
-            prodName: rowData.PARTNAME,
-            ordLine: parseInt(rowData.LINE)
-        },
-        cache: false,
-        success: function (data) {
-            $("#jqGridRevision").GridUnload();
-            $("#jqGridAttachments").GridUnload();
-            $("#jqGridTest").GridUnload();
+function createNewSampleDocument(supNAME, ordNAME, partNAME, ordLINE) {
+    $.ajax(
+        {
+            type: "POST",
+            data:
+            {
+                supName: supNAME,
+                partName: partNAME,
+                ordName: ordNAME,
+                ordLine: ordLINE
+            },
+            url: $('#navCreateSampleDocument').data('url'),//"/Home/GetSampleTestList",
+            contentType: "application/x-www-form-urlencoded;charset=ISO-8859-15",
+            success: function (response) {
+                console.log("response", response);
+                if (null != response && null != response.lstSampleObject && response.lstSampleObject.length > 0) {
+                    pageSampleobject.objSample = response.objSample;
+                    pageSampleobject.lstSamplQA = response.lstSamplQA;
+                    showPartSampls(response.lstSampleObject);
 
-            console.log("GetProductDetails ==> data", data);
-            if (null != data.objProduct) {
-                document.getElementById('lblLineNun').innerText = data.objProduct.LINE;
-                document.getElementById('lblProductName').innerText = data.objProduct.PARTNAME;
-                document.getElementById('lblSupplyDate').innerText = data.objProduct.pageREQDATE;
-                document.getElementById('lblProductDescription').innerText = data.objProduct.PDES;
-                document.getElementById('lbl_SERIALNAME').innerText = data.objProduct.SERIALNAME;
-                document.getElementById('lbl_REQDATE2').innerText = data.objProduct.REQDATE2;
-                document.getElementById('lblTotalAmountInOrder').innerText = data.objProduct.TQUANT;
-                document.getElementById('lblLeftAmountToDeliver').innerText = data.objProduct.TBALANCE;
-                document.getElementById('lbl_ACTNAME').innerText = data.objProduct.ACTNAME;
-                document.getElementById('lbl_SHR_DRAW').innerText = data.objProduct.SHR_DRAW;
-                document.getElementById('lbl_SHR_MNFPARTNAME').innerText = data.objProduct.SHR_MNFPARTNAME;
-                document.getElementById('lbl_SHR_MNFDES').innerText = data.objProduct.SHR_MNFDES;
-                document.getElementById('lbl_SHR_SERIAL_REVNUM').innerText = data.objProduct.SHR_SERIAL_REVNUM;
-                document.getElementById('lbl_REVNAME').innerText = data.objProduct.REVNAME;
-                document.getElementById('lblReasonRejection').innerText = '';
+                    //if (null != response.objSample && null != response.objSample.MED_TRANSSAMPLEQA_SUBFORM && response.objSample.MED_TRANSSAMPLEQA_SUBFORM.length > 0)
+                    //    showSelectedSampleQA(response.objSample.MED_TRANSSAMPLEQA_SUBFORM);
 
-                document.getElementById('hdnOrdId').value = data.objProduct.ORD;
-                document.getElementById('hdnPrdId').value = data.objProduct.PARTNAME;
-
-                if (null != data.lstAttachments)
-                    showGridProdAttachments(data.lstAttachments);
-
-                if (null == data.objSample.DOCNO) {
-                    /****** To Do: ****************/
-                    /* Opan new saple             */
-                    OpentestList();
-                    /*****************************/
-                    $("#jqGridRevision").GridUnload();
+                    var x = document.getElementsByTagName("html")[0].getAttribute("dir");
+                    if (x == 'rtl')
+                        $("#modal-9").trigger("click");
+                    else
+                        $("#modal-10").trigger("click");
                 }
                 else {
-                    // Fill sample data
-                    fillSampleSection(data.objSample);
-                    $("#jqGridRevision").GridUnload();
-                    console.log("data.objSample.MED_TRANSSAMPLEQA_SUBFORM", data.objSample.MED_TRANSSAMPLEQA_SUBFORM);
-                    if (null != data.objSample.MED_TRANSSAMPLEQA_SUBFORM) {
-                        console.log("data.objSample.MED_TRANSSAMPLEQA_SUBFORM", data.objSample.MED_TRANSSAMPLEQA_SUBFORM);
-                        showGridProdSamples(data.objSample.MED_TRANSSAMPLEQA_SUBFORM);
+                    if (response.ErrorDescription != '') {
+                        //form_data[0].reset();
+                        $('.modal').modal('hide');
+                        $('.modal').removeClass('show');
+                        $("#modal-error-text").html(response.ErrorDescription);
+                        $("#modal-1").trigger("click");
                     }
                 }
-                $("#loader").hide();
             }
-            else
-            {
-                window.location.href = $('#Logoff').data('url');
-            }
-        }
-    });
+        });
 }
 
 function GetOrderProducts(OrdId) {
@@ -363,17 +385,16 @@ function GetOrderProducts(OrdId) {
     });
 }
 
-function GetOrderProductTests(prodName, supplier, qaCode, REPETITION) {
+function GetOrderProductTests(prodName, supplier, qaCode, REPETITION, DOCNO) {
     console.log('GetOrderProductTests ==> REPETITION = ', REPETITION);
-    if (REPETITION == 0)
+    if (REPETITION === 0)
         return;
     //console.log('GetOrderProductTests ==> prodName = ', prodName);
     $.ajax({
         type: "POST",
         url: $('#navGetOrderProductTests').data('url'),//"GetOrderProductTests",
         data: {
-            prodName: prodName,
-            supplier: supplier,
+            DOCNO: DOCNO,
             qaCode: qaCode
         },
         cache: false,
@@ -381,28 +402,19 @@ function GetOrderProductTests(prodName, supplier, qaCode, REPETITION) {
             console.log("GetOrderProductTests ==> resData", resData);
             let isRESULTDET_SUBFORM = false;
 
-            //if (null != resData.objSample)
-            //    if (null != resData.objSample.MED_TRANSSAMPLEQA_SUBFORM)
-            //        if ((null != resData.objSample.MED_TRANSSAMPLEQA_SUBFORM[0].MED_RESULTDET_SUBFORM) && (resData.objSample.MED_TRANSSAMPLEQA_SUBFORM[0].MED_RESULTDET_SUBFORM.length > 0)) {
-            //            isRESULTDET_SUBFORM = true;
-            //            document.getElementById("testRepitition").style.display = 'inline';
-            //        }
-            //        else
-            //            document.getElementById("testRepitition").style.display = 'none';
-
-            //console.log("GetOrderProductTests ==> data", resData);
             console.log("GetOrderProductTests ==> REPETITION", REPETITION);
             document.getElementById("testRepitition").style.display = 'none';
-            if (null != resData.objSample && REPETITION > 0)
-                if (null != resData.objSample.MED_TRANSSAMPLEQA_SUBFORM && resData.objSample.MED_TRANSSAMPLEQA_SUBFORM.length > 0)
-                    if (resData.objSample.MED_TRANSSAMPLEQA_SUBFORM[0].RESULTANT == 'Y') {
+            if (null !== resData.objSample && REPETITION > 0)
+                if (null !== resData.objSample.MED_TRANSSAMPLEQA_SUBFORM && resData.objSample.MED_TRANSSAMPLEQA_SUBFORM.length > 0)
+                    if (resData.objSample.MED_TRANSSAMPLEQA_SUBFORM[0].RESULTANT === 'Y') {
                         isRESULTDET_SUBFORM = true;
                         document.getElementById("testRepitition").style.display = 'inline';
+                        pageSampleobject.objSample = resData.objSample;
                     }                
             console.log("GetOrderProductTests ==> isRESULTDET_SUBFORM", isRESULTDET_SUBFORM);
             var continer = document.getElementById("repititionTest");
             continer.innerHTML = '';
-            for (var i = 0; i < REPETITION ; i++)
+            for (var i = 0; i < REPETITION; i++)
             {
                 var div = document.createElement('div');
                 var lbl = document.createElement('label');
@@ -421,9 +433,11 @@ function GetOrderProductTests(prodName, supplier, qaCode, REPETITION) {
                 text.type = 'text';
                 text.classList.add('form-control');
                 text.id = 'txtLINE_' + i;
-                if (null != resData.objSample.MED_TRANSSAMPLEQA_SUBFORM[0].MED_RESULTDET_SUBFORM[i])
-                    if (isRESULTDET_SUBFORM)
-                     text.value = resData.objSample.MED_TRANSSAMPLEQA_SUBFORM[0].MED_RESULTDET_SUBFORM[i].KLINE;
+                if (null !== resData.objSample.MED_TRANSSAMPLEQA_SUBFORM[0])
+                    if (null !== resData.objSample.MED_TRANSSAMPLEQA_SUBFORM[0].MED_RESULTDET_SUBFORM && resData.objSample.MED_TRANSSAMPLEQA_SUBFORM[0].MED_RESULTDET_SUBFORM.length > 0)
+                        if (null !== resData.objSample.MED_TRANSSAMPLEQA_SUBFORM[0].MED_RESULTDET_SUBFORM[i])
+                            if (isRESULTDET_SUBFORM)
+                                text.value = resData.objSample.MED_TRANSSAMPLEQA_SUBFORM[0].MED_RESULTDET_SUBFORM[i].KLINE;
 
                 div.appendChild(text);
 
@@ -446,9 +460,11 @@ function GetOrderProductTests(prodName, supplier, qaCode, REPETITION) {
                 text.type = 'text';
                 text.classList.add('form-control');
                 text.id = 'txtRESULT_' + i;
-                if (null != resData.objSample.MED_TRANSSAMPLEQA_SUBFORM[0].MED_RESULTDET_SUBFORM[i])
-                    if (isRESULTDET_SUBFORM)
-                        text.value = resData.objSample.MED_TRANSSAMPLEQA_SUBFORM[0].MED_RESULTDET_SUBFORM[i].RESULT;
+                if (null !== resData.objSample.MED_TRANSSAMPLEQA_SUBFORM[0])
+                    if (null !== resData.objSample.MED_TRANSSAMPLEQA_SUBFORM[0].MED_RESULTDET_SUBFORM && resData.objSample.MED_TRANSSAMPLEQA_SUBFORM[0].MED_RESULTDET_SUBFORM.length > 0)
+                        if (null !== resData.objSample.MED_TRANSSAMPLEQA_SUBFORM[0].MED_RESULTDET_SUBFORM[i])
+                            if (isRESULTDET_SUBFORM)
+                                text.value = resData.objSample.MED_TRANSSAMPLEQA_SUBFORM[0].MED_RESULTDET_SUBFORM[i].RESULT;
                 div.appendChild(text);
 
                 continer.appendChild(div);
@@ -524,57 +540,6 @@ function formatFileIcon(cellValue, options, rowObject) {//options.rowId
     return a.outerHTML;
 }
 
-function GetProductAndRevision(OrderID, prodId, ordLine) {
-    console.log("GetProductAndRevision ==> options", OrderID);
-    console.log("GetProductAndRevision ==> prodId", prodId);
-    console.log("GetProductAndRevision ==> ordLine", ordLine);
-    jQuery("#jqGridRevision").jqGrid("GridUnload");
-    $.ajax({
-        type: "POST",
-        url: $('#navTestProductItemData').data('url'),//"TestProductItemData",
-        data: {
-            orderID: OrderID,
-            prodId: prodId,
-            ordLine: ordLine
-        },
-        cache: false,
-        success: function (data) {
-            console.log("GetProductAndRevision ==> data", data);
-            if (null != data.lstRevision) {
-                gridRevisionData = data.lstRevision;
-                showGridProdRevision(gridRevisionData);
-                document.getElementById('lblProductName').innerText = data.objProduct.ProductName;
-                document.getElementById('hdnOrdId').value = data.objProduct.OrderID;
-                document.getElementById('hdnPrdId').value = data.objProduct.ProductID;
-                document.getElementById('lblProductDescription').innerText = data.objProduct.ProductDescription;
-                document.getElementById('lblSupplyDate').innerText = data.objProduct.SupplyDate;
-                document.getElementById('lblTotalAmountInOrder').innerText = data.objProduct.TotalAmountInOrder;
-                document.getElementById('lblLeftAmountToDeliver').innerText = data.objProduct.LeftAmountToDeliver;
-                document.getElementById('lblLineStatus').innerText = data.objProduct.LineStatus;
-            }
-        }
-    });
-}
-
-function GetRevision(cellValue, options, rowObject) {
-    $.ajax({
-        type: "POST",
-        url: $('#navGetProductRevisionList').data('url'),//"GetProductRevisionList",
-        data: {
-            prodId: options.rowId,
-            revId: rowObject.REVNUM
-        },
-        cache: false,
-        success: function (data) {
-            console.log("GetOrderProducts ==> data", data);
-            if (null != data.lstRevision) {
-                gridRevisionData = data.lstRevision;
-                showGridProdRevision(gridRevisionData);
-            }
-        }
-    });
-}
-
 function downloadFile(filefolder, filename) {
     console.log("filefolder", filefolder);
     //filefolder = 'Test';
@@ -637,7 +602,7 @@ function OpenSampleModal(rowData) {
 
     $('#divMsg').remove();
 
-    var rasData = GetOrderProductTests(rowData.PARTNAME, rowData.SUPNAME, rowData.QACODE, rowData.REPETITION);
+    var rasData = GetOrderProductTests(rowData.PARTNAME, rowData.SUPNAME, rowData.QACODE, rowData.REPETITION, rowData.DOCNO);
     document.getElementById('attachments').value = '';
     document.getElementById('txtQACODE').innerText = rowData.QACODE;
     document.getElementById('txtQADES').innerText = rowData.QADES;
@@ -650,14 +615,17 @@ function OpenSampleModal(rowData) {
         document.getElementById("txtQaRESULTANT").setAttribute('disabled', 'disabled');
         document.getElementById('txtQaRESULTANT').checked = true;
         document.getElementById('txtQaRESULTANT').value = 'on';
-        document.getElementById("txtQaNORMAL").removeAttribute('disabled');
-        document.getElementById('txtQaRESULT').setAttribute('disabled', 'disabled');
+        document.getElementById('txtQaNORMAL').setAttribute('disabled', 'disabled');
+        
+        if (rowData.REPETITION > 0)
+            document.getElementById('txtQaRESULT').setAttribute('disabled', 'disabled');
     }
-    else {
+    else
+    {
         document.getElementById("txtQaRESULTANT").setAttribute('disabled', 'disabled');
         document.getElementById('txtQaRESULTANT').checked = false;
         document.getElementById('txtQaRESULTANT').value = 'off';
-
+        document.getElementById("txtQaNORMAL").removeAttribute('disabled');
         if (rowData.NORMAL == 'Y') //  אם תקין
         {
             document.getElementById('txtQaNORMAL').checked = true;
@@ -681,22 +649,6 @@ function OpenSampleModal(rowData) {
     document.getElementById('hdnQaPARTNAME').value = rowData.PARTNAME;
     document.getElementById('hdnQaREPETITION').value = rowData.REPETITION;
     document.getElementById('hdnQaSAMPQUANT').value = rowData.SAMPQUANT;
-}
-
-function GetRecord(data, parentRowKey) {
-    console.log("GetRecord ==> parentRowKey", parentRowKey);
-    console.log("GetRecord ==> data", data);
-    var rec = [];
-    for (var i = 0; i < data.length; i++) {
-        if (data[i].ORD == parentRowKey) {
-            for (var x = 0; x < data[i].PORDERITEMS_SUBFORM.length; x++) {
-                rec.push(data[i].PORDERITEMS_SUBFORM[x]);
-            }
-            console.log("GetRecord ==> rec", rec);
-            return rec;
-        }
-    }
-    return rec;
 }
 
 function GetResultRecord(data, parentRowKey) {
@@ -747,6 +699,7 @@ function onSubmit_TestForm(e) {
                 console.log("response", response);
                 if (null != response && null != response.ResultData)
                 {
+                    pageSampleobject.objSample = response.ResultData;
                     if (null != response.ResultData.MED_TRANSSAMPLEQA_SUBFORM) {
                         $("#jqGridRevision").GridUnload();
                         showGridProdSamples(response.ResultData.MED_TRANSSAMPLEQA_SUBFORM);
@@ -757,12 +710,14 @@ function onSubmit_TestForm(e) {
                             form_data[0].reset();
                             $('.modal').modal('hide');
                             $('.modal').removeClass('show');
-                            $("#modal-error-text").html(response.ErrorDescription);
-                            $("#modal-1").trigger("click");
-                            if (x == 'rtl')
+                            if (x == 'rtl') {
                                 $("#modal-1").trigger("click");
-                            else
+                                $("#odal-error-text").html(response.ErrorDescription);
+                            }
+                            else {
                                 $("#modal-21").trigger("click");
+                                $("#odal-error-text").html(response.ErrorDescription);
+                            }
                         }
                     }
                 }
@@ -772,17 +727,21 @@ function onSubmit_TestForm(e) {
                         $('.modal').modal('hide');
                         $('.modal').removeClass('show');
                         if (x == 'rtl')
+                        {
                             $("#modal-1").trigger("click");
-                        else
+                            $("#odal-error-text").html(response.ErrorDescription);
+                        }
+                        else {
                             $("#modal-21").trigger("click");
-                        $("#modal-error-text").html(response.ErrorDescription);
+                            $("#odal-error-text").html(response.ErrorDescription);
+                        }
                     }
                 }
             }
         });
 
-    //console.log("form_data = ", decode(createJson(fd)));
     fdata.append("sampleData", decode(createJson(fd)));
+    console.log("UploadFiles ==> fdata = ", fdata);
     $.ajax(
         {
             type: "POST",
@@ -850,12 +809,14 @@ function onSubmitCreateSampleList(e) {
             PARTNAME = fd[i].value;
         if (fd[i].id.includes('hdnQaListORDNAME'))
             ORDNAME = fd[i].value;
+        if (fd[i].id.includes('hdnQaListDOCNO'))
+            DOCNO = fd[i].value;
     }
 
     console.log("SUPNAME", SUPNAME);
     console.log("PARTNAME", PARTNAME);
-    if (document.getElementById('hdnIsNewDocument').value == '1')
-        isNewDocument = true;
+    //if (document.getElementById('hdnIsNewDocument').value == '1')
+    //    isNewDocument = true;
     // DO AJAX HERE
     $.ajax(
     {
@@ -864,7 +825,7 @@ function onSubmitCreateSampleList(e) {
         {
             supName: SUPNAME,
             partName: PARTNAME,
-            isNewDoc: isNewDocument,
+            DOCNO: DOCNO,
             ordName: ORDNAME,
             qaCode: JSON.stringify(jsonObj)
         },
@@ -872,6 +833,7 @@ function onSubmitCreateSampleList(e) {
         contentType: "application/x-www-form-urlencoded;charset=ISO-8859-15",
         success: function (response) {
             console.log("response", response);
+            pageSampleobject.objSample = response.objSample;
             if (null != response.objSample.MED_TRANSSAMPLEQA_SUBFORM) {
                 $("#jqGridRevision").GridUnload();
                 $("#jqGridPartSampls").GridUnload();
@@ -944,3 +906,137 @@ function createJson(fd) {
     console.log("JSON.stringify(jsonObj)", JSON.stringify(jsonObj));
     return JSON.stringify(jsonObj);
 }
+
+function GetRecord(data, parentRowKey) {
+    console.log("GetRecord ==> parentRowKey", parentRowKey);
+    console.log("GetRecord ==> data", data);
+    var rec = [];
+    for (var i = 0; i < data.length; i++) {
+        if (data[i].ORD == parentRowKey) {
+            for (var x = 0; x < data[i].PORDERITEMS_SUBFORM.length; x++) {
+                rec.push(data[i].PORDERITEMS_SUBFORM[x]);
+            }
+            console.log("GetRecord ==> rec", rec);
+            return rec;
+        }
+    }
+    return rec;
+}
+
+//function GetRevision(cellValue, options, rowObject) {
+//    $.ajax({
+//        type: "POST",
+//        url: $('#navGetProductRevisionList').data('url'),//"GetProductRevisionList",
+//        data: {
+//            prodId: options.rowId,
+//            revId: rowObject.REVNUM
+//        },
+//        cache: false,
+//        success: function (data) {
+//            console.log("GetOrderProducts ==> data", data);
+//            if (null != data.lstRevision) {
+//                gridRevisionData = data.lstRevision;
+//                showGridProdRevision(gridRevisionData);
+//            }
+//        }
+//    });
+//}
+
+//function GetProductAndRevision(OrderID, prodId, ordLine) {
+//    console.log("GetProductAndRevision ==> options", OrderID);
+//    console.log("GetProductAndRevision ==> prodId", prodId);
+//    console.log("GetProductAndRevision ==> ordLine", ordLine);
+//    jQuery("#jqGridRevision").jqGrid("GridUnload");
+//    $.ajax({
+//        type: "POST",
+//        url: $('#navTestProductItemData').data('url'),//"TestProductItemData",
+//        data: {
+//            orderID: OrderID,
+//            prodId: prodId,
+//            ordLine: ordLine
+//        },
+//        cache: false,
+//        success: function (data) {
+//            console.log("GetProductAndRevision ==> data", data);
+//            if (null != data.lstRevision) {
+//                gridRevisionData = data.lstRevision;
+//                showGridProdRevision(gridRevisionData);
+//                document.getElementById('lblProductName').innerText = data.objProduct.ProductName;
+//                document.getElementById('hdnOrdId').value = data.objProduct.OrderID;
+//                document.getElementById('hdnPrdId').value = data.objProduct.ProductID;
+//                document.getElementById('lblProductDescription').innerText = data.objProduct.ProductDescription;
+//                document.getElementById('lblSupplyDate').innerText = data.objProduct.SupplyDate;
+//                document.getElementById('lblTotalAmountInOrder').innerText = data.objProduct.TotalAmountInOrder;
+//                document.getElementById('lblLeftAmountToDeliver').innerText = data.objProduct.LeftAmountToDeliver;
+//                document.getElementById('lblLineStatus').innerText = data.objProduct.LineStatus;
+//            }
+//        }
+//    });
+//}
+
+//function GetProductDetails(rowData) {
+//    console.log("IN GetProductDetails ==> rowData", rowData);
+//    $("#loader").show();
+//    $.ajax({
+//        type: "POST",
+//        url: $('#navPostTestProductItem').data('url'),//"/Home_IL/PostTestProductItem",
+//        data: {
+//            orderID: parseInt(rowData.ORD),
+//            prodName: rowData.PARTNAME,
+//            ordLine: parseInt(rowData.LINE)
+//        },
+//        cache: false,
+//        success: function (data) {
+//            $("#jqGridRevision").GridUnload();
+//            $("#jqGridAttachments").GridUnload();
+//            $("#jqGridTest").GridUnload();
+
+//            console.log("GetProductDetails ==> data", data);
+//            if (null != data.objProduct) {
+//                document.getElementById('lblLineNun').innerText = data.objProduct.LINE;
+//                document.getElementById('lblProductName').innerText = null == data.objProduct.PARTNAME ? '' : data.objProduct.PARTNAME;
+//                document.getElementById('lblSupplyDate').innerText = null == data.objProduct.pageREQDATE ? '' : data.objProduct.pageREQDATE;
+//                document.getElementById('lblProductDescription').innerText = null == data.objProduct.PDES ? '' : data.objProduct.PDES;
+//                document.getElementById('lbl_SERIALNAME').innerText = null == data.objProduct.SERIALNAME ? '' : data.objProduct.SERIALNAME;
+//                document.getElementById('lbl_REQDATE2').innerText = null == data.objProduct.pageREQDATE2 ? '' : data.objProduct.pageREQDATE2;
+//                document.getElementById('lblTotalAmountInOrder').innerText = null == data.objProduct.TQUANT ? '' : data.objProduct.TQUANT;
+//                document.getElementById('lblLeftAmountToDeliver').innerText = null == data.objProduct.TBALANCE ? '' : data.objProduct.TBALANCE;
+//                document.getElementById('lbl_ACTNAME').innerText = null == data.objProduct.ACTNAME ? '' : data.objProduct.ACTNAME;
+//                document.getElementById('lbl_SHR_DRAW').innerText = null == data.objProduct.SHR_DRAW ? '' : data.objProduct.SHR_DRAW;
+//                document.getElementById('lbl_SHR_MNFPARTNAME').innerText = null == data.objProduct.SHR_MNFPARTNAME ? '' : data.objProduct.SHR_MNFPARTNAME;
+//                document.getElementById('lbl_SHR_MNFDES').innerText = null == data.objProduct.SHR_MNFDES ? '' : data.objProduct.SHR_MNFDES;
+//                document.getElementById('lbl_SHR_SERIAL_REVNUM').innerText = null == data.objProduct.SHR_SERIAL_REVNUM ? '' : data.objProduct.SHR_SERIAL_REVNUM;
+//                document.getElementById('lbl_REVNAME').innerText = null == data.objProduct.REVNAME ? '' : data.objProduct.REVNAME;
+//                document.getElementById('lblReasonRejection').innerText = '';
+
+//                document.getElementById('hdnOrdId').value = data.objProduct.ORD;
+//                document.getElementById('hdnPrdId').value = data.objProduct.PARTNAME;
+
+//                if (null != data.lstAttachments)
+//                    showGridProdAttachments(data.lstAttachments);
+
+//                if (null == data.objSample.DOCNO) {
+//                    /****** To Do: ****************/
+//                    /* Opan new saple             */
+//                    OpentestList();
+//                    /*****************************/
+//                    $("#jqGridRevision").GridUnload();
+//                }
+//                else {
+//                    // Fill sample data
+//                    fillSampleSection(data.objSample);
+//                    $("#jqGridRevision").GridUnload();
+//                    console.log("data.objSample.MED_TRANSSAMPLEQA_SUBFORM", data.objSample.MED_TRANSSAMPLEQA_SUBFORM);
+//                    if (null != data.objSample.MED_TRANSSAMPLEQA_SUBFORM) {
+//                        console.log("data.objSample.MED_TRANSSAMPLEQA_SUBFORM", data.objSample.MED_TRANSSAMPLEQA_SUBFORM);
+//                        showGridProdSamples(data.objSample.MED_TRANSSAMPLEQA_SUBFORM);
+//                    }
+//                }
+//                $("#loader").hide();
+//            }
+//            else {
+//                window.location.href = $('#Logoff').data('url');
+//            }
+//        }
+//    });
+//}

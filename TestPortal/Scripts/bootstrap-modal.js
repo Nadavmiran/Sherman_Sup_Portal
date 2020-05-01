@@ -4,8 +4,8 @@
 $("#modal-1").fireModal({ title: 'שגיאה בשמירת נתונים', body: $("#modal-error") });
 $("#modal-2").fireModal({ title: 'הודעת מערכת', body: $("#modal-error"), center: true});
 $("#modal-21").fireModal({ title: 'System message', body: $("#modal-error"), center: true });
-let modal_3_body = '<p>Do you want to create a new sample document</p>';
-let modal_31_body = '<p>Do you want to create a new sample document</p>';
+let modal_3_body = '<p>לפתיחת תעודת דגימה חדשה בחר "כן"<br/>להוספת בדיקות לתעודת דגימה קיימת, לחץ "לא"</p>';
+let modal_31_body = '<p>To create a new sample document, click "Yes"<br/>To add tests for an existing document, click "no".</p>';
 //let modal_31_body = '<p>Do you want to create a new sample document</p><pre class="language-javascript"><code>';
 //modal_31_body += '[\n';
 //modal_31_body += ' {\n';

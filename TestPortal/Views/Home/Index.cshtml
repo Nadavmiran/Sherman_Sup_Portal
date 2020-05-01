@@ -1,6 +1,6 @@
 ﻿@model TestPortal.Models.PageObject
 @{
-    ViewBag.Title = "Orders";
+    ViewBag.Title = "Open orders";
     Layout = "~/Views/Shared/_Layout_EN.cshtml";
 }
 <script>
@@ -28,6 +28,9 @@
         
     </form>
 </div>
+<div id="navGetOrdersData" data-url="@Url.Action("GetOrdersData", "Home")"></div>
+<div id="navQA_Page" data-url="@Url.Action("QA_Page", "Home")"></div>
+<div id="navTestProduct" data-url="@Url.Action("TestProduct", "Home")"></div>
 <div id="navOrder" data-url="@Url.Action("PostTestProductItem", "Home")"></div>
 <script type="text/javascript">
     var gridBaseWidth = 0;

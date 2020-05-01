@@ -63,13 +63,16 @@
     <div id="modal-error" class="card"></div>
     @Html.Partial("_Sample_QA")
     @Html.Partial("_SampleQA_List")
-    <div id="navGetSampleTest" data-url="@Url.Action("GetSampleTests", "Home")"></div>
-    <div id="navGetSampleTestList" data-url="@Url.Action("GetSampleTestList", "Home")"></div>
-    <div id="navCreateTest" data-url="@Url.Action("CreateTest", "Home")"></div>
+    <div id="navTestProduct" data-url="@Url.Action("TestProduct", "Home_IL")"></div>
+    <div id="navGetSampleTest" data-url="@Url.Action("GetSampleTests", "Home_IL")"></div>
+    <div id="navGetSampleTestList" data-url="@Url.Action("GetSampleTestList", "Home_IL")"></div>
+    <div id="navCreateTest" data-url="@Url.Action("CreateTest", "Home_IL")"></div>
+    <div id="navCreateSampleDocument" data-url="@Url.Action("CreateSampleDocument", "Home_IL")"></div>
     <div id="navDownload" data-url="@Url.Action("Download", "Home_IL")"></div>
-    <div id="navDownloadFile" data-url="@Url.Action("GetProductRevisionList", "Home")"></div>
-    <div id="navSaveTest" data-url="@Url.Action("SaveTest", "Home")"></div>
-    <div id="navUploadFiles" data-url="@Url.Action("UploadFiles", "Home")"></div>
+    <div id="navDownloadFile" data-url="@Url.Action("GetProductRevisionList", "Home_IL")"></div>
+    <div id="navSaveTest" data-url="@Url.Action("SaveTest", "Home_IL")"></div>
+    <div id="navUploadFiles" data-url="@Url.Action("UploadFiles", "Home_IL")"></div>
+    <div id="navGetOrderProductTests" data-url="@Url.Action("GetOrderProductTestsByDoc", "Home_IL")"></div>
 </div>
 <script type="text/javascript">
     $.jgrid.defaults.responsive = true;

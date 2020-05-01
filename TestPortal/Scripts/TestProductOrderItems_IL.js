@@ -8,7 +8,7 @@
         colModel: [
             { label: 'ORD', name: 'ORD', align: 'center', hidden: true, width: 75 },
             { label: '#', name: 'LINE', align: 'center', hidden: false, width: 75 },
-            { label: 'ProductID', name: 'PARTNAME', align: 'center', key: true, hidden: false, width: 75 },
+            { label: 'ProductID', name: 'PARTNAME', align: 'center', key: true, hidden: true, width: 75 },
             { label: 'מק"ט', name: 'PARTNAME', align: 'center', width: 100 }, //formatter: formatProdLink, 
             { label: 'תאור', name: 'PDES', align: 'center', width: 100 },
             { label: 'כמות', name: 'TQUANT', align: 'center', width: 100 },
@@ -33,7 +33,7 @@
             console.log('showGridProd ==> rowId ', rowId);
             console.log('showGridProd ==> iCol ', iCol);
             console.log('showGridProd ==> content ', content);
-            window.location = '/Home_IL/QA_Page/?orderID=' + rowData.ORD + '&orderName=' + document.getElementById('lbl_ORDNAME').innerText + '&prodName=' + rowData.PARTNAME + '&ordLine=' + rowData.LINE;
+            window.location = window.location.origin + $('#navQA_Page').data('url') + '?orderID=' + rowData.ORD + '&orderName=' + document.getElementById('lbl_ORDNAME').innerText + '&prodName=' + rowData.PARTNAME + '&ordLine=' + rowData.LINE;
         }
     });
 }

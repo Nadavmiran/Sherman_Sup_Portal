@@ -5,7 +5,7 @@
     ViewBag.Title = "שורות הזמנה";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div class="section-body" id="mainPageContent">
+<div class="section-body" id="mainPageContent" style="overflow-y:scroll;overflow-x:hidden;">
     <div class="row">
         @Html.Partial("_OrderDetails")
     </div>
@@ -31,9 +31,10 @@
     <div id="downLoadFile" data-url="@Url.Action("DownloadFile", "Home")"></div>
     <div id="Logoff" data-url="@Url.Action("LogOff", "Account")"></div>
 
+    <div id="navQA_Page" data-url="@Url.Action("QA_Page", "Home_IL")"></div>
     <div id="navPostTestProductItem" data-url="@Url.Action("PostTestProductItem", "Home_IL")"></div>
     <div id="navTestProductOrderItems" data-url="@Url.Action("TestProductOrderItems", "Home_IL")"></div>
-    <div id="navGetOrderProductTests" data-url="@Url.Action("GetOrderProductTests", "Home_IL")"></div>
+    
     <div id="navTestProductItemData" data-url="@Url.Action("TestProductItemData", "Home_IL")"></div>
     <div id="navGetProductRevisionList" data-url="@Url.Action("GetProductRevisionList", "Home_IL")"></div>
     <div id="navDownload" data-url="@Url.Action("Download", "Home_IL")"></div>

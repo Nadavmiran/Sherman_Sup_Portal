@@ -37,7 +37,7 @@ namespace TestPortal.Models
             string query = "/PHONEBOOK?$filter=EMAIL eq '" + Email + "'&$expand=EFI_PORTALDEF_SUBFORM($filter=USEREMAIL eq '" + Email + "' and PASSWORD eq '" + Password + "')";
             ResultAPI ra = Do_Call_Get(query);
             AppUserWarpper ow = JsonConvert.DeserializeObject<AppUserWarpper>(ra.JsonResult);
-            if (null != ow)
+            if (null != ow && null != ow.Value && ow.Value.Count > 0)
             {
                 if(null != ow.Value[0].EFI_PORTALDEF_SUBFORM && ow.Value[0].EFI_PORTALDEF_SUBFORM.Count > 0)
                 {

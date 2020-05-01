@@ -81,7 +81,7 @@ namespace TestPortal.Models
         internal Sample GetProductSamples(string supplierName, string orderName, string partName, int ordLine)
         {
             // MED_SAMPLE ?$filter = PARTNAME eq '23559000' and SUPNAME eq '20523' &$expand = MED_TRANSSAMPLEQA_SUBFORM
-            string query = "MED_SAMPLE?$filter=EFI_PORDNAME eq '" + orderName + "' and PARTNAME eq '" + partName + "' and SUPNAME eq '" + supplierName + "'&$select=CURDATE,DOCNO,SUPNAME,STATDES,PARTNAME,PARTDES,SERIALNAME,SHR_SERIAL_QUANT,SHR_QUANT,SHR_SAMPLE_STD_CODE,QUANT,SHR_DRAW,SHR_RAR,MAX_REJECT &$expand=MED_TRANSSAMPLEQA_SUBFORM($expand=MED_RESULTDET_SUBFORM)";
+            string query = "MED_SAMPLE?$filter=EFI_PORDNAME eq '" + orderName + "' and PARTNAME eq '" + partName + "' and SUPNAME eq '" + supplierName + "' and STATDES ne 'מבוטלת'&$select=CURDATE,DOCNO,SUPNAME,STATDES,PARTNAME,PARTDES,SERIALNAME,SHR_SERIAL_QUANT,SHR_QUANT,SHR_SAMPLE_STD_CODE,QUANT,SHR_DRAW,SHR_RAR,MAX_REJECT &$expand=MED_TRANSSAMPLEQA_SUBFORM($expand=MED_RESULTDET_SUBFORM)";
             string res = Call_Get(query);
 
             SamplesWarpper ow = JsonConvert.DeserializeObject<SamplesWarpper>(res);
@@ -94,7 +94,7 @@ namespace TestPortal.Models
 
         internal Sample GetProductSamples(string DOCNO)
         {
-            string query = "MED_SAMPLE?$filter=DOCNO eq '" + DOCNO + "'&$select=DOCNO,SUPNAME,PARTNAME&$expand=MED_TRANSSAMPLEQA_SUBFORM($expand=MED_RESULTDET_SUBFORM)";
+            string query = "MED_SAMPLE?$filter=DOCNO eq '" + DOCNO + "' and STATDES ne 'מבוטלת'&$select=DOCNO,SUPNAME,PARTNAME&$expand=MED_TRANSSAMPLEQA_SUBFORM($expand=MED_RESULTDET_SUBFORM)";
             string res = Call_Get(query);
 
             SamplesWarpper ow = JsonConvert.DeserializeObject<SamplesWarpper>(res);
@@ -107,7 +107,7 @@ namespace TestPortal.Models
 
         internal List<Sample> GetOrderSamples(string ORDNAME, string SUPNAME, string PARTNAME)
         {
-            string query = "MED_SAMPLE?$filter=EFI_PORDNAME eq '" + ORDNAME + "' and SUPNAME eq '" + SUPNAME + "' and PARTNAME eq '" + PARTNAME + "'";
+            string query = "MED_SAMPLE?$filter=EFI_PORDNAME eq '" + ORDNAME + "' and SUPNAME eq '" + SUPNAME + "' and PARTNAME eq '" + PARTNAME + "' and STATDES ne 'מבוטלת'";
             string res = Call_Get(query);
             SamplesWarpper ow = JsonConvert.DeserializeObject<SamplesWarpper>(res);
             return ow.Value;
@@ -286,6 +286,20 @@ namespace TestPortal.Models
             return new Sample();
         }
 
+        internal Sample GetOrderProductTests(string DOCNO, string qaCode)
+        {
+            // /MED_SAMPLE?$filter=PARTNAME eq '23559000' and SUPNAME eq '20523'&$expand=MED_TRANSSAMPLEQA_SUBFORM($filter=QACODE eq '007';$expand=MED_RESULTDET_SUBFORM)
+            string query = "MED_SAMPLE?$filter=DOCNO eq '" + DOCNO + "'&$expand=MED_TRANSSAMPLEQA_SUBFORM($filter=QACODE eq '" + qaCode + "';$expand=MED_RESULTDET_SUBFORM)";
+            string res = Call_Get(query);
+
+            SamplesWarpper ow = JsonConvert.DeserializeObject<SamplesWarpper>(res);
+            if ((null != ow) && (null != ow.Value) && (ow.Value.Count > 0))
+            {
+                return ow.Value[0];
+            }
+            return new Sample();
+        }
+
         internal ResultAPI Createtest(string supName, string ordName, string partName, List<CreateSampleTestMsg> form, bool isNewSample, string DOCNO = "")
         {
             string reqBody = CreateNewsampleMsg(supName, ordName, partName, form, isNewSample);
@@ -338,12 +352,40 @@ namespace TestPortal.Models
             return sb.ToString();
         }
 
+        private string CreateNewsampleMsg(string supName, string ordName, string partName, int ordLine)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("{");
+            sb.Append("\r\n\t\"CURDATE\":");
+            sb.Append("\"" + GetDateTimeOffset(DateTime.Now.ToString(), "00:00") + "\",");
+            sb.Append("\r\n\t\"EFI_PORDNAME\":");
+            sb.Append("\"" + ordName + "\",");
+            sb.Append("\r\n\t\"PARTNAME\":");
+            sb.Append("\"" + partName + "\",");
+            sb.Append("\r\n\t\"SUPNAME\":");
+            sb.Append("\"" + supName + "\",");
+            sb.Append("\r\n\t\"EFI_PILINE\":");
+            sb.Append(ordLine);
+
+            sb.Append("}");
+            return sb.ToString();
+        }
+
         internal ResultAPI AddSampleTests(string supName, string ordName, string partName, List<CreateSampleTestMsg> form, bool isNewSample, string DOCNO = "")
         {
             string reqBody = CreateNewsampleMsg(supName, ordName, partName, form, isNewSample, DOCNO);
             ResultAPI ra = Call_PATCH(reqBody);
             return ra;
         }
+
+        internal ResultAPI CreateSampleDocument(string supName, string ordName, string partName, int ordLine)
+        {
+            string reqBody = CreateNewsampleMsg(supName, ordName, partName, ordLine);
+            ResultAPI ra = Call_POST(reqBody);
+            return ra;
+        }
+
+
     }
 
     public class SamplesWarpper : ODataBase

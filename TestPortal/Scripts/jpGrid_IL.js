@@ -1,24 +1,25 @@
-﻿function getData(supplier) {
-    $.ajax({
-        type: "POST",
-        url: "Home/GetOrdersData",
-        data: {
-            supplier: supplier
-        },
-        cache: false,
-        success: function (data) {
-            console.log("data", data);
-            grid_data = data.lstOrderObject;
-            if ((null === grid_data) || (grid_data === ''))
-                return;
+﻿//function getData(supplier) {
+//    $.ajax({
+//        type: "POST",
+//        url: "Home/GetOrdersData",
+//        data: {
+//            supplier: supplier
+//        },
+//        cache: false,
+//        success: function (data) {
+//            console.log("data", data);
+//            grid_data = data.lstOrderObject;
+//            if ((null === grid_data) || (grid_data === ''))
+//                return;
 
-            showGrid();
-        }
-    });
-}
+//            showGrid();
+//        }
+//    });
+//}
 
 function showGrid() {
     console.log("showGrid ==> grid_data", grid_data);
+    
     $("#jqGrid").jqGrid({
         //styleUI: 'Bootstrap',
         guiStyle: "bootstrap",
@@ -27,11 +28,12 @@ function showGrid() {
         data: grid_data,
         colModel: [
             { label: 'OrderID', name: 'ORD', align: 'center', index: 'ORD', key: true, hidden: true, width: 75 },//, formatter: formatRPTLink
-            { label: 'הזמנה', name: 'ORDNAME', align: 'center', width: 75 },//, formatter: formatRPTLink
-            { label: 'תאריך הזמנה', name: 'pageCURDATE', align: 'center', width: 150, sorttype: "date" },//, formatter: formatRPTLink
-            { label: 'שם ספק', name: 'SHR_SUPTYPEDES', align: 'center', hidden: true, width: 150 },//, formatter: formatRPTLink
-            { label: 'שם הקניין', name: 'OWNERLOGIN', align: 'center', width: 150 },//, formatter: formatRPTLink
-            { label: 'ססטוס הזמנה', name: 'STATDES', align: 'center', width: 150 }//, formatter: formatRPTLink
+            { label: 'הזמנה', name: 'ORDNAME', index: 'ORDNAME', align: 'center', width: 75, searchtype: 'string', searchoptions:{sopt:['eq','ne','le','lt','gt','ge']}},//, formatter: formatRPTLink
+            { label: 'תאריך הזמנה', name: 'pageCURDATE', align: 'center', width: 150},//, formatter: formatRPTLink
+            { label: 'שם ספק', name: 'SHR_SUPTYPEDES', align: 'center', hidden: true },//, formatter: formatRPTLink
+            { label: 'שם הקניין', name: 'OWNERLOGIN', align: 'center', width: 150},//, formatter: formatRPTLink
+            { label: 'סוג הזמנה ', name: 'TYPEDES', align: 'center', width: 150},
+            { label: 'ססטוס הזמנה', name: 'STATDES', align: 'center', width: 150}//, formatter: formatRPTLink
         ],
         viewrecords: true,
         altRows: true,
@@ -39,6 +41,7 @@ function showGrid() {
         autowidth: true,
         height: null,
         rowNum: 30,
+        gridview: true,
         rowList: [10, 30, 50, 100],
         pager: "#jqGridPager",
         loadonce: true,
@@ -51,7 +54,7 @@ function showGrid() {
             var rowData = $(this).getRowData(id);
             console.log("onSelectRow rowData = ", rowData);
             //window.location.href += '/TestProduct/?OrderID=' + rowData.ORD + '&orderNumber=' + rowData.ORDNAME;
-            window.location = 'Home_IL/TestProduct/?OrderID=' + rowData.ORD + '&orderNumber=' + rowData.ORDNAME;
+            window.location = window.location.origin + $('#navTestProduct').data('url') + '/?OrderID=' + rowData.ORD + '&orderNumber=' + rowData.ORDNAME;
         },
         subGridOptions:
         {
@@ -79,12 +82,13 @@ function showGrid() {
                     { label: '#', name: 'LINE', align: 'center', key: true, hidden: false, width: 75 },
                     { label: 'ORD', name: 'ORD', align: 'center', hidden: true, width: 75 },
                     { label: 'מק"ט', name: 'PARTNAME', align: 'center', width: 100 },//, formatter: formatProdLink
+                    { label: 'שרטוט', name: 'SHR_DRAW', align: 'center', width: 100 },
                     { label: 'תאור', name: 'PDES', align: 'center', width: 100 },
                     { label: 'כמות', name: 'TQUANT', align: 'center', width: 100 },
                     { label: 'נותר לספק', name: 'TBALANCE', align: 'center', width: 100 },
                     { label: 'תאריך אספקה', name: 'pageREQDATE', align: 'center', width: 100 },
                     { label: 'סטטוס', name: 'PORDISTATUSDES', align: 'center', width: 100 },
-                    { label: '', name: 'Information', align: 'center', width: 150, formatter: formatBTNLink }
+                    { label: 'פרטי שורת הזמנה', name: 'Information', align: 'center', width: 150, formatter: formatBTNLink }
                 ],
                 onCellSelect: function (id, col, iCol, event) {
                     if (col == 8) return;
@@ -94,12 +98,12 @@ function showGrid() {
                     //console.log("onSelectRow rowId = ", rowId);
                     var rowData = $(this).getRowData(id);
                     console.log("onSelectRow rowData = ", rowData);
-                    window.location = '/Home_IL/QA_Page/?orderID=' + rowData.ORD + '&orderName=' + rowData.ORDNAME + '&prodName=' + rowData.PARTNAME + '&ordLine=' + rowData.LINE;
-                    //window.location.href += '/TestProductItem/?OrderID=' + rowData.ORD + '&prodName="' + rowData.PARTNAME + '"&ordLine=' + rowData.LINE;
+                    window.location = window.location.origin + $('#navQA_Page').data('url') + '/?orderID=' +  + rowData.ORD + '&orderName=' + rowData.ORDNAME + '&prodName=' + rowData.PARTNAME + '&ordLine=' + rowData.LINE;
                 }
             });
         }
     });
+    jQuery("#jqGrid").jqGrid("filterToolbar", {searchOperators:true, stringResult:true, searchOnEnter:false});
 }
 
 function formatBTNLink(cellValue, options, rowObject) {

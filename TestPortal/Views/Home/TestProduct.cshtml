@@ -7,25 +7,25 @@
     $.jgrid.defaults.responsive = true;
     $.jgrid.defaults.shrinkToFit = false;
 </script>
-<div class="section-body" id="mainPageContent">
-<div class="row">
-    @Html.Partial("_OrderDetails")
-</div>
-<div class="row">
-    <div class="col-12 col-md-12 col-lg-12">
-        <div class="card">
-            <div class="card-header">
-                <h4><i class="fas fa-list" style="font-size: 20px;"></i> Order products</h4>
-            </div>
-            <div class="card-body">
-                <div>
-                    <table id="jqGrid"></table>
-                    <div id="jqGridPager"></div>
+<div class="section-body" id="mainPageContent" style="overflow-y:scroll;">
+    <div class="row">
+        @Html.Partial("_OrderDetails")
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-12 col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4><i class="fas fa-list" style="font-size: 20px;"></i> Order products</h4>
+                </div>
+                <div class="card-body">
+                    <div>
+                        <table id="jqGrid"></table>
+                        <div id="jqGridPager"></div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
     <div id="modal-error" class="card">
         <p id="modal-error-text"></p>
@@ -36,9 +36,9 @@
 
     <div id="navQA_Page" data-url="@Url.Action("QA_Page", "Home")"></div>
 
+    <div id="navQA_Page" data-url="@Url.Action("QA_Page", "Home")"></div>
     <div id="navPostTestProductItem" data-url="@Url.Action("PostTestProductItem", "Home")"></div>
     <div id="navTestProductOrderItems" data-url="@Url.Action("TestProductOrderItems", "Home")"></div>
-    <div id="navGetOrderProductTests" data-url="@Url.Action("GetOrderProductTests", "Home")"></div>
     <div id="navTestProductItemData" data-url="@Url.Action("TestProductItemData", "Home")"></div>
     <div id="navGetProductRevisionList" data-url="@Url.Action("GetProductRevisionList", "Home")"></div>
 

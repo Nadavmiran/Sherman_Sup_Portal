@@ -288,6 +288,16 @@ namespace TestPortal.Models
         }
 
         [HttpPost]
+        public JsonResult GetOrderProductTestsByDoc(string DOCNO, string qaCode)
+        {
+            //MED_SAMPLE?$filter=PARTNAME eq '23559000' and SUPNAME eq '20523'&$expand=MED_TRANSSAMPLEQA_SUBFORM($filter=QACODE eq '007';$expand=MED_RESULTDET_SUBFORM)
+            Sample s = new Sample();
+            PageObject po = new PageObject();
+            po.objSample = s.GetOrderProductTests(DOCNO, qaCode);
+            return Json(po);
+        }
+
+        [HttpPost]
         public JsonResult SaveTest(string data)
         {
             Sample s = new Sample();
@@ -296,7 +306,7 @@ namespace TestPortal.Models
 
             if (ra.ResultStatus.ToUpper().Equals("OK"))
             {
-                s = s.GetProductSamples(ow.form[0].hdnQaSUPNAME, ow.form[0].hdnQaORDNAME, ow.form[0].hdnQaPARTNAME, 0);
+                s = s.GetProductSamples(ow.form[0].hdnQaDOCNO);
                 if ((null != s) && (null != s.MED_TRANSSAMPLEQA_SUBFORM) && (s.MED_TRANSSAMPLEQA_SUBFORM.Count > 0))
                 {
                     foreach (Sample_QA item in s.MED_TRANSSAMPLEQA_SUBFORM)
@@ -453,7 +463,7 @@ namespace TestPortal.Models
         }
 
         [HttpPost]
-        public JsonResult CreateTest(string supName, string partName, bool isNewDoc, string ordName, string qaCode)
+        public JsonResult CreateTest(string supName, string partName, string DOCNO, string ordName, string qaCode)
         {
             ResultAPI ra = null;
             Sample s = new Sample();
@@ -461,17 +471,17 @@ namespace TestPortal.Models
             CreateSampleTestMsgWarpper ow = JsonConvert.DeserializeObject<CreateSampleTestMsgWarpper>(qaCode);
             if(null != ow)
             {
-                if (isNewDoc)
+                if (string.IsNullOrEmpty(DOCNO))
                 {
                     ra = s.Createtest(supName, ordName, partName, ow.form, true);
                 }
                 else
                 {
-                    po.objSample = s.GetProductSamples(supName, ordName, partName, 0);
-                    if ((null == po.objSample) || (string.IsNullOrEmpty(po.objSample.DOCNO)))
-                        ra = s.Createtest(supName, ordName, partName, ow.form, true);
-                    else
-                        ra = s.AddSampleTests(supName, ordName, partName, ow.form, false, po.objSample.DOCNO);
+                    //po.objSample = s.GetProductSamples(DOCNO);
+                    //if ((null == po.objSample) || (string.IsNullOrEmpty(po.objSample.DOCNO)))
+                    //    ra = s.Createtest(supName, ordName, partName, ow.form, true);
+                    //else
+                        ra = s.AddSampleTests(supName, ordName, partName, ow.form, false, DOCNO);
 
                 }
                 //Get the test list after creation or update
@@ -482,13 +492,26 @@ namespace TestPortal.Models
         }
 
         [HttpPost]
-        public JsonResult GetSampleTestList(string supName, string partName)
+        public JsonResult CreateSampleDocument(string supName, string partName, string ordName, int ordLine)
+        {
+            ResultAPI ra = null;
+            Sample s = new Sample();
+            PageObject po = new PageObject();
+            ra = s.CreateSampleDocument(supName, ordName, partName, ordLine);
+            //Get the test list after creation or update
+            po.objSample = s.GetProductSamples(supName, ordName, partName, ordLine);
+            po.lstSampleObject = s.GetOrderSamples(ordName, supName, partName);
+            return Json(po);
+        }
+
+        [HttpPost]
+        public JsonResult GetSampleTestList(string supName, string partName, string ordName, int ordLine)
         {
             Sample s = new Sample();
             PageObject po = new PageObject();
             Sample_QA sq = new Sample_QA();
             po.lstSamplQA = sq.GetCommonSamplesList();
-            po.objSample = s.GetProductSamples(supName, partName, string.Empty, 0);
+            po.objSample = s.GetProductSamples(supName, ordName, partName, ordLine);
             return Json(po);
         }
 
