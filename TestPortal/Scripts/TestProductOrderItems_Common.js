@@ -619,9 +619,12 @@ function OpenSampleModal(rowData) {
         
         if (rowData.REPETITION > 0)
             document.getElementById('txtQaRESULT').setAttribute('disabled', 'disabled');
+        else
+            document.getElementById("txtQaRESULT").removeAttribute('disabled');
     }
     else
     {
+        document.getElementById('txtQaRESULT').setAttribute('disabled', 'disabled');
         document.getElementById("txtQaRESULTANT").setAttribute('disabled', 'disabled');
         document.getElementById('txtQaRESULTANT').checked = false;
         document.getElementById('txtQaRESULTANT').value = 'off';
