@@ -256,7 +256,40 @@ $("#modal-11").fireModal({
     autoFocus: true,
     onFormSubmit: function (modal, e, form) {
         // Form Data
-        onSubmitCreateSampleList(e);
+        onSubmit_UpdateOrderLineData();
+        //onSubmitCreateSampleList(e);
+        let fake_ajax = setTimeout(function () {
+            form.stopProgress();
+            //modal.find('.modal-body').prepend('<div class="alert alert-info" id="divTLMsg">Data submited.</div>');
+
+            clearInterval(fake_ajax);
+        }, 1500);
+
+        e.preventDefault();
+    },
+    shown: function (modal, form) {
+        console.log(form);
+    },
+    buttons: [
+        {
+            text: 'שמור',
+            submit: true,
+            class: 'btn btn-primary btn-shadow',
+            handler: function (modal) {
+            }
+        }
+    ]
+});
+
+$("#modal-12").fireModal({
+    title: 'Order Line',
+    body: $("#modal-order-part"),
+    footerClass: 'bg-whitesmoke',
+    autoFocus: true,
+    onFormSubmit: function (modal, e, form) {
+        // Form Data
+        //onSubmitCreateSampleList(e);
+        onSubmit_UpdateOrderLineData();
         let fake_ajax = setTimeout(function () {
             form.stopProgress();
             //modal.find('.modal-body').prepend('<div class="alert alert-info" id="divTLMsg">Data submited.</div>');
@@ -280,14 +313,47 @@ $("#modal-11").fireModal({
     ]
 });
 
-$("#modal-12").fireModal({
-    title: 'Order Line',
-    body: $("#modal-order-part"),
+$("#modal-13").fireModal({
+    title: 'עדכון פרטי תעודת דגימה',
+    body: $("#modal-Sample-part"),
     footerClass: 'bg-whitesmoke',
     autoFocus: true,
     onFormSubmit: function (modal, e, form) {
         // Form Data
-        onSubmitCreateSampleList(e);
+        //onSubmitCreateSampleList(e);
+        onSubmit_UpdateSampleDetails();
+        let fake_ajax = setTimeout(function () {
+            form.stopProgress();
+            //modal.find('.modal-body').prepend('<div class="alert alert-info" id="divTLMsg">Data submited.</div>');
+
+            clearInterval(fake_ajax);
+        }, 1500);
+
+        e.preventDefault();
+    },
+    shown: function (modal, form) {
+        console.log(form);
+    },
+    buttons: [
+        {
+            text: 'שמור',
+            submit: true,
+            class: 'btn btn-primary btn-shadow',
+            handler: function (modal) {
+            }
+        }
+    ]
+});
+
+$("#modal-14").fireModal({
+    title: 'Update sample detailse',
+    body: $("#modal-Sample-part"),
+    footerClass: 'bg-whitesmoke',
+    autoFocus: true,
+    onFormSubmit: function (modal, e, form) {
+        // Form Data
+        //onSubmitCreateSampleList(e);
+        onSubmit_UpdateSampleDetails();
         let fake_ajax = setTimeout(function () {
             form.stopProgress();
             //modal.find('.modal-body').prepend('<div class="alert alert-info" id="divTLMsg">Data submited.</div>');

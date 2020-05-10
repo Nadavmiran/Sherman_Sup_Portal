@@ -148,6 +148,36 @@ namespace LMNS.Priority.API
             return ra;
         }
 
+        public ResultAPI Call_Common_PATCH(string query, string msg)
+        {
+            IRestResponse response = null;
+            var uri = new Uri(ConfigurationManager.AppSettings["AppAPI"].ToString());  // Replace with your Service Root URL
+            ResultAPI ra = null;
+
+            try
+            {
+                System.Net.ServicePointManager.ServerCertificateValidationCallback = new System.Net.Security.RemoteCertificateValidationCallback(AcceptAllCertifications);
+
+                var client = new RestClient(ConfigurationManager.AppSettings["AppAPI"].ToString() + ConfigurationManager.AppSettings["Defult_DNAME"].ToString() + query);
+                var request = new RestRequest(Method.PATCH);
+                request.AddHeader("cache-control", "no-cache");
+                request.AddHeader("content-type", "application/atom+xml");
+                request.AddHeader("authorization", "Basic " + Convert.ToBase64String(Encoding.ASCII.GetBytes((ConfigurationManager.AppSettings["AppAPI_U"].ToString() + ":" + (ConfigurationManager.AppSettings["AppAPI_P"].ToString())))));
+                request.AddHeader("content-type", "application/json");
+                request.AddParameter("application/json", msg, ParameterType.RequestBody);
+
+                response = client.Execute(request);
+                ra = CreateResultApi(response);
+            }
+            catch (Exception ex)
+            {
+                AppLogger.log.Debug(AppLogger.CreateLogText("Call_Common_PATCH", ex.Message));
+                AppLogger.log.Debug(AppLogger.CreateLogText("Call_Common_PATCH", response.ErrorMessage), response.ErrorException);
+            }
+
+            return ra;
+        }
+
         public ResultAPI Call_PATCH(string query)
         {
             IRestResponse response = null;
@@ -733,7 +763,7 @@ namespace LMNS.Priority.API
              }
             return xml.ToString();
         }
-        
+
         private DateTime TestDateFormat(string date, string time)
         {
             AppLogger.log.Debug(AppLogger.CreateLogText("TestDateFormat => Date Value:", date));
@@ -773,7 +803,7 @@ namespace LMNS.Priority.API
             return dtRes;
         }
 
-        private string GetDateTimeOffset(string date, string time)
+        internal string GetDateTimeOffset(string date, string time)
         {
             DateTime dt = TestDateFormat(date, time);
             DateTimeOffset dto = new DateTimeOffset(dt);
@@ -834,7 +864,7 @@ namespace LMNS.Priority.API
             string m = date.Value.Month < 10 ? "0" + date.Value.Month : date.Value.Month.ToString();
             return d + "/" + m + "/" + date.Value.Year;
         }
-        
+
     }
 
     internal class OData

@@ -75,6 +75,10 @@ namespace TestPortal.Models
         /// מקסימום כמות פסולים 
         /// </summary>
         public int MAX_REJECT { get; set; }
+        public string EFI_SUPNO { get; set; }
+        public string SAMPLE_TYPE_CODE { get; set; }
+        public string SHR_ROHS { get; set; }
+        public string EFI_PORDNAME { get; set; }
 
         public List<Sample_QA> MED_TRANSSAMPLEQA_SUBFORM { get; set; }
         #endregion
@@ -94,7 +98,7 @@ namespace TestPortal.Models
 
         internal Sample GetProductSamples(string DOCNO)
         {
-            string query = "MED_SAMPLE?$filter=DOCNO eq '" + DOCNO + "' and STATDES ne 'מבוטלת'&$select=DOCNO,SUPNAME,PARTNAME&$expand=MED_TRANSSAMPLEQA_SUBFORM($expand=MED_RESULTDET_SUBFORM)";
+            string query = "MED_SAMPLE?$filter=DOCNO eq '" + DOCNO + "' and STATDES ne 'מבוטלת'&$expand=MED_TRANSSAMPLEQA_SUBFORM($expand=MED_RESULTDET_SUBFORM)";
             string res = Call_Get(query);
 
             SamplesWarpper ow = JsonConvert.DeserializeObject<SamplesWarpper>(res);
@@ -120,12 +124,12 @@ namespace TestPortal.Models
             return ra;
         }
 
-        private string GetDateTimeOffset(string date, string time)
-        {
-            DateTime dt = TestDateFormat(date, time);
-            DateTimeOffset dto = new DateTimeOffset(dt);
-            return string.Format("{0:O}", dto);
-        }
+        //private string GetDateTimeOffset(string date, string time)
+        //{
+        //    DateTime dt = TestDateFormat(date, time);
+        //    DateTimeOffset dto = new DateTimeOffset(dt);
+        //    return string.Format("{0:O}", dto);
+        //}
 
         private DateTime TestDateFormat(string date, string time)
         {
@@ -172,13 +176,12 @@ namespace TestPortal.Models
             sb.Append("{");
             sb.Append("\r\n\t\"DOCNO\":");
             sb.Append("\"" + data.hdnQaDOCNO + "\",");
-            sb.Append("\r\n\t\"CURDATE\":");
-            sb.Append("\"" + GetDateTimeOffset(DateTime.Now.ToString(), "00:00") + "\",");
+            //sb.Append("\r\n\t\"CURDATE\":");
+            //sb.Append("\"" + GetDateTimeOffset(DateTime.Now.ToString(), "00:00") + "\",");
             sb.Append("\r\n\t\"PARTNAME\":");
             sb.Append("\"" + data.hdnQaPARTNAME + "\",");
             sb.Append("\r\n\t\"SUPNAME\":");
             sb.Append("\"" + data.hdnQaSUPNAME + "\",");
-
             if (data.txtQaRESULTANT.ToLower().Equals("on") && Convert.ToInt32(data.hdnQaREPETITION) == 0)
                 Update_Normal_MED_RESULTDET_SUBFORM(data, sUB_RES, ref sb);
             else if (data.txtQaRESULTANT.ToLower().Equals("on") && Convert.ToInt32(data.hdnQaREPETITION) > 0)
@@ -218,7 +221,11 @@ namespace TestPortal.Models
             sb.Append("\r\n\t\"QACODE\":");
             sb.Append("\"" + data.hdnQACODE + "\",");
             sb.Append("\r\n\t\"LOCATION\":");
-            sb.Append("\"" + data.hdnLOCATION + "\",");
+            sb.Append("\"" + data.hdnLOCATION + "\","); 
+            sb.Append("\r\n\t\"EFI_MEASURESUPTOOLS\":");
+            sb.Append("\"" + data.txtQaEFI_MEASURESUPTOOLS + "\",");
+            sb.Append("\r\n\t\"EFI_CRITICALFLAG\":");
+            sb.Append("\"" + data.txtQaEFI_CRITICALFLAG + "\",");
             if (data.txtQaRESULTANT.ToLower().Equals("on")) //אם תוצאתית
             {
                 if (Convert.ToInt32(data.hdnQaREPETITION) == 0) // אם מספר חזרות = 0
@@ -355,6 +362,7 @@ namespace TestPortal.Models
         private string CreateNewsampleMsg(string supName, string ordName, string partName, int ordLine)
         {
             StringBuilder sb = new StringBuilder();
+            string SAMPLE_TYPE_CODE = "ספק";
             sb.Append("{");
             sb.Append("\r\n\t\"CURDATE\":");
             sb.Append("\"" + GetDateTimeOffset(DateTime.Now.ToString(), "00:00") + "\",");
@@ -364,6 +372,8 @@ namespace TestPortal.Models
             sb.Append("\"" + partName + "\",");
             sb.Append("\r\n\t\"SUPNAME\":");
             sb.Append("\"" + supName + "\",");
+            sb.Append("\r\n\t\"SAMPLE_TYPE_CODE\":");
+            sb.Append("\"" + SAMPLE_TYPE_CODE + "\",");
             sb.Append("\r\n\t\"EFI_PILINE\":");
             sb.Append(ordLine);
 
@@ -385,7 +395,32 @@ namespace TestPortal.Models
             return ra;
         }
 
+        internal ResultAPI UpdateSampleDetails(string SAMPLE_TYPE_CODE, string EFI_SUPNO, int SHR_QUANT, string SHR_ROHS, string SHR_SAMPLE_STD_CODE, string DOCNO)
+        {
+            string reqBody = CreateUpdateSampleDetailsMessage(SAMPLE_TYPE_CODE, EFI_SUPNO, SHR_QUANT, SHR_ROHS, SHR_SAMPLE_STD_CODE, DOCNO);
+            ResultAPI ra = Call_Common_PATCH("/MED_SAMPLE", reqBody);
+            return ra;
+        }
 
+        private string CreateUpdateSampleDetailsMessage(string SAMPLE_TYPE_CODE, string EFI_SUPNO, int SHR_QUANT, string SHR_ROHS, string SHR_SAMPLE_STD_CODE, string DOCNO)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("{");
+            sb.Append("\r\n\t\"DOCNO\":");
+            sb.Append("\"" + DOCNO + "\",");
+            sb.Append("\r\n\t\"SHR_SAMPLE_STD_CODE\":");
+            sb.Append("\"" + SHR_SAMPLE_STD_CODE + "\",");
+            sb.Append("\r\n\t\"EFI_SUPNO\":");
+            sb.Append("\"" + EFI_SUPNO + "\",");
+            sb.Append("\r\n\t\"SHR_QUANT\":");
+            sb.Append(SHR_QUANT + ",");
+            sb.Append("\r\n\t\"SAMPLE_TYPE_CODE\":");
+            sb.Append("\"" + SAMPLE_TYPE_CODE + "\",");
+            sb.Append("\r\n\t\"SHR_ROHS\":");
+            sb.Append("\"" + SHR_ROHS + "\"");
+            sb.Append("}");
+            return sb.ToString();
+        }
     }
 
     public class SamplesWarpper : ODataBase

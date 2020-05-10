@@ -35,9 +35,11 @@ namespace TestPortal.Models
             Order o = new Order();
             Product p = new Product();
             PageObject po = new PageObject();
+            OrderType oi = null;
             po.objSample = new Sample();
             po.User = Session["USER_LOGIN"] as AppUser;
-            po.objOrder = o.GetOrderDetails(orderID);//new Order { OrderID = orderID, OrderNumber = orderNumber };
+            po.objOrder = o.GetOrderDetails(orderID);
+            //TYPECODE
             if (null != po.objOrder)
             {
                 if (null != po.objOrder.PORDERITEMS_SUBFORM)
@@ -50,6 +52,12 @@ namespace TestPortal.Models
                         item.ORDNAME = po.objOrder.ORDNAME;
                     }
                 }
+
+                if(!string.IsNullOrEmpty(po.objOrder.TYPECODE))
+                {
+                    oi = new OrderType();
+                    po.htmlText = oi.GetOrderTypeText(po.objOrder.TYPECODE);
+                }
             }
             po.objProduct = new OrderItems();// { OrderID = 0, OrderNumber = string.Empty, LeftAmountToDeliver = 0, TotalAmountInOrder = 0, LineStatus = string.Empty, ProductDescription = string.Empty, ProductID = 0, ProductName = string.Empty, SupplyDate = string.Empty };
             return po;
@@ -60,7 +68,6 @@ namespace TestPortal.Models
         {
             Order ord = new Order();
             PageObject po = new PageObject();
-            po.TestObject = new Test();
             po.lstOrderObject = ord.GetSupplierOrders(supplier);
             po.lstItemsObject = new List<OrderItems>();
             foreach (Order obj in po.lstOrderObject)
@@ -102,9 +109,16 @@ namespace TestPortal.Models
             Order o = new Order();
             Product p = new Product();
             PageObject po = new PageObject();
+            DelayReason d = new DelayReason();
             po.lstAttachments = new List<Attachments>();
             po.User = Session["USER_LOGIN"] as AppUser;
             po.objOrder = o.GetOrderProductDetails(orderID, prodName);
+            po.lstDelayReason = d.GetDelayReasons();
+            if (!string.IsNullOrEmpty(po.objOrder.TYPECODE))
+            {
+                OrderType oi = new OrderType();
+                po.htmlText = oi.GetOrderTypeText(po.objOrder.TYPECODE);
+            }
 
             if ((null != po.objOrder.PORDERITEMS_SUBFORM) && (po.objOrder.PORDERITEMS_SUBFORM.Length > 0))
             {
@@ -114,7 +128,11 @@ namespace TestPortal.Models
                 // Get order line text
                 if ((null != po.objOrder.PORDERITEMS_SUBFORM[0].PORDERITEMSTEXT_SUBFORM) && (po.objOrder.PORDERITEMS_SUBFORM[0].PORDERITEMSTEXT_SUBFORM.Length > 0))
                 {
-                    po.objItemText = po.objOrder.PORDERITEMS_SUBFORM[0].PORDERITEMSTEXT_SUBFORM[0];
+                    po.objItemText = new OrdersItemText();
+                    foreach (OrdersItemText item in po.objOrder.PORDERITEMS_SUBFORM[0].PORDERITEMSTEXT_SUBFORM)
+                    {
+                        po.objItemText.TEXT += item.TEXT;
+                    }
                 }
 
                 if (null != po.objProduct)
@@ -534,7 +552,19 @@ namespace TestPortal.Models
                 Order o = new Order();
                 po.objOrder = o.GetOrderDetails(orderID);
                 if (null != po.objOrder)
+                {
                     orderName = po.objOrder.ORDNAME;
+
+                    // Get order line text
+                    if ((null != po.objOrder.PORDERITEMS_SUBFORM[0].PORDERITEMSTEXT_SUBFORM) && (po.objOrder.PORDERITEMS_SUBFORM[0].PORDERITEMSTEXT_SUBFORM.Length > 0))
+                    {
+                        po.objItemText = new OrdersItemText();
+                        foreach (OrdersItemText item in po.objOrder.PORDERITEMS_SUBFORM[0].PORDERITEMSTEXT_SUBFORM)
+                        {
+                            po.objItemText.TEXT += item.TEXT;
+                        }
+                    }
+                }
             }
             //GetProductObjAndSamples(orderID, orderName, prodName, ordLine, ref po);
             po.objOrder = oi.GetProductDetailse(po.User.Supplier_ID, orderName, prodName);
@@ -569,7 +599,7 @@ namespace TestPortal.Models
 
             return po;
         }
-
+        
         [HttpPost]
         public JsonResult GetSampleTests(string PARTNAME, string SUPNAME, string DOCNO)
         {
@@ -583,6 +613,47 @@ namespace TestPortal.Models
                     item.DOCNO = DOCNO;
                     item.SUPNAME = SUPNAME;
                     item.PARTNAME = PARTNAME;
+                }
+            }
+            return Json(po);
+        }
+
+        [HttpPost]
+        public JsonResult GetSampleStandardList()
+        {
+            SampleStandard s = new SampleStandard();
+            List<SampleStandard> lst = s.GetSampleStandardList();
+
+            return Json(lst);
+        }
+
+        [HttpPost]
+        public JsonResult UpdateSupplyDateAndDelayReason(string PARTNAME, string SUPNAME, int LINE, string ORDNAME, string REQDATE, string DELAYREASON)
+        {
+            OrderItems oi = new OrderItems();
+            oi.ORDNAME = ORDNAME;
+            oi.PARTNAME = PARTNAME;
+            oi.LINE = LINE;
+            oi.EFI_DELAYREASON = DELAYREASON;
+            oi.REQDATE = Convert.ToDateTime(REQDATE);
+            ResultAPI ra = oi.UpdateOrderLineData(SUPNAME);
+            return Json(ra);
+        }
+
+        [HttpPost]
+        public JsonResult UpdateSampleDetails(string SAMPLE_TYPE_CODE, string EFI_SUPNO, int SHR_QUANT, string SHR_ROHS, string SHR_SAMPLE_STD_CODE, string DOCNO)
+        {
+            PageObject po = new PageObject();
+            po.User = Session["USER_LOGIN"] as AppUser;
+            Sample s = new Sample();
+            ResultAPI ra = s.UpdateSampleDetails(SAMPLE_TYPE_CODE, EFI_SUPNO, SHR_QUANT, SHR_ROHS, SHR_SAMPLE_STD_CODE, DOCNO);
+            if(ra.ResultStatus.ToUpper() == "OK")
+            {
+                s = JsonConvert.DeserializeObject<Sample>(ra.JsonResult);
+                if(null != s)
+                {
+                    po.objSample = s;
+                    po.lstSampleObject = s.GetOrderSamples(s.EFI_PORDNAME, po.User.Supplier_ID, s.PARTNAME);
                 }
             }
             return Json(po);

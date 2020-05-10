@@ -55,7 +55,7 @@
                                 <i class="far fa-user"></i> Profile
                             </a>
                             <div class="dropdown-divider"></div>
-                            <a href="@Url.Action("LogOff", "Account")" class="dropdown-item has-icon text-danger">
+                            <a href="@Url.Action("LogOff", "Account")" onclick="window.sessionStorage.clear();console.log('done window.sessionStorage.clear()')" class="dropdown-item has-icon text-danger">
                                 <i class="fas fa-sign-out-alt"></i> Logout
                             </a>
                         </div>
@@ -68,8 +68,16 @@
                         <nav class="navbar navbar-expand-lg main-navbar">
                             <form class="form-inline mr-auto"></form>
                             <ul class="navbar-nav navbar-right">
+                                <li id="mnuSampleDetails" class="nav-item dropdown active" style="display:none;">
+                                    <a href="#" onclick="UpdateSampleDetails();" class="nav-link" style="background-color:rgb(1,65,111);height:60px;width:120px;text-align:center;white-space: nowrap;">
+                                        <div class="item">
+                                            <i class="fas fa-edit"></i>
+                                            <div class="caption" style="color:#FFF;margin-left:-24px;">Sample details</div>
+                                        </div>
+                                    </a>
+                                </li>
                                 <li id="mnuSampleList" class="nav-item dropdown active" style="display:none;">
-                                    <a href="#" onclick="OpentestList();" class="nav-link" style="background-color:rgb(1,65,111);height:60px;">
+                                    <a href="#" onclick="OpentestList();" class="nav-link" style="background-color:rgb(1,65,111);height:60px;width:120px;text-align:center;white-space: nowrap;">
                                         <div class="item">
                                             <i class="fas fa-certificate"></i>
                                             <div class="caption" style="color:#FFF;">Tests</div>
@@ -77,15 +85,23 @@
                                     </a>
                                 </li>
                                 <li id="mnuPartsList" class="nav-item dropdown active" style="display:none;">
-                                    <a href="#" onclick="navigateTestPage();" class="nav-link" style="background-color:rgb(1,65,111);height:60px;">
+                                    <a href="#" onclick="navigateTestPage();" class="nav-link" style="background-color:rgb(1,65,111);height:60px;width:120px;text-align:center;white-space: nowrap;">
                                         <div class="item">
                                             <i class="fas fa-puzzle-piece"></i>
                                             <div class="caption" style="color:#FFF;">Products</div>
                                         </div>
                                     </a>
                                 </li>
+                                <li id="mnuRefresh" class="nav-item dropdown active" style="display:none;">
+                                    <a href="#" onclick="refreshOrdersData('@Model.User.Supplier_ID');" class="nav-link" style="background-color:rgb(1,65,111);height:60px;width:120px;text-align:center;">
+                                        <div class="item">
+                                            <i class="fas fa-sync-alt"></i>
+                                            <div class="caption" style="color:#FFF;">Refresh</div>
+                                        </div>
+                                    </a>
+                                </li>
                                 <li class="nav-item dropdown active">
-                                    <a href="@Url.Action("Index", "Home")" class="nav-link" style="background-color:rgb(1,65,111);height:60px;">
+                                    <a href="@Url.Action("Index", "Home")" class="nav-link" style="background-color:rgb(1,65,111);height:60px;width:120px;text-align:center;white-space: nowrap;">
                                         <div class="item">
                                             <i class="fas fa-home"></i>
                                             <div class="caption" style="color:#FFF;">Orders</div>

@@ -576,3 +576,241 @@ INFO  2020-05-01 12:04:03,252 308187ms eporting Portal Logger reateUpdateTestMsg
 	"REMARK":""
 	}
 	]}
+INFO  2020-05-03 19:20:00,686   148ms eporting Portal Logger Download           - Function => Download ==> fileFolder = 23559000\23559000_C\
+INFO  2020-05-03 19:20:01,322   785ms eporting Portal Logger Download           - Function => Download ==> fileName = MM602085C.pdf
+INFO  2020-05-03 19:20:01,327   790ms eporting Portal Logger Download           - Function => Download ==> filePath = H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\PriorityDocs\23559000\23559000_C\/MM602085C.pdf
+INFO  2020-05-03 19:20:01,457   920ms eporting Portal Logger Download           - Function => Download ==> ReadAllBytes = H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\PriorityDocs\23559000\23559000_C\/MM602085C.pdf
+INFO  2020-05-03 19:20:01,458   921ms eporting Portal Logger Download           - filePath ==> ReadAllBytes ==> Exception
+System.IO.DirectoryNotFoundException: Could not find a part of the path 'H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\PriorityDocs\23559000\23559000_C\MM602085C.pdf'.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.OpenRead(String path)
+   at TestPortal.Models.CommonController.Download(String fileFolder, String fileName) in H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\Models\CommonController.cs:line 348
+INFO  2020-05-03 19:23:21,274 200737ms eporting Portal Logger Download           - Function => Download ==> fileFolder = 23559000\23559000_C\
+INFO  2020-05-03 19:23:21,275 200738ms eporting Portal Logger Download           - Function => Download ==> fileName = MM602085C.pdf
+INFO  2020-05-03 19:23:21,276 200739ms eporting Portal Logger Download           - Function => Download ==> filePath = H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\PriorityDocs\23559000\23559000_C\/MM602085C.pdf
+INFO  2020-05-03 19:23:21,324 200787ms eporting Portal Logger Download           - Function => Download ==> ReadAllBytes = H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\PriorityDocs\23559000\23559000_C\/MM602085C.pdf
+INFO  2020-05-03 19:23:21,325 200788ms eporting Portal Logger Download           - filePath ==> ReadAllBytes ==> Exception
+System.IO.DirectoryNotFoundException: Could not find a part of the path 'H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\PriorityDocs\23559000\23559000_C\MM602085C.pdf'.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.OpenRead(String path)
+   at TestPortal.Models.CommonController.Download(String fileFolder, String fileName) in H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\Models\CommonController.cs:line 348
+INFO  2020-05-03 19:25:02,854 302316ms eporting Portal Logger Download           - Function => Download ==> fileFolder = 23559000\23559000_C\
+INFO  2020-05-03 19:25:03,291 302753ms eporting Portal Logger Download           - Function => Download ==> fileName = MM602085C.pdf
+INFO  2020-05-03 19:25:09,632 309095ms eporting Portal Logger Download           - Function => Download ==> filePath = H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\PriorityDocs\23559000\23559000_C\/MM602085C.pdf
+INFO  2020-05-03 19:25:42,606 342069ms eporting Portal Logger Download           - Function => Download ==> ReadAllBytes = H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\PriorityDocs\23559000\23559000_C\/MM602085C.pdf
+INFO  2020-05-03 19:25:42,611 342074ms eporting Portal Logger Download           - filePath ==> ReadAllBytes ==> Exception
+System.IO.DirectoryNotFoundException: Could not find a part of the path 'H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\PriorityDocs\23559000\23559000_C\MM602085C.pdf'.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.OpenRead(String path)
+   at TestPortal.Models.CommonController.Download(String fileFolder, String fileName) in H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\Models\CommonController.cs:line 348
+INFO  2020-05-03 19:59:08,579 2348042ms eporting Portal Logger Download           - Function => Download ==> fileFolder = 23559000\23559000_C\
+INFO  2020-05-03 19:59:08,859 2348322ms eporting Portal Logger Download           - Function => Download ==> fileName = MM602085C.pdf
+INFO  2020-05-03 19:59:12,193 2351656ms eporting Portal Logger Download           - Function => Download ==> filePath = H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\PriorityDocs\23559000\23559000_C\/MM602085C.pdf
+INFO  2020-05-03 19:59:57,288 2396750ms eporting Portal Logger Download           - Function => Download ==> ReadAllBytes = H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\PriorityDocs\23559000\23559000_C\/MM602085C.pdf
+INFO  2020-05-03 19:59:57,644 2397107ms eporting Portal Logger Download           - filePath ==> ReadAllBytes ==> Exception
+System.IO.DirectoryNotFoundException: Could not find a part of the path 'H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\PriorityDocs\23559000\23559000_C\MM602085C.pdf'.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.OpenRead(String path)
+   at TestPortal.Models.CommonController.Download(String fileFolder, String fileName) in H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\Models\CommonController.cs:line 348
+DEBUG 2020-05-04 10:48:46,556   194ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 01/04/2020 0:00:00
+DEBUG 2020-05-04 12:08:16,901   224ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 18/03/2020 0:00:00
+DEBUG 2020-05-04 12:10:30,934   169ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 18/03/2020 0:00:00
+DEBUG 2020-05-04 12:18:39,382 488617ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 18/03/2020 0:00:00
+DEBUG 2020-05-04 12:24:04,830 814065ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 11/05/2020 0:00:00
+DEBUG 2020-05-04 12:39:05,042   302ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 12/05/2020 0:00:00
+DEBUG 2020-05-04 12:48:47,171 582431ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 04/05/2020 12:48:47
+DEBUG 2020-05-04 12:50:10,611 665872ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 13/05/2020 0:00:00
+DEBUG 2020-05-07 11:53:30,267   555ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 07/05/2020 11:53:29
+DEBUG 2020-05-07 12:01:24,016 474304ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 07/05/2020 12:01:24
+DEBUG 2020-05-07 12:02:35,693 545981ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 07/05/2020 12:02:35
+DEBUG 2020-05-07 12:03:54,339 624627ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 07/05/2020 12:03:54
+DEBUG 2020-05-07 14:26:49,932   147ms eporting Portal Logger CreateResultApi    - FunctionName = CreateResultApiExceptionMsg = Object reference not set to an instance of an object.
+DEBUG 2020-05-07 14:27:55,332   180ms eporting Portal Logger CreateResultApi    - FunctionName = CreateResultApiExceptionMsg = Object reference not set to an instance of an object.
+DEBUG 2020-05-07 14:29:37,509   170ms eporting Portal Logger CreateResultApi    - FunctionName = CreateResultApiExceptionMsg = Object reference not set to an instance of an object.
+DEBUG 2020-05-08 15:07:06,100   206ms eporting Portal Logger CreateResultApi    - FunctionName = CreateResultApi => Response XMLExceptionMsg = <FORM
+  TYPE="MED_SAMPLE">
+  <InterfaceErrors>
+    <text>??? 'Supplier' ?? ???? ?????? '??? ?????' ????? '???? ?????? ?????'. :Supplier ??? ?????</text>
+  </InterfaceErrors>
+</FORM>
+DEBUG 2020-05-08 15:08:10,705 64811ms eporting Portal Logger CreateResultApi    - FunctionName = CreateResultApi => Response XMLExceptionMsg = <FORM
+  TYPE="MED_SAMPLE">
+  <InterfaceErrors>
+    <text>??? 'Supplier' ?? ???? ?????? '??? ?????' ????? '???? ?????? ?????'. :Supplier ??? ?????</text>
+  </InterfaceErrors>
+</FORM>
+DEBUG 2020-05-09 11:27:39,018   166ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 09/05/2020 11:27:38
+INFO  2020-05-09 11:27:39,372   520ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001554",
+	"CURDATE":"2020-05-09T11:27:38.0000000+03:00",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"EFI_MEASURESUPTOOLS":"Test tool",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"2",
+	"RESULT":0,
+	"REMARK":""
+	}
+	]}
+DEBUG 2020-05-09 11:34:55,995   182ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 09/05/2020 11:34:55
+INFO  2020-05-09 11:34:56,028   215ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001554",
+	"CURDATE":"2020-05-09T11:34:55.0000000+03:00",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":6,
+	"QACODE":"006",
+	"LOCATION":"1",
+	"EFI_MEASURESUPTOOLS":"Test tool",
+	"NORMAL":"N",
+	"REMARK":""
+	}
+	]}
+DEBUG 2020-05-09 11:41:34,528 398715ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 09/05/2020 11:41:34
+INFO  2020-05-09 11:41:34,530 398717ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001554",
+	"CURDATE":"2020-05-09T11:41:34.0000000+03:00",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":6,
+	"QACODE":"006",
+	"LOCATION":"1",
+	"EFI_MEASURESUPTOOLS":"Test tool 11",
+	"NORMAL":"N",
+	"REMARK":""
+	}
+	]}
+DEBUG 2020-05-09 12:57:36,408   359ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 31/05/2020 0:00:00
+DEBUG 2020-05-10 10:54:51,632   160ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 10/05/2020 10:54:51
+INFO  2020-05-10 10:54:52,049   578ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001553",
+	"CURDATE":"2020-05-10T10:54:51.0000000+03:00",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"2",
+	"EFI_MEASURESUPTOOLS":"",
+	"EFI_CRITICALFLAG":"on",
+	"RESULT":0,
+	"REMARK":""
+	}
+	]}
+DEBUG 2020-05-10 10:55:30,734 39263ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 10/05/2020 10:55:30
+INFO  2020-05-10 10:55:30,735 39264ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001553",
+	"CURDATE":"2020-05-10T10:55:30.0000000+03:00",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"2",
+	"EFI_MEASURESUPTOOLS":"",
+	"EFI_CRITICALFLAG":"on",
+	"RESULT":0,
+	"REMARK":""
+	}
+	]}
+DEBUG 2020-05-10 11:07:55,450 783978ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 10/05/2020 11:07:55
+INFO  2020-05-10 11:07:55,451 783979ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001553",
+	"CURDATE":"2020-05-10T11:07:55.0000000+03:00",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"2",
+	"EFI_MEASURESUPTOOLS":"",
+	"EFI_CRITICALFLAG":"N",
+	"RESULT":0,
+	"REMARK":""
+	}
+	]}
+DEBUG 2020-05-10 11:12:53,702 1082230ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 10/05/2020 11:12:53
+INFO  2020-05-10 11:12:53,703 1082231ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001553",
+	"CURDATE":"2020-05-10T11:12:53.0000000+03:00",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"2",
+	"EFI_MEASURESUPTOOLS":"",
+	"EFI_CRITICALFLAG":"Y",
+	"RESULT":0,
+	"REMARK":""
+	}
+	]}
+DEBUG 2020-05-10 11:16:13,229 1281758ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 10/05/2020 11:16:13
+INFO  2020-05-10 11:16:13,239 1281768ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001553",
+	"CURDATE":"2020-05-10T11:16:13.0000000+03:00",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"2",
+	"EFI_MEASURESUPTOOLS":"",
+	"EFI_CRITICALFLAG":"Y",
+	"RESULT":0,
+	"REMARK":""
+	}
+	]}
+DEBUG 2020-05-10 11:38:15,773 2604301ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 10/05/2020 11:38:15
+INFO  2020-05-10 11:38:15,774 2604302ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001553",
+	"CURDATE":"2020-05-10T11:38:15.0000000+03:00",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"2",
+	"EFI_MEASURESUPTOOLS":"??? ????? 1",
+	"EFI_CRITICALFLAG":"N",
+	"RESULT":0,
+	"REMARK":"??? ?????"
+	}
+	]}
+DEBUG 2020-05-10 11:54:14,491   288ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 10/05/2020 11:54:14
+INFO  2020-05-10 12:01:20,310 426108ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001553",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"3",
+	"EFI_MEASURESUPTOOLS":"test tool",
+	"EFI_CRITICALFLAG":"Y",
+	"RESULT":0,
+	"REMARK":"no comments"
+	}
+	]}

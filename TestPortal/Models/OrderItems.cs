@@ -1,9 +1,7 @@
 ﻿using LMNS.Priority.API;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using System.Text;
 
 namespace TestPortal.Models
 {
@@ -102,14 +100,16 @@ namespace TestPortal.Models
         /// סטטוס שורת הזמנה
         /// </summary>
         public string PORDISTATUSDES { get; set; }
-        public OrdersItemText[] PORDERITEMSTEXT_SUBFORM { get; set; }
-        #endregion
-
-        // TO ADD LATER
         /// <summary>
         /// סיבת דחייה
         /// </summary>
-        //public string XXXXX { get; set; }
+        public string EFI_DELAYREASON { get; set; }
+        /// <summary>
+        /// קריטית
+        /// </summary>
+        public string EFI_CRITICALFLAG { get; set; }
+        public OrdersItemText[] PORDERITEMSTEXT_SUBFORM { get; set; }
+        #endregion
 
         internal Order GetProductDetailse(string SUPNAME, string ORDNAME, string PARTNAME)
         {
@@ -122,6 +122,37 @@ namespace TestPortal.Models
                 return ow.Value[0];
             }
             return null;
+        }
+
+        internal ResultAPI UpdateOrderLineData(string SUPNAME)
+        {
+            string message = CreateUpdateOrderLineMsg(SUPNAME);
+            ResultAPI ra = Call_Common_PATCH("/SHR_OPENSUPORDERS_T", message);
+            return ra;
+        }
+
+        private string CreateUpdateOrderLineMsg(string sUPNAME)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("{");
+            sb.Append("\r\n\t\"ORDNAME\":");
+            sb.Append("\"" + ORDNAME + "\",");
+            sb.Append("\r\n\t\"KLINE\":");
+            sb.Append(LINE + ",");
+            sb.Append("\r\n\t\"PARTNAME\":");
+            sb.Append("\"" + PARTNAME + "\",");
+            sb.Append("\r\n\t\"SUPNAME\":");
+            sb.Append("\"" + sUPNAME + "\",");
+            sb.Append("\r\n\t\"REQDATE\":");
+            sb.Append("\"" + GetDateTimeOffset(REQDATE.ToString(), "00:00") + "\",");
+            sb.Append("\r\n\t\"SHR_DUEDATE_APPROVED\":");
+            sb.Append("\"Y\",");
+            sb.Append("\r\n\t\"SHR_SUPUPD_FLAG\":");
+            sb.Append("\"Y\",");
+            sb.Append("\r\n\t\"EFI_DELAYREASON\":");
+            sb.Append("\"" + EFI_DELAYREASON + "\"");
+            sb.Append("}");
+            return sb.ToString(); 
         }
     }
 }

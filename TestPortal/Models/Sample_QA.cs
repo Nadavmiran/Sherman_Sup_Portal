@@ -67,6 +67,10 @@ namespace TestPortal.Models
         /// </summary>
         public string MEASUREDES { get; set; }
         /// <summary>
+        /// תאור כלי מדידה - ספק
+        /// </summary>
+        public string EFI_MEASURESUPTOOLS { get; set; }
+        /// <summary>
         /// תוצאת בדיקה
         /// </summary>
         public decimal RESULT { get; set; }
@@ -126,11 +130,13 @@ namespace TestPortal.Models
         public string txtQaRESULTANT { get; set; }
         public string txtQaNORMAL { get; set; }
         public string txtQaMEASUREDES { get; set; }
+        public string txtQaEFI_MEASURESUPTOOLS { get; set; }
         public string txtQaRESULT { get; set; }
         public string txtQaREMARK { get; set; }
         public string hdnQaPARTNAME { get; set; }
         public string hdnQaREPETITION { get; set; }
         public string hdnQaSAMPQUANT { get; set; }
+        public string txtQaEFI_CRITICALFLAG { get; set; }
         //[{"":"20523"},{"":"C2000001488"},{"":"007"},{"":"2"},{"":"7"},{"":"on"},{"":"on"},{"txtQaMEASUREDES":"מדיד הברגה"},{"":"12"},{"":""},{"attachments":""},{"fire-modal-1-submit":""}]
     }
 

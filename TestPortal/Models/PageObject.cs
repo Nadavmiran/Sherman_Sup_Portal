@@ -11,9 +11,10 @@ namespace TestPortal.Models
         public Product objProduct1 { get; set; }
         public OrderItems objProduct { get; set; }
         public OrdersItemText objItemText { get; set; }
-        public Test TestObject { get; set; }
         public Sample objSample { get; set; }
         public Sample_QA objSamplQA { get; set; }
+        public string htmlText { get; set; }
+        public List<DelayReason> lstDelayReason { get; set; }
         public List<Sample> lstSampleObject { get; set; }
         public List<Test> lstTestObject { get; set; }
         public List<Order> lstOrderObject { get; set; }

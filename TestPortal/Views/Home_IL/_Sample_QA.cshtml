@@ -15,7 +15,7 @@
                     <div class="row">
                         <div class="form-group col-md-2 col-12">
                             <label style="font-weight:bolder;">קוד בדיקה</label>
-                            <div class="col-sm-1">
+                            <div class="col-sm-12">
                                 <label type="text" id="txtQACODE" class="form-label"></label>
                             </div>
                         </div>
@@ -27,13 +27,13 @@
                         </div>
                         <div class="form-group col-md-2 col-12">
                             <label style="font-weight:bolder;">מיקום</label>
-                            <div class="col-sm-3 form-label">
+                            <div class="col-sm-12 form-label">
                                 <label type="text" id="txtQaLOCATION"></label>
                             </div>
                         </div>
                         <div class="form-group col-md-4 col-12">
                             <label style="font-weight:bolder;">בדיקה - טקסט</label>
-                            <div class="col-sm-4 form-label">
+                            <div class="col-sm-12 form-label">
                                 <label type="text" id="txtQaSHR_TEST" class=""></label>
                             </div>
                         </div>
@@ -41,7 +41,7 @@
                     <div class="row">
                         <div class="form-group col-md-2 col-12">
                             <label style="font-weight:bolder;">תוצאת מינימום</label>
-                            <div class="col-sm-1">
+                            <div class="col-sm-12">
                                 <label type="text" id="txtQaRESULTMIN" class="form-label"></label>
                             </div>
                         </div>
@@ -52,22 +52,8 @@
                             </div>
                         </div>
                         <div class="form-group col-md-2 col-12">
-                            <label style="font-weight:bolder;">חזרות</label>
-                            <div class="col-sm-3 form-label">
-                                <label type="text" id="txtQaREPETITION"></label>
-                            </div>
-                        </div>
-                        <div class="form-group col-md-4 col-12">
-                            <label style="font-weight:bolder;">תוצאתית</label>
-                            <div class="col-sm-4 form-label">
-                                <input type="checkbox" id="txtQaRESULTANT" class="big-checkbox" readonly />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-md-2 col-12">
                             <label style="font-weight:bolder;">תוצאה נדרשת</label>
-                            <div class="col-sm-1">
+                            <div class="col-sm-12">
                                 <label type="text" id="txtQaREQUIRED_RESULT" class="form-label"></label>
                             </div>
                         </div>
@@ -77,25 +63,49 @@
                                 <label type="text" id="txtQaSAMPQUANT"></label>
                             </div>
                         </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-2 col-12">
+                            <label style="font-weight:bolder;">חזרות</label>
+                            <div class="col-sm-12 form-label">
+                                <label type="text" id="txtQaREPETITION"></label>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-2 col-12">
+                            <label style="font-weight:bolder;">תוצאתית</label>
+                            <div class="col-sm-12 form-label">
+                                <input type="checkbox" id="txtQaRESULTANT" class="big-checkbox" readonly />
+                            </div>
+                        </div>
                         <div class="form-group col-md-2 col-12">
                             <label style="font-weight:bolder;">תקין</label>
-                            <div class="col-sm-3 form-label">
+                            <div class="col-sm-12 form-label">
                                 <input type="checkbox" id="txtQaNORMAL" class="big-checkbox" />
                             </div>
                         </div>
-                        <div class="form-group col-md-4 col-12">
+                        <div class="form-group col-md-2 col-12">
                             <label style="font-weight:bolder;">תאור כלי מדידה</label>
-                            <div class="col-sm-4">
+                            <div class="col-sm-12">
                                 <label type="text" name="MEASUREDES" id="txtQaMEASUREDES"></label>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-4 col-12">
+                            <label style="font-weight:bolder;">תאור כלי מדידה - ספק</label>
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control" name="EFI_MEASURESUPTOOLS" id="txtQaEFI_MEASURESUPTOOLS" />
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-md-2 col-12">
+                            <label id="lblQaEFI_CRITICALFLAG" style="font-weight:bolder;">קריטית</label>
+                            <input class="form-control" type="checkbox" name="EFI_CRITICALFLAG" id="txtQaEFI_CRITICALFLAG" />
+                        </div>
+                        <div class="form-group col-md-2 col-12">
                             <label style="font-weight:bolder;">תוצאת בדיקה</label>
                             <input class="form-control" type="number" pattern="^\d*(\.\d{0,6})?$" step="any" name="RESULT" id="txtQaRESULT" />
                         </div>
-                        <div class="form-group col-md-10 col-12">
+                        <div class="form-group col-md-8 col-12">
                             <label style="font-weight:bolder;">הערה</label>
                             <input class="form-control" type="text" name="REMARK" id="txtQaREMARK" maxlength="120" />
                         </div>

@@ -185,14 +185,17 @@
     <Compile Include="Models\Attachments.cs" />
     <Compile Include="Models\CommonAccountController.cs" />
     <Compile Include="Models\CommonController.cs" />
+    <Compile Include="Models\DelayReason.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\OrderItems.cs" />
     <Compile Include="Models\OrdersItemText.cs" />
+    <Compile Include="Models\OrderType.cs" />
     <Compile Include="Models\PageObject.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\ProductRevisionTest.cs" />
     <Compile Include="Models\Revision.cs" />
     <Compile Include="Models\Sample.cs" />
+    <Compile Include="Models\SampleStandard.cs" />
     <Compile Include="Models\Sample_QA.cs" />
     <Compile Include="Models\Test.cs" />
     <Compile Include="PriorityAPI\PriorityAPI.cs" />

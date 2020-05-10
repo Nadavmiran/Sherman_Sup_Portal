@@ -37,6 +37,7 @@ namespace TestPortal.Models
         public string CDES { get; set; }
         public string SHR_SUPTYPEDES { get; set; }
         public string OWNERLOGIN { get; set; }
+        public string TYPECODE { get; set; }
         public string TYPEDES { get; set; }
         public OrderItems[] PORDERITEMS_SUBFORM { get; set; }
         public Attachments[] EXTFILES_SUBFORM { get; set; }
@@ -65,7 +66,7 @@ namespace TestPortal.Models
         internal Order GetOrderDetails(int orderID)
         {
             //"/PORDERS?$filter=ORD eq " + orderID + "&$expand=EXTFILES_SUBFORM,PORDERITEMS_SUBFORM($expand=PORDERITEMSTEXT_SUBFORM)";
-            string query = "/PORDERS?$filter=ORD eq " + orderID + "&$select=TYPEDES, ORDNAME,STATDES,CURDATE,ORD,CODEDES,SUPNAME,CDES,SHR_SUPTYPEDES,OWNERLOGIN&$expand=PORDERITEMS_SUBFORM($expand=PORDERITEMSTEXT_SUBFORM)";
+            string query = "/PORDERS?$filter=ORD eq " + orderID + "&$select=TYPECODE, TYPEDES, ORDNAME,STATDES,CURDATE,ORD,CODEDES,SUPNAME,CDES,SHR_SUPTYPEDES,OWNERLOGIN&$expand=PORDERITEMS_SUBFORM($expand=PORDERITEMSTEXT_SUBFORM)";
             string res = Call_Get(query);
 
             OrdersWarpper ow = JsonConvert.DeserializeObject<OrdersWarpper>(res);
@@ -74,7 +75,7 @@ namespace TestPortal.Models
 
         internal Order GetOrderProductDetails(int orderID, string prodName)
         {
-            string query = "/PORDERS?$filter=ORD eq  " + orderID + "&$select=TYPEDES, ORDNAME,STATDES,CURDATE,ORD,CODEDES,SUPNAME,CDES,SHR_SUPTYPEDES,OWNERLOGIN&$expand=EXTFILES_SUBFORM($filter=SHR_PARTNAME eq '" + prodName + "'),PORDERITEMS_SUBFORM($filter=PARTNAME eq '" + prodName + "';$expand=PORDERITEMSTEXT_SUBFORM)";
+            string query = "/PORDERS?$filter=ORD eq  " + orderID + "&$select=TYPECODE, TYPEDES, ORDNAME,STATDES,CURDATE,ORD,CODEDES,SUPNAME,CDES,SHR_SUPTYPEDES,OWNERLOGIN&$expand=EXTFILES_SUBFORM($filter=SHR_PARTNAME eq '" + prodName + "'),PORDERITEMS_SUBFORM($filter=PARTNAME eq '" + prodName + "';$expand=PORDERITEMSTEXT_SUBFORM)";
             string res = Call_Get(query);
 
             OrdersWarpper ow = JsonConvert.DeserializeObject<OrdersWarpper>(res);

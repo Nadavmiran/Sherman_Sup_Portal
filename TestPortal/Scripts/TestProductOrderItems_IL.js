@@ -46,21 +46,23 @@ function showGridProdSamples(grid_data) {
         datatype: "local",
         data: grid_data,
         colModel: [
+            { label: 'תוצאה נדרשת', name: 'REQUIRED_RESULT', align: 'center', hidden: true, width: 80 },
+            { label: 'EFI_MEASURESUPTOOLS', name: 'EFI_MEASURESUPTOOLS', align: 'center', hidden: true, width: 200 },
+            { label: 'כלי בדיקה', name: 'MEASUREDES', align: 'center', hidden: true, width: 200 },
+            { label: 'EFI_CRITICALFLAG', name: 'EFI_CRITICALFLAG', align: 'center', hidden: true, width: 200 },
             { label: 'QA', name: 'QA', align: 'center', key: false, hidden: true, width: 75 },
             { label: 'DOCNO', name: 'DOCNO', align: 'center', key: false, hidden: true, width: 75 },
             { label: 'SUPNAME', name: 'SUPNAME', align: 'center', key: false, hidden: true, width: 75 },
             { label: 'PARTNAME', name: 'PARTNAME', align: 'center', key: false, hidden: true, width: 75 },
-            { label: 'קוד בדיקה', name: 'QACODE', align: 'center', key: true, hidden: false, width: 80 },
-            { label: 'מיקום', name: 'LOCATION', align: 'center', hidden: false, width: 80 },
-            { label: 'תאור בדיקה', name: 'QADES', align: 'center', hidden: false, width: 250 },
             { label: 'בדיקה - טקסט', name: 'SHR_TEST', align: 'center', hidden: true, width: 100 },
             { label: 'תוצאת מינ.', name: 'RESULTMIN', align: 'center', hidden: true, width: 80 },
             { label: 'תוצאת מקס.', name: 'RESULTMAX', align: 'center', hidden: true, width: 80 },/*formatter: formatGetRevListLink,*/
+            { label: 'קוד בדיקה', name: 'QACODE', align: 'center', key: false, hidden: false, width: 80 },
+            { label: 'מיקום', name: 'LOCATION', align: 'center', key: true, hidden: false, width: 80 },
+            { label: 'תאור בדיקה', name: 'QADES', align: 'center', hidden: false, width: 250 },
             { label: 'חזרות', name: 'REPETITION', align: 'center', width: 50 },
             { label: 'תוצאתית (Y/N)', name: 'RESULTANT', align: 'center', width: 80 },
-            { label: 'תוצאה נדרשת', name: 'REQUIRED_RESULT', align: 'center', hidden: true, width: 80 },
             { label: 'גודל המדגם', name: 'SAMPQUANT', align: 'center', width: 80 },
-            { label: 'כלי בדיקה', name: 'MEASUREDES', align: 'center', hidden: true, width: 200 },
             { label: 'תוצאה', name: 'RESULT', align: 'center', width: 80 },
             { label: 'תקין', name: 'NORMAL', align: 'center', width: 60 },
             { label: 'הערות', name: 'REMARK', align: 'center', width: 200 }
@@ -278,7 +280,7 @@ function showGridSampleList(grid_data) {
             for (i = 0, count = idsOfSelectedRows.length; i < count; i++) {
                 $this.jqGrid('setSelection', idsOfSelectedRows[i], false);
             }
-        },
+        }
         //inlineEditing: {
         //    keys: true
         //},
@@ -334,11 +336,11 @@ function showPartSampls(grid_data) {
             { label: 'תאריך דגימה', name: 'pageCURDATE', align: 'center', key: false, hidden: false, width: 100 },
             { label: 'סטטוס', name: 'STATDES', align: 'center', hidden: false, width: 150 },
             { label: 'תקן דגימה', name: 'SHR_SAMPLE_STD_CODE', align: 'center', hidden: false, width: 150 },
-            { label: 'כמות', name: 'QUANT', align: 'center', hidden: false, width: 90 },
-            { label: 'כמות מבוקשת', name: 'SHR_RAR', align: 'center', hidden: false, width: 150 },
-            { label: 'מקס. דחויים', name: 'MAX_REJECT', align: 'center', hidden: false, width: 150 },
+            //{ label: 'גודל מנה', name: 'SHR_QUANT', align: 'center', hidden: false, width: 90 },
+            //{ label: 'כמות מבוקשת', name: 'SHR_RAR', align: 'center', hidden: false, width: 150 },
+            //{ label: 'מקס. דחויים', name: 'MAX_REJECT', align: 'center', hidden: false, width: 150 },
             { label: 'כמות הפק"ע', name: 'SHR_SERIAL_QUANT', align: 'center', hidden: false, width: 150 },/*formatter: formatGetRevListLink,*/
-            { label: 'כמות המדגם', name: 'SHR_QUANT', align: 'center', width: 150 }
+            { label: 'כמות המדגם', name: 'QUANT', align: 'center', width: 150 }
         ],
         viewrecords: true,
         altRows: true,
@@ -347,7 +349,7 @@ function showPartSampls(grid_data) {
         height: null,
         width: 500,
         rowNum: 20,
-        //rowList: [10, 30, 50, 100],
+        rowList: [10, 30, 50, 100],
         pager: "#jqGridSelectedSampleQAPager",
         loadonce: true,
         subGrid: false,

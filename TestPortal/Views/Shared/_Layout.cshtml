@@ -16,14 +16,19 @@
     <link media="screen" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/themes/redmond/jquery-ui.min.css">
     <link media="screen" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link media="screen" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/free-jqgrid/4.15.5/css/ui.jqgrid.min.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link id="bsdp-css" href="https://unpkg.com/bootstrap-datepicker@1.9.0/dist/css/bootstrap-datepicker3.min.css" rel="stylesheet">
     <link href="~/Content/themes/base/jquery-ui.css" media="screen" rel="stylesheet" />
     <link href="~/Content/jquery.jqGrid/ui.jqgrid.css" media="screen" rel="stylesheet" />
     <!-- Template CSS -->
     <link href="~/Content/style_rtl.css" media="screen" rel="stylesheet" />
     <link href="~/Content/components_rtl.css" media="screen" rel="stylesheet" />
     <link media="screen" href="~/Content/Site.css" rel="stylesheet" />
+    <script media="screen" src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
     @*<script media="screen" src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>*@
-    <script media="screen" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
     <script media="screen" src="https://cdnjs.cloudflare.com/ajax/libs/free-jqgrid/4.15.5/jquery.jqgrid.min.js"></script>
 </head>
 <body class="layout-3" style="overflow:hidden;">
@@ -51,7 +56,7 @@
                                 <i class="fas fa-user"></i> פרופיל
                             </a>
                             <div class="dropdown-divider"></div>
-                            <a href="@Url.Action("LogOff", "Account_IL")" class="dropdown-item has-icon text-danger">
+                            <a href="@Url.Action("LogOff", "Account_IL")" onclick="window.sessionStorage.clear();console.log('done window.sessionStorage.clear()')" class="dropdown-item has-icon text-danger">
                                 <i class="fas fa-sign-out-alt"></i> יציאה
                             </a>
                         </div>
@@ -64,24 +69,40 @@
                         <nav class="navbar navbar-expand-lg main-navbar">
                             <form class="form-inline mr-auto"></form>
                             <ul class="navbar-nav navbar-right">
+                                <li id="mnuSampleDetails" class="nav-item dropdown active" style="display:none;">
+                                    <a href="#" onclick="UpdateSampleDetails();" class="nav-link" style="background-color:rgb(1,65,111);height:60px;width:120px;text-align:center;white-space: nowrap;">
+                                        <div class="item">
+                                            <i class="fas fa-edit"></i>
+                                            <div class="caption" style="color:#FFF;margin-right:-11px;">פרטי דגימה</div>
+                                        </div>
+                                    </a>
+                                </li>
                                 <li id="mnuSampleList" class="nav-item dropdown active" style="display:none;">
-                                    <a href="#" onclick="OpentestList();" class="nav-link" style="background-color:rgb(1,65,111);height:60px;">
+                                    <a href="#" onclick="OpentestList();" class="nav-link" style="background-color:rgb(1,65,111);height:60px;width:120px;text-align:center;">
                                         <div class="item">
                                             <i class="fas fa-certificate"></i>
-                                            <div class="caption" style="color:#FFF;">דגימות</div>
+                                            <div class="caption" style="color:#FFF;">בדיקות</div>
                                         </div>
                                     </a>
                                 </li>
                                 <li id="mnuPartsList" class="nav-item dropdown active" style="display:none;">
-                                    <a href="#" onclick="navigateTestPage();" class="nav-link" style="background-color:rgb(1,65,111);height:60px;">
+                                    <a href="#" onclick="navigateTestPage();" class="nav-link" style="background-color:rgb(1,65,111);height:60px;width:120px;text-align:center;">
                                         <div class="item">
                                             <i class="fas fa-puzzle-piece"></i>
                                             <div class="caption" style="color:#FFF;">מוצרים</div>
                                         </div>
                                     </a>
                                 </li>
+                                <li id="mnuRefresh" class="nav-item dropdown active" style="display:none;">
+                                    <a href="#" onclick="refreshOrdersData('@Model.User.Supplier_ID');" class="nav-link" style="background-color:rgb(1,65,111);height:60px;width:120px;text-align:center;">
+                                        <div class="item">
+                                            <i class="fas fa-sync-alt"></i>
+                                            <div class="caption" style="color:#FFF;">רענן</div>
+                                        </div>
+                                    </a>
+                                </li>
                                 <li class="nav-item dropdown active">
-                                    <a href="@Url.Action("Index", "Home_IL")" class="nav-link" style="background-color:rgb(1,65,111);height:60px;">
+                                    <a href="@Url.Action("Index", "Home_IL")" class="nav-link" style="background-color:rgb(1,65,111);height:60px;width:120px;text-align:center;">
                                         <div class="item">
                                             <i class="fas fa-home"></i>
                                             <div class="caption" style="color:#FFF;">הזמנות</div>
@@ -113,8 +134,8 @@
     @Scripts.Render("~/bundles/bootstrap")
     <!-- General JS Scripts -->
     @*<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>*@
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>*@
 
     <script src="~/Scripts/i18n/grid.locale-he.js"></script>
     <script src="~/Scripts/jquery.jqGrid.min.js"></script>

@@ -1,8 +1,42 @@
 ﻿var x = document.getElementsByTagName("html")[0].getAttribute("dir");
-
+var objSample = '';
 var pageSampleobject = '';
+var objSampleStandardList = '';
 
 function getData(supplier) {
+    //console.log("getData ==> window.sessionStorage.getItem('objOrdersList')", window.sessionStorage.getItem('objOrdersList'));
+    if (null === window.sessionStorage.getItem('objOrdersList')) {
+        $.ajax({
+
+            type: "POST",
+            url: $('#navGetOrdersData').data('url'), //"Home/GetOrdersData",
+            data: {
+                supplier: supplier
+            },
+            cache: false,
+            success: function (data) {
+                console.log("getData ==> data", data);
+                window.sessionStorage.setItem('objOrdersList', JSON.stringify(data.lstOrderObject));
+                grid_data = data.lstOrderObject;
+                if (null === grid_data || grid_data === '')
+                    return;
+
+                showGrid();
+            }
+        });
+    }
+    else {
+        grid_data = JSON.parse(window.sessionStorage.getItem('objOrdersList'));
+        if (null === grid_data || grid_data === '')
+            return;
+
+        showGrid();
+    }
+}
+
+function refreshOrdersData(supplier) {
+    console.log("refreshOrdersData ==> supplier", supplier);
+    window.sessionStorage.removeItem('objOrdersList');
     $.ajax({
 
         type: "POST",
@@ -12,9 +46,11 @@ function getData(supplier) {
         },
         cache: false,
         success: function (data) {
-            console.log("data", data);
+            console.log("refreshOrdersData ==> data", data);
+            window.sessionStorage.setItem('objOrdersList', JSON.stringify(data.lstOrderObject));
+            $("#jqGrid").GridUnload();
             grid_data = data.lstOrderObject;
-            if ((null === grid_data) || (grid_data === ''))
+            if (null === grid_data || grid_data === '')
                 return;
 
             showGrid();
@@ -26,16 +62,17 @@ function InitTestPageData(data) {
     var OrdId = document.getElementById('hdnOrdId').value;
     var pordId = document.getElementById('hdnPrdId').value;
 
-    document.getElementById('mnuSampleList').style.display = 'none';
+    document.getElementById('mnuSampleList').style.display = 'none'; 
     document.getElementById('mnuPartsList').style.display = 'none';
-
+    document.getElementById('mnuRefresh').style.display = 'none';
     console.log('hdnOrdId = ', OrdId);
     console.log('pordId = ', pordId);
     console.log('$(document).ready ==> data = ', data);
     console.log('$(document).ready ==> data.lstAttachments = ', data.lstAttachments);
 
     showOrderDetail(data.objOrder);
-    if (null == data.lstItemsObject)
+    document.getElementById('orderAlert').innerHTML = null === data.htmlText ? '' : data.htmlText;
+    if (null === data.lstItemsObject)
         GetOrderProducts(OrdId);
     else
         showGridProd(data.lstItemsObject);
@@ -43,10 +80,20 @@ function InitTestPageData(data) {
 
 function InitQAPageData(data) {
     pageSampleobject = data;
+
+    document.getElementById('lbl_pageREQDATE').style.display = 'inline-block';
+    document.getElementById('lbl_DELAYREASON').style.display = 'inline-block';
+    document.getElementById('txt_pageREQDATE').style.display = 'none';
+    document.getElementById('combo_DELAYREASON').style.display = 'none';
+    document.getElementById('txt_ReasonRejection').setAttribute('disabled', 'disabled');
+
+    document.getElementById('mnuRefresh').style.display = 'none';
     document.getElementById('mnuSampleList').style.display = 'inline-block';
     document.getElementById('mnuPartsList').style.display = 'inline-block';
+    document.getElementById('mnuSampleDetails').style.display = 'inline-block';
     document.getElementById('divSampleQA').style.display = 'inline-block';
     document.getElementById('sampleQaList').style.display = 'inline-block';
+    document.getElementById('sampleDetails').style.display = 'inline-block';
     document.getElementById('hdnQaListSUPNAME').value = '';
     document.getElementById('hdnQaListORDNAME').value = '';
     document.getElementById('hdnQaListPARTNAME').value = '';
@@ -58,11 +105,14 @@ function InitQAPageData(data) {
     document.getElementById('hdnQaListORDNAME').value = data.objOrder.ORDNAME;
 
     showOrderLineDetail(data.objProduct);
-    if (null != data.lstSampleObject && data.lstSampleObject.length > 0)
+    //Show order line text(comment)
+    document.getElementById('orderLineAlert').innerHTML = null === data.objItemText || null === data.objItemText.TEXT ? '' : data.objItemText.TEXT;
+
+    if (null !== data.lstSampleObject && data.lstSampleObject.length > 0)
         showPartSampls(data.lstSampleObject);
     else {
         console.log('data.lstSampleObject = ', data.lstSampleObject);
-        if (x == 'rtl') {
+        if (x === 'rtl') {
             $("#modal-2").trigger("click");
             $("#modal-error-text").html('לא נמצאה תעודת דגימה. לחץ על הכפתור "בדיקות" בתפריט ליצירת תעודת דגימה.');
         }
@@ -72,14 +122,14 @@ function InitQAPageData(data) {
         }
     }
 
-    if (null != data.lstAttachments)
+    if (null !== data.lstAttachments)
         showGridProdAttachments(data.lstAttachments);
 
     $("#loader").hide();
 }
 
 function navigateTestPage() {
-    if (x == 'rtl')
+    if (x === 'rtl')
         window.location = window.location.origin + $('#navTestProduct').data('url') + '/?OrderID=' + document.getElementById('hdnOrdId').value + '&orderNumber=' + document.getElementById('hdnPrdId').value;
     else
         window.location = window.location.origin + $('#navTestProduct').data('url') + '/?OrderID=' + document.getElementById('hdnOrdId').value + '&orderNumber=' + document.getElementById('hdnPrdId').value;
@@ -91,7 +141,7 @@ function showSalesorderDetail(PARTNAME, ORD, LINE) {
     console.log('showSalesorderDetail ==> PARTNAME = ', PARTNAME);
     $.ajax({
         type: "POST",
-        url: $('#navOrder').data('url'),//"PostTestProduct",
+        url: $('#navPostTestProductItem').data('url'),//"PostTestProduct",
         data: {
             orderID: ORD,
             prodName: PARTNAME,
@@ -101,67 +151,280 @@ function showSalesorderDetail(PARTNAME, ORD, LINE) {
         success: function (data) {
             console.log("showSalesorderDetail ==> data", data);
             showOrderDetail(data.objOrder);
+            //Show order comments
+            document.getElementById('orderAlert').innerHTML = null === data.htmlText ? '' : data.htmlText;
             showOrderLineDetail(data.objProduct);
-
-            if (null != data.objSample.MED_TRANSSAMPLEQA_SUBFORM)
+            //Show order line comments
+            console.log("showSalesorderDetail ==> data.objItemText", data.objItemText);
+            document.getElementById('orderLineAlert').innerHTML = null === data.objItemText || null === data.objItemText.TEXT ? '' : data.objItemText.TEXT;
+            if (null !== data.objSample.MED_TRANSSAMPLEQA_SUBFORM)
                 showGridProdSamples(data.objSample.MED_TRANSSAMPLEQA_SUBFORM);
-            if (null != data.lstAttachments)
+            if (null !== data.lstAttachments)
                 showGridProdAttachments(data.lstAttachments);
 
-            if (x == 'rtl')
+            manageDelayReasonSelect(data);
+
+            if (x === 'rtl')
                 $("#modal-11").trigger("click");
             else
-            $("#modal-12").trigger("click");
+                $("#modal-12").trigger("click");
         }
     });
 }
 
+function manageDelayReasonSelect(data)
+{
+    document.getElementById('div_ReasonRejection').style.display = 'inline';
+    let selectList = document.getElementById('combo_DELAYREASON');
+    let i, L = selectList.options.length - 1;
+    for (i = L; i >= 0; i--) {
+        selectList.remove(i);
+    }
+
+    let option = document.createElement("option");
+    option.value = '-1';
+    if (x === 'rtl')
+        option.text = 'אחר';
+    else
+        option.text = 'Other';
+    option.selected = true;
+    selectList.appendChild(option);
+    if (null !== data.lstDelayReason && data.lstDelayReason.length > 0) {
+        for (i = 0; i < data.lstDelayReason.length; i++) {
+            option = document.createElement("option");
+            option.value = data.lstDelayReason[i].CODE;
+            if (x === 'rtl')
+                option.text = data.lstDelayReason[i].DES;
+            else
+                option.text = data.lstDelayReason[i].EDES;
+
+            if (data.objProduct.EFI_DELAYREASON === data.lstDelayReason[i].DES || data.objProduct.EFI_DELAYREASON === data.lstDelayReason[i].EDES)
+                option.selected = true;
+
+            selectList.appendChild(option);
+        }
+    }
+    document.getElementById('lbl_pageREQDATE').style.display = 'none';
+    document.getElementById('lbl_DELAYREASON').style.display = 'none';
+
+    document.getElementById('txt_pageREQDATE').style.display = 'inline-block';
+    document.getElementById('combo_DELAYREASON').style.display = 'inline-block';
+
+    if (selectList.options[selectList.selectedIndex].value === '-1') {
+        document.getElementById("txt_ReasonRejection").removeAttribute('disabled');
+        document.getElementById('txt_ReasonRejection').value = data.objProduct.EFI_DELAYREASON;
+    }
+    else
+        document.getElementById('txt_ReasonRejection').setAttribute('disabled', 'disabled');
+}
+
+function comboDelayReasonOnChange() {
+    let selectList = document.getElementById('combo_DELAYREASON');
+    if (selectList.options[selectList.selectedIndex].value === '-1')
+        document.getElementById("txt_ReasonRejection").removeAttribute('disabled');
+    else
+        document.getElementById('txt_ReasonRejection').setAttribute('disabled', 'disabled');
+}
+
 function showOrderDetail(objOrder) {
     console.log('showOrderDetail ==> objOrder', objOrder);
-    document.getElementById('lbl_ORDNAME').innerText = null == objOrder.ORDNAME ? '' : objOrder.ORDNAME;
-    document.getElementById('lbl_pageCURDATE').innerText = null == objOrder.pageCURDATE ? '' : objOrder.pageCURDATE;
-    document.getElementById('lbl_STATDESE').innerText = null == objOrder.STATDESE ? '' : objOrder.STATDESE;
-    document.getElementById('lbl_OWNERLOGIN').innerText = null == objOrder.OWNERLOGIN ? '' : objOrder.OWNERLOGIN;
-    document.getElementById('SHR_SUPTYPEDES').innerText = null == objOrder.SUPTYPEDES ? '' : objOrder.SUPTYPEDES;
-    document.getElementById('lbl_SUPNAME').innerText = null == objOrder.SUPNAME ? '' : objOrder.SUPNAME;
-    document.getElementById('lbl_CDES').innerText = null == objOrder.CDES ? '' : objOrder.CDES;
-    document.getElementById('lbl_TYPEDES').innerText = null == objOrder.TYPEDES ? '' : objOrder.TYPEDES;
+    document.getElementById('lbl_ORDNAME').innerText = null === objOrder.ORDNAME ? '' : objOrder.ORDNAME;
+    document.getElementById('lbl_pageCURDATE').innerText = null === objOrder.pageCURDATE ? '' : objOrder.pageCURDATE;
+    document.getElementById('lbl_STATDESE').innerText = null === objOrder.STATDES ? '' : objOrder.STATDES;
+    document.getElementById('lbl_OWNERLOGIN').innerText = null === objOrder.OWNERLOGIN ? '' : objOrder.OWNERLOGIN;
+    //document.getElementById('SHR_SUPTYPEDES').innerText = null == objOrder.SUPTYPEDES ? '' : objOrder.SUPTYPEDES;
+    document.getElementById('lbl_SUPNAME').innerText = null === objOrder.SUPNAME ? '' : objOrder.SUPNAME;
+    document.getElementById('lbl_CDES').innerText = null === objOrder.CDES ? '' : objOrder.CDES;
+    document.getElementById('lbl_TYPEDES').innerText = null === objOrder.TYPEDES ? '' : objOrder.TYPEDES;
     
 }
 
+function setInputDate(_id, pageREQDATE) {
+    let _dat = document.querySelector(_id);
+    let minDate = new Date();
+    let hoy = '';
+    let d = '';
+    let m = '';
+    let y = '';
+    let min_d = '';
+    let min_m = '';
+    let min_y = '';
+    let data;
+    if (null === pageREQDATE || pageREQDATE === '') {
+        hoy = new Date(),
+            d = hoy.getDate(),
+            m = hoy.getMonth() + 1,
+            y = hoy.getFullYear(),
+            data;
+        console.log(hoy);
+    }
+    else {
+        pageREQDATE = pageREQDATE.replace("/", "-").replace("/", "-");
+        let arr = pageREQDATE.split("-");
+        pageREQDATE = arr[2] + '-' + arr[1] + '-' + arr[0];
+        console.log(pageREQDATE);
+        hoy = new Date(pageREQDATE);
+        console.log(hoy);
+        d = hoy.getDate();
+        m = hoy.getMonth()+1;
+        y = hoy.getFullYear();
+    }
+
+    min_d = minDate.getDate();
+    min_m = minDate.getMonth() +1;
+    min_y = minDate.getFullYear;
+
+    if (min_d < 10) {
+        min_d = "0" + d;
+    }
+    if (min_m < 10) {
+        min_m = "0" + m;
+    }
+
+    if (d < 10) {
+        d = "0" + d;
+    }
+    if (m < 10) {
+        m = "0" + m;
+    }
+
+    data = y + "-" + m + "-" + d;
+    console.log(data);
+    _dat.value = data;
+    data = min_y + '-' + min_m + '-' + min_d;
+    _dat.min = data;
+}
+
 function showOrderLineDetail(objProduct) {
-    document.getElementById('lbl_LINE').innerText = null == objProduct.LINE ? '' : objProduct.LINE;
-    document.getElementById('lbl_PARTNAME').innerText = null == objProduct.PARTNAME ? '' : objProduct.PARTNAME;
-    document.getElementById('lbl_pageREQDATE').innerText = null == objProduct.pageREQDATE ? '' : objProduct.pageREQDATE;
-    document.getElementById('lbl_REQDATE2').innerText = null == objProduct.REQDATE2 ? '' : objProduct.pageREQDATE2;
-    document.getElementById('lbl_PDES').innerText = null == objProduct.PDES ? '' : objProduct.PDES;
-    document.getElementById('lbl_SERIALNAME').innerText = null == objProduct.SERIALNAME ? '' : objProduct.SERIALNAME;
-    document.getElementById('lbl_TQUANT').innerText = null == objProduct.TQUANT ? '' : objProduct.TQUANT;
-    document.getElementById('lbl_TBALANCE').innerText = null == objProduct.TBALANCE ? '' : objProduct.TBALANCE;
-    document.getElementById('lbl_ACTNAME').innerText = null == objProduct.ACTNAME ? '' : objProduct.ACTNAME;
-    document.getElementById('lbl_SHR_DRAW').innerText = null == objProduct.SHR_DRAW ? '' : objProduct.SHR_DRAW;
-    document.getElementById('lbl_SHR_MNFDES').innerText = null == objProduct.SHR_MNFDES ? '' : objProduct.SHR_MNFDES;
-    document.getElementById('lbl_SHR_MNFPARTNAME').innerText = null == objProduct.SHR_MNFPARTNAME ? '' : objProduct.SHR_MNFPARTNAME;
-    document.getElementById('lbl_SHR_SERIAL_REVNUM').innerText = null == objProduct.SHR_SERIAL_REVNUM ? '' : objProduct.SHR_SERIAL_REVNUM;
-    document.getElementById('lbl_REVNAME').innerText = null == objProduct.REVNAME ? '' : objProduct.REVNAME;
+    var dateControl = document.querySelector('input[type="date"]');
+    console.log('showOrderLineDetail ==>  = dateControl', dateControl);
+    document.getElementById('lbl_LINE').innerText = null === objProduct.LINE ? '' : objProduct.LINE;
+    document.getElementById('lbl_PARTNAME').innerText = null === objProduct.PARTNAME ? '' : objProduct.PARTNAME;
+    console.log('showOrderLineDetail ==>  document.getElementById("lbl_pageREQDATE")', document.getElementById('lbl_pageREQDATE'));
+    document.getElementById('lbl_pageREQDATE').innerText = null === objProduct.pageREQDATE ? '' : objProduct.pageREQDATE;
+    setInputDate("#txt_pageREQDATE", objProduct.pageREQDATE);
+    document.getElementById('lbl_REQDATE2').innerText = null === objProduct.REQDATE2 ? '' : objProduct.pageREQDATE2;
+    document.getElementById('lbl_PDES').innerText = null === objProduct.PDES ? '' : objProduct.PDES;
+    document.getElementById('lbl_SERIALNAME').innerText = null === objProduct.SERIALNAME ? '' : objProduct.SERIALNAME;
+    document.getElementById('lbl_TQUANT').innerText = null === objProduct.TQUANT ? '' : objProduct.TQUANT;
+    document.getElementById('lbl_TBALANCE').innerText = null === objProduct.TBALANCE ? '' : objProduct.TBALANCE;
+    document.getElementById('lbl_ACTNAME').innerText = null === objProduct.ACTNAME ? '' : objProduct.ACTNAME;
+    document.getElementById('lbl_SHR_DRAW').innerText = null === objProduct.SHR_DRAW ? '' : objProduct.SHR_DRAW;
+    document.getElementById('lbl_SHR_MNFDES').innerText = null === objProduct.SHR_MNFDES ? '' : objProduct.SHR_MNFDES;
+    document.getElementById('lbl_SHR_MNFPARTNAME').innerText = null === objProduct.SHR_MNFPARTNAME ? '' : objProduct.SHR_MNFPARTNAME;
+    document.getElementById('lbl_SHR_SERIAL_REVNUM').innerText = null === objProduct.SHR_SERIAL_REVNUM ? '' : objProduct.SHR_SERIAL_REVNUM;
+    document.getElementById('lbl_REVNAME').innerText = null === objProduct.REVNAME ? '' : objProduct.REVNAME;
+    document.getElementById('lbl_DELAYREASON').innerText = null === objProduct.EFI_DELAYREASON ? '' : objProduct.EFI_DELAYREASON;
+    
+    document.getElementById('div_ReasonRejection').style.display = 'none';
 }
 
 function showSampleDetails(objSample) {
     console.log('showSampleDetails ==> objSample', objSample);
-    if (null == objSample || null == objSample.DOCNO) {
-        $("#modal-21").trigger("click");
-        $("#modal-error-text").html('Sample document was not found. Click "Tests" button to create sample document.');
+    if (null === objSample || null === objSample.DOCNO) {
+        if (x === 'rtl') {
+            $("#modal-2").trigger("click");
+            $("#modal-error-text").html('לא נמצאה תעודת דגימה. לחץ על הכפתור "בדיקות" בתפריט ליצירת תעודת דגימה.');
+        }
+        else {
+            $("#modal-21").trigger("click");
+            $("#modal-error-text").html('Sample document was not found. Click "Tests" button to create sample document.');
+        }
     }
     else {
-        document.getElementById('lbl_DOCNO').innerText = null == objSample.DOCNO ? '' : objSample.DOCNO;
-        document.getElementById('lbl_CURDATE').innerText = null == objSample.pageCURDATE ? '' : objSample.pageCURDATE;
-        document.getElementById('lbl_QUANT').innerText = null == objSample.QUANT ? '' : objSample.QUANT;
-        document.getElementById('lbl_SERIALNAME').innerText = null == objSample.SERIALNAME ? '' : objSample.SERIALNAME;
-        document.getElementById('lbl_SHR_RAR').innerText = null == objSample.SHR_RAR ? '' : objSample.SHR_RAR;
-        document.getElementById('lbl_SHR_SERIAL_QUANT').innerText = null == objSample.SHR_SERIAL_QUANT ? '' : objSample.SHR_SERIAL_QUANT;
-        document.getElementById('lbl_STATDES').innerText = null == objSample.STATDES ? '' : objSample.STATDES;
-        document.getElementById('lbl_SHR_SAMPLE_STD_CODE').innerText = null == objSample.SHR_SAMPLE_STD_CODE ? '' : objSample.SHR_SAMPLE_STD_CODE;
+        GetSampleStandardList(objSample);
     }
+}
+
+function GetSampleStandardList(objSample) {
+    $.ajax(
+        {
+            type: "POST",
+            //data:
+            //{
+            //    PARTNAME: rowData.PARTNAME,
+            //    SUPNAME: rowData.SUPNAME,
+            //    DOCNO: rowData.DOCNO
+            //},
+            url: $('#navGetSampleStandardList').data('url'),//"/Home/GetSampleTestList",
+            contentType: "application/x-www-form-urlencoded;charset=ISO-8859-15",
+            success: function (response) {
+                console.log('GetSampleStandardList ==> response', response);
+                document.getElementById('lbl_DOCNO').innerText = null === objSample.DOCNO ? '' : objSample.DOCNO;
+                document.getElementById('lbl_CURDATE').innerText = null === objSample.pageCURDATE ? '' : objSample.pageCURDATE;
+                document.getElementById('lbl_SHR_QUANT').value = null === objSample.SHR_QUANT ? 0 : objSample.SHR_QUANT;
+                //document.getElementById('lbl_SAMPLE_TYPE_CODE').value = null === objSample.SAMPLE_TYPE_CODE ? '' : objSample.SAMPLE_TYPE_CODE;
+                document.getElementById('lbl_EFI_SUPNO').value = null === objSample.EFI_SUPNO ? '' : objSample.EFI_SUPNO;
+                //document.getElementById('lbl_SHR_SERIAL_QUANT').innerText = null === objSample.SHR_SERIAL_QUANT ? '' : objSample.SHR_SERIAL_QUANT;
+                document.getElementById('lbl_STATDES').innerText = null === objSample.STATDES ? '' : objSample.STATDES;
+                document.getElementById('lbl_SHR_SAMPLE_STD_CODE').value = null === objSample.SHR_SAMPLE_STD_CODE ? '' : objSample.SHR_SAMPLE_STD_CODE;
+                document.getElementById('lbl_SHR_ROHS').checked = null === objSample.SHR_ROHS || objSample.SHR_ROHS === 'N' ? false : true;
+                console.log('GetSampleStandardList ==> objSample.SAMPLE_TYPE_CODE', objSample.SAMPLE_TYPE_CODE);
+                objSampleStandardList = response;
+                let sl = document.getElementById('lbl_SHR_SAMPLE_STD_CODE');
+                let i, L = sl.options.length - 1;
+                for (i = L; i >= 0; i--) {
+                    sl.remove(i);
+                }
+                for (i = 0; i < objSampleStandardList.length; i++) {
+                    let option = document.createElement("option");
+                    option.value = objSampleStandardList[i].SHR_SAMPLE_STD;
+                    option.text = objSampleStandardList[i].SAMPLE_STD_CODE;
+                    
+                    if (objSample.SHR_SAMPLE_STD_CODE === objSampleStandardList[i].SAMPLE_STD_CODE)
+                        option.selected = true;
+                    sl.appendChild(option);
+                }
+                
+                var x = document.getElementsByTagName("html")[0].getAttribute("dir");
+                if (x === 'rtl')
+                    $("#modal-13").trigger("click");
+                else
+                    $("#modal-14").trigger("click");
+            }
+        });
+}
+function onSubmit_UpdateSampleDetails() {
+    let DOCNO = document.getElementById('lbl_DOCNO').innerText;
+    let EFI_SUPNO = document.getElementById('lbl_EFI_SUPNO').value;
+    let SHR_QUANT = document.getElementById('lbl_SHR_QUANT').value;
+    let SHR_ROHS = document.getElementById('lbl_SHR_ROHS').checked ? 'Y' : 'N';
+    //let SHR_SAMPLE_STD_CODE = document.getElementById('lbl_SHR_SAMPLE_STD_CODE').value;
+    let SAMPLE_TYPE_CODE = document.getElementById('lbl_SAMPLE_TYPE_CODE').value;
+
+    let sl = document.getElementById('lbl_SHR_SAMPLE_STD_CODE');
+    console.log("onSubmit_UpdateSampleDetails ==> sl.options[sl.selectedIndex].text", sl.options[sl.selectedIndex].text);
+    let SHR_SAMPLE_STD_CODE = sl.options[sl.selectedIndex].text;
+
+    console.log("onSubmit_UpdateSampleDetails ==> DOCNO", DOCNO);
+    console.log("onSubmit_UpdateSampleDetails ==> EFI_SUPNO", EFI_SUPNO);
+    console.log("onSubmit_UpdateSampleDetails ==> SHR_QUANT", SHR_QUANT);
+    console.log("onSubmit_UpdateSampleDetails ==> SHR_ROHS", SHR_ROHS);
+    console.log("onSubmit_UpdateSampleDetails ==> SHR_SAMPLE_STD_CODE", SHR_SAMPLE_STD_CODE);
+    console.log("onSubmit_UpdateSampleDetails ==> SAMPLE_TYPE_CODE", SAMPLE_TYPE_CODE);
+    $.ajax(
+        {
+            type: "POST",
+            data:
+            {
+                SAMPLE_TYPE_CODE: SAMPLE_TYPE_CODE,
+                EFI_SUPNO: EFI_SUPNO,
+                SHR_QUANT: SHR_QUANT,
+                SHR_ROHS: SHR_ROHS,
+                SHR_SAMPLE_STD_CODE: SHR_SAMPLE_STD_CODE,
+                DOCNO: DOCNO
+            },
+            url: $('#navUpdateSampleDetails').data('url'),//"/Home/UpdateSampleDetails",
+            contentType: "application/x-www-form-urlencoded;charset=ISO-8859-15",
+            success: function (response)
+            {
+                console.log("onSubmit_UpdateSampleDetails ==> response", response);
+                pageSampleobject.objSample = response.objSample;
+                pageSampleobject.lstSampleObject = response.lstSampleObject;
+                $("#jqGridPartSampls").GridUnload();
+                showPartSampls(response.lstSampleObject);
+            }
+        });
 }
 
 function GetSampleTests(rowData) {
@@ -186,11 +449,11 @@ function GetSampleTests(rowData) {
             contentType: "application/x-www-form-urlencoded;charset=ISO-8859-15",
             success: function (response) {
                 console.log("GetSampleTests ==> response", response);
-                if (null != response && null != response.objSample) {
+                if (null !== response && null !== response.objSample) {
                     pageSampleobject.objSample = response.objSample;
                     //showGridSampleList(response.lstSamplQA);
                     $("#jqGridRevision").GridUnload();
-                    if (null != response.objSample && null != response.objSample.MED_TRANSSAMPLEQA_SUBFORM && response.objSample.MED_TRANSSAMPLEQA_SUBFORM.length > 0)
+                    if (null !== response.objSample && null !== response.objSample.MED_TRANSSAMPLEQA_SUBFORM && response.objSample.MED_TRANSSAMPLEQA_SUBFORM.length > 0)
                         showGridProdSamples(response.objSample.MED_TRANSSAMPLEQA_SUBFORM);
 
                     //var x = document.getElementsByTagName("html")[0].getAttribute("dir");
@@ -200,7 +463,7 @@ function GetSampleTests(rowData) {
                     //    $("#modal-10").trigger("click");
                 }
                 else {
-                    if (response.ErrorDescription != '') {
+                    if (response.ErrorDescription !== '') {
                         form_data[0].reset();
                         $('.modal').modal('hide');
                         $('.modal').removeClass('show');
@@ -255,46 +518,47 @@ function doNext() {
     if (inNewDoc == 1) {
         createNewSampleDocument(supName, ordNAME, partName, ordLINE);
     }
-
-    $.ajax(
-        {
-            type: "POST",
-            data:
+    else {
+        $.ajax(
             {
-                supName: supName,
-                partName: partName,
-                ordName: ordNAME,
-                ordLine: ordLINE
-            },
-            url: $('#navGetSampleTestList').data('url'),//"/Home/GetSampleTestList",
-            contentType: "application/x-www-form-urlencoded;charset=ISO-8859-15",
-            success: function (response) {
-                console.log("response", response);
-                if (null != response && null != response.lstSamplQA && response.lstSamplQA.length > 0) {
-                    pageSampleobject.objSample = response.objSample;
-                    pageSampleobject.lstSamplQA = response.lstSamplQA;
-                    showGridSampleList(response.lstSamplQA);
+                type: "POST",
+                data:
+                {
+                    supName: supName,
+                    partName: partName,
+                    ordName: ordNAME,
+                    ordLine: ordLINE
+                },
+                url: $('#navGetSampleTestList').data('url'),//"/Home/GetSampleTestList",
+                contentType: "application/x-www-form-urlencoded;charset=ISO-8859-15",
+                success: function (response) {
+                    console.log("response", response);
+                    if (null !== response && null !== response.lstSamplQA && response.lstSamplQA.length > 0) {
+                        pageSampleobject.objSample = response.objSample;
+                        pageSampleobject.lstSamplQA = response.lstSamplQA;
+                        showGridSampleList(response.lstSamplQA);
 
-                    if (null != response.objSample && null != response.objSample.MED_TRANSSAMPLEQA_SUBFORM && response.objSample.MED_TRANSSAMPLEQA_SUBFORM.length > 0)
-                        showSelectedSampleQA(response.objSample.MED_TRANSSAMPLEQA_SUBFORM);
+                        if (null !== response.objSample && null !== response.objSample.MED_TRANSSAMPLEQA_SUBFORM && response.objSample.MED_TRANSSAMPLEQA_SUBFORM.length > 0)
+                            showSelectedSampleQA(response.objSample.MED_TRANSSAMPLEQA_SUBFORM);
 
-                    var x = document.getElementsByTagName("html")[0].getAttribute("dir");
-                    if (x == 'rtl')
-                        $("#modal-9").trigger("click");
-                    else
-                        $("#modal-10").trigger("click");
-                }
-                else {
-                    if (response.ErrorDescription != '') {
-                        //form_data[0].reset();
-                        $('.modal').modal('hide');
-                        $('.modal').removeClass('show');
-                        $("#modal-error-text").html(response.ErrorDescription);
-                        $("#modal-1").trigger("click");
+                        var x = document.getElementsByTagName("html")[0].getAttribute("dir");
+                        if (x === 'rtl')
+                            $("#modal-9").trigger("click");
+                        else
+                            $("#modal-10").trigger("click");
+                    }
+                    else {
+                        if (response.ErrorDescription !== '') {
+                            //form_data[0].reset();
+                            $('.modal').modal('hide');
+                            $('.modal').removeClass('show');
+                            $("#modal-error-text").html(response.ErrorDescription);
+                            $("#modal-1").trigger("click");
+                        }
                     }
                 }
-            }
-        });
+            });
+    }
 }
 function OpentestList()
 {
@@ -302,32 +566,38 @@ function OpentestList()
     console.log("GetSampleTests ==> pageSampleobject", pageSampleobject);
     console.log("OpentestList ==> DOCNO", document.getElementById('hdnQaListDOCNO').value);
     console.log("OpentestList ==> x(isRTL)", x);
-    if (document.getElementById('hdnQaListDOCNO').value == '' && pageSampleobject.lstSampleObject != null && pageSampleobject.lstSampleObject.length > 0)
-    {
-        if (x == 'rtl') {
-            $("#modal-2").trigger("click");
-            $("#modal-error-text").html('יש לבחור תעודת דגימה מרשימת הדגימות ואז להוסיף בדיקות.');
-        }
-        else {
-            $("#modal-21").trigger("click");
-            $("#modal-error-text").html('No sample document was selected. Please select document from the list below and then add tests.');
-        }
-    }
-    else
-    {
+    //if (document.getElementById('hdnQaListDOCNO').value == '' && pageSampleobject.lstSampleObject != null && pageSampleobject.lstSampleObject.length > 0)
+    //{
+    //    if (x == 'rtl') {
+    //        $("#modal-2").trigger("click");
+    //        $("#modal-error-text").html('יש לבחור תעודת דגימה מרשימת הדגימות ואז להוסיף בדיקות.');
+    //    }
+    //    else {
+    //        $("#modal-21").trigger("click");
+    //        $("#modal-error-text").html('No sample document was selected. Please select document from the list below and then add tests.');
+    //    }
+    //}
+    //else
+    //{
         //Open message : do you want to create a new sample document?
         $("#jqGridSampleQA").GridUnload();
-        var x = document.getElementsByTagName("html")[0].getAttribute("dir");
+        //var x = document.getElementsByTagName("html")[0].getAttribute("dir");
         document.getElementById('hdnIsNewDocument').value = -1;
-        if (x == 'rtl')
+        if (x === 'rtl')
             $("#modal-3").trigger("click");
         else {
             $("#modal-31").trigger("click");
         }
-    }
+    //}
+}
+
+function UpdateSampleDetails() {
+    console.log('UpdateSampleDetails ==> pageSampleobject', pageSampleobject);
+    showSampleDetails(pageSampleobject.objSample);
 }
 
 function createNewSampleDocument(supNAME, ordNAME, partNAME, ordLINE) {
+    console.log("IN createNewSampleDocument");
     $.ajax(
         {
             type: "POST",
@@ -341,23 +611,24 @@ function createNewSampleDocument(supNAME, ordNAME, partNAME, ordLINE) {
             url: $('#navCreateSampleDocument').data('url'),//"/Home/GetSampleTestList",
             contentType: "application/x-www-form-urlencoded;charset=ISO-8859-15",
             success: function (response) {
-                console.log("response", response);
-                if (null != response && null != response.lstSampleObject && response.lstSampleObject.length > 0) {
+                console.log("createNewSampleDocument ==> response", response);
+                if (null !== response && null !== response.lstSampleObject && response.lstSampleObject.length > 0) {
                     pageSampleobject.objSample = response.objSample;
                     pageSampleobject.lstSamplQA = response.lstSamplQA;
+                    $("#jqGridPartSampls").GridUnload();
                     showPartSampls(response.lstSampleObject);
 
                     //if (null != response.objSample && null != response.objSample.MED_TRANSSAMPLEQA_SUBFORM && response.objSample.MED_TRANSSAMPLEQA_SUBFORM.length > 0)
                     //    showSelectedSampleQA(response.objSample.MED_TRANSSAMPLEQA_SUBFORM);
 
                     var x = document.getElementsByTagName("html")[0].getAttribute("dir");
-                    if (x == 'rtl')
+                    if (x === 'rtl')
                         $("#modal-9").trigger("click");
                     else
                         $("#modal-10").trigger("click");
                 }
                 else {
-                    if (response.ErrorDescription != '') {
+                    if (response.ErrorDescription !== '') {
                         //form_data[0].reset();
                         $('.modal').modal('hide');
                         $('.modal').removeClass('show');
@@ -423,7 +694,7 @@ function GetOrderProductTests(prodName, supplier, qaCode, REPETITION, DOCNO) {
                 div.classList.add('form-group', 'col-md-3', 'col-12');
                
                 lbl.style.fontWeight = 'bolder';
-                if (document.getElementsByTagName("html")[0].getAttribute("dir") == 'rtl')
+                if (document.getElementsByTagName("html")[0].getAttribute("dir") === 'rtl')
                     lbl.innerText = 'שורה';
                 else
                     lbl.innerText = 'Line';
@@ -449,7 +720,7 @@ function GetOrderProductTests(prodName, supplier, qaCode, REPETITION, DOCNO) {
 
                 lbl = document.createElement('label');
                 lbl.style.fontWeight = 'bolder';
-                if (document.getElementsByTagName("html")[0].getAttribute("dir") == 'rtl')
+                if (document.getElementsByTagName("html")[0].getAttribute("dir") === 'rtl')
                     lbl.innerText = 'תוצאה';
                 else
                     lbl.innerText = 'Result';
@@ -560,17 +831,17 @@ function downloadFile(filefolder, filename) {
             url: $('#navDownload').data('url'),//"/Home/Download",
             success: function (response) {
                 //
-                console.log("downloadFile ==> Downlod => url", $('#downLoadFile').data('url'));
-                //DoDownlod(filefolder, filename);
+                console.log("downloadFile ==> Downlod => url", $('#navDownloadFile').data('url'));
+                DoDownlod(filefolder, filename);
                 
-                window.location.href = $('#downLoadFile').data('url') + "/?fileFolder=" + filefolder + "&fileName=" + filename;
+                //window.location = window.location.origin + $('#downLoadFile').data('url') + "/?fileFolder=" + filefolder + "&fileName=" + filename;
            }
         });
 }
 
 function DoDownlod(filefolder, filename) {
     $.ajax({
-        type: "POST",
+        type: "GET",
         data:
         {
             fileFolder: filefolder,
@@ -579,8 +850,9 @@ function DoDownlod(filefolder, filename) {
         url: $('#navDownloadFile').data('url'),//"/Home/DownloadFile",
         success: function (response) {
             console.log("DoDownlod ==> DownloadFile => response", response);
+            //window.open(window.location.origin + $('#navDownloadFile').data('url') + "/?fileFolder=" + filefolder + "&fileName=" + filename);
             //window.location.href = "@Url.RouteUrl(new { Controller = "Home", Action = "DownloadFile" })/?fileFolder=" + filefolder + "&fileName=" + filename;
-            //window.location = '~../../../../PriorityDocs/' + filefolder + '/' + filename;
+            window.location = window.location.origin + $('#navDownloadFile').data('url') + "/?fileFolder=" + filefolder + "&fileName=" + filename;
         }
     });
 }
@@ -610,7 +882,7 @@ function OpenSampleModal(rowData) {
     document.getElementById('txtQaSHR_TEST').innerText = rowData.SHR_TEST;
     document.getElementById('txtQaRESULTMIN').innerText = rowData.RESULTMIN;
     document.getElementById('txtQaRESULTMAX').innerText = rowData.RESULTMAX;
-    if (rowData.RESULTANT == 'Y') // אם תוצאתית
+    if (rowData.RESULTANT === 'Y') // אם תוצאתית
     {
         document.getElementById("txtQaRESULTANT").setAttribute('disabled', 'disabled');
         document.getElementById('txtQaRESULTANT').checked = true;
@@ -629,7 +901,7 @@ function OpenSampleModal(rowData) {
         document.getElementById('txtQaRESULTANT').checked = false;
         document.getElementById('txtQaRESULTANT').value = 'off';
         document.getElementById("txtQaNORMAL").removeAttribute('disabled');
-        if (rowData.NORMAL == 'Y') //  אם תקין
+        if (rowData.NORMAL === 'Y') //  אם תקין
         {
             document.getElementById('txtQaNORMAL').checked = true;
         }
@@ -642,6 +914,12 @@ function OpenSampleModal(rowData) {
     document.getElementById('txtQaREQUIRED_RESULT').innerText = rowData.REQUIRED_RESULT;
     document.getElementById('txtQaSAMPQUANT').innerText = rowData.SAMPQUANT;
     document.getElementById('txtQaMEASUREDES').innerText = rowData.MEASUREDES;
+    document.getElementById('txtQaEFI_MEASURESUPTOOLS').value = rowData.EFI_MEASURESUPTOOLS;
+    document.getElementById('txtQaEFI_CRITICALFLAG').checked = null === rowData.EFI_CRITICALFLAG || rowData.EFI_CRITICALFLAG === '' || rowData.EFI_CRITICALFLAG === 'N' ? false : true;
+    if (document.getElementById('txtQaEFI_CRITICALFLAG').checked)
+        document.getElementById('lblQaEFI_CRITICALFLAG').style.color = 'red';
+    else
+        document.getElementById('lblQaEFI_CRITICALFLAG').style.color = '#000000';
     document.getElementById('txtQaRESULT').value = rowData.RESULT;
     document.getElementById('txtQaREMARK').value = rowData.REMARK;
     document.getElementById('hdnQaDOCNO').value = rowData.DOCNO;
@@ -659,7 +937,7 @@ function GetResultRecord(data, parentRowKey) {
     console.log("GetResultRecord ==> data", data);
     var rec = [];
     for (var i = 0; i < data.length; i++) {
-        if (data[i].QACODE == parentRowKey) {
+        if (data[i].QACODE === parentRowKey) {
             for (var x = 0; x < data[i].MED_RESULTDET_SUBFORM.length; x++) {
                 rec.push(data[i].MED_RESULTDET_SUBFORM[x]);
             }
@@ -700,20 +978,20 @@ function onSubmit_TestForm(e) {
             contentType: "application/x-www-form-urlencoded;charset=ISO-8859-15",
             success: function (response) {
                 console.log("response", response);
-                if (null != response && null != response.ResultData)
+                if (null !== response && null !== response.ResultData)
                 {
                     pageSampleobject.objSample = response.ResultData;
-                    if (null != response.ResultData.MED_TRANSSAMPLEQA_SUBFORM) {
+                    if (null !== response.ResultData.MED_TRANSSAMPLEQA_SUBFORM) {
                         $("#jqGridRevision").GridUnload();
                         showGridProdSamples(response.ResultData.MED_TRANSSAMPLEQA_SUBFORM);
 
                     }
                     else {
-                        if (response.ErrorDescription != '') {
+                        if (response.ErrorDescription !== '') {
                             form_data[0].reset();
                             $('.modal').modal('hide');
                             $('.modal').removeClass('show');
-                            if (x == 'rtl') {
+                            if (x === 'rtl') {
                                 $("#modal-1").trigger("click");
                                 $("#odal-error-text").html(response.ErrorDescription);
                             }
@@ -725,11 +1003,11 @@ function onSubmit_TestForm(e) {
                     }
                 }
                 else {
-                    if (response.ErrorDescription != '') {
+                    if (response.ErrorDescription !== '') {
                         form_data[0].reset();
                         $('.modal').modal('hide');
                         $('.modal').removeClass('show');
-                        if (x == 'rtl')
+                        if (x === 'rtl')
                         {
                             $("#modal-1").trigger("click");
                             $("#odal-error-text").html(response.ErrorDescription);
@@ -754,11 +1032,11 @@ function onSubmit_TestForm(e) {
             processData: false,
             success: function (response) {
                 console.log("UploadFiles - response", response);
-                if (null != response && null != response.ResultData) {
-                    if (response.ResultStatus == 'OK')
+                if (null !== response && null !== response.ResultData) {
+                    if (response.ResultStatus === 'OK')
                         return;
 
-                    if (response.ErrorDescription != '') {
+                    if (response.ErrorDescription !== '') {
                         $("#modal-error-text").html(response.ErrorDescription);
                         $("#modal-1").trigger("click");
                     }
@@ -837,7 +1115,7 @@ function onSubmitCreateSampleList(e) {
         success: function (response) {
             console.log("response", response);
             pageSampleobject.objSample = response.objSample;
-            if (null != response.objSample.MED_TRANSSAMPLEQA_SUBFORM) {
+            if (null !== response.objSample.MED_TRANSSAMPLEQA_SUBFORM) {
                 $("#jqGridRevision").GridUnload();
                 $("#jqGridPartSampls").GridUnload();
                 showPartSampls(response.lstSampleObject);
@@ -849,7 +1127,7 @@ function onSubmitCreateSampleList(e) {
                 jQuery('#jqGridSelectedSampleQA').trigger('reloadGrid');
             }
             else {
-                if (response.ErrorDescription != '') {
+                if (response.ErrorDescription !== '') {
                     form_data[0].reset();
                     $('.modal').modal('hide');
                     $('.modal').removeClass('show');
@@ -859,6 +1137,47 @@ function onSubmitCreateSampleList(e) {
             }
         }
     });
+}
+
+function onSubmit_UpdateOrderLineData() {
+    let selectList = document.getElementById('combo_DELAYREASON');
+    let SUPNAME = document.getElementById('lbl_SUPNAME').innerText;
+    let PARTNAME = document.getElementById('lbl_PARTNAME').innerText;
+    let ORDNAME = document.getElementById('lbl_ORDNAME').innerText;
+    let LINE = document.getElementById('lbl_LINE').innerText;
+    let DELAYREASON = '';
+    let REQDATE = document.getElementById('txt_pageREQDATE').value;
+
+    if (selectList.options[selectList.selectedIndex].value === '-1')
+        DELAYREASON = document.getElementById("txt_ReasonRejection").value;
+    else
+        DELAYREASON = selectList.options[selectList.selectedIndex].text;
+
+    console.log("SUPNAME", SUPNAME);
+    console.log("PARTNAME", PARTNAME);
+    console.log("ORDNAME", ORDNAME);
+    console.log("LINE", LINE);
+    console.log("DELAYREASON", DELAYREASON);
+    console.log("REQDATE", REQDATE);
+    // DO AJAX HERE
+    $.ajax(
+        {
+            type: "POST",
+            data:
+            {
+                PARTNAME: PARTNAME,
+                SUPNAME: SUPNAME,
+                LINE: LINE,
+                ORDNAME: ORDNAME,
+                REQDATE: REQDATE,
+                DELAYREASON: DELAYREASON
+            },
+            url: $('#navUpdateSupplyDateAndDelayReason').data('url'),
+            contentType: "application/x-www-form-urlencoded;charset=ISO-8859-15",
+            success: function (response) {
+                console.log("onSubmit_UpdateOrderLineData ==> response", response);
+            }
+        });
 }
 
 function decode(str) {
@@ -873,7 +1192,7 @@ function createJson(fd) {
     var item = {};
     var itemRes = {};
     for (var i = 0; i < fd.length; i++) {
-        if (fd[i].id == '')
+        if (fd[i].id === '')
             continue;
        
         console.log("fd[i]", fd[i]);
@@ -892,12 +1211,19 @@ function createJson(fd) {
         {
             var val = fd[i].value;
             console.log("fd[i].value", fd[i].value);
-            if (fd[i].id == 'txtQaNORMAL') {
-                console.log("fd[i].checked", fd[i].checked);
+            if (fd[i].id === 'txtQaNORMAL') {
+                console.log("fd[i].checked ==> txtQaNORMAL", fd[i].checked);
                 if (fd[i].checked)
-                    fd[i].value = 'on';
+                    fd[i].value = 'Y';
                 else
-                    fd[i].value = 'off';
+                    fd[i].value = 'N';
+            }
+            if (fd[i].id === 'txtQaEFI_CRITICALFLAG') {
+                console.log("fd[i].checked ==> txtQaEFI_CRITICALFLAG", fd[i].checked);
+                if (fd[i].checked)
+                    fd[i].value = 'Y';
+                else
+                    fd[i].value = 'N';
             }
             item[fd[i].id] = fd[i].value;
         }
@@ -914,9 +1240,14 @@ function GetRecord(data, parentRowKey) {
     console.log("GetRecord ==> parentRowKey", parentRowKey);
     console.log("GetRecord ==> data", data);
     var rec = [];
-    for (var i = 0; i < data.length; i++) {
-        if (data[i].ORD == parentRowKey) {
-            for (var x = 0; x < data[i].PORDERITEMS_SUBFORM.length; x++) {
+    for (var i = 0; i < data.length; i++)
+    {
+        console.log("GetRecord ==> data[i].ORD", data[i].ORD);
+        if (data[i].ORD == parentRowKey)
+        {
+            
+            for (var x = 0; x < data[i].PORDERITEMS_SUBFORM.length; x++)
+            {
                 rec.push(data[i].PORDERITEMS_SUBFORM[x]);
             }
             console.log("GetRecord ==> rec", rec);
@@ -926,6 +1257,15 @@ function GetRecord(data, parentRowKey) {
     return rec;
 }
 
+function UpdateOrderlineData() {
+
+    //oi.ORDNAME = ORDNAME;
+    //oi.PARTNAME = PARTNAME;
+    //oi.LINE = LINE;
+    //oi.EFI_DELAYREASON = DELAYREASON;
+    //oi.REQDATE = Convert.ToDateTime(REQDATE);
+    //ResultAPI ra = oi.UpdateOrderLineData(SUPNAME);
+}
 //function GetRevision(cellValue, options, rowObject) {
 //    $.ajax({
 //        type: "POST",

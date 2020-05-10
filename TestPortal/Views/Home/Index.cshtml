@@ -31,7 +31,9 @@
 <div id="navGetOrdersData" data-url="@Url.Action("GetOrdersData", "Home")"></div>
 <div id="navQA_Page" data-url="@Url.Action("QA_Page", "Home")"></div>
 <div id="navTestProduct" data-url="@Url.Action("TestProduct", "Home")"></div>
-<div id="navOrder" data-url="@Url.Action("PostTestProductItem", "Home")"></div>
+<div id="navPostTestProductItem" data-url="@Url.Action("PostTestProductItem", "Home")"></div>
+<div id="navUpdateSupplyDateAndDelayReason" data-url="@Url.Action("UpdateSupplyDateAndDelayReason", "Home")"></div>
+
 <script type="text/javascript">
     var gridBaseWidth = 0;
     var isWidth = false;
@@ -56,6 +58,8 @@
     $(document).ready(function () {
         document.getElementById('mnuSampleList').style.display = 'none';
         document.getElementById('mnuPartsList').style.display = 'none';
+        document.getElementById('mnuSampleDetails').style.display = 'none';
+        document.getElementById('mnuRefresh').style.display = 'inline-block';
         $("#loader").show();
         getData("@Model.User.Supplier_ID");
 

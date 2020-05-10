@@ -15,7 +15,7 @@
                     <div class="row">
                         <div class="form-group col-md-2 col-12">
                             <label style="font-weight:bolder;">QA code</label>
-                            <div class="col-sm-1">
+                            <div class="col-sm-12">
                                 <label type="text" id="txtQACODE" class="form-label"></label>
                             </div>
                         </div>
@@ -27,13 +27,13 @@
                         </div>
                         <div class="form-group col-md-2 col-12">
                             <label style="font-weight:bolder;">Location</label>
-                            <div class="col-sm-3 form-label">
+                            <div class="col-sm-12 form-label">
                                 <label type="text" id="txtQaLOCATION"></label>
                             </div>
                         </div>
                         <div class="form-group col-md-4 col-12">
                             <label style="font-weight:bolder;">QA test</label>
-                            <div class="col-sm-4 form-label">
+                            <div class="col-sm-12 form-label">
                                 <label type="text" id="txtQaSHR_TEST" class=""></label>
                             </div>
                         </div>
@@ -41,7 +41,7 @@
                     <div class="row">
                         <div class="form-group col-md-2 col-12">
                             <label style="font-weight:bolder;">Result min.</label>
-                            <div class="col-sm-1">
+                            <div class="col-sm-12">
                                 <label type="text" id="txtQaRESULTMIN" class="form-label"></label>
                             </div>
                         </div>
@@ -52,50 +52,60 @@
                             </div>
                         </div>
                         <div class="form-group col-md-2 col-12">
-                            <label style="font-weight:bolder;">Repitition</label>
-                            <div class="col-sm-3 form-label">
-                                <label type="text" id="txtQaREPETITION"></label>
-                            </div>
-                        </div>
-                        <div class="form-group col-md-4 col-12">
-                            <label>Resultant</label>
-                            <div class="col-sm-4 form-label">
-                                <input type="checkbox" id="txtQaRESULTANT" class="big-checkbox" disabled />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-md-2 col-12">
                             <label style="font-weight:bolder;">Requierd result</label>
-                            <div class="col-sm-1">
+                            <div class="col-sm-12">
                                 <label type="text" id="txtQaREQUIRED_RESULT" class="form-label"></label>
                             </div>
                         </div>
                         <div class="form-group col-md-4 col-12">
                             <label style="font-weight:bolder;">Sample quantity</label>
-                            <div class="col-sm-4">
+                            <div class="col-sm-12">
                                 <label type="text" id="txtQaSAMPQUANT"></label>
-                            </div>
-                        </div>
-                        <div class="form-group col-md-2 col-12">
-                            <label style="font-weight:bolder;">Normal</label>
-                            <div class="col-sm-3 form-label">
-                                <input type="checkbox" id="txtQaNORMAL" class="big-checkbox" />
-                            </div>
-                        </div>
-                        <div class="form-group col-md-4 col-12">
-                            <label style="font-weight:bolder;">Measurment tool</label>
-                            <div class="col-sm-4">
-                                <label type="text" name="MEASUREDES" id="txtQaMEASUREDES"></label>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-md-2 col-12">
+                            <label style="font-weight:bolder;">Repitition</label>
+                            <div class="col-sm-12 form-label">
+                                <label type="text" id="txtQaREPETITION"></label>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-2 col-12">
+                            <label>Resultant</label>
+                            <div class="col-sm-12 form-label">
+                                <input type="checkbox" id="txtQaRESULTANT" class="big-checkbox" disabled />
+                            </div>
+                        </div>
+                        <div class="form-group col-md-2 col-12">
+                            <label style="font-weight:bolder;">Normal</label>
+                            <div class="col-sm-12 form-label">
+                                <input type="checkbox" id="txtQaNORMAL" class="big-checkbox" />
+                            </div>
+                        </div>
+                        <div class="form-group col-md-2 col-12">
+                            <label style="font-weight:bolder;">Measurment tool</label>
+                            <div class="col-sm-12">
+                                <label type="text" name="MEASUREDES" id="txtQaMEASUREDES"></label>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-4 col-12">
+                            <label style="font-weight:bolder;">Supplier measurment tool</label>
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control" name="EFI_MEASURESUPTOOLS" id="txtQaEFI_MEASURESUPTOOLS" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-2 col-12">
+                            <label id="lblQaEFI_CRITICALFLAG" style="font-weight:bolder;">Critical</label>
+                            <input class="form-control" type="checkbox" name="EFI_CRITICALFLAG" id="txtQaEFI_CRITICALFLAG" />
+                        </div>
+                        <div class="form-group col-md-2 col-12">
                             <label style="font-weight:bolder;">Test result</label>
                             <input class="form-control" type="number" name="REMARK" id="txtQaRESULT" />
                         </div>
-                        <div class="form-group col-md-10 col-12">
+                        <div class="form-group col-md-8 col-12">
                             <label style="font-weight:bolder;">Remark</label>
                             <input class="form-control" type="text" name="REMARK" id="txtQaREMARK" maxlength="120" />
                         </div>

@@ -49,6 +49,13 @@ function showGridProdSamples(grid_data) {
         datatype: "local",
         data: grid_data,
         colModel: [
+            { label: 'Sample - Text', name: 'SHR_TEST', align: 'center', hidden: true, width: 100 },
+            { label: 'Result - Min', name: 'RESULTMIN', align: 'center', hidden: true, width: 80 },
+            { label: 'Result - Max', name: 'RESULTMAX', align: 'center', hidden: true, width: 80 },/*formatter: formatGetRevListLink,*/ 
+            { label: 'Requird Result', name: 'REQUIRED_RESULT', align: 'center', hidden: true, width: 80 },
+            { label: 'EFI_MEASURESUPTOOLS', name: 'EFI_MEASURESUPTOOLS', align: 'center', hidden: true, width: 200 },
+            { label: 'Measure Tool', name: 'MEASUREDES', align: 'center', hidden: true, width: 200 },
+            { label: 'EFI_CRITICALFLAG', name: 'EFI_CRITICALFLAG', align: 'center', hidden: true, width: 200 },
             { label: 'QA', name: 'QA', align: 'center', key: false, hidden: true, width: 75 },
             { label: 'DOCNO', name: 'DOCNO', align: 'center', key: false, hidden: true, width: 75 },
             { label: 'SUPNAME', name: 'SUPNAME', align: 'center', key: false, hidden: true, width: 75 },
@@ -56,14 +63,9 @@ function showGridProdSamples(grid_data) {
             { label: 'Code', name: 'QACODE', align: 'center', key: true, hidden: false, width: 80 },
             { label: 'Location', name: 'LOCATION', align: 'center', hidden: false, width: 140 },
             { label: 'Sample', name: 'QADES', align: 'center', hidden: false, width: 200 },
-            { label: 'Sample - Text', name: 'SHR_TEST', align: 'center', hidden: true, width: 100 },
-            { label: 'Result - Min', name: 'RESULTMIN', align: 'center', hidden: true, width: 80 },
-            { label: 'Result - Max', name: 'RESULTMAX', align: 'center', hidden: true, width: 80 },/*formatter: formatGetRevListLink,*/ 
             { label: 'Repitition', name: 'REPETITION', align: 'center', width: 120 },
             { label: 'Resultant', name: 'RESULTANT', align: 'center', width: 120 }, 
-            { label: 'Requird Result', name: 'REQUIRED_RESULT', align: 'center', hidden: true, width: 80 },
             { label: 'Sample Qnt.', name: 'SAMPQUANT', align: 'center', width: 120 },
-            { label: 'Measure Tool', name: 'MEASUREDES', align: 'center', hidden: true, width: 200 },
             { label: 'Result', name: 'RESULT', align: 'center', width: 90 },
             { label: 'Normal', name: 'NORMAL', align: 'center', width: 90 },
             { label: 'Remarks', name: 'REMARK', align: 'center', width: 200 }
@@ -278,7 +280,7 @@ function showGridTestList(grid_data) {
             for (i = 0, count = idsOfSelectedRows.length; i < count; i++) {
                 $this.jqGrid('setSelection', idsOfSelectedRows[i], false);
             }
-        },
+        }
         //inlineEditing: {
         //    keys: true
         //},
@@ -335,11 +337,11 @@ function showPartSampls(grid_data) {
             { label: 'Date', name: 'pageCURDATE', align: 'center', key: false, hidden: false, width: 100 }, 
             { label: 'Status', name: 'STATDES', align: 'center', hidden: false, width: 150 },
             { label: 'Sampling standard', name: 'SHR_SAMPLE_STD_CODE', align: 'center', hidden: false, width: 150 },
-            { label: 'Quantity', name: 'QUANT', align: 'center', hidden: false, width: 90 },
-            { label: 'Request quality', name: 'SHR_RAR', align: 'center', hidden: false, width: 150 },
-            { label: 'Max. reject', name: 'MAX_REJECT', align: 'center', hidden: false, width: 150 },
+            //{ label: 'Portion size', name: 'SHR_QUANT', align: 'center', hidden: false, width: 90 },
+            //{ label: 'Request quality', name: 'SHR_RAR', align: 'center', hidden: false, width: 150 },
+            //{ label: 'Max. reject', name: 'MAX_REJECT', align: 'center', hidden: false, width: 150 },
             { label: 'Serial quantity', name: 'SHR_SERIAL_QUANT', align: 'center', hidden: false, width: 150 },/*formatter: formatGetRevListLink,*/
-            { label: 'Sample portion', name: 'SHR_QUANT', align: 'center', width: 150 }
+            { label: 'Sample portion', name: 'QUANT', align: 'center', width: 150 }
         ],
         viewrecords: true,
         altRows: true,
