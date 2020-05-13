@@ -28,9 +28,9 @@ function showGrid() {
         data: grid_data,
         colModel: [
             { label: 'OrderID', name: 'ORD', align: 'center', index: 'ORD', key: true, hidden: true, width: 75 },//, formatter: formatRPTLink
-            { label: 'הזמנה', name: 'ORDNAME', index: 'ORDNAME', align: 'center', width: 75, searchtype: 'string', searchoptions:{sopt:['eq','ne','le','lt','gt','ge']}},//, formatter: formatRPTLink
-            { label: 'תאריך הזמנה', name: 'pageCURDATE', align: 'center', width: 150},//, formatter: formatRPTLink
             { label: 'שם ספק', name: 'SHR_SUPTYPEDES', align: 'center', hidden: true },//, formatter: formatRPTLink
+            { label: 'הזמנה', name: 'ORDNAME', index: 'ORDNAME', align: 'center', width: 75, sorttype: 'string', searchtype: 'string', searchoptions: { sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge', 'bw', 'bn', 'in', 'ni', 'ew', 'en', 'cn', 'nc']}},//, formatter: formatRPTLink
+            { label: 'תאריך הזמנה', name: 'pageCURDATE', align: 'center', width: 150},//, formatter: formatRPTLink
             { label: 'שם הקניין', name: 'OWNERLOGIN', align: 'center', width: 150},//, formatter: formatRPTLink
             { label: 'סוג הזמנה ', name: 'TYPEDES', align: 'center', width: 150},
             { label: 'ססטוס הזמנה', name: 'STATDES', align: 'center', width: 150}//, formatter: formatRPTLink
@@ -81,7 +81,7 @@ function showGrid() {
                 colModel: [
                     { label: '#', name: 'LINE', align: 'center', key: true, hidden: false, width: 75 },
                     { label: 'ORD', name: 'ORD', align: 'center', hidden: true, width: 75 },
-                    { label: 'מק"ט', name: 'PARTNAME', align: 'center', width: 100 },//, formatter: formatProdLink
+                    { label: 'מק"ט', name: 'PARTNAME', align: 'center', width: 100},//, formatter: formatProdLink
                     { label: 'שרטוט', name: 'SHR_DRAW', align: 'center', width: 100 },
                     { label: 'תאור', name: 'PDES', align: 'center', width: 100 },
                     { label: 'כמות', name: 'TQUANT', align: 'center', width: 100 },
@@ -103,7 +103,9 @@ function showGrid() {
             });
         }
     });
-    jQuery("#jqGrid").jqGrid("filterToolbar", {searchOperators:true, stringResult:true, searchOnEnter:false});
+    jQuery("#jqGrid").jqGrid("filterToolbar", { searchOperators: true, stringResult: true, searchOnEnter: false });
+    $("#jqGrid").jqGrid('navGrid', '#jqGridPager', { edit: false, save: false, add: false, del: false, search: true }, {}, {}, {}, { multipleSearch: true, overlay: false });
+    
 }
 
 function formatBTNLink(cellValue, options, rowObject) {

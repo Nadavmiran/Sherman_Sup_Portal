@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Text;
 using System.Web;
 
 namespace TestPortal.Models
@@ -45,9 +46,15 @@ namespace TestPortal.Models
         internal List<Order> GetSupplierOrders(string supplier)
         {
             OrdersWarpper ow = null;
-            try
+            string portalOrderStatus = GetOrderStatus();
+            if(string.IsNullOrEmpty(portalOrderStatus))
             {
-                string query = "/PORDERS?$filter=SUPNAME eq '" + supplier + "' and(STATDES eq 'מאושרת' or STATDES eq 'נשלחה-עדכון' or STATDES eq 'נשלחה' or STATDES eq 'אישור ספק' or STATDES eq 'פתיחה חוזרת' or STATDES eq 'מוקפאת')&$select=ORDNAME,STATDES,CURDATE,ORD,CODEDES,SUPNAME,CDES,SHR_SUPTYPEDES,OWNERLOGIN&$expand=PORDERITEMS_SUBFORM($expand=PORDERITEMSTEXT_SUBFORM)";
+                AppLogger.log.Error("GetSupplierOrders ==> No oreders status were found!!!");
+                return new List<Order>();
+            }
+            try
+            {//STATDES eq 'מאושרת' or STATDES eq 'נשלחה-עדכון' or STATDES eq 'נשלחה' or STATDES eq 'אישור ספק' or STATDES eq 'פתיחה חוזרת' or STATDES eq 'מוקפאת'
+                string query = "/PORDERS?$filter=SUPNAME eq '" + supplier + "' and CLOSEDBOOL ne 'Y' and(" + portalOrderStatus + ")&$select=TYPEDES, CLOSEDBOOL, ORDNAME,STATDES,CURDATE,ORD,CODEDES,SUPNAME,CDES,SHR_SUPTYPEDES,OWNERLOGIN&$expand=PORDERITEMS_SUBFORM($filter=CLOSEDBOOL ne 'Y';$expand=PORDERITEMSTEXT_SUBFORM)";
                 string res = Call_Get(query);
 
                 ow = JsonConvert.DeserializeObject<OrdersWarpper>(res);
@@ -58,15 +65,46 @@ namespace TestPortal.Models
             }
             catch (Exception ex)
             {
-                AppLogger.log.Error("GetSupplierOrders ==> SP = LMNS_GetSupplierOrders ==> supplier = " + supplier, ex);
+                AppLogger.log.Error("GetSupplierOrders ==> supplier = " + supplier, ex);
             }
             return new List<Order>();
+        }
+
+        private string GetOrderStatus()
+        {
+            OrderStatusWarpper ow = null;
+            StringBuilder sb = new StringBuilder();
+            string query = "/PORDSTATS?$filter=OPENDOCFLAG eq 'Y'";
+            int indx = 0;
+            try
+            {
+                string res = Call_Get(query);
+
+                ow = JsonConvert.DeserializeObject<OrderStatusWarpper>(res);
+                if ((null != ow) && (null != ow.Value) && (ow.Value.Count > 0))
+                {
+                    foreach (OrderStatus item in ow.Value)
+                    {
+                        sb.Append("STATDES eq '");
+                        sb.Append(item.STATDES);
+                        sb.Append("'");
+                        indx++;
+                        if (indx < ow.Value.Count)
+                            sb.Append(" or ");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                AppLogger.log.Error("GetOrderStatus ==> Error!! => ", ex);
+            }
+            return sb.ToString();
         }
 
         internal Order GetOrderDetails(int orderID)
         {
             //"/PORDERS?$filter=ORD eq " + orderID + "&$expand=EXTFILES_SUBFORM,PORDERITEMS_SUBFORM($expand=PORDERITEMSTEXT_SUBFORM)";
-            string query = "/PORDERS?$filter=ORD eq " + orderID + "&$select=TYPECODE, TYPEDES, ORDNAME,STATDES,CURDATE,ORD,CODEDES,SUPNAME,CDES,SHR_SUPTYPEDES,OWNERLOGIN&$expand=PORDERITEMS_SUBFORM($expand=PORDERITEMSTEXT_SUBFORM)";
+            string query = "/PORDERS?$filter=ORD eq " + orderID + "&$select=TYPECODE, TYPEDES, ORDNAME,STATDES,CURDATE,ORD,CODEDES,SUPNAME,CDES,SHR_SUPTYPEDES,OWNERLOGIN&$expand=PORDERITEMS_SUBFORM($filter=CLOSEDBOOL ne 'Y';$expand=PORDERITEMSTEXT_SUBFORM)";
             string res = Call_Get(query);
 
             OrdersWarpper ow = JsonConvert.DeserializeObject<OrdersWarpper>(res);

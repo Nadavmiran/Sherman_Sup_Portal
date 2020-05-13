@@ -814,3 +814,298 @@ INFO  2020-05-10 12:01:20,310 426108ms eporting Portal Logger reateUpdateTestMsg
 	"REMARK":"no comments"
 	}
 	]}
+DEBUG 2020-05-11 09:50:10,801   468ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 11/05/2020 9:50:10
+INFO  2020-05-11 09:50:59,607 49274ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001561",
+	"PARTNAME":"23417000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"2",
+	"EFI_MEASURESUPTOOLS":"QQQQQQQQQQQ",
+	"EFI_CRITICALFLAG":"N",
+	"RESULT":0,
+	"REMARK":"AAAAAAAAAAAA"
+	}
+	]}
+INFO  2020-05-11 09:54:06,033 235699ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001554",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":6,
+	"QACODE":"006",
+	"LOCATION":"1",
+	"EFI_MEASURESUPTOOLS":"qqqqqqqqqq",
+	"EFI_CRITICALFLAG":"N",
+	"NORMAL":"N",
+	"REMARK":"aaaaaaaaaa"
+	}
+	]}
+INFO  2020-05-11 09:55:49,163 338829ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001554",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":6,
+	"QACODE":"006",
+	"LOCATION":"1",
+	"EFI_MEASURESUPTOOLS":"",
+	"EFI_CRITICALFLAG":"N",
+	"NORMAL":"N",
+	"REMARK":"Test 1"
+	}
+	]}
+INFO  2020-05-11 09:57:06,903 416570ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001554",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":6,
+	"QACODE":"006",
+	"LOCATION":"1",
+	"EFI_MEASURESUPTOOLS":"Tool1",
+	"EFI_CRITICALFLAG":"N",
+	"NORMAL":"N",
+	"REMARK":""
+	}
+	]}
+INFO  2020-05-11 09:57:55,237 464903ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001554",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":6,
+	"QACODE":"006",
+	"LOCATION":"1",
+	"EFI_MEASURESUPTOOLS":"Tool 1",
+	"EFI_CRITICALFLAG":"N",
+	"NORMAL":"N",
+	"REMARK":""
+	}
+	]}
+INFO  2020-05-11 09:58:45,763 515430ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001554",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":6,
+	"QACODE":"006",
+	"LOCATION":"1",
+	"EFI_MEASURESUPTOOLS":"",
+	"EFI_CRITICALFLAG":"N",
+	"NORMAL":"N",
+	"REMARK":""
+	}
+	]}
+INFO  2020-05-11 10:03:05,593 775259ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001554",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":6,
+	"QACODE":"006",
+	"LOCATION":"1",
+	"EFI_MEASURESUPTOOLS":"",
+	"EFI_CRITICALFLAG":"N",
+	"NORMAL":"N",
+	"REMARK":""
+	}
+	]}
+INFO  2020-05-11 10:07:01,221 1010887ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001553",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":6,
+	"QACODE":"006",
+	"LOCATION":"1",
+	"EFI_MEASURESUPTOOLS":"",
+	"EFI_CRITICALFLAG":"N",
+	"NORMAL":"N",
+	"REMARK":""
+	}
+	]}
+INFO  2020-05-11 10:16:16,705   159ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001553",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":6,
+	"QACODE":"006",
+	"LOCATION":"1",
+	"NORMAL":"Y",
+	"EFI_MEASURESUPTOOLS":"Tool 1",
+	"REMARK":"Comment 1",
+	"EFI_CRITICALFLAG":"Y"
+	}
+	]}
+INFO  2020-05-11 10:31:29,718 913173ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001553",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":6,
+	"QACODE":"006",
+	"LOCATION":"1",
+	"NORMAL":"Y",
+	"EFI_MEASURESUPTOOLS":"Tool 1",
+	"REMARK":"Nadav 1",
+	"EFI_CRITICALFLAG":"N"
+	}
+	]}
+INFO  2020-05-11 10:32:21,187 964641ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001553",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":6,
+	"QACODE":"006",
+	"LOCATION":"1",
+	"NORMAL":"N",
+	"EFI_MEASURESUPTOOLS":"",
+	"REMARK":"AAAAAAAAAAAAA",
+	"EFI_CRITICALFLAG":"N"
+	}
+	]}
+INFO  2020-05-11 10:35:32,710 1156165ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001553",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":6,
+	"QACODE":"006",
+	"LOCATION":"1",
+	"NORMAL":"N",
+	"EFI_MEASURESUPTOOLS":"",
+	"REMARK":"Nadav Test",
+	"EFI_CRITICALFLAG":"N"
+	}
+	]}
+INFO  2020-05-11 10:36:30,845 1214299ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001553",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":6,
+	"QACODE":"006",
+	"LOCATION":"1",
+	"NORMAL":"N",
+	"EFI_MEASURESUPTOOLS":"",
+	"REMARK":"qqqqqqqqqqqqqqqqq",
+	"EFI_CRITICALFLAG":"N"
+	}
+	]}
+INFO  2020-05-11 10:39:31,969 1395423ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001553",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":6,
+	"QACODE":"006",
+	"LOCATION":"1",
+	"NORMAL":"N",
+	"EFI_MEASURESUPTOOLS":"",
+	"REMARK":"WWWWWW",
+	"EFI_CRITICALFLAG":"N"
+	}
+	]}
+INFO  2020-05-11 10:39:53,851 1417305ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001553",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":6,
+	"QACODE":"006",
+	"LOCATION":"1",
+	"NORMAL":"N",
+	"EFI_MEASURESUPTOOLS":"",
+	"REMARK":"QQQQQQQQQQQQQQQQQ",
+	"EFI_CRITICALFLAG":"N"
+	}
+	]}
+INFO  2020-05-11 10:58:40,882 2544336ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001553",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":6,
+	"QACODE":"006",
+	"LOCATION":"1",
+	"NORMAL":"N",
+	"EFI_MEASURESUPTOOLS":"AAAAAAAAAAAAAA",
+	"REMARK":"Test Yotam",
+	"EFI_CRITICALFLAG":"N"
+	}
+	]}
+INFO  2020-05-11 11:29:42,821   259ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001553",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":6,
+	"QACODE":"006",
+	"LOCATION":"1",
+	"NORMAL":"Y",
+	"EFI_MEASURESUPTOOLS":"Tool 1",
+	"REMARK":"Test Yotam 12",
+	"EFI_CRITICALFLAG":"Y"
+	}
+	]}
+DEBUG 2020-05-12 15:46:41,094   290ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 18/03/2020 0:00:00
+DEBUG 2020-05-12 15:48:38,164 117360ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 19/03/2020 0:00:00
+DEBUG 2020-05-13 12:30:14,392   152ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 13/05/2020 12:30:14
+DEBUG 2020-05-13 12:54:17,765 1443526ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 13/05/2020 12:54:17
+DEBUG 2020-05-13 12:55:06,796 1492557ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 13/05/2020 12:55:06
+DEBUG 2020-05-13 12:57:52,007 1657768ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 13/05/2020 12:57:52
+DEBUG 2020-05-13 12:58:17,382 1683143ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 13/05/2020 12:58:17
+DEBUG 2020-05-13 12:58:17,944 1683705ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 13/05/2020 12:58:17
+DEBUG 2020-05-13 12:58:18,529 1684290ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 13/05/2020 12:58:18
+DEBUG 2020-05-13 12:58:19,138 1684899ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 13/05/2020 12:58:19
+DEBUG 2020-05-13 12:58:19,819 1685579ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 13/05/2020 12:58:19
+DEBUG 2020-05-13 12:58:20,413 1686173ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 13/05/2020 12:58:20
+DEBUG 2020-05-13 12:58:21,170 1686931ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 13/05/2020 12:58:21
+DEBUG 2020-05-13 12:58:21,782 1687543ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 13/05/2020 12:58:21
+DEBUG 2020-05-13 12:58:22,352 1688112ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 13/05/2020 12:58:22
+DEBUG 2020-05-13 12:58:22,925 1688686ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 13/05/2020 12:58:22
+DEBUG 2020-05-13 12:58:23,474 1689234ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 13/05/2020 12:58:23
+DEBUG 2020-05-13 12:58:24,054 1689814ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 13/05/2020 12:58:24
+DEBUG 2020-05-13 12:58:24,639 1690400ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 13/05/2020 12:58:24
+DEBUG 2020-05-13 12:58:25,226 1690986ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 13/05/2020 12:58:25
+DEBUG 2020-05-13 12:58:26,089 1691850ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 13/05/2020 12:58:26
+DEBUG 2020-05-13 12:58:26,713 1692473ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 13/05/2020 12:58:26
+DEBUG 2020-05-13 12:58:27,794 1693555ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 13/05/2020 12:58:27
+DEBUG 2020-05-13 12:58:28,399 1694160ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 13/05/2020 12:58:28
+DEBUG 2020-05-13 13:01:59,709   169ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 13/05/2020 13:01:59
+DEBUG 2020-05-13 13:02:39,644 40103ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 13/05/2020 13:02:39
+DEBUG 2020-05-13 13:03:17,022 77481ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 13/05/2020 13:03:17
+DEBUG 2020-05-13 13:03:46,702 107162ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 13/05/2020 13:03:46
+DEBUG 2020-05-13 13:04:16,856 137316ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 13/05/2020 13:04:16
+DEBUG 2020-05-13 13:04:47,284 167744ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 13/05/2020 13:04:47
+DEBUG 2020-05-13 13:05:56,704 237163ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 13/05/2020 13:05:56
+DEBUG 2020-05-13 13:11:14,793   183ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 13/05/2020 13:11:14
+DEBUG 2020-05-13 13:11:41,505 26896ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 13/05/2020 13:11:41
+DEBUG 2020-05-13 13:12:15,533 60924ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 13/05/2020 13:12:15
+DEBUG 2020-05-13 13:12:46,316 91707ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 13/05/2020 13:12:46
+DEBUG 2020-05-13 13:13:35,737 141128ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 13/05/2020 13:13:35
+DEBUG 2020-05-13 13:17:21,012 366403ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 13/05/2020 13:17:21
+DEBUG 2020-05-13 13:21:38,687 624078ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 13/05/2020 13:21:38
+DEBUG 2020-05-13 13:22:01,121 646512ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 13/05/2020 13:22:01

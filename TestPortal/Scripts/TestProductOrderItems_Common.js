@@ -182,13 +182,22 @@ function manageDelayReasonSelect(data)
     }
 
     let option = document.createElement("option");
+    option.value = '-2';
+    if (x === 'rtl')
+        option.text = '-- בחר סיבת דחיה --';
+    else
+        option.text = '-- select delay reason --';
+    option.disabled = true;
+    option.selected = true;
+    selectList.appendChild(option);
+
+    option = document.createElement("option");
     option.value = '-1';
     if (x === 'rtl')
         option.text = 'אחר';
     else
         option.text = 'Other';
-    option.selected = true;
-    selectList.appendChild(option);
+
     if (null !== data.lstDelayReason && data.lstDelayReason.length > 0) {
         for (i = 0; i < data.lstDelayReason.length; i++) {
             option = document.createElement("option");
@@ -198,8 +207,11 @@ function manageDelayReasonSelect(data)
             else
                 option.text = data.lstDelayReason[i].EDES;
 
-            if (data.objProduct.EFI_DELAYREASON === data.lstDelayReason[i].DES || data.objProduct.EFI_DELAYREASON === data.lstDelayReason[i].EDES)
-                option.selected = true;
+            console.log("showSalesorderDetail ==> data.objProduct.EFI_DELAYREASON", data.objProduct.EFI_DELAYREASON);
+            console.log("showSalesorderDetail ==> data.lstDelayReason[i].DES", data.lstDelayReason[i].DES);
+            if (null !== data.objProduct.EFI_DELAYREASON && data.objProduct.EFI_DELAYREASON !== '')
+                if (data.objProduct.EFI_DELAYREASON === data.lstDelayReason[i].DES || data.objProduct.EFI_DELAYREASON === data.lstDelayReason[i].EDES)
+                    option.selected = true;
 
             selectList.appendChild(option);
         }
@@ -340,12 +352,6 @@ function GetSampleStandardList(objSample) {
     $.ajax(
         {
             type: "POST",
-            //data:
-            //{
-            //    PARTNAME: rowData.PARTNAME,
-            //    SUPNAME: rowData.SUPNAME,
-            //    DOCNO: rowData.DOCNO
-            //},
             url: $('#navGetSampleStandardList').data('url'),//"/Home/GetSampleTestList",
             contentType: "application/x-www-form-urlencoded;charset=ISO-8859-15",
             success: function (response) {
@@ -356,11 +362,11 @@ function GetSampleStandardList(objSample) {
                 //document.getElementById('lbl_SAMPLE_TYPE_CODE').value = null === objSample.SAMPLE_TYPE_CODE ? '' : objSample.SAMPLE_TYPE_CODE;
                 document.getElementById('lbl_EFI_SUPNO').value = null === objSample.EFI_SUPNO ? '' : objSample.EFI_SUPNO;
                 //document.getElementById('lbl_SHR_SERIAL_QUANT').innerText = null === objSample.SHR_SERIAL_QUANT ? '' : objSample.SHR_SERIAL_QUANT;
-                document.getElementById('lbl_STATDES').innerText = null === objSample.STATDES ? '' : objSample.STATDES;
+                //document.getElementById('lbl_STATDES').innerText = null === objSample.STATDES ? '' : objSample.STATDES;
                 document.getElementById('lbl_SHR_SAMPLE_STD_CODE').value = null === objSample.SHR_SAMPLE_STD_CODE ? '' : objSample.SHR_SAMPLE_STD_CODE;
                 document.getElementById('lbl_SHR_ROHS').checked = null === objSample.SHR_ROHS || objSample.SHR_ROHS === 'N' ? false : true;
                 console.log('GetSampleStandardList ==> objSample.SAMPLE_TYPE_CODE', objSample.SAMPLE_TYPE_CODE);
-                objSampleStandardList = response;
+                objSampleStandardList = response.lstSampleStandard;
                 let sl = document.getElementById('lbl_SHR_SAMPLE_STD_CODE');
                 let i, L = sl.options.length - 1;
                 for (i = L; i >= 0; i--) {
@@ -375,7 +381,27 @@ function GetSampleStandardList(objSample) {
                         option.selected = true;
                     sl.appendChild(option);
                 }
-                
+                // Fill sample status
+                sl = document.getElementById('lbl_STATDES');
+                i, L = sl.options.length - 1;
+                for (i = L; i >= 0; i--) {
+                    sl.remove(i);
+                }
+                for (i = 0; i < response.lstSampleStatus.length; i++) {
+                    let option = document.createElement("option");
+                    option.value = response.lstSampleStatus[i].SAMPLESTATUS;
+                    option.text = response.lstSampleStatus[i].STATDES;
+
+
+                    if (objSample.STATDES === response.lstSampleStatus[i].STATDES)
+                    {
+                        console.log('GetSampleStandardList ==> objSample.STATDES', objSample.STATDES);
+                        console.log('GetSampleStandardList ==> response.lstSampleStatus[i].STATDES', response.lstSampleStatus[i].STATDES);
+                        option.selected = true;
+                    }
+                    sl.appendChild(option);
+                }
+
                 var x = document.getElementsByTagName("html")[0].getAttribute("dir");
                 if (x === 'rtl')
                     $("#modal-13").trigger("click");
@@ -393,9 +419,12 @@ function onSubmit_UpdateSampleDetails() {
     let SAMPLE_TYPE_CODE = document.getElementById('lbl_SAMPLE_TYPE_CODE').value;
 
     let sl = document.getElementById('lbl_SHR_SAMPLE_STD_CODE');
-    console.log("onSubmit_UpdateSampleDetails ==> sl.options[sl.selectedIndex].text", sl.options[sl.selectedIndex].text);
+    console.log("onSubmit_UpdateSampleDetails ==> lbl_SHR_SAMPLE_STD_CODE => sl.options[sl.selectedIndex].text", sl.options[sl.selectedIndex].text);
     let SHR_SAMPLE_STD_CODE = sl.options[sl.selectedIndex].text;
 
+    sl = document.getElementById('lbl_STATDES');
+    console.log("onSubmit_UpdateSampleDetails ==> lbl_STATDES => sl.options[sl.selectedIndex].text", sl.options[sl.selectedIndex].text);
+    let STATDES = sl.options[sl.selectedIndex].text;
     console.log("onSubmit_UpdateSampleDetails ==> DOCNO", DOCNO);
     console.log("onSubmit_UpdateSampleDetails ==> EFI_SUPNO", EFI_SUPNO);
     console.log("onSubmit_UpdateSampleDetails ==> SHR_QUANT", SHR_QUANT);
@@ -407,6 +436,7 @@ function onSubmit_UpdateSampleDetails() {
             type: "POST",
             data:
             {
+                STATDES: STATDES,
                 SAMPLE_TYPE_CODE: SAMPLE_TYPE_CODE,
                 EFI_SUPNO: EFI_SUPNO,
                 SHR_QUANT: SHR_QUANT,
@@ -455,12 +485,18 @@ function GetSampleTests(rowData) {
                     $("#jqGridRevision").GridUnload();
                     if (null !== response.objSample && null !== response.objSample.MED_TRANSSAMPLEQA_SUBFORM && response.objSample.MED_TRANSSAMPLEQA_SUBFORM.length > 0)
                         showGridProdSamples(response.objSample.MED_TRANSSAMPLEQA_SUBFORM);
-
-                    //var x = document.getElementsByTagName("html")[0].getAttribute("dir");
-                    //if (x == 'rtl')
-                    //    $("#modal-9").trigger("click");
-                    //else
-                    //    $("#modal-10").trigger("click");
+                    else
+                    {
+                        let x = document.getElementsByTagName("html")[0].getAttribute("dir");
+                        if (x === 'rtl') {
+                            $("#modal-2").trigger("click");
+                            $("#modal-error-text").html('לא נמצאו בדיקות לדגימה זו. יש ללחוץ על כפתור "בדיקות" ולהוסיף בדיקות מתוך הרשימה.');
+                        }
+                        else {
+                            $("#modal-21").trigger("click");
+                            $("#modal-error-text").html('No tests were found for this sample.Click the "Test" button and add tests from the list.');
+                        }
+                    }
                 }
                 else {
                     if (response.ErrorDescription !== '') {
@@ -536,16 +572,16 @@ function doNext() {
                     if (null !== response && null !== response.lstSamplQA && response.lstSamplQA.length > 0) {
                         pageSampleobject.objSample = response.objSample;
                         pageSampleobject.lstSamplQA = response.lstSamplQA;
-                        showGridSampleList(response.lstSamplQA);
-
-                        if (null !== response.objSample && null !== response.objSample.MED_TRANSSAMPLEQA_SUBFORM && response.objSample.MED_TRANSSAMPLEQA_SUBFORM.length > 0)
-                            showSelectedSampleQA(response.objSample.MED_TRANSSAMPLEQA_SUBFORM);
-
-                        var x = document.getElementsByTagName("html")[0].getAttribute("dir");
-                        if (x === 'rtl')
-                            $("#modal-9").trigger("click");
-                        else
-                            $("#modal-10").trigger("click");
+                        showGridTestList(response.lstSamplQA);
+                        //if (null !== response.objSample && null !== response.objSample.MED_TRANSSAMPLEQA_SUBFORM && response.objSample.MED_TRANSSAMPLEQA_SUBFORM.length > 0)
+                        //    showSelectedSampleQA(response.objSample.MED_TRANSSAMPLEQA_SUBFORM);
+                        //else {
+                            var x = document.getElementsByTagName("html")[0].getAttribute("dir");
+                            if (x === 'rtl')
+                                $("#modal-9").trigger("click");
+                            else
+                                $("#modal-10").trigger("click");
+                        //}
                     }
                     else {
                         if (response.ErrorDescription !== '') {
@@ -591,6 +627,59 @@ function OpentestList()
     //}
 }
 
+function getSampleTestList() {
+    let supName = document.getElementById('hdnSUPNAME').value;
+    let partName = document.getElementById('hdnPrdId').value;
+    let ordNAME = document.getElementById('hdnORDNAME').value;
+    let ordLINE = document.getElementById('lbl_LINE').innerText;
+    let inNewDoc = document.getElementById('hdnIsNewDocument').value;
+    console.log('OpentestList ==> supName = ', supName);
+    console.log('OpentestList ==> partName = ', partName);
+    console.log('OpentestList ==> ordNAME = ', ordNAME);
+    console.log('OpentestList ==> ordLINE = ', ordLINE);
+    console.log('OpentestList ==> inNewDoc = ', inNewDoc);
+
+    document.getElementById('hdnQaListSUPNAME').value = supName;
+    document.getElementById('hdnQaListPARTNAME').value = partName;
+    $.ajax(
+        {
+            type: "POST",
+            data:
+            {
+                supName: supName,
+                partName: partName,
+                ordName: ordNAME,
+                ordLine: ordLINE
+            },
+            url: $('#navGetSampleTestList').data('url'),//"/Home/GetSampleTestList",
+            contentType: "application/x-www-form-urlencoded;charset=ISO-8859-15",
+            success: function (response) {
+                console.log("response", response);
+                if (null !== response && null !== response.lstSamplQA && response.lstSamplQA.length > 0) {
+                    showGridTestList(response.lstSamplQA);
+                    //if (null !== response.objSample && null !== response.objSample.MED_TRANSSAMPLEQA_SUBFORM && response.objSample.MED_TRANSSAMPLEQA_SUBFORM.length > 0)
+                    //    showSelectedSampleQA(response.objSample.MED_TRANSSAMPLEQA_SUBFORM);
+                    //else {
+                    var x = document.getElementsByTagName("html")[0].getAttribute("dir");
+                    if (x === 'rtl')
+                        $("#modal-9").trigger("click");
+                    else
+                        $("#modal-10").trigger("click");
+                    //}
+                }
+                else {
+                    if (response.ErrorDescription !== '') {
+                        //form_data[0].reset();
+                        $('.modal').modal('hide');
+                        $('.modal').removeClass('show');
+                        $("#modal-error-text").html(response.ErrorDescription);
+                        $("#modal-1").trigger("click");
+                    }
+                }
+            }
+        });
+}
+
 function UpdateSampleDetails() {
     console.log('UpdateSampleDetails ==> pageSampleobject', pageSampleobject);
     showSampleDetails(pageSampleobject.objSample);
@@ -618,14 +707,17 @@ function createNewSampleDocument(supNAME, ordNAME, partNAME, ordLINE) {
                     $("#jqGridPartSampls").GridUnload();
                     showPartSampls(response.lstSampleObject);
 
-                    //if (null != response.objSample && null != response.objSample.MED_TRANSSAMPLEQA_SUBFORM && response.objSample.MED_TRANSSAMPLEQA_SUBFORM.length > 0)
-                    //    showSelectedSampleQA(response.objSample.MED_TRANSSAMPLEQA_SUBFORM);
-
-                    var x = document.getElementsByTagName("html")[0].getAttribute("dir");
-                    if (x === 'rtl')
-                        $("#modal-9").trigger("click");
+                    if (null !== response.objSample && null !== response.objSample.MED_TRANSSAMPLEQA_SUBFORM && response.objSample.MED_TRANSSAMPLEQA_SUBFORM.length == 0) {
+                        getSampleTestList();
+                        //showGridTestList(response.lstSamplQA);
+                        //var x = document.getElementsByTagName("html")[0].getAttribute("dir");
+                        //if (x === 'rtl')
+                        //    $("#modal-9").trigger("click");
+                        //else
+                        //    $("#modal-10").trigger("click");
+                    }
                     else
-                        $("#modal-10").trigger("click");
+                        showSelectedSampleQA(response.objSample.MED_TRANSSAMPLEQA_SUBFORM);
                 }
                 else {
                     if (response.ErrorDescription !== '') {
@@ -1176,6 +1268,7 @@ function onSubmit_UpdateOrderLineData() {
             contentType: "application/x-www-form-urlencoded;charset=ISO-8859-15",
             success: function (response) {
                 console.log("onSubmit_UpdateOrderLineData ==> response", response);
+                refreshOrdersData(SUPNAME);
             }
         });
 }
@@ -1217,6 +1310,8 @@ function createJson(fd) {
                     fd[i].value = 'Y';
                 else
                     fd[i].value = 'N';
+
+                console.log("fd[i].value ==> txtQaNORMAL", fd[i].value);
             }
             if (fd[i].id === 'txtQaEFI_CRITICALFLAG') {
                 console.log("fd[i].checked ==> txtQaEFI_CRITICALFLAG", fd[i].checked);

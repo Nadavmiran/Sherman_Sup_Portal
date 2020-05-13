@@ -28,7 +28,7 @@ function showGrid()
         data: grid_data,
         colModel: [
             { label: 'OrderID', name: 'ORD', align: 'center', index: 'ORD', key: true, hidden: true, width: 75 },//, formatter: formatRPTLink
-            { label: 'Order', name: 'ORDNAME', align: 'center', width: 75 },//
+            { label: 'Order', name: 'ORDNAME', align: 'center', width: 75, sorttype: 'string', searchtype: 'string', searchoptions: { sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge', 'bw', 'bn', 'in', 'ni', 'ew', 'en', 'cn', 'nc'] } },//, formatter: formatRPTLink
             { label: 'Order Date', name: 'pageCURDATE', align: 'center', width: 150, sorttype: "date" },
             { label: 'Supplier', name: 'SHR_SUPTYPEDES', align: 'center', hidden: true, width: 150 },
             { label: 'For treatment ', name: 'OWNERLOGIN', align: 'center', width: 150 },
@@ -105,6 +105,8 @@ function showGrid()
             });
         }
     });
+    jQuery("#jqGrid").jqGrid("filterToolbar", { searchOperators: true, stringResult: true, searchOnEnter: false });
+    $("#jqGrid").jqGrid('navGrid', '#jqGridPager', { edit: false, save: false, add: false, del: false, search: true }, {}, {}, {}, { multipleSearch: true, overlay: false });
 }
 
 function formatBTNLink(cellValue, options, rowObject) {

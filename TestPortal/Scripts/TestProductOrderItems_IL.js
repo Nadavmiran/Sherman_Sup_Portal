@@ -217,7 +217,7 @@ function showGridProdAttachments(grid_data) {
     });
 }
 
-function showGridSampleList(grid_data) {
+function showGridTestList(grid_data) {
     console.log("showGridSampleList ==> grid_data", grid_data);
     var $grid = $("#jqGridSampleQA"), idsOfSelectedRows = [],
         updateIdsOfSelectedRows = function (id, isSelected) {

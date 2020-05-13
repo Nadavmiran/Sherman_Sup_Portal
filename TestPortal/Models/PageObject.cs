@@ -22,6 +22,8 @@ namespace TestPortal.Models
         public List<Attachments> lstAttachments { get; set; }
         public List<Revision> lstRevision { get; set; }
         public List<Sample_QA> lstSamplQA { get; set; }
+        public List<SampleStatus> lstSampleStatus { get; set; }
+        public List<SampleStandard> lstSampleStandard { get; set; }
         public IEnumerable<HttpPostedFileBase> attachments { get; set; }
         public AppUser User { get; set; }
     }

@@ -621,10 +621,12 @@ namespace TestPortal.Models
         [HttpPost]
         public JsonResult GetSampleStandardList()
         {
+            PageObject po = new PageObject();
             SampleStandard s = new SampleStandard();
-            List<SampleStandard> lst = s.GetSampleStandardList();
-
-            return Json(lst);
+            SampleStatus ss = new SampleStatus();
+            po.lstSampleStandard = s.GetSampleStandardList();
+            po.lstSampleStatus = ss.GetSampleStatusList();
+            return Json(po);
         }
 
         [HttpPost]
@@ -641,12 +643,12 @@ namespace TestPortal.Models
         }
 
         [HttpPost]
-        public JsonResult UpdateSampleDetails(string SAMPLE_TYPE_CODE, string EFI_SUPNO, int SHR_QUANT, string SHR_ROHS, string SHR_SAMPLE_STD_CODE, string DOCNO)
+        public JsonResult UpdateSampleDetails(string STATDES,  string SAMPLE_TYPE_CODE, string EFI_SUPNO, int SHR_QUANT, string SHR_ROHS, string SHR_SAMPLE_STD_CODE, string DOCNO)
         {
             PageObject po = new PageObject();
             po.User = Session["USER_LOGIN"] as AppUser;
             Sample s = new Sample();
-            ResultAPI ra = s.UpdateSampleDetails(SAMPLE_TYPE_CODE, EFI_SUPNO, SHR_QUANT, SHR_ROHS, SHR_SAMPLE_STD_CODE, DOCNO);
+            ResultAPI ra = s.UpdateSampleDetails(STATDES, SAMPLE_TYPE_CODE, EFI_SUPNO, SHR_QUANT, SHR_ROHS, SHR_SAMPLE_STD_CODE, DOCNO);
             if(ra.ResultStatus.ToUpper() == "OK")
             {
                 s = JsonConvert.DeserializeObject<Sample>(ra.JsonResult);

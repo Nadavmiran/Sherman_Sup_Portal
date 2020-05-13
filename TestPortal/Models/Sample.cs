@@ -222,10 +222,6 @@ namespace TestPortal.Models
             sb.Append("\"" + data.hdnQACODE + "\",");
             sb.Append("\r\n\t\"LOCATION\":");
             sb.Append("\"" + data.hdnLOCATION + "\","); 
-            sb.Append("\r\n\t\"EFI_MEASURESUPTOOLS\":");
-            sb.Append("\"" + data.txtQaEFI_MEASURESUPTOOLS + "\",");
-            sb.Append("\r\n\t\"EFI_CRITICALFLAG\":");
-            sb.Append("\"" + data.txtQaEFI_CRITICALFLAG + "\",");
             if (data.txtQaRESULTANT.ToLower().Equals("on")) //אם תוצאתית
             {
                 if (Convert.ToInt32(data.hdnQaREPETITION) == 0) // אם מספר חזרות = 0
@@ -236,7 +232,7 @@ namespace TestPortal.Models
             }
             else
             {
-                if (data.txtQaNORMAL.ToLower().Equals("on"))// עדכון ערך בשדה 'תקין'  בלבד
+                if (data.txtQaNORMAL.ToLower().Equals("y"))// עדכון ערך בשדה 'תקין'  בלבד
                 {
                     sb.Append("\r\n\t\"NORMAL\":");
                     sb.Append("\"Y\",");
@@ -247,9 +243,12 @@ namespace TestPortal.Models
                     sb.Append("\"N\",");
                 }
             }
+            sb.Append("\r\n\t\"EFI_MEASURESUPTOOLS\":");
+            sb.Append("\"" + data.txtQaEFI_MEASURESUPTOOLS + "\",");
             sb.Append("\r\n\t\"REMARK\":");
-            sb.Append("\"" + data.txtQaREMARK + "\"");
-
+            sb.Append("\"" + data.txtQaREMARK + "\",");
+            sb.Append("\r\n\t\"EFI_CRITICALFLAG\":");
+            sb.Append("\"" + data.txtQaEFI_CRITICALFLAG + "\"");
             //If needed then creat sub form for MED_RESULTDET_SUBFORM
             if ((data.txtQaRESULTANT.ToLower().Equals("on") && (Convert.ToInt32(data.hdnQaREPETITION) > 0)) && ((null != sUB_RES) && (sUB_RES.Count > 0)))
             {
@@ -362,7 +361,21 @@ namespace TestPortal.Models
         private string CreateNewsampleMsg(string supName, string ordName, string partName, int ordLine)
         {
             StringBuilder sb = new StringBuilder();
-            string SAMPLE_TYPE_CODE = "ספק";
+            string SAMPLE_TYPE_CODE = string.Empty;
+            string res = Call_Get("SHR_SAMPLE_TYPE?$filter=EFI_CONT eq 'Y'");
+            if(string.IsNullOrEmpty(res))
+            {
+                SAMPLE_TYPE_CODE = "ספק";
+            }
+            else
+            {
+                SampleTypeWarpper ow = JsonConvert.DeserializeObject<SampleTypeWarpper>(res);
+                if(null == ow || null == ow.Value || ow.Value.Count == 0)
+                    SAMPLE_TYPE_CODE = "ספק";
+                else
+                    SAMPLE_TYPE_CODE = ow.Value[0].SAMPLE_TYPE_CODE;
+            }                
+
             sb.Append("{");
             sb.Append("\r\n\t\"CURDATE\":");
             sb.Append("\"" + GetDateTimeOffset(DateTime.Now.ToString(), "00:00") + "\",");
@@ -395,19 +408,21 @@ namespace TestPortal.Models
             return ra;
         }
 
-        internal ResultAPI UpdateSampleDetails(string SAMPLE_TYPE_CODE, string EFI_SUPNO, int SHR_QUANT, string SHR_ROHS, string SHR_SAMPLE_STD_CODE, string DOCNO)
+        internal ResultAPI UpdateSampleDetails(string STATDES, string SAMPLE_TYPE_CODE, string EFI_SUPNO, int SHR_QUANT, string SHR_ROHS, string SHR_SAMPLE_STD_CODE, string DOCNO)
         {
-            string reqBody = CreateUpdateSampleDetailsMessage(SAMPLE_TYPE_CODE, EFI_SUPNO, SHR_QUANT, SHR_ROHS, SHR_SAMPLE_STD_CODE, DOCNO);
+            string reqBody = CreateUpdateSampleDetailsMessage(STATDES, SAMPLE_TYPE_CODE, EFI_SUPNO, SHR_QUANT, SHR_ROHS, SHR_SAMPLE_STD_CODE, DOCNO);
             ResultAPI ra = Call_Common_PATCH("/MED_SAMPLE", reqBody);
             return ra;
         }
 
-        private string CreateUpdateSampleDetailsMessage(string SAMPLE_TYPE_CODE, string EFI_SUPNO, int SHR_QUANT, string SHR_ROHS, string SHR_SAMPLE_STD_CODE, string DOCNO)
+        private string CreateUpdateSampleDetailsMessage(string STATDES, string SAMPLE_TYPE_CODE, string EFI_SUPNO, int SHR_QUANT, string SHR_ROHS, string SHR_SAMPLE_STD_CODE, string DOCNO)
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("{");
             sb.Append("\r\n\t\"DOCNO\":");
             sb.Append("\"" + DOCNO + "\",");
+            sb.Append("\r\n\t\"STATDES\":");
+            sb.Append("\"" + STATDES + "\",");
             sb.Append("\r\n\t\"SHR_SAMPLE_STD_CODE\":");
             sb.Append("\"" + SHR_SAMPLE_STD_CODE + "\",");
             sb.Append("\r\n\t\"EFI_SUPNO\":");
