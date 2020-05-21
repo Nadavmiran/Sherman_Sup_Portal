@@ -20,6 +20,7 @@ namespace TestPortal.Models
         public List<Order> lstOrderObject { get; set; }
         public List<OrderItems> lstItemsObject { get; set; }
         public List<Attachments> lstAttachments { get; set; }
+        public List<OrderAttachment> lstOrderAttachments { get; set; }
         public List<Revision> lstRevision { get; set; }
         public List<Sample_QA> lstSamplQA { get; set; }
         public List<SampleStatus> lstSampleStatus { get; set; }

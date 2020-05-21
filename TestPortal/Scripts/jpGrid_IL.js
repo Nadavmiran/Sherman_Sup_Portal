@@ -1,23 +1,4 @@
-﻿//function getData(supplier) {
-//    $.ajax({
-//        type: "POST",
-//        url: "Home/GetOrdersData",
-//        data: {
-//            supplier: supplier
-//        },
-//        cache: false,
-//        success: function (data) {
-//            console.log("data", data);
-//            grid_data = data.lstOrderObject;
-//            if ((null === grid_data) || (grid_data === ''))
-//                return;
-
-//            showGrid();
-//        }
-//    });
-//}
-
-function showGrid() {
+﻿function showGrid() {
     console.log("showGrid ==> grid_data", grid_data);
     
     $("#jqGrid").jqGrid({
@@ -53,8 +34,7 @@ function showGrid() {
             var id = jQuery("#jqGrid").jqGrid('getCell', row, 'ORD');
             var rowData = $(this).getRowData(id);
             console.log("onSelectRow rowData = ", rowData);
-            //window.location.href += '/TestProduct/?OrderID=' + rowData.ORD + '&orderNumber=' + rowData.ORDNAME;
-            window.location = window.location.origin + $('#navTestProduct').data('url') + '/?OrderID=' + rowData.ORD + '&orderNumber=' + rowData.ORDNAME;
+            navigateTestProduct(rowData.ORD, rowData.ORDNAME);
         },
         subGridOptions:
         {
@@ -81,6 +61,7 @@ function showGrid() {
                 colModel: [
                     { label: '#', name: 'LINE', align: 'center', key: true, hidden: false, width: 75 },
                     { label: 'ORD', name: 'ORD', align: 'center', hidden: true, width: 75 },
+                    { label: 'ORDNAME', name: 'ORDNAME', align: 'center', hidden: true, width: 75 },
                     { label: 'מק"ט', name: 'PARTNAME', align: 'center', width: 100},//, formatter: formatProdLink
                     { label: 'שרטוט', name: 'SHR_DRAW', align: 'center', width: 100 },
                     { label: 'תאור', name: 'PDES', align: 'center', width: 100 },
@@ -98,7 +79,7 @@ function showGrid() {
                     //console.log("onSelectRow rowId = ", rowId);
                     var rowData = $(this).getRowData(id);
                     console.log("onSelectRow rowData = ", rowData);
-                    window.location = window.location.origin + $('#navQA_Page').data('url') + '/?orderID=' +  + rowData.ORD + '&orderName=' + rowData.ORDNAME + '&prodName=' + rowData.PARTNAME + '&ordLine=' + rowData.LINE;
+                    navigateQA_Page(rowData.ORD, rowData.ORDNAME, rowData.PARTNAME, rowData.LINE);
                 }
             });
         }
@@ -109,7 +90,7 @@ function showGrid() {
 }
 
 function formatBTNLink(cellValue, options, rowObject) {
-    return '<i class="fas fa-info-circle" style="font-size:14px;" onclick="showSalesorderDetail(\'' + rowObject.PARTNAME + '\',' + rowObject.ORD + ',' + rowObject.LINE + ')"></i>';
+    return '<i class="fas fa-info-circle" style="font-size:14px;cursor:pointer;" onclick="showSalesorderDetail(\'' + rowObject.PARTNAME + '\',' + rowObject.ORD + ',' + rowObject.LINE + ')"></i>';
 }
 //function formatRPTLink(cellValue, options, rowObject) {
 //    //console.log("formatRPTLink ==> options", options);

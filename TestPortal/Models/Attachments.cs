@@ -111,4 +111,14 @@ namespace TestPortal.Models
             return ra;
         }
     }
+
+    public class OrderAttachment
+    {
+        public string ORDNAME { get; set; }
+        public List<Attachments> EXTFILES_SUBFORM { get; set; }
+    }
+    public class AttachmentWarpper : ODataBase
+    {
+        public List<OrderAttachment> Value { get; set; }
+    }
 }

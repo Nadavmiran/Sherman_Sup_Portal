@@ -36,7 +36,8 @@
             console.log('showGridProd ==> iCol ', iCol);
             console.log('showGridProd ==> content ', content);
            // GetProductDetails(rowData);
-            window.location = window.location.origin + $('#navQA_Page').data('url') + '/?orderID=' + rowData.ORD + '&orderName=' + document.getElementById('lbl_ORDNAME').innerText +'&prodName=' + rowData.PARTNAME + '&ordLine=' + rowData.LINE;
+            //window.location = window.location.origin + $('#navQA_Page').data('url') + '/?orderID=' + rowData.ORD + '&orderName=' + document.getElementById('lbl_ORDNAME').innerText +'&prodName=' + rowData.PARTNAME + '&ordLine=' + rowData.LINE;
+            navigateQA_Page(rowData.ORD, rowData.ORDNAME, rowData.PARTNAME, rowData.LINE);
         }
     });
 }
@@ -192,12 +193,12 @@ function showGridProdAttachments(grid_data) {
         datatype: "local",
         data: grid_data,
         colModel: [
-            { label: '#', name: 'SHR_LINE', align: 'center', key: true, hidden: false, width: 75 },
-            { label: 'Subject', name: 'SHR_EXTFILEDESTEXT', align: 'center', hidden: false, width: 200 },
+            { label: 'Purchase tag', name: 'SHR_PURCH_FLAG', align: 'center', width: 200, hidden: true },
             { label: 'Folder', name: 'FOLDER', align: 'center', hidden: true, width: 200 },
             { label: 'File name', name: 'FILE_NAME', align: 'center', hidden: true, width: 200 },
-            { label: 'File type', name: 'SUFFIX', align: 'center', width: 200, formatter: formatFileIcon }, //formatter: formatProdLink, 
-            { label: 'Purchase tag', name: 'SHR_PURCH_FLAG', align: 'center', hidden: true,width: 200 }
+            { label: '#', name: 'SHR_LINE', align: 'center', key: true, hidden: false, width: 75 },
+            { label: 'Subject', name: 'SHR_EXTFILEDESTEXT', align: 'center', hidden: false, width: 200 },
+            { label: 'File type', name: 'SUFFIX', align: 'center', width: 200, formatter: formatFileIcon }
         ],
         viewrecords: true,
         altRows: true,

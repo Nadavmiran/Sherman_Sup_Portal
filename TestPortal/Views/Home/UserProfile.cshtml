@@ -1,0 +1,81 @@
+﻿@model TestPortal.Models.PageObject
+@{
+    ViewBag.Title = "Profile";
+    Layout = "~/Views/Shared/_Layout_EN.cshtml";
+}
+<div class="section-body" id="mainPageContent">
+    <div class="row">
+        <div class="col-12 col-md-12 col-lg-7">
+            <div class="card">
+                <form id="frmUsrProfile">
+                    <div class="card-header">
+                        <h4>Edit Profile</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="form-group col-md-6 col-12">
+                                <label>Full Name</label>
+                                <input type="text" class="form-control" value="@Model.User.FullName" required="">
+                                <div class="invalid-feedback">
+                                    Please fill in the last name
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6 col-12">
+                                <label>Language</label>
+                                <select id="comboLang" class="form-control">
+                                    <option id="HE" value="1">עברית</option>
+                                    <option id="EN" value="3">English</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-7 col-12">
+                                <label>User name(Email)</label>
+                                <input type="email" class="form-control" value="@Model.User.Email" required="">
+                                <div class="invalid-feedback">
+                                    Please fill in the email
+                                </div>
+                            </div>
+                            <div class="form-group col-md-5 col-12">
+                                <label>Password</label>
+                                <input id="password-field" type="password" class="form-control" name="password" value="@Model.User.Password" readonly>
+                                <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="card-footer text-right">
+                    <button class="btn btn-primary" onclick="doSubmitUserProfile()">Save Changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*<button class="btn btn-danger" id="modal-2" style="visibility:hidden;">System message</button>
+    <div id="modal-error" class="card">
+        <p id="modal-error-text"></p>
+    </div>*@
+    <div id="navSaveUserProfile" data-url="@Url.Action("SaveUserProfile", "Account")"></div>
+</div>
+<script>
+$(".toggle-password").click(function() {
+
+    $(this).toggleClass("fa-eye fa-eye-slash");
+    var input = $($(this).attr("toggle"));
+    if (input.attr("type") == "password") {
+    input.attr("type", "text");
+    } else {
+    input.attr("type", "password");
+    }
+});
+
+$(document).ready(function () {
+    if ('@Model.User.Language' == 'עברית') {
+        document.getElementById("HE").selected = true;
+    }
+    else {
+        document.getElementById("EN").selected = true;
+    }
+    $("#loader").hide();
+});
+</script>
+

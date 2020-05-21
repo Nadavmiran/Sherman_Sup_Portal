@@ -1,0 +1,53 @@
+﻿@model TestPortal.Models.PageObject
+@{
+    ViewBag.Title = "Testing Arena";
+}
+
+<div class="section-body" id="mainPageContent">
+    <div class="row">
+        @Html.Partial("_OrderLineDetails")
+    </div>
+    <div class="row">
+        <div class="col-8 col-md-8 col-lg-8">
+            <div class="card">
+                <div class="card-header">
+                    <h4><i class="fas fa-certificate" style="font-size: 20px;"></i> Product samples list</h4>
+                </div>
+                <div class="card-body">
+                    <div>
+                        <table id="jqGridPartSampls"></table>
+                        <div id="jqGridPartSamplsPager"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-4 col-md-4 col-lg-4">
+            <div class="card">
+                <div class="card-header">
+                    <h4><i class="fas fa-download" style="font-size: 20px;"></i> Serial files</h4>
+                </div>
+                <div class="card-body">
+                    <div>
+                        <table id="jqGridAttachments"></table>
+                        @*<div id="jqGridAttachmentsPager"></div>*@
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-12 col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4><i class="fab fa-rev" style="font-size: 20px;"></i> Product test list</h4>
+                </div>
+                <div class="card-body">
+                    <div>
+                        <table id="jqGridRevision"></table>
+                        <div id="jqGridRevisionPager"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

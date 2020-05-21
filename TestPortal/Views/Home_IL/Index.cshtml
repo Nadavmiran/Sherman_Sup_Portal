@@ -3,43 +3,37 @@
     ViewBag.Title = "הזמנות פתוחות";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<script>
-    $.jgrid.defaults.responsive = true;
-    $.jgrid.defaults.shrinkToFit = false;
-</script>
-<!-- Main Content -->
-<div class="section-body" id="mainPageContent" style="overflow-y:scroll;">
-    <div class="card">
-        <div class="card-body">
-            <div>
-                <table id="jqGrid"></table>
-                <div id="jqGridPager"></div>
+<div id="pageContent" style="overflow-x:hidden;overflow-y:scroll;">
+    @*<script>
+        $.jgrid.defaults.responsive = true;
+        $.jgrid.defaults.shrinkToFit = false;
+    </script>*@
+    <!-- Main Content -->
+    <div class="section-body" id="mainPageContent">
+        <div class="card">
+            <div class="card-body">
+                <div>
+                    <table id="jqGrid"></table>
+                    <div id="jqGridPager"></div>
+                </div>
             </div>
         </div>
+        <form>
+            <button class="btn btn-danger" id="modal-11" style="visibility:hidden;">פרטי הזמנה</button>
+        </form>
+        <form id="modal-order-part" role="form" class="">
+            @Html.Partial("_OrderDetails")
+            @Html.Partial("_OrderLineDetails")
+
+        </form>
     </div>
-    <div id="loader" class="loader"></div>
-
-    <form>
-        <button class="btn btn-danger" id="modal-11" style="visibility:hidden;">פרטי הזמנה</button>
-    </form>
-    <form id="modal-order-part" role="form" class="">
-        @Html.Partial("_OrderDetails")
-        @Html.Partial("_OrderLineDetails")
-
-    </form>
-</div>
-<div id="navGetOrdersData" data-url="@Url.Action("GetOrdersData", "Home_IL")"></div>
-<div id="navQA_Page" data-url="@Url.Action("QA_Page", "Home_IL")"></div>
-<div id="navTestProduct" data-url="@Url.Action("TestProduct", "Home_IL")"></div>
-<div id="navPostTestProductItem" data-url="@Url.Action("PostTestProductItem", "Home_IL")"></div>
-<div id="navUpdateSupplyDateAndDelayReason" data-url="@Url.Action("UpdateSupplyDateAndDelayReason", "Home_IL")"></div>
-
-<script type="text/javascript">
+    
+    <script type="text/javascript">
     var gridBaseWidth = 0;
     var isWidth = false;
 
-    $(window).on("resize", function () {
+        $(window).on("resize", function () {
+
         var $grid = $("#jqGrid"),
             newWidth = $grid.closest(".ui-jqgrid").parent().width();
 
@@ -47,14 +41,15 @@
         console.log(" resize ==> gridBaseWidth ", gridBaseWidth);
         if (newWidth > gridBaseWidth)
             newWidth = gridBaseWidth;
-        $grid.jqGrid("setGridWidth", newWidth, true);
+
+            $grid.jqGrid("setGridWidth", newWidth, true);
     });
 
-    $(window).load(function () {
+    //$(window).load(function () {
 
-        $('.section-body').css('height', $(document).innerHeight() - ($(document).innerHeight() / 30));
-        $('.section-body').css('height', $('.section-body').height() - ($(document).innerHeight() - $('.section-body').height()));
-    });
+    //    $('.section-body').css('height', $(document).innerHeight() - ($(document).innerHeight() / 30));
+    //    $('.section-body').css('height', $('.section-body').height() - ($(document).innerHeight() - $('.section-body').height()));
+    //});
 
     $(document).ready(function () {
         document.getElementById('mnuSampleList').style.display = 'none';
@@ -71,14 +66,13 @@
             gridBaseWidth = newWidth;
             isWidth = true;
         }
-        $('#jqGrid').setGridParam({ direction: 'rtl' });
+        //$('#jqGrid').setGridParam({ direction: 'rtl' });
 
-        console.log(" onload ==> newWidth ", newWidth);
-        console.log(" onload ==> gridBaseWidth ", gridBaseWidth);
+        //console.log(" onload ==> newWidth ", newWidth);
+        //console.log(" onload ==> gridBaseWidth ", gridBaseWidth);
 
-        $('.section-body').css('height', $(document).innerHeight() - ($(document).innerHeight() / 30));
-        $('.section-body').css('height', $('.section-body').height() - ($(document).innerHeight() + $('.section-body').height()));
+        //$('.section-body').css('height', $(document).innerHeight() - ($(document).innerHeight() / 30));
+        //$('.section-body').css('height', $('.section-body').height() - ($(document).innerHeight() + $('.section-body').height()));
     });
-</script>
-
-
+    </script>
+</div>

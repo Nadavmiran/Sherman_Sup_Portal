@@ -17,7 +17,6 @@
                                     <label class="control-label" id="lbl_CURDATE"></label>
                                 </div>
                             </div>
-                            @*סוג דגימה,מנת ספק, גודל מנה (פתוח לעדכון), תקן דגימה, rohs complaint*@
                             <div class="form-group col-md-3 col-12">
                                 <label class="control-label" style="color:#01416F; font-weight:bolder;">סטטוס דגימה</label>
                                 <div class="col-sm-12">
@@ -27,7 +26,33 @@
                             <div class="form-group col-md-3 col-12">
                                 <label class="control-label" style="color:#01416F; font-weight:bolder;">סוג דגימה </label>
                                 <div class="col-sm-12">
-                                    <input type="text" class="form-control" id="lbl_SAMPLE_TYPE_CODE" value="ספק" readonly="readonly"/>
+                                    <input type="text" class="form-control" id="lbl_SAMPLE_TYPE_CODE" value="" readonly="readonly" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-3 col-12">
+                                <label class="control-label" style="color:#01416F; font-weight:bolder;">כמות המדגם </label>
+                                <div class="col-sm-12">
+                                    <label class="control-label" id="lbl_QUANT"></label>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-3 col-12">
+                                <label class="control-label" style="color:#01416F; font-weight:bolder;">כמות הפק"ע</label>
+                                <div class="col-sm-12">
+                                    <label class="control-label" id="lbl_SHR_SERIAL_QUANT"></label>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-3 col-12">
+                                <label class="control-label" style="color:#01416F; font-weight:bolder;">מקס. כמות פסולים</label>
+                                <div class="col-sm-12">
+                                    <label class="control-label" id="lbl_MAX_REJECT"></label>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-3 col-12">
+                                <label class="control-label" style="color:#01416F; font-weight:bolder;">רמת איכות רצויה </label>
+                                <div class="col-sm-12">
+                                    <label class="control-label" id="lbl_SHR_RAR"></label>
                                 </div>
                             </div>
                         </div>
@@ -53,7 +78,7 @@
                             <div class="form-group col-md-3 col-12">
                                 <label class="control-label" style="color:#01416F; font-weight:bolder;">תקן דגימה</label>
                                 <div class="col-sm-12">
-                                    <select class="form-control" id="lbl_SHR_SAMPLE_STD_CODE" ></select>
+                                    <select class="form-control" id="lbl_SHR_SAMPLE_STD_CODE"></select>
                                 </div>
                             </div>
                         </div>

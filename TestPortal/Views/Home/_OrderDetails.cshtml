@@ -4,7 +4,7 @@
     <div class="card">
         <div class="col-12">
             <div class="card-header">
-                <h4><i class="fas fa-file-invoice" style="font-size: 20px;"></i> Order details</h4>
+                <h5 style="color:#34395e;"><i class="fas fa-file-invoice" style="font-size: 20px;"></i> Order details</h5>
             </div>
             <div class="card-body">
                 <div class="row">
@@ -33,11 +33,11 @@
                         </div>
                     </div>
                     @*<div class="form-group col-md-6 col-12">
-                        <label class="control-label" style="color:#01416F; font-weight:bolder;">Supplier type</label>
-                        <div class="col-sm-12">
-                            <label class="control-label" id="SHR_SUPTYPEDES"></label>
-                        </div>
-                    </div>*@
+                            <label class="control-label" style="color:#01416F; font-weight:bolder;">Supplier type</label>
+                            <div class="col-sm-12">
+                                <label class="control-label" id="SHR_SUPTYPEDES"></label>
+                            </div>
+                        </div>*@
                 </div>
                 <div class="row">
                     <div class="form-group col-md-3 col-12">
@@ -62,15 +62,50 @@
             </div>
         </div>
     </div>
-    <div class="card">
-        <div class="col-12">
-            <div class="card-header">
-                <h4><i class="fas fa-exclamation-triangle" style="font-size: 20px;"></i>Order comment</h4>
+    <div id="accOrdMsg">
+        <div class="card">
+            <div class="col-12">
+                <div class="card-header" id="headingOne">
+                    <h5 class="mb-12">
+                        <span style="color:#34395e;cursor:pointer;" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            <i class="fas fa-exclamation-triangle" style="font-size: 20px;"></i>  Order comment
+                        </span>
+                    </h5>
+                </div>
+                @*<div class="card-header">
+                        <h4><i class="fas fa-exclamation-triangle" style="font-size: 20px;"></i>Order comment</h4>
+                    </div>*@
+                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accOrdMsg">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="form-group col-md-12 col-12">
+                                <div class="col-sm-12" id="orderAlert"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="form-group col-md-12 col-12">
-                        <div class="col-sm-12" id="orderAlert"></div>
+        </div>
+    </div>
+    <div id="accOrdAttachments">
+        <div class="card">
+            <div class="col-12">
+                <div class="card-header" id="headingAttach">
+                    <h5 class="mb-12">
+                        <span style="color:#34395e;cursor:pointer;" data-toggle="collapse" data-target="#collapseAttach" aria-expanded="true" aria-controls="collapseAttach">
+                            <i class="fas fa-download" style="font-size: 20px;"></i>  Order attachments
+                        </span>
+                    </h5>
+                </div>
+                <div id="collapseAttach" class="collapse show" aria-labelledby="headingAttach" data-parent="#accOrdAttachments">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="form-group col-md-12 col-12">
+                                <div>
+                                    <table id="jqGridAttachments"></table>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

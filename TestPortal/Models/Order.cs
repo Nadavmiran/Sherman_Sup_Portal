@@ -119,6 +119,15 @@ namespace TestPortal.Models
             OrdersWarpper ow = JsonConvert.DeserializeObject<OrdersWarpper>(res);
             return ow.Value[0];
         }
+
+        internal List<OrderAttachment> GetOrderAttachments(string ORDNAME)
+        {
+            string query = "/PORDERS?$filter=ORDNAME eq '" + ORDNAME + "'&$select=ORDNAME&$expand=EXTFILES_SUBFORM&($filter=SHR_PURCH_FLAG eq 'Y')";
+            string res = Call_Get(query);
+
+            AttachmentWarpper ow = JsonConvert.DeserializeObject<AttachmentWarpper>(res);
+            return ow.Value;
+        }
     }
 
     public class OrdersWarpper : ODataBase

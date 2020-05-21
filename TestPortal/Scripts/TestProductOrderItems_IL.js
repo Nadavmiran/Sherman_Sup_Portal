@@ -33,7 +33,8 @@
             console.log('showGridProd ==> rowId ', rowId);
             console.log('showGridProd ==> iCol ', iCol);
             console.log('showGridProd ==> content ', content);
-            window.location = window.location.origin + $('#navQA_Page').data('url') + '?orderID=' + rowData.ORD + '&orderName=' + document.getElementById('lbl_ORDNAME').innerText + '&prodName=' + rowData.PARTNAME + '&ordLine=' + rowData.LINE;
+            //window.location = window.location.origin + $('#navQA_Page').data('url') + '?orderID=' + rowData.ORD + '&orderName=' + document.getElementById('lbl_ORDNAME').innerText + '&prodName=' + rowData.PARTNAME + '&ordLine=' + rowData.LINE;
+            navigateQA_Page(rowData.ORD, rowData.ORDNAME, rowData.PARTNAME, rowData.LINE);
         }
     });
 }
@@ -192,12 +193,12 @@ function showGridProdAttachments(grid_data) {
         datatype: "local",
         data: grid_data,
         colModel: [
-            { label: '#', name: 'SHR_LINE', align: 'center', key: true, hidden: false, width: 75 }, 
+            { label: 'תג רכש', name: 'SHR_PURCH_FLAG', align: 'center', hidden: true, width: 200 },
+            { label: 'תיקייה', name: 'FOLDER', align: 'center', hidden: true, width: 200 },
+            { label: 'שם קובץ', name: 'FILE_NAME', align: 'center', hidden: true, width: 200 },
+            { label: '#', name: 'SHR_LINE', align: 'center', key: true, hidden: false, width: 75 },
             { label: 'נושא', name: 'SHR_EXTFILEDESTEXT', align: 'center', hidden: false, width: 200 },
-            { label: 'תיקייה', name: 'FOLDER', align: 'center', hidden: false, width: 200 },
-            { label: 'שם קובץ', name: 'FILE_NAME', align: 'center', hidden: false, width: 200 },
-            { label: 'קובץ', name: 'SUFFIX', align: 'center', width: 200, formatter: formatFileIcon}, //formatter: formatProdLink, 
-            { label: 'תג רכש', name: 'SHR_PURCH_FLAG', align: 'center', width: 200}
+            { label: 'קובץ', name: 'SUFFIX', align: 'center', width: 200, formatter: formatFileIcon}
         ],
         viewrecords: true,
         altRows: true,
@@ -230,7 +231,6 @@ function showGridTestList(grid_data) {
                 console.log('IN idsOfSelectedRows');
             }
         };
-
     $("#jqGridSampleQA").jqGrid({
         guiStyle: "bootstrap",
         iconSet: "fontAwesome",
@@ -240,7 +240,7 @@ function showGridTestList(grid_data) {
             { label: 'QA', name: 'QA', align: 'center', key: false, hidden: true, width: 75 },
             { label: 'DOCNO', name: 'DOCNO', align: 'center', key: false, hidden: true, width: 75 },
             { label: 'SUPNAME', name: 'SUPNAME', align: 'center', key: false, hidden: true, width: 75 },
-            { label: 'PARTNAME', name: 'PARTNAME', align: 'center', key: false, hidden: true, width: 75 },
+            { label: 'PARTNAME', name: 'PARTNAME', align: 'center', key: false, hidden: true, width: 75, editable: true },
             { label: 'קוד בדיקה', name: 'QACODE', key: true, hidden: false, width: 85 },
             { label: 'תאור בדיקה', name: 'QADES', align: 'right', hidden: false, width: 250 },
             { label: 'תוצאת מינ.', name: 'RESULTMIN', align: 'center', editable: true, hidden: false, width: 80 },
@@ -261,8 +261,33 @@ function showGridTestList(grid_data) {
         subGrid: false,
         multiselect: true,
         //multiPageSelection: true,
-        onSelectRow: function () {
+        onSelectRow: function (id) {
             updateIdsOfSelectedRows();
+            let rowData = $grid.getRowData(id);
+            console.log("jqGridSampleQA ==> updateIdsOfSelectedRows => rowData", rowData);
+            if (rowData.RESULTANT === 'Y') {
+                $grid.jqGrid("setColProp", "RESULTMIN", { editable: false });
+                $grid.jqGrid("setColProp", "RESULTMAX", { editable: false });
+                $grid.jqGrid("setColProp", "REPETITION", { editable: false });
+
+                $grid.jqGrid('saveRow', id);
+                //let cmRESULTMIN = jQuery("#jqGridSampleQA").jqGrid('getColProp', 'RESULTMIN');
+                //let cmRESULTMAX = jQuery("#jqGridSampleQA").jqGrid('getColProp', 'RESULTMAX');
+                //let cmREPETITION = jQuery("#jqGridSampleQA").jqGrid('getColProp', 'REPETITION');
+                ////some condition to enable or disable editing
+                //cmRESULTMIN.editable = false;
+                //cmRESULTMAX.editable = false;
+                //cmREPETITION.editable = false;
+                ////always call editRow after changing editable property
+                //cmRESULTMIN.editable = true;
+                //cmRESULTMAX.editable = true;
+                //cmREPETITION.editable = true;
+            }
+            else {
+                $grid.jqGrid("setColProp", "RESULTMIN", { editable: true });
+                $grid.jqGrid("setColProp", "RESULTMAX", { editable: true });
+                $grid.jqGrid("setColProp", "REPETITION", { editable: true });
+            }
         },
         gridComplete: function () {
             currids = $(this).jqGrid('getDataIDs');
@@ -286,6 +311,7 @@ function showGridTestList(grid_data) {
         //},
         // singleSelectClickMode: "selectonly", // prevent unselect once selected rows
     });
+
     $("#jqGridSampleQA").jqGrid('navGrid', '#jqGridSampleQAPager', { edit: false, save: true, add: false, del: false }, {}, {}, {}, { multipleSearch: true, overlay: false });
     jQuery("#jqGridSampleQA").jqGrid('inlineNav', "#jqGridSampleQAPager", { edit: true, save: true, add: false, del: false }, {}, {}, {}, { multipleSearch: true, overlay: false });
 }

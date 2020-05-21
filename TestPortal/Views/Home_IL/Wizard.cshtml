@@ -1,0 +1,121 @@
+﻿
+@{
+    ViewBag.Title = "Wizard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="section-body">
+    <div class="card">
+        <div class="card-body">
+            <div class="wizard-horizontal">
+
+                <h6>
+                    <i class="step-icon"></i>
+                    <span class="fonticon-wrap">
+                        <i class="livicon-evo" data-options="name:morph-doc.svg; size: 50px; style:lines; strokeColor:#adb5bd;"></i>
+                    </span>
+                </h6>
+                <fieldset>
+                    @Html.Partial("_Sample_QA")
+                    @*<div class="form-group">
+            <label for="fullName">Full Name :</label>
+            <input type="text" class="form-control" id="fullName">
+        </div>*@
+                </fieldset>
+
+                <h6>
+                    <i class="step-icon"></i>
+                    <span class="fonticon-wrap">
+                        <i class="livicon-evo" data-options="name:truck.svg; size: 50px; style:lines; strokeColor:#adb5bd;"></i>
+                    </span>
+                </h6>
+                <fieldset>
+                    @Html.Partial("_Sample_QA")
+                    @*<div class="form-group">
+            <label for="emailAddress">Email Address :</label>
+            <input type="email" class="form-control" id="emailAddress">
+        </div>*@
+                </fieldset>
+            </div><!-- /.main-content -->
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/jquery.steps.min.js"></script>
+<script>
+    // Wizard tabs with icons setup
+    $(".wizard-horizontal").steps({
+        headerTag: "h6",
+        bodyTag: "fieldset",
+        transitionEffect: "fade",
+        titleTemplate: '<span class="step">#index#</span> #title#',
+        labels: {
+            finish: 'Submit'
+        },
+        onFinished: function (event, currentIndex) {
+            alert("Form submitted.");
+        }
+    });
+
+    // Initialize step icon
+    $(".current").find(".step-icon").addClass("bx bx-time-five");
+    // Step icon change on different step
+    $(".actions [href='#next']").click(function () {
+        $(".done").find(".step-icon").removeClass("bx bx-time-five").addClass("bx bx-check-circle");
+        $(".current").find(".step-icon").removeClass("bx bx-check-circle").addClass("bx bx-time-five");
+    });
+</script>
+<script>
+    $('#sub1').click(function (e, form) {
+        console.log("form = ", $('#frm1'));
+        //console.log("e.form.action = ", e.form.action);
+        let form_data = $('#frm1').serialize();
+        var fdata = new FormData();
+        var formdata = $('#attachments').prop("files");
+        console.log("files = ", formdata);
+        console.log("form_data = ", form_data);
+        for (var i = 0; i < formdata.length; i++) {
+            var sfilename = formdata[i].name;
+            let srandomid = Math.random().toString(36).substring(7);
+
+            fdata.append(sfilename, formdata[i]);
+        }
+        console.log(form_data);
+        console.log(formdata);
+
+        // DO AJAX HERE
+        $.ajax(
+            {
+                type: "POST",
+                data:
+                {
+                    data: decode(form_data)
+                },
+                url: "/Home_IL/SaveTest",
+                contentType: "application/x-www-form-urlencoded;charset=ISO-8859-15",
+                success: function (response) {
+                    console.log("response", response);
+                }
+            });
+
+        $.ajax(
+            {
+                type: "POST",
+                data: fdata,
+                url: "/Home/UploadFiles",
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    console.log("response", response);
+                }
+            });
+
+        let fake_ajax = setTimeout(function () {
+            form.stopProgress();
+            modal.find('.modal-body').prepend('<div class="alert alert-info">הנתונים נשמרו.</div>');
+
+            clearInterval(fake_ajax);
+        }, 1500);
+        e.preventDefault();
+        //$("#frm1").submit();
+    });
+        
+</script>

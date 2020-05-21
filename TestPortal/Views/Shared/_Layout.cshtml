@@ -25,7 +25,7 @@
     <link href="~/Content/components_rtl.css" media="screen" rel="stylesheet" />
     <link media="screen" href="~/Content/Site.css" rel="stylesheet" />
     <script media="screen" src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script media="screen" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
     @*<script media="screen" src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>*@
 
@@ -52,7 +52,7 @@
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
                             <div class="dropdown-title"><h6>הגדרות</h6></div>
-                            <a href="@Url.Action("UserProfile", "Account_IL")" class="dropdown-item has-icon">
+                            <a href="@Url.Action("UserProfile", "Home_IL")" class="dropdown-item has-icon">
                                 <i class="fas fa-user"></i> פרופיל
                             </a>
                             <div class="dropdown-divider"></div>
@@ -111,36 +111,72 @@
                                 </li>
                             </ul>
                         </nav>
-                        <h1>@ViewBag.Title</h1>
+                        <h1 id="pageTitle">@ViewBag.Title</h1>
                     </div>
                     @RenderBody()
-                    <footer class="main-footer">
-                        <div class="footer-right">
-                            <span class="">
-                                &nbsp;Created by <a href="http://www.efimp.com"><img src="~/Content/Images/EF_logo.jpg" style="width:130px;height:50px" /></a>
-                            </span>
-                            <span>&nbsp;</span>
-                            <span class="">Deveplopment: LMNS</span>
-                        </div>
-                        <div class="footer-left">
-                            &copy; @DateTime.Now.Year - Sherman
-                        </div>
-                    </footer>
+
                 </section>
+                <footer class="main-footer">
+                    <div class="footer-right">
+                        <span class="">
+                            &nbsp;Created by <a href="http://www.efimp.com"><img src="~/Content/Images/EF_logo.jpg" style="width:130px;height:50px" /></a>
+                        </span>
+                        <span>&nbsp;</span>
+                        <span class="">Deveplopment: LMNS</span>
+                    </div>
+                    <div class="footer-left">
+                        &copy; @DateTime.Now.Year - Sherman
+                    </div>
+                </footer>
             </div>
         </div>
     </div>
+    <!-- PAGE NAVIGATION -->
+    <div id="loader" class="loader" style="z-index:9999;"></div>
+    <div id="navGetOrdersData" data-url="@Url.Action("GetOrdersData", "Home_IL")"></div>
+    <div id="navQA_Page" data-url="@Url.Action("QA_Page", "Home_IL")"></div>
+    <div id="navGetProductQaData" data-url="@Url.Action("GetProductQaData", "Home_IL")"></div>
+    <div id="navTestProduct" data-url="@Url.Action("TestProduct", "Home_IL")"></div>
+    <div id="navPostTestProduct" data-url="@Url.Action("PostTestProduct", "Home_IL")"></div>
+    <div id="navPostTestProductItem" data-url="@Url.Action("PostTestProductItem", "Home_IL")"></div>
+    <div id="navUpdateSupplyDateAndDelayReason" data-url="@Url.Action("UpdateSupplyDateAndDelayReason", "Home_IL")"></div>
+
+    <div id="navTestProduct" data-url="@Url.Action("TestProduct", "Home_IL")"></div>
+    <div id="navGetSampleTest" data-url="@Url.Action("GetSampleTests", "Home_IL")"></div>
+    <div id="navGetSampleTestList" data-url="@Url.Action("GetSampleTestList", "Home_IL")"></div>
+    <div id="navCreateTest" data-url="@Url.Action("CreateTest", "Home_IL")"></div>
+    <div id="navCreateSampleDocument" data-url="@Url.Action("CreateSampleDocument", "Home_IL")"></div>
+    <div id="navDownloadFile" data-url="@Url.Action("DownloadFile", "Home_IL")"></div>
+    <div id="navDownload" data-url="@Url.Action("Download", "Home_IL")"></div>
+    <div id="navDownloadFile" data-url="@Url.Action("GetProductRevisionList", "Home_IL")"></div>
+    <div id="navSaveTest" data-url="@Url.Action("SaveTest", "Home_IL")"></div>
+    <div id="navUploadFiles" data-url="@Url.Action("UploadFiles", "Home_IL")"></div>
+    <div id="navGetOrderProductTests" data-url="@Url.Action("GetOrderProductTestsByDoc", "Home_IL")"></div>
+    <div id="navUpdateSampleDetails" data-url="@Url.Action("UpdateSampleDetails", "Home_IL")"></div>
+    <div id="navGetSampleStandardList" data-url="@Url.Action("GetSampleStandardList", "Home_IL")"></div>
+    <!-- END PAGE NAVIGATION -->
+    <!-- MODALS -->
+    <div id="modal-error" class="card"></div>
+    <button class="btn btn-primary" id="modal-8" style="visibility:hidden;">New Test</button>
+    <button class="btn btn-danger" id="modal-3" style="visibility:hidden;">Sample list</button>
+    <button class="btn btn-primary" id="modal-7" style="visibility:hidden;">בדיקה חדשה</button>
+    <button class="btn btn-danger" id="modal-1" style="visibility:hidden;">שגיאה</button>
+    <button class="btn btn-danger" id="modal-9" style="visibility:hidden;">רשימת דגימות</button>
+    <button class="btn btn-danger" id="modal-2" style="visibility:hidden;">System message</button>
+    <button class="btn btn-danger" id="modal-13" style="visibility:hidden;">עדכון תעודת דגימה</button>
+    <!-- END MODALS -->
+
+    @Html.Partial("_SampleDetails")
+    @Html.Partial("_Sample_QA")
+    @Html.Partial("_SampleQA_List")
+
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
-    <!-- General JS Scripts -->
-    @*<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>*@
 
+    <!-- General JS Scripts -->
     <script src="~/Scripts/i18n/grid.locale-he.js"></script>
     <script src="~/Scripts/jquery.jqGrid.min.js"></script>
     <script src="~/Scripts/stisla.js"></script>
-    @*<script src="~/Scripts/dropzone.js"></script>*@
 
     <script src="~/Scripts/scripts.js"></script>
     <script src="~/Scripts/custom.js"></script>
@@ -151,6 +187,11 @@
     <script src="~/Scripts/TestProductOrderItems_IL.js"></script>
     <script src="~/Scripts/TestProductOrderItems_Common.js"></script>
     <script src="~/Scripts/LMNS-Site.js"></script>
+    <script src="~/Scripts/FileDownload.js"></script>
+    <script src="~/Scripts/LMNS_pageNavigation.js"></script>
+    <script type="text/javascript">
+        pageSize();
+    </script>
     @RenderSection("scripts", required: false)
 </body>
 </html>

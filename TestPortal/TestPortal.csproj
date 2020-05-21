@@ -285,6 +285,7 @@
     <Content Include="Scripts\grid.formedit.js" />
     <Content Include="Scripts\jquery.searchFilter.js" />
     <Content Include="Scripts\LMNS-Site.js" />
+    <Content Include="Scripts\LMNS_pageNavigation.js" />
     <Content Include="Scripts\TestProductOrderItems_Common.js" />
     <Content Include="Scripts\components-multiple-upload.js" />
     <Content Include="Scripts\custom.js" />

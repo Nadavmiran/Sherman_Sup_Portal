@@ -3,6 +3,12 @@ var objSample = '';
 var pageSampleobject = '';
 var objSampleStandardList = '';
 
+function pageSize() {
+    $.jgrid.defaults.responsive = true;
+    $.jgrid.defaults.shrinkToFit = true;
+    $('#pageContent').css('height', $(document).innerHeight() - ($(document).innerHeight() / 4));
+}
+
 function getData(supplier) {
     //console.log("getData ==> window.sessionStorage.getItem('objOrdersList')", window.sessionStorage.getItem('objOrdersList'));
     if (null === window.sessionStorage.getItem('objOrdersList')) {
@@ -61,7 +67,13 @@ function refreshOrdersData(supplier) {
 function InitTestPageData(data) {
     var OrdId = document.getElementById('hdnOrdId').value;
     var pordId = document.getElementById('hdnPrdId').value;
-
+    if (x === 'rtl') {
+        document.getElementById('pageTitle').innerHTML = "שורות הזמנה";
+    }
+    else {
+        document.getElementById('pageTitle').innerHTML = "Order products";
+    }
+    document.getElementById('mnuSampleDetails').style.display = 'none'; 
     document.getElementById('mnuSampleList').style.display = 'none'; 
     document.getElementById('mnuPartsList').style.display = 'none';
     document.getElementById('mnuRefresh').style.display = 'none';
@@ -76,11 +88,20 @@ function InitTestPageData(data) {
         GetOrderProducts(OrdId);
     else
         showGridProd(data.lstItemsObject);
+
+    if (null !== data.lstOrderAttachments && null !== data.lstOrderAttachments.EXTFILES_SUBFORM && data.lstOrderAttachments.length > 0)
+        if (null !== data.lstOrderAttachments[0].EXTFILES_SUBFORM && data.lstOrderAttachments[0].EXTFILES_SUBFORM.length > 0)
+            showGridProdAttachments(data.lstOrderAttachments[0].EXTFILES_SUBFORM);
 }
 
 function InitQAPageData(data) {
     pageSampleobject = data;
-
+    if (x === 'rtl') {
+        document.getElementById('pageTitle').innerHTML = "בדיקות איכות";
+    }
+    else {
+        document.getElementById('pageTitle').innerHTML = "Testing Arena";
+    }
     document.getElementById('lbl_pageREQDATE').style.display = 'inline-block';
     document.getElementById('lbl_DELAYREASON').style.display = 'inline-block';
     document.getElementById('txt_pageREQDATE').style.display = 'none';
@@ -91,6 +112,7 @@ function InitQAPageData(data) {
     document.getElementById('mnuSampleList').style.display = 'inline-block';
     document.getElementById('mnuPartsList').style.display = 'inline-block';
     document.getElementById('mnuSampleDetails').style.display = 'inline-block';
+    document.getElementById('divOrdLineDetails').style.display = 'inline';
     document.getElementById('divSampleQA').style.display = 'inline-block';
     document.getElementById('sampleQaList').style.display = 'inline-block';
     document.getElementById('sampleDetails').style.display = 'inline-block';
@@ -128,14 +150,8 @@ function InitQAPageData(data) {
     $("#loader").hide();
 }
 
-function navigateTestPage() {
-    if (x === 'rtl')
-        window.location = window.location.origin + $('#navTestProduct').data('url') + '/?OrderID=' + document.getElementById('hdnOrdId').value + '&orderNumber=' + document.getElementById('hdnPrdId').value;
-    else
-        window.location = window.location.origin + $('#navTestProduct').data('url') + '/?OrderID=' + document.getElementById('hdnOrdId').value + '&orderNumber=' + document.getElementById('hdnPrdId').value;
-}
-
 function showSalesorderDetail(PARTNAME, ORD, LINE) {
+    $("#loader").show();
     console.log('showSalesorderDetail ==> ORD = ', ORD);
     console.log('showSalesorderDetail ==> LINE = ', LINE);
     console.log('showSalesorderDetail ==> PARTNAME = ', PARTNAME);
@@ -159,11 +175,12 @@ function showSalesorderDetail(PARTNAME, ORD, LINE) {
             document.getElementById('orderLineAlert').innerHTML = null === data.objItemText || null === data.objItemText.TEXT ? '' : data.objItemText.TEXT;
             if (null !== data.objSample.MED_TRANSSAMPLEQA_SUBFORM)
                 showGridProdSamples(data.objSample.MED_TRANSSAMPLEQA_SUBFORM);
-            if (null !== data.lstAttachments)
-                showGridProdAttachments(data.lstAttachments);
+            if (null !== data.lstOrderAttachments && null !== data.lstOrderAttachments.EXTFILES_SUBFORM && data.lstOrderAttachments.length > 0)
+                if (null !== data.lstOrderAttachments[0].EXTFILES_SUBFORM && data.lstOrderAttachments[0].EXTFILES_SUBFORM.length > 0)
+                    showGridProdAttachments(data.lstOrderAttachments[0].EXTFILES_SUBFORM);
 
             manageDelayReasonSelect(data);
-
+            $("#loader").hide();
             if (x === 'rtl')
                 $("#modal-11").trigger("click");
             else
@@ -359,11 +376,12 @@ function GetSampleStandardList(objSample) {
                 document.getElementById('lbl_DOCNO').innerText = null === objSample.DOCNO ? '' : objSample.DOCNO;
                 document.getElementById('lbl_CURDATE').innerText = null === objSample.pageCURDATE ? '' : objSample.pageCURDATE;
                 document.getElementById('lbl_SHR_QUANT').value = null === objSample.SHR_QUANT ? 0 : objSample.SHR_QUANT;
-                //document.getElementById('lbl_SAMPLE_TYPE_CODE').value = null === objSample.SAMPLE_TYPE_CODE ? '' : objSample.SAMPLE_TYPE_CODE;
+                document.getElementById('lbl_MAX_REJECT').innerText = null === objSample.MAX_REJECT ? '' : objSample.MAX_REJECT;
                 document.getElementById('lbl_EFI_SUPNO').value = null === objSample.EFI_SUPNO ? '' : objSample.EFI_SUPNO;
-                //document.getElementById('lbl_SHR_SERIAL_QUANT').innerText = null === objSample.SHR_SERIAL_QUANT ? '' : objSample.SHR_SERIAL_QUANT;
-                //document.getElementById('lbl_STATDES').innerText = null === objSample.STATDES ? '' : objSample.STATDES;
+                document.getElementById('lbl_SHR_SERIAL_QUANT').innerText = null === objSample.SHR_SERIAL_QUANT ? '' : objSample.SHR_SERIAL_QUANT;
+                document.getElementById('lbl_SHR_RAR').innerText = null === objSample.SHR_RAR ? '' : objSample.SHR_RAR;
                 document.getElementById('lbl_SHR_SAMPLE_STD_CODE').value = null === objSample.SHR_SAMPLE_STD_CODE ? '' : objSample.SHR_SAMPLE_STD_CODE;
+                document.getElementById('lbl_QUANT').innerText = null === objSample.QUANT ? '' : objSample.QUANT;
                 document.getElementById('lbl_SHR_ROHS').checked = null === objSample.SHR_ROHS || objSample.SHR_ROHS === 'N' ? false : true;
                 console.log('GetSampleStandardList ==> objSample.SAMPLE_TYPE_CODE', objSample.SAMPLE_TYPE_CODE);
                 objSampleStandardList = response.lstSampleStandard;
@@ -401,7 +419,7 @@ function GetSampleStandardList(objSample) {
                     }
                     sl.appendChild(option);
                 }
-
+                document.getElementById('sampleDetails').style.display = 'inline-block';
                 var x = document.getElementsByTagName("html")[0].getAttribute("dir");
                 if (x === 'rtl')
                     $("#modal-13").trigger("click");
@@ -453,60 +471,6 @@ function onSubmit_UpdateSampleDetails() {
                 pageSampleobject.lstSampleObject = response.lstSampleObject;
                 $("#jqGridPartSampls").GridUnload();
                 showPartSampls(response.lstSampleObject);
-            }
-        });
-}
-
-function GetSampleTests(rowData) {
-    
-    console.log("GetSampleTests ==> rowData", rowData);
-    /***********  Fill Qa test list pop-up hidden fields **************/
-    document.getElementById('hdnQaListSUPNAME').value = rowData.SUPNAME;
-    document.getElementById('hdnQaListORDNAME').value = document.getElementById('hdnORDNAME').value;
-    document.getElementById('hdnQaListPARTNAME').value = rowData.PARTNAME;
-    document.getElementById('hdnQaListDOCNO').value = rowData.DOCNO;
-    /******************************************************************/
-    $.ajax(
-        {
-            type: "POST",
-            data:
-            {
-                PARTNAME: rowData.PARTNAME,
-                SUPNAME: rowData.SUPNAME,
-                DOCNO: rowData.DOCNO
-            },
-            url: $('#navGetSampleTest').data('url'),//"/Home/GetSampleTestList",
-            contentType: "application/x-www-form-urlencoded;charset=ISO-8859-15",
-            success: function (response) {
-                console.log("GetSampleTests ==> response", response);
-                if (null !== response && null !== response.objSample) {
-                    pageSampleobject.objSample = response.objSample;
-                    //showGridSampleList(response.lstSamplQA);
-                    $("#jqGridRevision").GridUnload();
-                    if (null !== response.objSample && null !== response.objSample.MED_TRANSSAMPLEQA_SUBFORM && response.objSample.MED_TRANSSAMPLEQA_SUBFORM.length > 0)
-                        showGridProdSamples(response.objSample.MED_TRANSSAMPLEQA_SUBFORM);
-                    else
-                    {
-                        let x = document.getElementsByTagName("html")[0].getAttribute("dir");
-                        if (x === 'rtl') {
-                            $("#modal-2").trigger("click");
-                            $("#modal-error-text").html('לא נמצאו בדיקות לדגימה זו. יש ללחוץ על כפתור "בדיקות" ולהוסיף בדיקות מתוך הרשימה.');
-                        }
-                        else {
-                            $("#modal-21").trigger("click");
-                            $("#modal-error-text").html('No tests were found for this sample.Click the "Test" button and add tests from the list.');
-                        }
-                    }
-                }
-                else {
-                    if (response.ErrorDescription !== '') {
-                        form_data[0].reset();
-                        $('.modal').modal('hide');
-                        $('.modal').removeClass('show');
-                        $("#modal-error-text").html(response.ErrorDescription);
-                        $("#modal-1").trigger("click");
-                    }
-                }
             }
         });
 }
@@ -602,29 +566,28 @@ function OpentestList()
     console.log("GetSampleTests ==> pageSampleobject", pageSampleobject);
     console.log("OpentestList ==> DOCNO", document.getElementById('hdnQaListDOCNO').value);
     console.log("OpentestList ==> x(isRTL)", x);
-    //if (document.getElementById('hdnQaListDOCNO').value == '' && pageSampleobject.lstSampleObject != null && pageSampleobject.lstSampleObject.length > 0)
-    //{
-    //    if (x == 'rtl') {
-    //        $("#modal-2").trigger("click");
-    //        $("#modal-error-text").html('יש לבחור תעודת דגימה מרשימת הדגימות ואז להוסיף בדיקות.');
-    //    }
-    //    else {
-    //        $("#modal-21").trigger("click");
-    //        $("#modal-error-text").html('No sample document was selected. Please select document from the list below and then add tests.');
-    //    }
-    //}
-    //else
-    //{
+    if (document.getElementById('hdnQaListDOCNO').value === '' && pageSampleobject.lstSampleObject !== null && pageSampleobject.lstSampleObject.length > 0)
+    {
+        if (x === 'rtl') {
+            $("#modal-2").trigger("click");
+            $("#modal-error-text").html('יש לבחור תעודת דגימה מרשימת הדגימות ואז להוסיף בדיקות.');
+        }
+        else {
+            $("#modal-21").trigger("click");
+            $("#modal-error-text").html('No sample document was selected. Please select document from the list below and then add tests.');
+        }
+    }
+    else
+    {
         //Open message : do you want to create a new sample document?
         $("#jqGridSampleQA").GridUnload();
-        //var x = document.getElementsByTagName("html")[0].getAttribute("dir");
         document.getElementById('hdnIsNewDocument').value = -1;
+        // Show modal Is new document?
         if (x === 'rtl')
             $("#modal-3").trigger("click");
-        else {
+        else 
             $("#modal-31").trigger("click");
-        }
-    //}
+    }
 }
 
 function getSampleTestList() {
@@ -654,13 +617,14 @@ function getSampleTestList() {
             url: $('#navGetSampleTestList').data('url'),//"/Home/GetSampleTestList",
             contentType: "application/x-www-form-urlencoded;charset=ISO-8859-15",
             success: function (response) {
-                console.log("response", response);
+                console.log("getSampleTestList ==> response", response);
                 if (null !== response && null !== response.lstSamplQA && response.lstSamplQA.length > 0) {
+                    document.getElementById('sampleQaList').style.display = 'inline-block';
                     showGridTestList(response.lstSamplQA);
                     //if (null !== response.objSample && null !== response.objSample.MED_TRANSSAMPLEQA_SUBFORM && response.objSample.MED_TRANSSAMPLEQA_SUBFORM.length > 0)
                     //    showSelectedSampleQA(response.objSample.MED_TRANSSAMPLEQA_SUBFORM);
                     //else {
-                    var x = document.getElementsByTagName("html")[0].getAttribute("dir");
+                    //var x = document.getElementsByTagName("html")[0].getAttribute("dir");
                     if (x === 'rtl')
                         $("#modal-9").trigger("click");
                     else
@@ -680,6 +644,58 @@ function getSampleTestList() {
         });
 }
 
+function GetSampleTests(rowData) {
+
+    console.log("GetSampleTests ==> rowData", rowData);
+    /***********  Fill Qa test list pop-up hidden fields **************/
+    document.getElementById('hdnQaListSUPNAME').value = rowData.SUPNAME;
+    document.getElementById('hdnQaListORDNAME').value = document.getElementById('hdnORDNAME').value;
+    document.getElementById('hdnQaListPARTNAME').value = rowData.PARTNAME;
+    document.getElementById('hdnQaListDOCNO').value = rowData.DOCNO;
+    /******************************************************************/
+    $.ajax(
+        {
+            type: "POST",
+            data:
+            {
+                PARTNAME: rowData.PARTNAME,
+                SUPNAME: rowData.SUPNAME,
+                DOCNO: rowData.DOCNO
+            },
+            url: $('#navGetSampleTest').data('url'),//"/Home/GetSampleTestList",
+            contentType: "application/x-www-form-urlencoded;charset=ISO-8859-15",
+            success: function (response) {
+                console.log("GetSampleTests ==> response", response);
+                if (null !== response && null !== response.objSample) {
+                    pageSampleobject.objSample = response.objSample;
+                    //showGridSampleList(response.lstSamplQA);
+                    $("#jqGridRevision").GridUnload();
+                    if (null !== response.objSample && null !== response.objSample.MED_TRANSSAMPLEQA_SUBFORM && response.objSample.MED_TRANSSAMPLEQA_SUBFORM.length > 0)
+                        showGridProdSamples(response.objSample.MED_TRANSSAMPLEQA_SUBFORM);
+                    else {
+                        let x = document.getElementsByTagName("html")[0].getAttribute("dir");
+                        if (x === 'rtl') {
+                            $("#modal-2").trigger("click");
+                            $("#modal-error-text").html('לא נמצאו בדיקות לדגימה זו. יש ללחוץ על כפתור "בדיקות" ולהוסיף בדיקות מתוך הרשימה.');
+                        }
+                        else {
+                            $("#modal-21").trigger("click");
+                            $("#modal-error-text").html('No tests were found for this sample.Click the "Test" button and add tests from the list.');
+                        }
+                    }
+                }
+                else {
+                    if (response.ErrorDescription !== '') {
+                        form_data[0].reset();
+                        $('.modal').modal('hide');
+                        $('.modal').removeClass('show');
+                        $("#modal-error-text").html(response.ErrorDescription);
+                        $("#modal-1").trigger("click");
+                    }
+                }
+            }
+        });
+}
 function UpdateSampleDetails() {
     console.log('UpdateSampleDetails ==> pageSampleobject', pageSampleobject);
     showSampleDetails(pageSampleobject.objSample);
@@ -1232,6 +1248,7 @@ function onSubmitCreateSampleList(e) {
 }
 
 function onSubmit_UpdateOrderLineData() {
+    $("#loader").show();
     let selectList = document.getElementById('combo_DELAYREASON');
     let SUPNAME = document.getElementById('lbl_SUPNAME').innerText;
     let PARTNAME = document.getElementById('lbl_PARTNAME').innerText;
@@ -1269,6 +1286,7 @@ function onSubmit_UpdateOrderLineData() {
             success: function (response) {
                 console.log("onSubmit_UpdateOrderLineData ==> response", response);
                 refreshOrdersData(SUPNAME);
+                $("#loader").hide();
             }
         });
 }

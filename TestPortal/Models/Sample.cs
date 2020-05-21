@@ -75,6 +75,10 @@ namespace TestPortal.Models
         /// מקסימום כמות פסולים 
         /// </summary>
         public int MAX_REJECT { get; set; }
+        /// <summary>
+        /// תאור רמת איכות רצויה
+        /// </summary>
+        public string EFI_RAR_DES { get; set; }
         public string EFI_SUPNO { get; set; }
         public string SAMPLE_TYPE_CODE { get; set; }
         public string SHR_ROHS { get; set; }
@@ -85,7 +89,7 @@ namespace TestPortal.Models
         internal Sample GetProductSamples(string supplierName, string orderName, string partName, int ordLine)
         {
             // MED_SAMPLE ?$filter = PARTNAME eq '23559000' and SUPNAME eq '20523' &$expand = MED_TRANSSAMPLEQA_SUBFORM
-            string query = "MED_SAMPLE?$filter=EFI_PORDNAME eq '" + orderName + "' and PARTNAME eq '" + partName + "' and SUPNAME eq '" + supplierName + "' and STATDES ne 'מבוטלת'&$select=CURDATE,DOCNO,SUPNAME,STATDES,PARTNAME,PARTDES,SERIALNAME,SHR_SERIAL_QUANT,SHR_QUANT,SHR_SAMPLE_STD_CODE,QUANT,SHR_DRAW,SHR_RAR,MAX_REJECT &$expand=MED_TRANSSAMPLEQA_SUBFORM($expand=MED_RESULTDET_SUBFORM)";
+            string query = "MED_SAMPLE?$filter=EFI_PORDNAME eq '" + orderName + "' and PARTNAME eq '" + partName + "' and SUPNAME eq '" + supplierName + "' and STATDES ne 'מבוטלת'&$select=EFI_RAR_DES, CURDATE,DOCNO,SUPNAME,STATDES,PARTNAME,PARTDES,SERIALNAME,SHR_SERIAL_QUANT,SHR_QUANT,SHR_SAMPLE_STD_CODE,QUANT,SHR_DRAW,SHR_RAR,MAX_REJECT &$expand=MED_TRANSSAMPLEQA_SUBFORM($expand=MED_RESULTDET_SUBFORM)";
             string res = Call_Get(query);
 
             SamplesWarpper ow = JsonConvert.DeserializeObject<SamplesWarpper>(res);

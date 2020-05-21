@@ -27,7 +27,7 @@ namespace TestPortal.Models
             res = string.Empty;
             foreach (PORDTYPESTEXT_SUBFORM item in ow.Value[0].PORDTYPESTEXT_SUBFORM)
             {
-                res += item.TEXT;
+                res += "&nbsp;" + item.TEXT.Replace("Pdir", "P dir") + "&nbsp;";
             }
             return res;
         }
