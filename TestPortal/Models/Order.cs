@@ -128,6 +128,15 @@ namespace TestPortal.Models
             AttachmentWarpper ow = JsonConvert.DeserializeObject<AttachmentWarpper>(res);
             return ow.Value;
         }
+
+        internal Order GetOrderProductDetailsByLine(int orderID, string prodName, int ordLine)
+        {
+            string query = "/PORDERS?$filter=ORD eq  " + orderID + "&$select=TYPECODE, TYPEDES, ORDNAME,STATDES,CURDATE,ORD,CODEDES,SUPNAME,CDES,SHR_SUPTYPEDES,OWNERLOGIN&$expand=EXTFILES_SUBFORM($filter=SHR_PARTNAME eq '" + prodName + "'),PORDERITEMS_SUBFORM($filter=PARTNAME eq '" + prodName + "' and LINE eq " + ordLine + ";$expand=PORDERITEMSTEXT_SUBFORM)";
+            string res = Call_Get(query);
+
+            OrdersWarpper ow = JsonConvert.DeserializeObject<OrdersWarpper>(res);
+            return ow.Value[0];
+        }
     }
 
     public class OrdersWarpper : ODataBase

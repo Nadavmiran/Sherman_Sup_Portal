@@ -1109,3 +1109,5 @@ DEBUG 2020-05-13 13:13:35,737 141128ms eporting Portal Logger TestDateFormat    
 DEBUG 2020-05-13 13:17:21,012 366403ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 13/05/2020 13:17:21
 DEBUG 2020-05-13 13:21:38,687 624078ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 13/05/2020 13:21:38
 DEBUG 2020-05-13 13:22:01,121 646512ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 13/05/2020 13:22:01
+DEBUG 2020-05-25 11:43:13,869   505ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 31/05/2020 0:00:00
+DEBUG 2020-05-25 11:44:29,205 75841ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 25/05/2020 0:00:00

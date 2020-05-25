@@ -131,11 +131,78 @@ namespace TestPortal.Models
         }
 
         [HttpPost]
-        public JsonResult PostTestProductItem(int orderID, string prodName, int ordLine)
+        public JsonResult GetSalesorderDetail(int orderID, string prodName, int ordLine)
         {
             if (Session["USER_LOGIN"] == null)
                 return Json(RedirectToAction("Login", "Account"));
 
+            Sample s = new Sample();
+            Order o = new Order();
+            Product p = new Product();
+            PageObject po = new PageObject();
+            DelayReason d = new DelayReason();
+            po.lstAttachments = new List<Attachments>();
+            po.lstOrderAttachments = new List<OrderAttachment>();
+            po.User = Session["USER_LOGIN"] as AppUser;
+            po.objOrder = o.GetOrderProductDetailsByLine(orderID, prodName, ordLine);
+            po.lstDelayReason = d.GetDelayReasons();
+            po.lstOrderAttachments = o.GetOrderAttachments(po.objOrder.ORDNAME);
+
+            if (null != po.lstOrderAttachments && po.lstOrderAttachments.Count > 0)
+                if (null != po.lstOrderAttachments[0].EXTFILES_SUBFORM && po.lstOrderAttachments[0].EXTFILES_SUBFORM.Count > 0)
+                {
+                    foreach (Attachments item in po.lstOrderAttachments[0].EXTFILES_SUBFORM)
+                    {
+                        string[] arr = item.EXTFILENAME.Split('\\'); //item.EXTFILENAME.Split(' / ');
+                        if (string.IsNullOrEmpty(arr[arr.Length - 1]))
+                        {
+                            item.FILE_NAME = arr[0];
+                            item.FOLDER = arr[1];
+                        }
+                        else
+                        {
+                            if (arr.Length == 3)
+                            {
+                                item.FILE_NAME = arr[arr.Length - 1];
+                                item.FOLDER = arr[arr.Length - 2];
+                            }
+                            if (arr.Length == 4)
+                            {
+                                item.FILE_NAME = arr[arr.Length - 1];
+                                item.FOLDER = arr[arr.Length - 3] + @"\" + arr[arr.Length - 2];
+                            }
+                        }
+                    }
+                }
+            if (!string.IsNullOrEmpty(po.objOrder.TYPECODE))
+            {
+                OrderType oi = new OrderType();
+                po.htmlText = oi.GetOrderTypeText(po.objOrder.TYPECODE);
+            }
+
+            if ((null != po.objOrder.PORDERITEMS_SUBFORM) && (po.objOrder.PORDERITEMS_SUBFORM.Length > 0))
+            {
+                po.objProduct = po.objOrder.PORDERITEMS_SUBFORM[0];
+                po.objProduct.ORD = po.objOrder.ORD;
+                po.objProduct.ORDNAME = po.objOrder.ORDNAME;
+                // Get order line text
+                if ((null != po.objOrder.PORDERITEMS_SUBFORM[0].PORDERITEMSTEXT_SUBFORM) && (po.objOrder.PORDERITEMS_SUBFORM[0].PORDERITEMSTEXT_SUBFORM.Length > 0))
+                {
+                    po.objItemText = new OrdersItemText();
+                    foreach (OrdersItemText item in po.objOrder.PORDERITEMS_SUBFORM[0].PORDERITEMSTEXT_SUBFORM)
+                    {
+                        po.objItemText.TEXT += item.TEXT.Replace(" ", "&nbsp;").Replace("Pdir", "P dir");
+                    }
+                }
+            }
+            return Json(po);
+        }
+
+        [HttpPost]
+        public JsonResult PostTestProductItem(int orderID, string prodName, int ordLine)
+        {
+            if (Session["USER_LOGIN"] == null)
+                return Json(RedirectToAction("Login", "Account"));
             return Json(getPostProductTestData(orderID, prodName, ordLine));
         }
 

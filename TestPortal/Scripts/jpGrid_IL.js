@@ -72,7 +72,7 @@
                     { label: 'פרטי שורת הזמנה', name: 'Information', align: 'center', width: 150, formatter: formatBTNLink }
                 ],
                 onCellSelect: function (id, col, iCol, event) {
-                    if (col == 9) return;
+                    if (col == 10) return;
                     console.log("onSelectRow col = ", col);
                     console.log("onSelectRow iCol = ", iCol);
                     console.log("onSelectRow id = ", id);

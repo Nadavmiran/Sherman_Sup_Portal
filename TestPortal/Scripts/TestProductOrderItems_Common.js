@@ -157,7 +157,7 @@ function showSalesorderDetail(PARTNAME, ORD, LINE) {
     console.log('showSalesorderDetail ==> PARTNAME = ', PARTNAME);
     $.ajax({
         type: "POST",
-        url: $('#navPostTestProductItem').data('url'),//"PostTestProduct",
+        url: $('#navGetSalesorderDetail').data('url'),//"PostTestProduct",
         data: {
             orderID: ORD,
             prodName: PARTNAME,
@@ -173,8 +173,8 @@ function showSalesorderDetail(PARTNAME, ORD, LINE) {
             //Show order line comments
             console.log("showSalesorderDetail ==> data.objItemText", data.objItemText);
             document.getElementById('orderLineAlert').innerHTML = null === data.objItemText || null === data.objItemText.TEXT ? '' : data.objItemText.TEXT;
-            if (null !== data.objSample.MED_TRANSSAMPLEQA_SUBFORM)
-                showGridProdSamples(data.objSample.MED_TRANSSAMPLEQA_SUBFORM);
+            //if (null !== data.objSample.MED_TRANSSAMPLEQA_SUBFORM)
+            //    showGridProdSamples(data.objSample.MED_TRANSSAMPLEQA_SUBFORM);
             if (null !== data.lstOrderAttachments && null !== data.lstOrderAttachments.EXTFILES_SUBFORM && data.lstOrderAttachments.length > 0)
                 if (null !== data.lstOrderAttachments[0].EXTFILES_SUBFORM && data.lstOrderAttachments[0].EXTFILES_SUBFORM.length > 0)
                     showGridProdAttachments(data.lstOrderAttachments[0].EXTFILES_SUBFORM);
