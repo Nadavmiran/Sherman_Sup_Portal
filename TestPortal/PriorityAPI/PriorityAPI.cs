@@ -1,6 +1,5 @@
 ﻿using LMNS.App.Log;
 using Newtonsoft.Json;
-//using ReportingPortal.ODATA;
 using RestSharp;
 using System;
 using System.Collections.Generic;
@@ -11,11 +10,14 @@ using System.Security.Cryptography;
 using System.Net;
 using System.Security.Cryptography.X509Certificates;
 using System.Net.Security;
+using TestPortal.Models;
 
 namespace LMNS.Priority.API
 {
     public class PriorityAPI
     {
+        public string UserLanguage { get; set; }
+
         public string TestAPI()
         {
             IRestResponse response = null;
@@ -94,7 +96,7 @@ namespace LMNS.Priority.API
         {
             IRestResponse response = null;
             ResultAPI ra = null;
-            var uri = new Uri(ConfigurationManager.AppSettings["AppAPI"].ToString());  // Replace with your Service Root URL
+            Uri uri = GetUri(); // Replace with your Service Root URL
 
             try
             {
@@ -118,10 +120,29 @@ namespace LMNS.Priority.API
             return ra;
         }
 
+        private Uri GetUri()
+        {
+            Uri u = null; 
+            switch (UserLanguage)
+            {
+                case "עברית":
+                    u = new Uri(ConfigurationManager.AppSettings["AppAPI"].ToString());
+                    break;
+                case "English":
+                    u = new Uri(ConfigurationManager.AppSettings["AppAPI_EN"].ToString());
+                    break;
+                default:
+                    u = new Uri(ConfigurationManager.AppSettings["AppAPI"].ToString());
+                    break;
+            }
+            return u;
+        }
+
         public ResultAPI Call_POST(string query)
         {
             IRestResponse response = null;
-            var uri = new Uri(ConfigurationManager.AppSettings["AppAPI"].ToString());  // Replace with your Service Root URL
+            //var uri = new Uri(ConfigurationManager.AppSettings["AppAPI"].ToString());  // Replace with your Service Root URL
+            Uri uri = GetUri();
             ResultAPI ra = null;
 
             try
@@ -151,7 +172,8 @@ namespace LMNS.Priority.API
         public ResultAPI Call_Common_PATCH(string query, string msg)
         {
             IRestResponse response = null;
-            var uri = new Uri(ConfigurationManager.AppSettings["AppAPI"].ToString());  // Replace with your Service Root URL
+            //var uri = new Uri(ConfigurationManager.AppSettings["AppAPI"].ToString());  // Replace with your Service Root URL
+            Uri uri = GetUri();
             ResultAPI ra = null;
 
             try
@@ -181,7 +203,8 @@ namespace LMNS.Priority.API
         public ResultAPI Call_PATCH(string query)
         {
             IRestResponse response = null;
-            var uri = new Uri(ConfigurationManager.AppSettings["AppAPI"].ToString());  // Replace with your Service Root URL
+            //var uri = new Uri(ConfigurationManager.AppSettings["AppAPI"].ToString());  // Replace with your Service Root URL
+            Uri uri = GetUri();
             ResultAPI ra = null;
 
             try
@@ -211,7 +234,8 @@ namespace LMNS.Priority.API
         public ResultAPI Call_PATCH_USER(string query)
         {
             IRestResponse response = null;
-            var uri = new Uri(ConfigurationManager.AppSettings["AppAPI"].ToString());  // Replace with your Service Root URL
+            //var uri = new Uri(ConfigurationManager.AppSettings["AppAPI"].ToString());  // Replace with your Service Root URL
+            Uri uri = GetUri();
             ResultAPI ra = null;
 
             try
@@ -237,427 +261,6 @@ namespace LMNS.Priority.API
 
             return ra;
         }
-        #region Reporting Portal
-        //public ResultAPI CreateRPT(string dbName, ProductionReport rptData, ReportData exRPT, List<ReportingDefectCodes> rdf)
-        //{
-        //    IRestResponse response = null;
-        //    var uri = new Uri(ConfigurationManager.AppSettings["AppAPI"].ToString());  // Replace with your Service Root URL
-        //    bool isNewRPT = true;
-        //    string aline_one_data = CreateBaseFormData(rptData, exRPT, rdf, null, isNewRPT);
-
-        //    try
-        //    {
-        //        var client = new RestClient(ConfigurationManager.AppSettings["AppAPI"].ToString() + dbName + "/ALINE_ONE"); // ("https://priority.metalicone.com/odata/priority/tabula.ini/metalic/ALINE_ONE");
-        //        var request = new RestRequest(Method.POST);
-        //        request.AddHeader("postman-token", "869a9852-0cee-9abf-3432-ea9511eeaf6c");
-        //        request.AddHeader("cache-control", "no-cache");
-        //        request.AddHeader("authorization", "Basic " + Convert.ToBase64String(Encoding.ASCII.GetBytes((ConfigurationManager.AppSettings["AppAPI_U"].ToString() + ":" + (ConfigurationManager.AppSettings["AppAPI_P"].ToString())))));
-        //        request.AddHeader("content-type", "application/json");
-        //        request.AddParameter("application/json", aline_one_data, ParameterType.RequestBody);
-
-        //        response = client.Execute(request);
-
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        AppLogger.log.Debug(AppLogger.CreateLogText("CreateRPT", ex.Message));
-        //        AppLogger.log.Debug(AppLogger.CreateLogText("CreateRPT", response.ErrorMessage), response.ErrorException);
-        //    }
-
-        //    return CreateResultApi(response);
-        //}
-
-        //public ResultAPI UpdateRPT(string dbName, ProductionReport rptData, ReportData exRPT, List<ReportingDefectCodes> rdf)
-        //{
-        //    IRestResponse response = null;
-        //    var uri = new Uri(ConfigurationManager.AppSettings["AppAPI"].ToString());  // Replace with your Service Root URL
-        //    bool isNewRPT = true;
-        //    string aline_one_data = CreateBaseFormData(rptData, exRPT, rdf, null, isNewRPT);
-        //    try
-        //    {
-        //        var client = new RestClient(ConfigurationManager.AppSettings["AppAPI"].ToString() + dbName + "/ALINE_ONE"); // ("https://priority.metalicone.com/odata/priority/tabula.ini/metalic/ALINE_ONE");
-        //        var request = new RestRequest(Method.PATCH);
-        //        request.AddHeader("postman-token", "4f2baeb2-bf9a-3acb-1dde-302895567ea9");
-        //        request.AddHeader("cache-control", "no-cache");
-        //        request.AddHeader("if-match", "W/\"08D2931BACB7D7FD\"");
-        //        request.AddHeader("authorization", "Basic " + Convert.ToBase64String(Encoding.ASCII.GetBytes((ConfigurationManager.AppSettings["AppAPI_U"].ToString() + ":" + (ConfigurationManager.AppSettings["AppAPI_P"].ToString())))));
-        //        request.AddHeader("content-type", "application/json");
-        //        request.AddParameter("application/json", aline_one_data, ParameterType.RequestBody);
-        //        //request.AddParameter("application/json", "{\r\n\t\"CURDATE\":\"2017-11-18T00:00:00+02:00\",\r\n\t\"SERIALNAME\":\"51601704\",\r\n\t\"USERID\":504795,\r\n\t\"MET_SETUP\":\"D\",\r\n\t\"RTYPEBOOL\":\"N\",\r\n\t\"PLS_TEXT\":\"\",\r\n\t\"MET_ADDSETUP\":\"\",\r\n\t\"STIME\":\"11:16\",\r\n\t\"EMPSTIME\":\"11:16\",\r\n\t\"MET_ROBOT\":\"\",\r\n\t\"MET_START\":\"Y\",\r\n\t\"ACTNAME\":\"A15-1\"\r\n}", ParameterType.RequestBody);
-
-        //        response = client.Execute(request);
-
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        AppLogger.log.Debug(AppLogger.CreateLogText("UpdateRPT", ex.Message));
-        //        AppLogger.log.Debug(AppLogger.CreateLogText("UpdateRPT", response.ErrorMessage), response.ErrorException);
-        //    }
-
-        //    return CreateResultApi(response);
-        //}
-
-        //private string CreateBaseFormData(ProductionReport rptData, ReportData exRPT, List<ReportingDefectCodes> rdf, string[] subForm, bool isNewRPT)
-        //{
-        //    StringBuilder sb = new StringBuilder();
-
-        //    //"CURDATE":"2017-12-04T00:00:00.000+02:00",
-        //    //"EMPSDATE":"2017-12-04T06:00:00.000+02:00",
-        //    //"EMPEDATE":"2017-12-04T08:00:00+02:00",
-        //    //"DOC":907077,
-        //    //"SERIALNAME":"51601899",
-        //    //"MET_START":"Y",
-        //    //"MET_END":"Y",
-        //    //"MET_SETUP":"D",
-        //    //"ACTNAME":"QC-10550",
-        //    //"USERID":503872,
-        //    //"QUANT":14,
-        //    //"SQUANT":3,
-        //    //"MQUANT":6,
-        //    //"RTYPEBOOL":"N",
-        //    //"PLS_TEXT":"PUTESDDA_TEM",
-        //    //"MET_ADDSETUP":"N",
-        //    //"MET_ROBOT":"N",
-
-        //    //"STIME":"06:00",
-        //    //"ETIME":"08:00",
-        //    //"SDATE": "2017-12-04T08:00:00+02:00",
-        //    //"EMPSTIME":"06:00",	
-        //    //"EMPETIME":"08:00",
-        //    //"EDATE":"2017-12-04T22:10:33.049+02:00",
-        //    //"WORKCNAME":"A14-5",
-        //    //"MET_MTIME":"N",
-        //    //"MET_WORKTIME":"N",
-        //    //"MET_SETUPEND":"N"}
-
-
-        //    sb.Append("{");
-        //    sb.Append("\r\n\t\"CURDATE\":");
-        //    sb.Append("\"" + GetDateTimeOffset(rptData.CURDATE, "00:00") + "\",");
-
-        //    sb.Append("\n\t\"SDATE\":");
-        //    sb.Append("\"" + GetDateTimeOffset(rptData.SDATE, exRPT.MachineStartDateTime) + "\",");
-
-        //    sb.Append("\n\t\"EDATE\":"); //סיום מכונה
-        //    sb.Append("\"" + GetDateTimeOffset(rptData.EDATE, exRPT.MachineEndDateTime) + "\",");
-
-        //    sb.Append("\n\t\"EMPSDATE\":");
-        //    sb.Append("\"" + GetDateTimeOffset(exRPT.EmployeeStartDate, exRPT.EmployeeStartTime) + "\",");
-
-        //    sb.Append("\n\t\"EMPEDATE\":");
-        //    sb.Append("\"" + GetDateTimeOffset(exRPT.EmployeeEndDate, exRPT.EmployeeEndTime) + "\",");
-
-        //    if (rptData.AL > 0)
-        //    {
-        //        sb.Append("\r\n\t\"DOC\":");
-        //        sb.Append(rptData.AL + ",");
-        //    }
-
-        //    sb.Append("\r\n\t\"SERIALNAME\":");
-        //    sb.Append("\"" + rptData.SERIALNAME + "\",");
-
-        //    sb.Append("\r\n\t\"MET_START\":");
-        //    sb.Append("\"Y\",");
-
-        //    if (rptData.MET_END)
-        //    {
-        //        sb.Append("\n\t\"MET_END\":");
-        //        sb.Append("\"Y\",");
-        //    }
-
-        //    sb.Append("\r\n\t\"MET_SETUP\":");
-        //    sb.Append("\"" + exRPT.ReportingSetupID + "\",");
-
-        //    sb.Append("\r\n\t\"USERID\":");
-        //    sb.Append(Convert.ToInt32(rptData.USERID) + ",");
-
-        //    sb.Append("\r\n\t\"ACTNAME\":");
-        //    sb.Append("\"" + rptData.ACTNAME + "\",");
-
-        //    sb.Append("\n\t\"QUANT\":");
-        //    sb.Append(rptData.A_QUANT + ",");
-
-        //    sb.Append("\n\t\"SQUANT\":");
-        //    sb.Append(rptData.A_SQUANT + ",");
-
-        //    sb.Append("\n\t\"MQUANT\":");
-        //    sb.Append(rptData.A_MQUANT + ",");
-
-        //    sb.Append("\r\n\t\"STIME\":");
-        //    sb.Append("\"" + exRPT.MachineStartDateTime + "\",");
-
-        //    //if (rptData.MET_END)
-        //    //{
-        //    sb.Append("\n\t\"ETIME\":");
-        //    sb.Append("\"" + exRPT.MachineEndDateTime + "\",");
-        //    //}
-
-        //    sb.Append("\r\n\t\"EMPSTIME\":");
-        //    sb.Append("\"" + exRPT.EmployeeStartTime + "\",");
-
-        //    //if (rptData.MET_END)
-        //    //{
-        //    sb.Append("\n\t\"EMPETIME\":");
-        //    sb.Append("\"" + exRPT.EmployeeEndTime + "\",");
-        //    //}
-
-        //    sb.Append("\r\n\t\"RTYPEBOOL\":");
-        //    if (exRPT.Rework)
-        //        sb.Append("\"Y\",");
-        //    else
-        //        sb.Append("\"N\",");
-
-        //    if (!string.IsNullOrEmpty(exRPT.ToWarehouse))
-        //    {
-        //        sb.Append("\r\n\t\"WARHSNAME\":");
-        //        sb.Append("\"" + exRPT.ToWarehouse + "\",");
-        //    }
-
-        //    sb.Append("\n\t\"MET_SETUPEND\":");
-        //    if (rptData.MET_SETUPEND)
-        //        sb.Append("\"Y\",");
-        //    else
-        //        sb.Append("\"N\",");
-
-        //    sb.Append("\r\n\t\"MET_ADDSETUP\":");
-        //    if (rptData.MET_ADDSETUP)
-        //        sb.Append("\"Y\",");
-        //    else
-        //        sb.Append("\"N\",");
-
-        //    sb.Append("\r\n\t\"MET_ROBOT\":");
-        //    if (rptData.MET_ROBOT)
-        //        sb.Append("\"Y\",");
-        //    else
-        //        sb.Append("\"N\",");
-
-        //    sb.Append("\n\t\"WORKCNAME\":");
-        //    sb.Append("\"" + rptData.WORKCNAME + "\",");
-
-        //    sb.Append("\n\t\"MET_MTIME\":");
-        //    if (rptData.MET_MTIME)
-        //        sb.Append("\"Y\",");
-        //    else
-        //        sb.Append("\"N\",");
-
-        //    sb.Append("\n\t\"MET_WORKTIME\":");
-        //    if (rptData.MET_WORKTIME)
-        //        sb.Append("\"Y\"");
-        //    else
-        //        sb.Append("\"N\",");
-
-        //    sb.Append("\n\t\"EXCDES\":");
-        //    sb.Append("\"\",");
-
-        //    sb.Append("\r\n\t\"PLS_TEXT\":");
-        //    if (string.IsNullOrEmpty(rptData.PLS_TEXT))
-        //        sb.Append("\"\"");
-        //    else
-        //        sb.Append("\"" + rptData.PLS_TEXT + "\"");
-        //    /***/
-
-        //    if ((null != rdf) && (rdf.Count > 0))
-        //    {
-        //        int indx = 1;
-        //        sb.Append("\t,");
-        //        sb.Append("\r\n\t\"ALINEDEFECTCODES_SUBFORM\": [");
-        //        foreach (var item in rdf)
-        //        {
-        //            sb.Append("\r\n{");
-        //            sb.Append("\r\n\t\"DEFECTCODE\":");
-        //            sb.Append("\"" + item.DEFECTCODE + "\",\r\n");
-
-        //            sb.Append("\r\n\t\"MET_ACTNAME\":");
-        //            sb.Append("\"" + rptData.ACTNAME + "\",\r\n");
-
-        //            sb.Append("\r\n\t\"MET_USERNUM\":");
-        //            sb.Append(item.USERID + ",\r\n");
-
-        //            sb.Append("\r\n\t\"QUANT\":");
-        //            sb.Append(item.QUANT + ",\r\n");
-
-        //            sb.Append("\r\n\t\"REMARK\":");
-        //            if (string.IsNullOrEmpty(item.REMARK))
-        //            {
-        //                item.REMARK = " ";
-        //                sb.Append("\"" + item.REMARK + "\"\r\n");
-        //            }
-        //            else
-        //                sb.Append("\"" + item.REMARK + "\"\r\n");
-
-        //            sb.Append("}");
-
-        //            if (indx < rdf.Count)
-        //                sb.Append(",");
-
-        //            indx++;
-        //        }
-        //        sb.Append("]\r\n");
-        //    }
-
-        //    if (subForm != null)
-        //        foreach (var item in subForm)
-        //        {
-        //            sb.Append(item);
-        //        }
-
-        //    sb.Append("}");
-
-        //    return sb.ToString();
-        //}
-
-        //internal ResultAPI SaveBreakeTime(string dbName, ProductionReport rptData, ReportData exRPT, List<ReportingDefectCodes> rdf, string breakCode, string breakTime)
-        //{
-        //    IRestResponse response = null;
-        //    var uri = new Uri(ConfigurationManager.AppSettings["AppAPI"].ToString());  // Replace with your Service Root URL
-        //    string PLS_ALINESTOP_SUBFORM = CreateAlineStopData(breakCode, breakTime);
-        //    string[] subForm = { PLS_ALINESTOP_SUBFORM };
-        //    string aline_one_data = CreateBreakReport(rptData, exRPT, breakCode, breakTime);
-
-        //    try
-        //    {
-        //        var client = new RestClient(ConfigurationManager.AppSettings["AppAPI"].ToString() + dbName + "/ALINE_ONE");
-        //        var request = new RestRequest(Method.POST);
-        //        request.AddHeader("postman-token", "869a9852-0cee-9abf-3432-ea9511eeaf6c");
-        //        request.AddHeader("cache-control", "no-cache");
-        //        request.AddHeader("authorization", "Basic " + Convert.ToBase64String(Encoding.ASCII.GetBytes((ConfigurationManager.AppSettings["AppAPI_U"].ToString() + ":" + (ConfigurationManager.AppSettings["AppAPI_P"].ToString())))));
-        //        request.AddHeader("content-type", "application/json");
-        //        request.AddParameter("application/json", aline_one_data, ParameterType.RequestBody);
-        //        //request.AddParameter("application/json", "{\r\n\t\"CURDATE\":\"2017-11-18T00:00:00+02:00\",\r\n\t\"SERIALNAME\":\"51601704\",\r\n\t\"USERID\":504795,\r\n\t\"MET_SETUP\":\"D\",\r\n\t\"RTYPEBOOL\":\"N\",\r\n\t\"PLS_TEXT\":\"\",\r\n\t\"MET_ADDSETUP\":\"\",\r\n\t\"STIME\":\"11:16\",\r\n\t\"EMPSTIME\":\"11:16\",\r\n\t\"MET_ROBOT\":\"\",\r\n\t\"MET_START\":\"Y\",\r\n\t\"ACTNAME\":\"A15-1\"\r\n}", ParameterType.RequestBody);
-
-        //        response = client.Execute(request);
-
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        AppLogger.log.Debug(AppLogger.CreateLogText("SaveBreakeTime", ex.Message));
-        //        AppLogger.log.Debug(AppLogger.CreateLogText("SaveBreakeTime", response.ErrorMessage), response.ErrorException);
-        //    }
-
-        //    return CreateResultApi(response);
-        //}
-
-        //private string CreateBreakReport(ProductionReport rptData, ReportData exRPT, string breakCode, string breakTime)
-        //{
-        //    //	"CURDATE":"2018-01-12T14:26:35.8778406+02:00",
-        //    //"SERIALNAME":"21613905",
-        //    //"MET_START":"Y",
-        //    //"MET_SETUP":"B",
-        //    //"ACTNAME":"1363-1",
-        //    //"USERID":503872,
-        //    //"STIME":"14:26",
-        //    //"ETIME":"14:26",
-        //    //"EMPSTIME":"14:26",
-        //    //"EMPETIME":"14:26",
-        //    //"RTYPEBOOL":"N",
-        //    //"PLS_TEXT":"",
-        //    //"MET_ROBOT":"N",
-        //    //"MET_ADDSETUP":"N",	
-        //    StringBuilder sb = new StringBuilder();
-        //    sb.Append("{");
-        //    if (!exRPT.ReportingSetupID.Equals("B"))
-        //    {
-        //        sb.Append("\r\n\t\"CURDATE\":");
-        //        sb.Append("\"" + GetDateTimeOffset(rptData.CURDATE, "00:00") + "\",");
-
-        //        sb.Append("\n\t\"EMPSDATE\":");
-        //        sb.Append("\"" + GetDateTimeOffset(exRPT.EmployeeStartDate, exRPT.EmployeeStartDateTime) + "\",");
-
-        //        sb.Append("\n\t\"EMPEDATE\":");
-        //        sb.Append("\"" + GetDateTimeOffset(exRPT.EmployeeEndDate, exRPT.EmployeeEndDateTime) + "\",");
-        //    }
-        //    sb.Append("\r\n\t\"SERIALNAME\":");
-        //    sb.Append("\"" + rptData.SERIALNAME + "\",");
-
-        //    sb.Append("\r\n\t\"MET_START\":");
-        //    sb.Append("\"Y\",");
-
-        //    sb.Append("\r\n\t\"MET_SETUP\":");
-        //    sb.Append("\"" + exRPT.ReportingSetupID + "\",");
-
-        //    sb.Append("\r\n\t\"ACTNAME\":");
-        //    sb.Append("\"" + rptData.ACTNAME + "\",");
-
-        //    sb.Append("\r\n\t\"USERID\":");
-        //    sb.Append(Convert.ToInt32(rptData.USERID) + ",");
-
-        //    sb.Append("\r\n\t\"STIME\":");
-        //    sb.Append("\"" + exRPT.MachineStartDateTime + "\",");
-
-        //    sb.Append("\n\t\"ETIME\":");
-        //    sb.Append("\"" + exRPT.MachineEndDateTime + "\",");
-
-        //    sb.Append("\r\n\t\"EMPSTIME\":");
-        //    sb.Append("\"" + exRPT.EmployeeStartDateTime + "\",");
-
-        //    sb.Append("\n\t\"EMPETIME\":");
-        //    sb.Append("\"" + exRPT.EmployeeEndDateTime + "\",");
-
-        //    sb.Append("\r\n\t\"RTYPEBOOL\":");
-        //    if (exRPT.Rework)
-        //        sb.Append("\"Y\",");
-        //    else
-        //        sb.Append("\"N\",");
-
-        //    sb.Append("\r\n\t\"PLS_TEXT\":");
-        //    if (string.IsNullOrEmpty(rptData.PLS_TEXT))
-        //        sb.Append("\"\",");
-        //    else
-        //        sb.Append("\"" + rptData.PLS_TEXT + "\",");
-
-        //    sb.Append("\r\n\t\"MET_ROBOT\":");
-        //    if (rptData.MET_ROBOT)
-        //        sb.Append("\"Y\",");
-        //    else
-        //        sb.Append("\"N\",");
-
-        //    sb.Append("\n\t\"SDATE\":");
-        //    sb.Append("\"" + GetDateTimeOffset(exRPT.MachineStartDate, exRPT.MachineStartDateTime) + "\",");
-
-        //    //if (rptData.MET_END)
-        //    //{
-        //    sb.Append("\n\t\"EDATE\":"); //סיום מכונה
-        //    sb.Append("\"" + GetDateTimeOffset(exRPT.MachineEndDate, exRPT.MachineEndDateTime) + "\",");
-
-        //    sb.Append("\r\n\t\"MET_ADDSETUP\":");
-        //    if (rptData.MET_ADDSETUP)
-        //        sb.Append("\"Y\",");
-        //    else
-        //        sb.Append("\"N\"");
-
-        //    sb.Append(CreateAlineStopData(breakCode, breakTime));
-        //    sb.Append("}");
-
-        //    return sb.ToString();
-
-        //}
-
-        //private string CreateAlineStopData(string breakCode, string breakTime)
-        //{
-        //    StringBuilder sb = new StringBuilder();
-        //    sb.Append(",\n\t\"PLS_ALINESTOP_SUBFORM\": [\n\t\t{\n\t\t\t");
-        //    sb.Append("\"STOPCODE\":");
-        //    sb.Append("\"" + breakCode + "\",");
-
-        //    if (string.IsNullOrEmpty(breakTime))
-        //        breakTime = "00:00";
-
-        //    sb.Append("\n\t\t\t\"STOPTIME\":");
-        //    sb.Append("\"" + breakTime + "\"");
-
-        //    sb.Append("\n\t\t}");
-        //    sb.Append("\n\t\t]\n\t");
-        //    //,\n\t\"PLS_ALINESTOP_SUBFORM\": [\n\t\t{\n\t\t\t\"STOPCODE\":\"05\",\n\t\t\t\"STOPTIME\":\"07:30:00.000\",\n\t\t\t\"PLS_STOPRE\":5\n\t\t}\n\t]
-        //    return sb.ToString();
-        //} 
-        #endregion
-        //{
-        //  "@odata.context":"https://priority.metalicone.com/odata/Priority/tabula.ini/metalic/$metadata#ALINE_ONE","value":[
-        //    {
-        //      "CURDATE":"2018-02-10T00:00:00+02:00","DOC":907350,"SERIALNAME":"51701906","SERQUANT":100,"MET_PRODCOSTCNAME":null,"MET_WCCOSTCNAME":"M105","PARTNAME":"H10CA341-10230","MET_START":"Y","MET_END":null,"ACTNAME":"M42-11-17","ACTDES":"MILLING DMG70-105","WORKCNAME":"1367","WORKCDES":"\u05db\u05e8\u05e1\u05d5\u05dd EVO linear 70-DMG \u05de\u05d7' 105","USERID":503872,"BNAME":"\u05d0\u05d5\u05dc\u05d2 \u05d1\u05d5\u05d2\u05d3\u05e0\u05d5\u05d1 102","EMPCODE":null,"SNAME":null,"QUANT":0,"SQUANT":0,"MQUANT":0,"UNITNAME":"\u05d9\u05d7'","STIME":"19:58","ETIME":"19:58","ASPAN":"000:00","EMPSTIME":"19:58","EMPETIME":"19:58","EMPASPAN":"000:00","RTYPEBOOL":null,"WARHSNAME":null,"LOCNAME":null,"AINVFLAG":"R","EDATE":"2018-02-10T19:58:00+02:00","MET_QC":null,"SDATE":"2018-02-10T19:58:00+02:00","REVNAME":"01","ANALYSISVALID":null,"ANALYSISNOTVALID":null,"FORMNAME":"D180000046","GENERAL":"Y","MET_ROBOT":"Y","MET_STEP":null,"MET_SUMQUANT":0,"MET_SETUP":"S","EXCNAME":null,"EXCDES":null,"MET_COSTCNAME":null,"PLS_TEXT":null,"MET_MTIME":"N","MET_WORKTIME":"N","MET_SETUPEND":"N","MET_ADDSETUP":"N","MET_WEIGHT":null,"MET_WUNITNAME":null,"PLS_PARTDES":"IMP DRUM MACH MERON CL47600003","MET_USERLOGINSIG":"reportalnew","MET_UDATESIGN":"2018-02-10T19:59:00+02:00","EFI_ENGSUTIME":"002:00","EFI_ENGSTTIME":"001:10","EFI_SERSUTIME":"002:00","EFI_SERSTTIME":"001:10","PLS_SHIFTNAME":"2","MET_REPORTDATE":"2018-02-10T00:00:00+02:00","EMPSDATE":"2018-02-10T19:58:00+02:00","EMPEDATE":"2018-02-10T19:58:00+02:00","FORM":248903,"KLINE":1
-        //    }
-        //  ]
-        //}
 
         private string TransformeResultToXml(string res)
         {
@@ -891,4 +494,426 @@ namespace LMNS.Priority.API
         public string AGENTNAME { get; set; }
         public string ORDSTATUSDES { get; set; }
     }
+
+    #region Reporting Portal
+    //public ResultAPI CreateRPT(string dbName, ProductionReport rptData, ReportData exRPT, List<ReportingDefectCodes> rdf)
+    //{
+    //    IRestResponse response = null;
+    //    var uri = new Uri(ConfigurationManager.AppSettings["AppAPI"].ToString());  // Replace with your Service Root URL
+    //    bool isNewRPT = true;
+    //    string aline_one_data = CreateBaseFormData(rptData, exRPT, rdf, null, isNewRPT);
+
+    //    try
+    //    {
+    //        var client = new RestClient(ConfigurationManager.AppSettings["AppAPI"].ToString() + dbName + "/ALINE_ONE"); // ("https://priority.metalicone.com/odata/priority/tabula.ini/metalic/ALINE_ONE");
+    //        var request = new RestRequest(Method.POST);
+    //        request.AddHeader("postman-token", "869a9852-0cee-9abf-3432-ea9511eeaf6c");
+    //        request.AddHeader("cache-control", "no-cache");
+    //        request.AddHeader("authorization", "Basic " + Convert.ToBase64String(Encoding.ASCII.GetBytes((ConfigurationManager.AppSettings["AppAPI_U"].ToString() + ":" + (ConfigurationManager.AppSettings["AppAPI_P"].ToString())))));
+    //        request.AddHeader("content-type", "application/json");
+    //        request.AddParameter("application/json", aline_one_data, ParameterType.RequestBody);
+
+    //        response = client.Execute(request);
+
+    //    }
+    //    catch (Exception ex)
+    //    {
+    //        AppLogger.log.Debug(AppLogger.CreateLogText("CreateRPT", ex.Message));
+    //        AppLogger.log.Debug(AppLogger.CreateLogText("CreateRPT", response.ErrorMessage), response.ErrorException);
+    //    }
+
+    //    return CreateResultApi(response);
+    //}
+
+    //public ResultAPI UpdateRPT(string dbName, ProductionReport rptData, ReportData exRPT, List<ReportingDefectCodes> rdf)
+    //{
+    //    IRestResponse response = null;
+    //    var uri = new Uri(ConfigurationManager.AppSettings["AppAPI"].ToString());  // Replace with your Service Root URL
+    //    bool isNewRPT = true;
+    //    string aline_one_data = CreateBaseFormData(rptData, exRPT, rdf, null, isNewRPT);
+    //    try
+    //    {
+    //        var client = new RestClient(ConfigurationManager.AppSettings["AppAPI"].ToString() + dbName + "/ALINE_ONE"); // ("https://priority.metalicone.com/odata/priority/tabula.ini/metalic/ALINE_ONE");
+    //        var request = new RestRequest(Method.PATCH);
+    //        request.AddHeader("postman-token", "4f2baeb2-bf9a-3acb-1dde-302895567ea9");
+    //        request.AddHeader("cache-control", "no-cache");
+    //        request.AddHeader("if-match", "W/\"08D2931BACB7D7FD\"");
+    //        request.AddHeader("authorization", "Basic " + Convert.ToBase64String(Encoding.ASCII.GetBytes((ConfigurationManager.AppSettings["AppAPI_U"].ToString() + ":" + (ConfigurationManager.AppSettings["AppAPI_P"].ToString())))));
+    //        request.AddHeader("content-type", "application/json");
+    //        request.AddParameter("application/json", aline_one_data, ParameterType.RequestBody);
+    //        //request.AddParameter("application/json", "{\r\n\t\"CURDATE\":\"2017-11-18T00:00:00+02:00\",\r\n\t\"SERIALNAME\":\"51601704\",\r\n\t\"USERID\":504795,\r\n\t\"MET_SETUP\":\"D\",\r\n\t\"RTYPEBOOL\":\"N\",\r\n\t\"PLS_TEXT\":\"\",\r\n\t\"MET_ADDSETUP\":\"\",\r\n\t\"STIME\":\"11:16\",\r\n\t\"EMPSTIME\":\"11:16\",\r\n\t\"MET_ROBOT\":\"\",\r\n\t\"MET_START\":\"Y\",\r\n\t\"ACTNAME\":\"A15-1\"\r\n}", ParameterType.RequestBody);
+
+    //        response = client.Execute(request);
+
+    //    }
+    //    catch (Exception ex)
+    //    {
+    //        AppLogger.log.Debug(AppLogger.CreateLogText("UpdateRPT", ex.Message));
+    //        AppLogger.log.Debug(AppLogger.CreateLogText("UpdateRPT", response.ErrorMessage), response.ErrorException);
+    //    }
+
+    //    return CreateResultApi(response);
+    //}
+
+    //private string CreateBaseFormData(ProductionReport rptData, ReportData exRPT, List<ReportingDefectCodes> rdf, string[] subForm, bool isNewRPT)
+    //{
+    //    StringBuilder sb = new StringBuilder();
+
+    //    //"CURDATE":"2017-12-04T00:00:00.000+02:00",
+    //    //"EMPSDATE":"2017-12-04T06:00:00.000+02:00",
+    //    //"EMPEDATE":"2017-12-04T08:00:00+02:00",
+    //    //"DOC":907077,
+    //    //"SERIALNAME":"51601899",
+    //    //"MET_START":"Y",
+    //    //"MET_END":"Y",
+    //    //"MET_SETUP":"D",
+    //    //"ACTNAME":"QC-10550",
+    //    //"USERID":503872,
+    //    //"QUANT":14,
+    //    //"SQUANT":3,
+    //    //"MQUANT":6,
+    //    //"RTYPEBOOL":"N",
+    //    //"PLS_TEXT":"PUTESDDA_TEM",
+    //    //"MET_ADDSETUP":"N",
+    //    //"MET_ROBOT":"N",
+
+    //    //"STIME":"06:00",
+    //    //"ETIME":"08:00",
+    //    //"SDATE": "2017-12-04T08:00:00+02:00",
+    //    //"EMPSTIME":"06:00",	
+    //    //"EMPETIME":"08:00",
+    //    //"EDATE":"2017-12-04T22:10:33.049+02:00",
+    //    //"WORKCNAME":"A14-5",
+    //    //"MET_MTIME":"N",
+    //    //"MET_WORKTIME":"N",
+    //    //"MET_SETUPEND":"N"}
+
+
+    //    sb.Append("{");
+    //    sb.Append("\r\n\t\"CURDATE\":");
+    //    sb.Append("\"" + GetDateTimeOffset(rptData.CURDATE, "00:00") + "\",");
+
+    //    sb.Append("\n\t\"SDATE\":");
+    //    sb.Append("\"" + GetDateTimeOffset(rptData.SDATE, exRPT.MachineStartDateTime) + "\",");
+
+    //    sb.Append("\n\t\"EDATE\":"); //סיום מכונה
+    //    sb.Append("\"" + GetDateTimeOffset(rptData.EDATE, exRPT.MachineEndDateTime) + "\",");
+
+    //    sb.Append("\n\t\"EMPSDATE\":");
+    //    sb.Append("\"" + GetDateTimeOffset(exRPT.EmployeeStartDate, exRPT.EmployeeStartTime) + "\",");
+
+    //    sb.Append("\n\t\"EMPEDATE\":");
+    //    sb.Append("\"" + GetDateTimeOffset(exRPT.EmployeeEndDate, exRPT.EmployeeEndTime) + "\",");
+
+    //    if (rptData.AL > 0)
+    //    {
+    //        sb.Append("\r\n\t\"DOC\":");
+    //        sb.Append(rptData.AL + ",");
+    //    }
+
+    //    sb.Append("\r\n\t\"SERIALNAME\":");
+    //    sb.Append("\"" + rptData.SERIALNAME + "\",");
+
+    //    sb.Append("\r\n\t\"MET_START\":");
+    //    sb.Append("\"Y\",");
+
+    //    if (rptData.MET_END)
+    //    {
+    //        sb.Append("\n\t\"MET_END\":");
+    //        sb.Append("\"Y\",");
+    //    }
+
+    //    sb.Append("\r\n\t\"MET_SETUP\":");
+    //    sb.Append("\"" + exRPT.ReportingSetupID + "\",");
+
+    //    sb.Append("\r\n\t\"USERID\":");
+    //    sb.Append(Convert.ToInt32(rptData.USERID) + ",");
+
+    //    sb.Append("\r\n\t\"ACTNAME\":");
+    //    sb.Append("\"" + rptData.ACTNAME + "\",");
+
+    //    sb.Append("\n\t\"QUANT\":");
+    //    sb.Append(rptData.A_QUANT + ",");
+
+    //    sb.Append("\n\t\"SQUANT\":");
+    //    sb.Append(rptData.A_SQUANT + ",");
+
+    //    sb.Append("\n\t\"MQUANT\":");
+    //    sb.Append(rptData.A_MQUANT + ",");
+
+    //    sb.Append("\r\n\t\"STIME\":");
+    //    sb.Append("\"" + exRPT.MachineStartDateTime + "\",");
+
+    //    //if (rptData.MET_END)
+    //    //{
+    //    sb.Append("\n\t\"ETIME\":");
+    //    sb.Append("\"" + exRPT.MachineEndDateTime + "\",");
+    //    //}
+
+    //    sb.Append("\r\n\t\"EMPSTIME\":");
+    //    sb.Append("\"" + exRPT.EmployeeStartTime + "\",");
+
+    //    //if (rptData.MET_END)
+    //    //{
+    //    sb.Append("\n\t\"EMPETIME\":");
+    //    sb.Append("\"" + exRPT.EmployeeEndTime + "\",");
+    //    //}
+
+    //    sb.Append("\r\n\t\"RTYPEBOOL\":");
+    //    if (exRPT.Rework)
+    //        sb.Append("\"Y\",");
+    //    else
+    //        sb.Append("\"N\",");
+
+    //    if (!string.IsNullOrEmpty(exRPT.ToWarehouse))
+    //    {
+    //        sb.Append("\r\n\t\"WARHSNAME\":");
+    //        sb.Append("\"" + exRPT.ToWarehouse + "\",");
+    //    }
+
+    //    sb.Append("\n\t\"MET_SETUPEND\":");
+    //    if (rptData.MET_SETUPEND)
+    //        sb.Append("\"Y\",");
+    //    else
+    //        sb.Append("\"N\",");
+
+    //    sb.Append("\r\n\t\"MET_ADDSETUP\":");
+    //    if (rptData.MET_ADDSETUP)
+    //        sb.Append("\"Y\",");
+    //    else
+    //        sb.Append("\"N\",");
+
+    //    sb.Append("\r\n\t\"MET_ROBOT\":");
+    //    if (rptData.MET_ROBOT)
+    //        sb.Append("\"Y\",");
+    //    else
+    //        sb.Append("\"N\",");
+
+    //    sb.Append("\n\t\"WORKCNAME\":");
+    //    sb.Append("\"" + rptData.WORKCNAME + "\",");
+
+    //    sb.Append("\n\t\"MET_MTIME\":");
+    //    if (rptData.MET_MTIME)
+    //        sb.Append("\"Y\",");
+    //    else
+    //        sb.Append("\"N\",");
+
+    //    sb.Append("\n\t\"MET_WORKTIME\":");
+    //    if (rptData.MET_WORKTIME)
+    //        sb.Append("\"Y\"");
+    //    else
+    //        sb.Append("\"N\",");
+
+    //    sb.Append("\n\t\"EXCDES\":");
+    //    sb.Append("\"\",");
+
+    //    sb.Append("\r\n\t\"PLS_TEXT\":");
+    //    if (string.IsNullOrEmpty(rptData.PLS_TEXT))
+    //        sb.Append("\"\"");
+    //    else
+    //        sb.Append("\"" + rptData.PLS_TEXT + "\"");
+    //    /***/
+
+    //    if ((null != rdf) && (rdf.Count > 0))
+    //    {
+    //        int indx = 1;
+    //        sb.Append("\t,");
+    //        sb.Append("\r\n\t\"ALINEDEFECTCODES_SUBFORM\": [");
+    //        foreach (var item in rdf)
+    //        {
+    //            sb.Append("\r\n{");
+    //            sb.Append("\r\n\t\"DEFECTCODE\":");
+    //            sb.Append("\"" + item.DEFECTCODE + "\",\r\n");
+
+    //            sb.Append("\r\n\t\"MET_ACTNAME\":");
+    //            sb.Append("\"" + rptData.ACTNAME + "\",\r\n");
+
+    //            sb.Append("\r\n\t\"MET_USERNUM\":");
+    //            sb.Append(item.USERID + ",\r\n");
+
+    //            sb.Append("\r\n\t\"QUANT\":");
+    //            sb.Append(item.QUANT + ",\r\n");
+
+    //            sb.Append("\r\n\t\"REMARK\":");
+    //            if (string.IsNullOrEmpty(item.REMARK))
+    //            {
+    //                item.REMARK = " ";
+    //                sb.Append("\"" + item.REMARK + "\"\r\n");
+    //            }
+    //            else
+    //                sb.Append("\"" + item.REMARK + "\"\r\n");
+
+    //            sb.Append("}");
+
+    //            if (indx < rdf.Count)
+    //                sb.Append(",");
+
+    //            indx++;
+    //        }
+    //        sb.Append("]\r\n");
+    //    }
+
+    //    if (subForm != null)
+    //        foreach (var item in subForm)
+    //        {
+    //            sb.Append(item);
+    //        }
+
+    //    sb.Append("}");
+
+    //    return sb.ToString();
+    //}
+
+    //internal ResultAPI SaveBreakeTime(string dbName, ProductionReport rptData, ReportData exRPT, List<ReportingDefectCodes> rdf, string breakCode, string breakTime)
+    //{
+    //    IRestResponse response = null;
+    //    var uri = new Uri(ConfigurationManager.AppSettings["AppAPI"].ToString());  // Replace with your Service Root URL
+    //    string PLS_ALINESTOP_SUBFORM = CreateAlineStopData(breakCode, breakTime);
+    //    string[] subForm = { PLS_ALINESTOP_SUBFORM };
+    //    string aline_one_data = CreateBreakReport(rptData, exRPT, breakCode, breakTime);
+
+    //    try
+    //    {
+    //        var client = new RestClient(ConfigurationManager.AppSettings["AppAPI"].ToString() + dbName + "/ALINE_ONE");
+    //        var request = new RestRequest(Method.POST);
+    //        request.AddHeader("postman-token", "869a9852-0cee-9abf-3432-ea9511eeaf6c");
+    //        request.AddHeader("cache-control", "no-cache");
+    //        request.AddHeader("authorization", "Basic " + Convert.ToBase64String(Encoding.ASCII.GetBytes((ConfigurationManager.AppSettings["AppAPI_U"].ToString() + ":" + (ConfigurationManager.AppSettings["AppAPI_P"].ToString())))));
+    //        request.AddHeader("content-type", "application/json");
+    //        request.AddParameter("application/json", aline_one_data, ParameterType.RequestBody);
+    //        //request.AddParameter("application/json", "{\r\n\t\"CURDATE\":\"2017-11-18T00:00:00+02:00\",\r\n\t\"SERIALNAME\":\"51601704\",\r\n\t\"USERID\":504795,\r\n\t\"MET_SETUP\":\"D\",\r\n\t\"RTYPEBOOL\":\"N\",\r\n\t\"PLS_TEXT\":\"\",\r\n\t\"MET_ADDSETUP\":\"\",\r\n\t\"STIME\":\"11:16\",\r\n\t\"EMPSTIME\":\"11:16\",\r\n\t\"MET_ROBOT\":\"\",\r\n\t\"MET_START\":\"Y\",\r\n\t\"ACTNAME\":\"A15-1\"\r\n}", ParameterType.RequestBody);
+
+    //        response = client.Execute(request);
+
+    //    }
+    //    catch (Exception ex)
+    //    {
+    //        AppLogger.log.Debug(AppLogger.CreateLogText("SaveBreakeTime", ex.Message));
+    //        AppLogger.log.Debug(AppLogger.CreateLogText("SaveBreakeTime", response.ErrorMessage), response.ErrorException);
+    //    }
+
+    //    return CreateResultApi(response);
+    //}
+
+    //private string CreateBreakReport(ProductionReport rptData, ReportData exRPT, string breakCode, string breakTime)
+    //{
+    //    //	"CURDATE":"2018-01-12T14:26:35.8778406+02:00",
+    //    //"SERIALNAME":"21613905",
+    //    //"MET_START":"Y",
+    //    //"MET_SETUP":"B",
+    //    //"ACTNAME":"1363-1",
+    //    //"USERID":503872,
+    //    //"STIME":"14:26",
+    //    //"ETIME":"14:26",
+    //    //"EMPSTIME":"14:26",
+    //    //"EMPETIME":"14:26",
+    //    //"RTYPEBOOL":"N",
+    //    //"PLS_TEXT":"",
+    //    //"MET_ROBOT":"N",
+    //    //"MET_ADDSETUP":"N",	
+    //    StringBuilder sb = new StringBuilder();
+    //    sb.Append("{");
+    //    if (!exRPT.ReportingSetupID.Equals("B"))
+    //    {
+    //        sb.Append("\r\n\t\"CURDATE\":");
+    //        sb.Append("\"" + GetDateTimeOffset(rptData.CURDATE, "00:00") + "\",");
+
+    //        sb.Append("\n\t\"EMPSDATE\":");
+    //        sb.Append("\"" + GetDateTimeOffset(exRPT.EmployeeStartDate, exRPT.EmployeeStartDateTime) + "\",");
+
+    //        sb.Append("\n\t\"EMPEDATE\":");
+    //        sb.Append("\"" + GetDateTimeOffset(exRPT.EmployeeEndDate, exRPT.EmployeeEndDateTime) + "\",");
+    //    }
+    //    sb.Append("\r\n\t\"SERIALNAME\":");
+    //    sb.Append("\"" + rptData.SERIALNAME + "\",");
+
+    //    sb.Append("\r\n\t\"MET_START\":");
+    //    sb.Append("\"Y\",");
+
+    //    sb.Append("\r\n\t\"MET_SETUP\":");
+    //    sb.Append("\"" + exRPT.ReportingSetupID + "\",");
+
+    //    sb.Append("\r\n\t\"ACTNAME\":");
+    //    sb.Append("\"" + rptData.ACTNAME + "\",");
+
+    //    sb.Append("\r\n\t\"USERID\":");
+    //    sb.Append(Convert.ToInt32(rptData.USERID) + ",");
+
+    //    sb.Append("\r\n\t\"STIME\":");
+    //    sb.Append("\"" + exRPT.MachineStartDateTime + "\",");
+
+    //    sb.Append("\n\t\"ETIME\":");
+    //    sb.Append("\"" + exRPT.MachineEndDateTime + "\",");
+
+    //    sb.Append("\r\n\t\"EMPSTIME\":");
+    //    sb.Append("\"" + exRPT.EmployeeStartDateTime + "\",");
+
+    //    sb.Append("\n\t\"EMPETIME\":");
+    //    sb.Append("\"" + exRPT.EmployeeEndDateTime + "\",");
+
+    //    sb.Append("\r\n\t\"RTYPEBOOL\":");
+    //    if (exRPT.Rework)
+    //        sb.Append("\"Y\",");
+    //    else
+    //        sb.Append("\"N\",");
+
+    //    sb.Append("\r\n\t\"PLS_TEXT\":");
+    //    if (string.IsNullOrEmpty(rptData.PLS_TEXT))
+    //        sb.Append("\"\",");
+    //    else
+    //        sb.Append("\"" + rptData.PLS_TEXT + "\",");
+
+    //    sb.Append("\r\n\t\"MET_ROBOT\":");
+    //    if (rptData.MET_ROBOT)
+    //        sb.Append("\"Y\",");
+    //    else
+    //        sb.Append("\"N\",");
+
+    //    sb.Append("\n\t\"SDATE\":");
+    //    sb.Append("\"" + GetDateTimeOffset(exRPT.MachineStartDate, exRPT.MachineStartDateTime) + "\",");
+
+    //    //if (rptData.MET_END)
+    //    //{
+    //    sb.Append("\n\t\"EDATE\":"); //סיום מכונה
+    //    sb.Append("\"" + GetDateTimeOffset(exRPT.MachineEndDate, exRPT.MachineEndDateTime) + "\",");
+
+    //    sb.Append("\r\n\t\"MET_ADDSETUP\":");
+    //    if (rptData.MET_ADDSETUP)
+    //        sb.Append("\"Y\",");
+    //    else
+    //        sb.Append("\"N\"");
+
+    //    sb.Append(CreateAlineStopData(breakCode, breakTime));
+    //    sb.Append("}");
+
+    //    return sb.ToString();
+
+    //}
+
+    //private string CreateAlineStopData(string breakCode, string breakTime)
+    //{
+    //    StringBuilder sb = new StringBuilder();
+    //    sb.Append(",\n\t\"PLS_ALINESTOP_SUBFORM\": [\n\t\t{\n\t\t\t");
+    //    sb.Append("\"STOPCODE\":");
+    //    sb.Append("\"" + breakCode + "\",");
+
+    //    if (string.IsNullOrEmpty(breakTime))
+    //        breakTime = "00:00";
+
+    //    sb.Append("\n\t\t\t\"STOPTIME\":");
+    //    sb.Append("\"" + breakTime + "\"");
+
+    //    sb.Append("\n\t\t}");
+    //    sb.Append("\n\t\t]\n\t");
+    //    //,\n\t\"PLS_ALINESTOP_SUBFORM\": [\n\t\t{\n\t\t\t\"STOPCODE\":\"05\",\n\t\t\t\"STOPTIME\":\"07:30:00.000\",\n\t\t\t\"PLS_STOPRE\":5\n\t\t}\n\t]
+    //    return sb.ToString();
+    //} 
+    #endregion
+    //{
+    //  "@odata.context":"https://priority.metalicone.com/odata/Priority/tabula.ini/metalic/$metadata#ALINE_ONE","value":[
+    //    {
+    //      "CURDATE":"2018-02-10T00:00:00+02:00","DOC":907350,"SERIALNAME":"51701906","SERQUANT":100,"MET_PRODCOSTCNAME":null,"MET_WCCOSTCNAME":"M105","PARTNAME":"H10CA341-10230","MET_START":"Y","MET_END":null,"ACTNAME":"M42-11-17","ACTDES":"MILLING DMG70-105","WORKCNAME":"1367","WORKCDES":"\u05db\u05e8\u05e1\u05d5\u05dd EVO linear 70-DMG \u05de\u05d7' 105","USERID":503872,"BNAME":"\u05d0\u05d5\u05dc\u05d2 \u05d1\u05d5\u05d2\u05d3\u05e0\u05d5\u05d1 102","EMPCODE":null,"SNAME":null,"QUANT":0,"SQUANT":0,"MQUANT":0,"UNITNAME":"\u05d9\u05d7'","STIME":"19:58","ETIME":"19:58","ASPAN":"000:00","EMPSTIME":"19:58","EMPETIME":"19:58","EMPASPAN":"000:00","RTYPEBOOL":null,"WARHSNAME":null,"LOCNAME":null,"AINVFLAG":"R","EDATE":"2018-02-10T19:58:00+02:00","MET_QC":null,"SDATE":"2018-02-10T19:58:00+02:00","REVNAME":"01","ANALYSISVALID":null,"ANALYSISNOTVALID":null,"FORMNAME":"D180000046","GENERAL":"Y","MET_ROBOT":"Y","MET_STEP":null,"MET_SUMQUANT":0,"MET_SETUP":"S","EXCNAME":null,"EXCDES":null,"MET_COSTCNAME":null,"PLS_TEXT":null,"MET_MTIME":"N","MET_WORKTIME":"N","MET_SETUPEND":"N","MET_ADDSETUP":"N","MET_WEIGHT":null,"MET_WUNITNAME":null,"PLS_PARTDES":"IMP DRUM MACH MERON CL47600003","MET_USERLOGINSIG":"reportalnew","MET_UDATESIGN":"2018-02-10T19:59:00+02:00","EFI_ENGSUTIME":"002:00","EFI_ENGSTTIME":"001:10","EFI_SERSUTIME":"002:00","EFI_SERSTTIME":"001:10","PLS_SHIFTNAME":"2","MET_REPORTDATE":"2018-02-10T00:00:00+02:00","EMPSDATE":"2018-02-10T19:58:00+02:00","EMPEDATE":"2018-02-10T19:58:00+02:00","FORM":248903,"KLINE":1
+    //    }
+    //  ]
+    //}
 }

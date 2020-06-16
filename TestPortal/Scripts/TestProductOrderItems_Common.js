@@ -68,10 +68,10 @@ function InitTestPageData(data) {
     var OrdId = document.getElementById('hdnOrdId').value;
     var pordId = document.getElementById('hdnPrdId').value;
     if (x === 'rtl') {
-        document.getElementById('pageTitle').innerHTML = "שורות הזמנה";
+        document.getElementById('pageTitle').innerHTML = "דגימות";
     }
     else {
-        document.getElementById('pageTitle').innerHTML = "Order products";
+        document.getElementById('pageTitle').innerHTML = "Samples";
     }
     document.getElementById('mnuSampleDetails').style.display = 'none'; 
     document.getElementById('mnuSampleList').style.display = 'none'; 
@@ -214,7 +214,7 @@ function manageDelayReasonSelect(data)
         option.text = 'אחר';
     else
         option.text = 'Other';
-
+    selectList.appendChild(option);
     if (null !== data.lstDelayReason && data.lstDelayReason.length > 0) {
         for (i = 0; i < data.lstDelayReason.length; i++) {
             option = document.createElement("option");
@@ -261,6 +261,7 @@ function showOrderDetail(objOrder) {
     document.getElementById('lbl_pageCURDATE').innerText = null === objOrder.pageCURDATE ? '' : objOrder.pageCURDATE;
     document.getElementById('lbl_STATDESE').innerText = null === objOrder.STATDES ? '' : objOrder.STATDES;
     document.getElementById('lbl_OWNERLOGIN').innerText = null === objOrder.OWNERLOGIN ? '' : objOrder.OWNERLOGIN;
+    document.getElementById('lbl_CURVERSION').innerText = null === objOrder.CURVERSION ? '' : objOrder.CURVERSION;
     //document.getElementById('SHR_SUPTYPEDES').innerText = null == objOrder.SUPTYPEDES ? '' : objOrder.SUPTYPEDES;
     document.getElementById('lbl_SUPNAME').innerText = null === objOrder.SUPNAME ? '' : objOrder.SUPNAME;
     document.getElementById('lbl_CDES').innerText = null === objOrder.CDES ? '' : objOrder.CDES;
@@ -331,7 +332,11 @@ function showOrderLineDetail(objProduct) {
     document.getElementById('lbl_PARTNAME').innerText = null === objProduct.PARTNAME ? '' : objProduct.PARTNAME;
     console.log('showOrderLineDetail ==>  document.getElementById("lbl_pageREQDATE")', document.getElementById('lbl_pageREQDATE'));
     document.getElementById('lbl_pageREQDATE').innerText = null === objProduct.pageREQDATE ? '' : objProduct.pageREQDATE;
-    setInputDate("#txt_pageREQDATE", objProduct.pageREQDATE);
+    if (objProduct.pageREQDATE === '')
+        $('#txt_pageREQDATE').val('--/--/----');
+    else
+        setInputDate("#txt_pageREQDATE", objProduct.pageREQDATE);
+    
     document.getElementById('lbl_REQDATE2').innerText = null === objProduct.REQDATE2 ? '' : objProduct.pageREQDATE2;
     document.getElementById('lbl_PDES').innerText = null === objProduct.PDES ? '' : objProduct.PDES;
     document.getElementById('lbl_SERIALNAME').innerText = null === objProduct.SERIALNAME ? '' : objProduct.SERIALNAME;
@@ -352,12 +357,14 @@ function showSampleDetails(objSample) {
     console.log('showSampleDetails ==> objSample', objSample);
     if (null === objSample || null === objSample.DOCNO) {
         if (x === 'rtl') {
-            $("#modal-2").trigger("click");
-            $("#modal-error-text").html('לא נמצאה תעודת דגימה. לחץ על הכפתור "בדיקות" בתפריט ליצירת תעודת דגימה.');
+            //$("#modal-2").trigger("click");
+            //$("#modal-error-text").html('לא נמצאה תעודת דגימה. לחץ על הכפתור "בדיקות" בתפריט ליצירת תעודת דגימה.');
+            showErrorMessage('לא נמצאה תעודת דגימה. לחץ על הכפתור "בדיקות" בתפריט ליצירת תעודת דגימה.');
         }
         else {
-            $("#modal-21").trigger("click");
-            $("#modal-error-text").html('Sample document was not found. Click "Tests" button to create sample document.');
+            //$("#modal-21").trigger("click");
+            //$("#modal-error-text").html('Sample document was not found. Click "Tests" button to create sample document.');
+            showErrorMessage('Sample document was not found. Click "Tests" button to create sample document.');
         }
     }
     else {
@@ -467,12 +474,40 @@ function onSubmit_UpdateSampleDetails() {
             success: function (response)
             {
                 console.log("onSubmit_UpdateSampleDetails ==> response", response);
-                pageSampleobject.objSample = response.objSample;
-                pageSampleobject.lstSampleObject = response.lstSampleObject;
-                $("#jqGridPartSampls").GridUnload();
-                showPartSampls(response.lstSampleObject);
+                if (null === response.objOrder && null === response.lstSampleObject)
+                {
+                    if (null === response.apiResultMessage || response.apiResultMessage === '')
+                    {
+                        if (x === 'rtl')
+                            showErrorMessage('ארעה שגיאה בעת שמירת הנתונים.');
+                        else
+                            showErrorMessage('An error occured while saving data.');
+                    }
+                    else
+                        showErrorMessage(response.apiResultMessage);
+                }
+                else {
+                       pageSampleobject.objSample = response.objSample;
+                        pageSampleobject.lstSampleObject = response.lstSampleObject;
+                        $("#jqGridPartSampls").GridUnload();
+                        showPartSampls(response.lstSampleObject);
+                }
             }
         });
+}
+
+function showErrorMessage(errMsg) {
+    console.log('showErrorMessage ==> errMsg', errMsg);
+    if (x === 'rtl') {
+        $("#modal-error-text").html(errMsg);
+        $("#modal-2").trigger("click");
+        //$("#modal-error-text").html(errMsg);
+        console.log('showErrorMessage ==> modal-error-text', $("#modal-error-text"));
+    }
+    else {
+        $("#modal-21").trigger("click");
+        $("#modal-error-text").html(errMsg);
+    }
 }
 
 function fillSampleSection(objSample) {

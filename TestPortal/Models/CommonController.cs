@@ -36,6 +36,9 @@ namespace TestPortal.Models
         [HttpPost]
         public ActionResult PostTestProduct(int orderID, string orderNumber)
         {
+            if (Session["USER_LOGIN"] == null)
+                return Json(RedirectToAction("Login", "Account"));
+
             return Json(GetOrder(orderID, orderNumber));
         }
 
@@ -48,6 +51,7 @@ namespace TestPortal.Models
             po.objSample = new Sample();
             po.lstOrderAttachments = new List<OrderAttachment>();
             po.User = Session["USER_LOGIN"] as AppUser;
+            o.UserLanguage = po.User.Language;
             po.objOrder = o.GetOrderDetails(orderID);
             if (null != po.objOrder)
             {
@@ -92,6 +96,7 @@ namespace TestPortal.Models
                 if(!string.IsNullOrEmpty(po.objOrder.TYPECODE))
                 {
                     oi = new OrderType();
+                    oi.UserLanguage = po.User.Language;
                     po.htmlText = oi.GetOrderTypeText(po.objOrder.TYPECODE);
                 }
             }
@@ -101,8 +106,12 @@ namespace TestPortal.Models
         [HttpPost]
         public JsonResult GetOrdersData(string supplier)
         {
-            Order ord = new Order();
+            if (Session["USER_LOGIN"] == null)
+                return Json(RedirectToAction("Login", "Account"));
             PageObject po = new PageObject();
+            Order ord = new Order();
+            po.User = Session["USER_LOGIN"] as AppUser;
+            ord.UserLanguage = po.User.Language;
             po.lstOrderObject = ord.GetSupplierOrders(supplier);
             po.lstItemsObject = new List<OrderItems>();
             foreach (Order obj in po.lstOrderObject)
@@ -135,15 +144,17 @@ namespace TestPortal.Models
         {
             if (Session["USER_LOGIN"] == null)
                 return Json(RedirectToAction("Login", "Account"));
-
+            PageObject po = new PageObject();
+            po.User = Session["USER_LOGIN"] as AppUser;
             Sample s = new Sample();
             Order o = new Order();
             Product p = new Product();
-            PageObject po = new PageObject();
             DelayReason d = new DelayReason();
             po.lstAttachments = new List<Attachments>();
             po.lstOrderAttachments = new List<OrderAttachment>();
-            po.User = Session["USER_LOGIN"] as AppUser;
+            o.UserLanguage = po.User.Language;
+            d.UserLanguage = po.User.Language;
+            s.UserLanguage = po.User.Language;
             po.objOrder = o.GetOrderProductDetailsByLine(orderID, prodName, ordLine);
             po.lstDelayReason = d.GetDelayReasons();
             po.lstOrderAttachments = o.GetOrderAttachments(po.objOrder.ORDNAME);
@@ -177,6 +188,7 @@ namespace TestPortal.Models
             if (!string.IsNullOrEmpty(po.objOrder.TYPECODE))
             {
                 OrderType oi = new OrderType();
+                oi.UserLanguage = po.User.Language;
                 po.htmlText = oi.GetOrderTypeText(po.objOrder.TYPECODE);
             }
 
@@ -216,6 +228,9 @@ namespace TestPortal.Models
             po.lstAttachments = new List<Attachments>();
             po.lstOrderAttachments = new List<OrderAttachment>();
             po.User = Session["USER_LOGIN"] as AppUser;
+            o.UserLanguage = po.User.Language;
+            d.UserLanguage = po.User.Language;
+            s.UserLanguage = po.User.Language;
             po.objOrder = o.GetOrderProductDetails(orderID, prodName);
             po.lstDelayReason = d.GetDelayReasons();
             po.lstOrderAttachments = o.GetOrderAttachments(po.objOrder.ORDNAME);
@@ -321,6 +336,7 @@ namespace TestPortal.Models
             Product p = new Product();
             PageObject po = new PageObject();
             po.User = Session["USER_LOGIN"] as AppUser;
+            o.UserLanguage = po.User.Language;
             po.objOrder = o.GetOrderDetails(orderID);
             po.lstItemsObject = new List<OrderItems>();
 
@@ -421,8 +437,13 @@ namespace TestPortal.Models
         public JsonResult GetOrderProductTests(string prodName, string supplier, string qaCode)
         {
             //MED_SAMPLE?$filter=PARTNAME eq '23559000' and SUPNAME eq '20523'&$expand=MED_TRANSSAMPLEQA_SUBFORM($filter=QACODE eq '007';$expand=MED_RESULTDET_SUBFORM)
-            Sample s = new Sample();
+
+            if (Session["USER_LOGIN"] == null)
+                return Json(RedirectToAction("Login", "Account"));
             PageObject po = new PageObject();
+            po.User = Session["USER_LOGIN"] as AppUser;
+            Sample s = new Sample();
+            s.UserLanguage = po.User.Language;
             po.objSample = s.GetOrderProductTests(prodName, supplier, qaCode);
             return Json(po);
         }
@@ -431,8 +452,12 @@ namespace TestPortal.Models
         public JsonResult GetOrderProductTestsByDoc(string DOCNO, string qaCode)
         {
             //MED_SAMPLE?$filter=PARTNAME eq '23559000' and SUPNAME eq '20523'&$expand=MED_TRANSSAMPLEQA_SUBFORM($filter=QACODE eq '007';$expand=MED_RESULTDET_SUBFORM)
-            Sample s = new Sample();
+            if (Session["USER_LOGIN"] == null)
+                return Json(RedirectToAction("Login", "Account"));
             PageObject po = new PageObject();
+            po.User = Session["USER_LOGIN"] as AppUser;
+            Sample s = new Sample();
+            s.UserLanguage = po.User.Language;
             po.objSample = s.GetOrderProductTests(DOCNO, qaCode);
             return Json(po);
         }
@@ -440,7 +465,12 @@ namespace TestPortal.Models
         [HttpPost]
         public JsonResult SaveTest(string data)
         {
+            if (Session["USER_LOGIN"] == null)
+                return Json(RedirectToAction("Login", "Account"));
+            PageObject po = new PageObject();
+            po.User = Session["USER_LOGIN"] as AppUser;
             Sample s = new Sample();
+            s.UserLanguage = po.User.Language;
             SampleTestMsgWarpper ow = JsonConvert.DeserializeObject<SampleTestMsgWarpper>(data);
             ResultAPI ra = s.UpdateTest(ow.form[0], ow.SUB_RES);
 
@@ -568,6 +598,10 @@ namespace TestPortal.Models
         [HttpPost]
         public JsonResult UploadFiles()
         {
+            if (Session["USER_LOGIN"] == null)
+                return Json(RedirectToAction("Login", "Account"));
+            PageObject po = new PageObject();
+            po.User = Session["USER_LOGIN"] as AppUser;
             HttpFileCollectionBase files = Request.Files;
             SampleTestMsgWarpper ow = JsonConvert.DeserializeObject<SampleTestMsgWarpper>(Request.Form[0]);
             
@@ -582,6 +616,7 @@ namespace TestPortal.Models
                 {
                     var file = Request.Files[i];
                     a = new Attachments();
+                    a.UserLanguage = po.User.Language;
                     if (file != null && file.ContentLength > 0)
                     {
                         string fileName = Path.GetFileName(file.FileName);
@@ -605,9 +640,13 @@ namespace TestPortal.Models
         [HttpPost]
         public JsonResult CreateTest(string supName, string partName, string DOCNO, string ordName, string qaCode)
         {
+            if (Session["USER_LOGIN"] == null)
+                return Json(RedirectToAction("Login", "Account"));
+            PageObject po = new PageObject();
+            po.User = Session["USER_LOGIN"] as AppUser;
             ResultAPI ra = null;
             Sample s = new Sample();
-            PageObject po = new PageObject();
+            s.UserLanguage = po.User.Language;
             CreateSampleTestMsgWarpper ow = JsonConvert.DeserializeObject<CreateSampleTestMsgWarpper>(qaCode);
             if(null != ow)
             {
@@ -634,9 +673,13 @@ namespace TestPortal.Models
         [HttpPost]
         public JsonResult CreateSampleDocument(string supName, string partName, string ordName, int ordLine)
         {
+            if (Session["USER_LOGIN"] == null)
+                return Json(RedirectToAction("Login", "Account"));
+            PageObject po = new PageObject();
+            po.User = Session["USER_LOGIN"] as AppUser;
             ResultAPI ra = null;
             Sample s = new Sample();
-            PageObject po = new PageObject();
+            s.UserLanguage = po.User.Language;
             ra = s.CreateSampleDocument(supName, ordName, partName, ordLine);
             //Get the test list after creation or update
             po.objSample = s.GetProductSamples(supName, ordName, partName, ordLine);
@@ -647,9 +690,14 @@ namespace TestPortal.Models
         [HttpPost]
         public JsonResult GetSampleTestList(string supName, string partName, string ordName, int ordLine)
         {
-            Sample s = new Sample();
+            if (Session["USER_LOGIN"] == null)
+                return Json(RedirectToAction("Login", "Account"));
             PageObject po = new PageObject();
+            po.User = Session["USER_LOGIN"] as AppUser;
+            Sample s = new Sample();
+            s.UserLanguage = po.User.Language;
             Sample_QA sq = new Sample_QA();
+            sq.UserLanguage = po.User.Language;
             po.lstSamplQA = sq.GetCommonSamplesList();
             po.objSample = s.GetProductSamples(supName, ordName, partName, ordLine);
             return Json(po);
@@ -669,10 +717,12 @@ namespace TestPortal.Models
             PageObject po = new PageObject();
             Sample s = new Sample();
             po.User = Session["USER_LOGIN"] as AppUser;
-
+            oi.UserLanguage = po.User.Language;
+            s.UserLanguage = po.User.Language;
             if (string.IsNullOrEmpty(orderName) || (orderName.Equals("undefined")))
             {
                 Order o = new Order();
+                o.UserLanguage = po.User.Language;
                 po.objOrder = o.GetOrderDetails(orderID);
                 if (null != po.objOrder)
                 {
@@ -738,10 +788,12 @@ namespace TestPortal.Models
             PageObject po = new PageObject();
             Sample s = new Sample();
             po.User = Session["USER_LOGIN"] as AppUser;
+            s.UserLanguage = oi.UserLanguage = po.User.Language;
 
             if (string.IsNullOrEmpty(orderName) || (orderName.Equals("undefined")))
             {
                 Order o = new Order();
+                o.UserLanguage = po.User.Language;
                 po.objOrder = o.GetOrderDetails(orderID);
                 if (null != po.objOrder)
                 {
@@ -806,8 +858,12 @@ namespace TestPortal.Models
         [HttpPost]
         public JsonResult GetSampleTests(string PARTNAME, string SUPNAME, string DOCNO)
         {
-            Sample s = new Sample();
+            if (Session["USER_LOGIN"] == null)
+                return Json(RedirectToAction("Login", "Account"));
             PageObject po = new PageObject();
+            po.User = Session["USER_LOGIN"] as AppUser;
+            Sample s = new Sample();
+            s.UserLanguage = po.User.Language;
             po.objSample = s.GetProductSamples(DOCNO);
             if(null != po.objSample && null != po.objSample.MED_TRANSSAMPLEQA_SUBFORM)
             {
@@ -824,9 +880,13 @@ namespace TestPortal.Models
         [HttpPost]
         public JsonResult GetSampleStandardList()
         {
+            if (Session["USER_LOGIN"] == null)
+                return Json(RedirectToAction("Login", "Account"));
             PageObject po = new PageObject();
+            po.User = Session["USER_LOGIN"] as AppUser;
             SampleStandard s = new SampleStandard();
             SampleStatus ss = new SampleStatus();
+            s.UserLanguage = ss.UserLanguage = po.User.Language;
             po.lstSampleStandard = s.GetSampleStandardList();
             po.lstSampleStatus = ss.GetSampleStatusList();
             return Json(po);
@@ -835,7 +895,12 @@ namespace TestPortal.Models
         [HttpPost]
         public JsonResult UpdateSupplyDateAndDelayReason(string PARTNAME, string SUPNAME, int LINE, string ORDNAME, string REQDATE, string DELAYREASON)
         {
+            if (Session["USER_LOGIN"] == null)
+                return Json(RedirectToAction("Login", "Account"));
+            PageObject po = new PageObject();
+            po.User = Session["USER_LOGIN"] as AppUser;
             OrderItems oi = new OrderItems();
+            oi.UserLanguage = po.User.Language;
             oi.ORDNAME = ORDNAME;
             oi.PARTNAME = PARTNAME;
             oi.LINE = LINE;
@@ -851,16 +916,19 @@ namespace TestPortal.Models
             PageObject po = new PageObject();
             po.User = Session["USER_LOGIN"] as AppUser;
             Sample s = new Sample();
+            s.UserLanguage = po.User.Language;
             ResultAPI ra = s.UpdateSampleDetails(STATDES, SAMPLE_TYPE_CODE, EFI_SUPNO, SHR_QUANT, SHR_ROHS, SHR_SAMPLE_STD_CODE, DOCNO);
-            if(ra.ResultStatus.ToUpper() == "OK")
+            if (ra.ResultStatus.ToUpper() == "OK")
             {
                 s = JsonConvert.DeserializeObject<Sample>(ra.JsonResult);
-                if(null != s)
+                if (null != s)
                 {
                     po.objSample = s;
                     po.lstSampleObject = s.GetOrderSamples(s.EFI_PORDNAME, po.User.Supplier_ID, s.PARTNAME);
                 }
             }
+            else
+                po.apiResultMessage = ra.ErrorDescription;
             return Json(po);
         }
     }
