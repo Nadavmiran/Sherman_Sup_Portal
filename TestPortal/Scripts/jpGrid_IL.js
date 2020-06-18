@@ -14,7 +14,8 @@
             { label: 'תאריך הזמנה', name: 'pageCURDATE', align: 'center', width: 150},//, formatter: formatRPTLink
             { label: 'שם הקניין', name: 'OWNERLOGIN', align: 'center', width: 150},//, formatter: formatRPTLink
             { label: 'סוג הזמנה ', name: 'TYPEDES', align: 'center', width: 150},
-            { label: 'ססטוס הזמנה', name: 'STATDES', align: 'center', width: 150}//, formatter: formatRPTLink
+            { label: 'ססטוס הזמנה', name: 'STATDES', align: 'center', width: 150 },
+            { label: 'מהדורה', name: 'CURVERSION', align: 'center', width: 90 }
         ],
         viewrecords: true,
         altRows: true,

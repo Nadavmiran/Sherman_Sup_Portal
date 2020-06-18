@@ -148,7 +148,7 @@ namespace TestPortal.Models
             po.User = Session["USER_LOGIN"] as AppUser;
             Sample s = new Sample();
             Order o = new Order();
-            Product p = new Product();
+            //Product p = new Product();
             DelayReason d = new DelayReason();
             po.lstAttachments = new List<Attachments>();
             po.lstOrderAttachments = new List<OrderAttachment>();
@@ -197,6 +197,7 @@ namespace TestPortal.Models
                 po.objProduct = po.objOrder.PORDERITEMS_SUBFORM[0];
                 po.objProduct.ORD = po.objOrder.ORD;
                 po.objProduct.ORDNAME = po.objOrder.ORDNAME;
+                po.objProduct.SHR_SUP_REMARKS = po.objProduct.GerSupplierRemarks(po.objOrder.ORDNAME, po.objProduct.KLINE);
                 // Get order line text
                 if ((null != po.objOrder.PORDERITEMS_SUBFORM[0].PORDERITEMSTEXT_SUBFORM) && (po.objOrder.PORDERITEMS_SUBFORM[0].PORDERITEMSTEXT_SUBFORM.Length > 0))
                 {
@@ -893,7 +894,7 @@ namespace TestPortal.Models
         }
 
         [HttpPost]
-        public JsonResult UpdateSupplyDateAndDelayReason(string PARTNAME, string SUPNAME, int LINE, string ORDNAME, string REQDATE, string DELAYREASON)
+        public JsonResult UpdateSupplyDateAndDelayReason(string PARTNAME, string SUPNAME, int LINE, string ORDNAME, string REQDATE, string DELAYREASON, string SHR_SUP_REMARKS)
         {
             if (Session["USER_LOGIN"] == null)
                 return Json(RedirectToAction("Login", "Account"));
@@ -905,7 +906,9 @@ namespace TestPortal.Models
             oi.PARTNAME = PARTNAME;
             oi.LINE = LINE;
             oi.EFI_DELAYREASON = DELAYREASON;
-            oi.REQDATE = Convert.ToDateTime(REQDATE);
+            oi.SHR_SUP_REMARKS = SHR_SUP_REMARKS;
+            if (!string.IsNullOrEmpty(REQDATE))
+                oi.REQDATE = Convert.ToDateTime(REQDATE);
             ResultAPI ra = oi.UpdateOrderLineData(SUPNAME);
             return Json(ra);
         }

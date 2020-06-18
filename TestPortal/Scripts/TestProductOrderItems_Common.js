@@ -191,7 +191,7 @@ function showSalesorderDetail(PARTNAME, ORD, LINE) {
 
 function manageDelayReasonSelect(data)
 {
-    document.getElementById('div_ReasonRejection').style.display = 'inline';
+    document.getElementById('div_ReasonRejection').style.display = 'block';
     let selectList = document.getElementById('combo_DELAYREASON');
     let i, L = selectList.options.length - 1;
     for (i = L; i >= 0; i--) {
@@ -328,7 +328,7 @@ function setInputDate(_id, pageREQDATE) {
 function showOrderLineDetail(objProduct) {
     var dateControl = document.querySelector('input[type="date"]');
     console.log('showOrderLineDetail ==>  = dateControl', dateControl);
-    document.getElementById('lbl_LINE').innerText = null === objProduct.LINE ? '' : objProduct.LINE;
+    document.getElementById('lbl_LINE').innerText = null === objProduct.KLINE ? '' : objProduct.KLINE;
     document.getElementById('lbl_PARTNAME').innerText = null === objProduct.PARTNAME ? '' : objProduct.PARTNAME;
     console.log('showOrderLineDetail ==>  document.getElementById("lbl_pageREQDATE")', document.getElementById('lbl_pageREQDATE'));
     document.getElementById('lbl_pageREQDATE').innerText = null === objProduct.pageREQDATE ? '' : objProduct.pageREQDATE;
@@ -336,7 +336,7 @@ function showOrderLineDetail(objProduct) {
         $('#txt_pageREQDATE').val('--/--/----');
     else
         setInputDate("#txt_pageREQDATE", objProduct.pageREQDATE);
-    
+    document.getElementById('lbl_SHR_SUP_REMARKS').value = null === objProduct.SHR_SUP_REMARKS ? '' : objProduct.SHR_SUP_REMARKS;
     document.getElementById('lbl_REQDATE2').innerText = null === objProduct.REQDATE2 ? '' : objProduct.pageREQDATE2;
     document.getElementById('lbl_PDES').innerText = null === objProduct.PDES ? '' : objProduct.PDES;
     document.getElementById('lbl_SERIALNAME').innerText = null === objProduct.SERIALNAME ? '' : objProduct.SERIALNAME;
@@ -1031,7 +1031,7 @@ function OpenSampleModal(rowData) {
         document.getElementById('txtQaRESULTANT').checked = true;
         document.getElementById('txtQaRESULTANT').value = 'on';
         document.getElementById('txtQaNORMAL').setAttribute('disabled', 'disabled');
-        
+        //document.getElementById('txtQaNORMAL').value = rowData.NORMAL;
         if (rowData.REPETITION > 0)
             document.getElementById('txtQaRESULT').setAttribute('disabled', 'disabled');
         else
@@ -1044,13 +1044,14 @@ function OpenSampleModal(rowData) {
         document.getElementById('txtQaRESULTANT').checked = false;
         document.getElementById('txtQaRESULTANT').value = 'off';
         document.getElementById("txtQaNORMAL").removeAttribute('disabled');
-        if (rowData.NORMAL === 'Y') //  אם תקין
-        {
-            document.getElementById('txtQaNORMAL').checked = true;
-        }
-        else {
-            document.getElementById('txtQaNORMAL').checked = false;
-        }
+        document.getElementById('txtQaNORMAL').value = rowData.NORMAL;
+        //if (rowData.NORMAL === 'Y') //  אם תקין
+        //{
+        //    document.getElementById('txtQaNORMAL').value = true;
+        //}
+        //else {
+        //    document.getElementById('txtQaNORMAL').checked = false;
+        //}
     }
     document.getElementById('hdnQaORDNAME').value = document.getElementById('hdnORDNAME').value;
     document.getElementById('txtQaREPETITION').innerText = rowData.REPETITION;
@@ -1136,11 +1137,11 @@ function onSubmit_TestForm(e) {
                             $('.modal').removeClass('show');
                             if (x === 'rtl') {
                                 $("#modal-1").trigger("click");
-                                $("#odal-error-text").html(response.ErrorDescription);
+                                $("#modal-error-text").html(response.ErrorDescription);
                             }
                             else {
                                 $("#modal-21").trigger("click");
-                                $("#odal-error-text").html(response.ErrorDescription);
+                                $("#modal-error-text").html(response.ErrorDescription);
                             }
                         }
                     }
@@ -1153,11 +1154,11 @@ function onSubmit_TestForm(e) {
                         if (x === 'rtl')
                         {
                             $("#modal-1").trigger("click");
-                            $("#odal-error-text").html(response.ErrorDescription);
+                            $("#modal-error-text").html(response.ErrorDescription);
                         }
                         else {
                             $("#modal-21").trigger("click");
-                            $("#odal-error-text").html(response.ErrorDescription);
+                            $("#modal-error-text").html(response.ErrorDescription);
                         }
                     }
                 }
@@ -1291,12 +1292,14 @@ function onSubmit_UpdateOrderLineData() {
     let LINE = document.getElementById('lbl_LINE').innerText;
     let DELAYREASON = '';
     let REQDATE = document.getElementById('txt_pageREQDATE').value;
+    let SHR_SUP_REMARKS = document.getElementById('lbl_SHR_SUP_REMARKS').value;
 
     if (selectList.options[selectList.selectedIndex].value === '-1')
         DELAYREASON = document.getElementById("txt_ReasonRejection").value;
     else
         DELAYREASON = selectList.options[selectList.selectedIndex].text;
 
+    console.log("SHR_SUP_REMARKS", SUPNAME);
     console.log("SUPNAME", SUPNAME);
     console.log("PARTNAME", PARTNAME);
     console.log("ORDNAME", ORDNAME);
@@ -1314,14 +1317,27 @@ function onSubmit_UpdateOrderLineData() {
                 LINE: LINE,
                 ORDNAME: ORDNAME,
                 REQDATE: REQDATE,
-                DELAYREASON: DELAYREASON
+                DELAYREASON: DELAYREASON,
+                SHR_SUP_REMARKS: SHR_SUP_REMARKS
             },
             url: $('#navUpdateSupplyDateAndDelayReason').data('url'),
             contentType: "application/x-www-form-urlencoded;charset=ISO-8859-15",
             success: function (response) {
                 console.log("onSubmit_UpdateOrderLineData ==> response", response);
-                refreshOrdersData(SUPNAME);
+                
                 $("#loader").hide();
+                if (null !== response.ErrorDescription) {
+                    showErrorMessage(response.ErrorDescription);
+                    //if (x === 'rtl') {
+                    //    $("#modal-error-text").html(response.ErrorDescription);
+                    //    $("#modal-2").trigger("click");
+                    //}
+                    //else {
+                    //    $("#modal-error-text").html(response.ErrorDescription);
+                    //    $("#modal-21").trigger("click");
+                    //}
+                }
+                refreshOrdersData(SUPNAME);
             }
         });
 }
@@ -1355,14 +1371,17 @@ function createJson(fd) {
         }
         else
         {
-            var val = fd[i].value;
+            //var val = fd[i].value;
             console.log("fd[i].value", fd[i].value);
             if (fd[i].id === 'txtQaNORMAL') {
-                console.log("fd[i].checked ==> txtQaNORMAL", fd[i].checked);
-                if (fd[i].checked)
-                    fd[i].value = 'Y';
-                else
-                    fd[i].value = 'N';
+                let sl = document.getElementById('txtQaNORMAL');
+                console.log("createJson ==> txtQaNORMAL => sl.options[sl.selectedIndex].value", sl.options[sl.selectedIndex].value);
+                fd[i].value = sl.options[sl.selectedIndex].value;
+                //console.log("fd[i].checked ==> txtQaNORMAL", fd[i].checked);
+                //if (fd[i].checked)
+                //    fd[i].value = 'Y';
+                //else
+                //    fd[i].value = 'N';
 
                 console.log("fd[i].value ==> txtQaNORMAL", fd[i].value);
             }

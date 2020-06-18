@@ -1,6 +1,7 @@
 ﻿using LMNS.Priority.API;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Text;
 
 namespace TestPortal.Models
@@ -20,6 +21,10 @@ namespace TestPortal.Models
         /// שורה
         /// </summary>
         public int LINE { get; set; }
+        /// <summary>
+        /// שורה
+        /// </summary>
+        public int KLINE { get; set; }
         /// <summary>
         /// מקט
         /// </summary>
@@ -125,6 +130,10 @@ namespace TestPortal.Models
         /// קריטית
         /// </summary>
         public string EFI_CRITICALFLAG { get; set; }
+        /// <summary>
+        /// SHR_OPENSUPORDERS_T.SHR_SUP_REMARKS - הערות ספק
+        /// </summary>
+        public string SHR_SUP_REMARKS { get; set; }
         public OrdersItemText[] PORDERITEMSTEXT_SUBFORM { get; set; }
         #endregion
 
@@ -162,15 +171,33 @@ namespace TestPortal.Models
             sb.Append("\r\n\t\"SUPNAME\":");
             sb.Append("\"" + sUPNAME + "\",");
             sb.Append("\r\n\t\"REQDATE\":");
-            sb.Append("\"" + GetDateTimeOffset(REQDATE.ToString(), "00:00") + "\",");
+            if(null != REQDATE && !string.IsNullOrEmpty(REQDATE.ToString()))
+                sb.Append("\"" + GetDateTimeOffset(REQDATE.ToString(), "00:00") + "\",");
             sb.Append("\r\n\t\"SHR_DUEDATE_APPROVED\":");
             sb.Append("\"Y\",");
             sb.Append("\r\n\t\"SHR_SUPUPD_FLAG\":");
             sb.Append("\"Y\",");
+            sb.Append("\r\n\t\"SHR_SUP_REMARKS\":");
+            sb.Append("\"" + SHR_SUP_REMARKS + "\",");
             sb.Append("\r\n\t\"EFI_DELAYREASON\":");
             sb.Append("\"" + EFI_DELAYREASON + "\"");
             sb.Append("}");
             return sb.ToString(); 
         }
+
+        internal string GerSupplierRemarks(string ORDNAME, int KLINE)
+        {
+            string res = Call_Get("/SHR_OPENSUPORDERS_T?$filter=ORDNAME eq '"+ ORDNAME + "' and KLINE eq " + KLINE +"&$select=SHR_SUP_REMARKS");
+            OrdersItemWarpper ow = JsonConvert.DeserializeObject<OrdersItemWarpper>(res);
+            if (null == ow || ow.Value.Count == 0)
+                return string.Empty;
+
+            return ow.Value[0].SHR_SUP_REMARKS;
+        }
+    }
+
+    public class OrdersItemWarpper : ODataBase
+    {
+        public List<OrderItems> Value { get; set; }
     }
 }

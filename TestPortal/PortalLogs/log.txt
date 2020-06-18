@@ -1285,3 +1285,318 @@ Newtonsoft.Json.JsonReaderException: Input string '2.02' is not a valid integer.
    at Newtonsoft.Json.JsonConvert.DeserializeObject[T](String value, JsonSerializerSettings settings)
    at Newtonsoft.Json.JsonConvert.DeserializeObject[T](String value)
    at TestPortal.Models.Order.GetSupplierOrders(String supplier) in H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\Models\Order.cs:line 64
+DEBUG 2020-06-17 09:09:34,090   565ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 17/06/2020 9:09:33
+INFO  2020-06-17 09:10:43,315 69791ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001539",
+	"PARTNAME":"23417000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":17,
+	"QACODE":"018",
+	"LOCATION":"1",
+	"RESULT":1,
+	"EFI_MEASURESUPTOOLS":"",
+	"REMARK":"",
+	"EFI_CRITICALFLAG":"N"
+	}
+	]}
+DEBUG 2020-06-17 09:12:11,372 157848ms eporting Portal Logger CreateResultApi    - FunctionName = CreateResultApi => Response XMLExceptionMsg = <FORM
+  TYPE="MED_SAMPLE">
+  <InterfaceErrors>
+    <text>?? ???? ?????? ?? ?????? ?????? ?????? ?? ?? ????? ???? ?? ? Check List ???? ?? ??????? ??????</text>
+  </InterfaceErrors>
+</FORM>
+INFO  2020-06-17 09:12:40,264 186739ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001539",
+	"PARTNAME":"23417000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":18,
+	"QACODE":"019",
+	"LOCATION":"0",
+	"RESULT":5,
+	"EFI_MEASURESUPTOOLS":"",
+	"REMARK":"test 5",
+	"EFI_CRITICALFLAG":"N"
+	}
+	]}
+DEBUG 2020-06-17 09:12:49,651 196127ms eporting Portal Logger CreateResultApi    - FunctionName = CreateResultApi => Response XMLExceptionMsg = <FORM
+  TYPE="MED_SAMPLE">
+  <InterfaceErrors>
+    <text>?? ???? ?????? ?? ?????? ?????? ?????? ?? ?? ????? ???? ?? ? Check List ???? ?? ??????? ??????</text>
+  </InterfaceErrors>
+</FORM>
+INFO  2020-06-17 09:21:28,511 714987ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001541",
+	"PARTNAME":"4700000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":3,
+	"QACODE":"003",
+	"LOCATION":"0",
+	"RESULT":1,
+	"EFI_MEASURESUPTOOLS":"",
+	"REMARK":"",
+	"EFI_CRITICALFLAG":"N"
+	}
+	]}
+DEBUG 2020-06-17 09:22:14,125 760601ms eporting Portal Logger CreateResultApi    - FunctionName = CreateResultApi => Response XMLExceptionMsg = <FORM
+  TYPE="MED_SAMPLE">
+  <InterfaceErrors>
+    <text>?? ???? ?????? ?? ?????? ?????? ?????? ?? ?? ????? ???? ?? ? Check List ???? ?? ??????? ??????</text>
+  </InterfaceErrors>
+</FORM>
+INFO  2020-06-17 09:24:03,325 869800ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001541",
+	"PARTNAME":"4700000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":2,
+	"QACODE":"002",
+	"LOCATION":"1",
+	"NORMAL":"N",
+	"EFI_MEASURESUPTOOLS":"",
+	"REMARK":"",
+	"EFI_CRITICALFLAG":"N"
+	}
+	]}
+INFO  2020-06-17 09:37:31,114 1677590ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001541",
+	"PARTNAME":"4700000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":2,
+	"QACODE":"002",
+	"LOCATION":"1",
+	"NORMAL":"N",
+	"EFI_MEASURESUPTOOLS":"",
+	"REMARK":"",
+	"EFI_CRITICALFLAG":"N"
+	}
+	]}
+INFO  2020-06-17 09:42:47,090   167ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001541",
+	"PARTNAME":"4700000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":2,
+	"QACODE":"002",
+	"LOCATION":"1",
+	"NORMAL":"Y",
+	"EFI_MEASURESUPTOOLS":"",
+	"REMARK":"",
+	"EFI_CRITICALFLAG":"N"
+	}
+	]}
+INFO  2020-06-17 09:54:37,628   222ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001541",
+	"PARTNAME":"4700000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":2,
+	"QACODE":"002",
+	"LOCATION":"1",
+	"NORMAL":"N",
+	"EFI_MEASURESUPTOOLS":"",
+	"REMARK":"",
+	"EFI_CRITICALFLAG":"N"
+	}
+	]}
+INFO  2020-06-17 09:56:08,242 90837ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001541",
+	"PARTNAME":"4700000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":2,
+	"QACODE":"002",
+	"LOCATION":"1",
+	"NORMAL":"N",
+	"EFI_MEASURESUPTOOLS":"",
+	"REMARK":"",
+	"EFI_CRITICALFLAG":"N"
+	}
+	]}
+INFO  2020-06-17 09:58:27,477   213ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001541",
+	"PARTNAME":"4700000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":2,
+	"QACODE":"002",
+	"LOCATION":"1",
+	"NORMAL":"",
+	"EFI_MEASURESUPTOOLS":"",
+	"REMARK":"",
+	"EFI_CRITICALFLAG":"N"
+	}
+	]}
+INFO  2020-06-17 09:58:53,179 25915ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001541",
+	"PARTNAME":"4700000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":2,
+	"QACODE":"002",
+	"LOCATION":"1",
+	"NORMAL":"Y",
+	"EFI_MEASURESUPTOOLS":"",
+	"REMARK":"",
+	"EFI_CRITICALFLAG":"N"
+	}
+	]}
+INFO  2020-06-17 09:59:16,686 49423ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001541",
+	"PARTNAME":"4700000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":2,
+	"QACODE":"002",
+	"LOCATION":"1",
+	"NORMAL":"Y",
+	"EFI_MEASURESUPTOOLS":"",
+	"REMARK":"",
+	"EFI_CRITICALFLAG":"N"
+	}
+	]}
+INFO  2020-06-17 09:59:45,679 78415ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001541",
+	"PARTNAME":"4700000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":2,
+	"QACODE":"002",
+	"LOCATION":"1",
+	"NORMAL":"N",
+	"EFI_MEASURESUPTOOLS":"",
+	"REMARK":"",
+	"EFI_CRITICALFLAG":"N"
+	}
+	]}
+INFO  2020-06-17 10:00:29,583 122320ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001541",
+	"PARTNAME":"4700000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":2,
+	"QACODE":"002",
+	"LOCATION":"1",
+	"NORMAL":"Y",
+	"EFI_MEASURESUPTOOLS":"",
+	"REMARK":"",
+	"EFI_CRITICALFLAG":"N"
+	}
+	]}
+INFO  2020-06-17 10:00:44,219 136956ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001541",
+	"PARTNAME":"4700000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":2,
+	"QACODE":"002",
+	"LOCATION":"1",
+	"NORMAL":"",
+	"EFI_MEASURESUPTOOLS":"",
+	"REMARK":"",
+	"EFI_CRITICALFLAG":"N"
+	}
+	]}
+INFO  2020-06-17 10:03:18,207 290944ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001541",
+	"PARTNAME":"4700000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":2,
+	"QACODE":"002",
+	"LOCATION":"1",
+	"NORMAL":"N",
+	"EFI_MEASURESUPTOOLS":"",
+	"REMARK":"",
+	"EFI_CRITICALFLAG":"N"
+	}
+	]}
+INFO  2020-06-17 10:03:35,416 308152ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001541",
+	"PARTNAME":"4700000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":2,
+	"QACODE":"002",
+	"LOCATION":"1",
+	"NORMAL":"Y",
+	"EFI_MEASURESUPTOOLS":"",
+	"REMARK":"",
+	"EFI_CRITICALFLAG":"N"
+	}
+	]}
+DEBUG 2020-06-17 20:01:05,879   408ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 18/06/2020 0:00:00
+DEBUG 2020-06-17 20:01:07,092  1622ms eporting Portal Logger CreateResultApi    - FunctionName = CreateResultApi => Response XMLExceptionMsg = <FORM
+  TYPE="SHR_OPENSUPORDERS_T">
+  <InterfaceErrors>
+    <text>- ??? ????</text>
+  </InterfaceErrors>
+</FORM>
+DEBUG 2020-06-17 20:01:42,759 37288ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 18/06/2020 0:00:00
+DEBUG 2020-06-17 20:02:31,212 85741ms eporting Portal Logger CreateResultApi    - FunctionName = CreateResultApi => Response XMLExceptionMsg = <FORM
+  TYPE="SHR_OPENSUPORDERS_T">
+  <InterfaceErrors>
+    <text>- ??? ????</text>
+  </InterfaceErrors>
+</FORM>
+DEBUG 2020-06-17 20:07:14,579 369109ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 18/06/2020 0:00:00
+DEBUG 2020-06-17 20:07:18,154 372683ms eporting Portal Logger CreateResultApi    - FunctionName = CreateResultApi => Response XMLExceptionMsg = <FORM
+  TYPE="SHR_OPENSUPORDERS_T">
+  <InterfaceErrors>
+    <text>- ??? ????</text>
+  </InterfaceErrors>
+</FORM>
+DEBUG 2020-06-17 20:08:19,626 434155ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 18/06/2020 0:00:00
+DEBUG 2020-06-17 20:08:19,780 434309ms eporting Portal Logger CreateResultApi    - FunctionName = CreateResultApi => Response XMLExceptionMsg = <FORM
+  TYPE="SHR_OPENSUPORDERS_T">
+  <InterfaceErrors>
+    <text>- ??? ????</text>
+  </InterfaceErrors>
+</FORM>
+DEBUG 2020-06-17 20:10:49,229 583758ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 18/06/2020 0:00:00
+DEBUG 2020-06-17 20:10:49,386 583916ms eporting Portal Logger CreateResultApi    - FunctionName = CreateResultApi => Response XMLExceptionMsg = <FORM
+  TYPE="SHR_OPENSUPORDERS_T">
+  <InterfaceErrors>
+    <text>- ??? ????</text>
+  </InterfaceErrors>
+</FORM>
+DEBUG 2020-06-17 20:13:56,057   397ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 
+DEBUG 2020-06-17 20:17:13,851   346ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 
+DEBUG 2020-06-17 20:22:13,956   406ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 18/06/2020 0:00:00
+DEBUG 2020-06-17 20:22:14,409   859ms eporting Portal Logger CreateResultApi    - FunctionName = CreateResultApi => Response XMLExceptionMsg = <FORM
+  TYPE="SHR_OPENSUPORDERS_T">
+  <InterfaceErrors>
+    <text>- ??? ????</text>
+  </InterfaceErrors>
+</FORM>
+DEBUG 2020-06-17 20:25:11,957 178407ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 18/06/2020 0:00:00
+DEBUG 2020-06-17 20:25:12,117 178567ms eporting Portal Logger CreateResultApi    - FunctionName = CreateResultApi => Response XMLExceptionMsg = <FORM
+  TYPE="SHR_OPENSUPORDERS_T">
+  <InterfaceErrors>
+    <text>- ??? ????</text>
+  </InterfaceErrors>
+</FORM>
+DEBUG 2020-06-17 20:37:23,666   341ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 18/06/2020 0:00:00
+DEBUG 2020-06-17 20:51:04,722   322ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 18/06/2020 0:00:00
+DEBUG 2020-06-17 20:51:52,050 47650ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 18/06/2020 0:00:00
+DEBUG 2020-06-17 20:54:38,791 214391ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 19/06/2020 0:00:00
+DEBUG 2020-06-17 21:46:47,716   376ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 19/05/2020 0:00:00

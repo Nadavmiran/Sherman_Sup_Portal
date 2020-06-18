@@ -14,7 +14,8 @@
             { label: 'Supplier', name: 'SHR_SUPTYPEDES', align: 'center', hidden: true, width: 150 },
             { label: 'For treatment ', name: 'OWNERLOGIN', align: 'center', width: 150 },
             { label: 'Order type ', name: 'TYPEDES', align: 'center', width: 150 },
-            { label: 'Order ststus', name: 'STATDES', align: 'center', width: 150 }
+            { label: 'Order ststus', name: 'STATDES', align: 'center', width: 150 },
+            { label: 'Version', name: 'CURVERSION', align: 'center', width: 90 }
         ],
         viewrecords: true,
         altRows: true,

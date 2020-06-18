@@ -15,6 +15,7 @@ namespace TestPortal.Models
         public int OrderID { get; set; }
         public string OrderNumber { get; set; }
         public int LINE { get; set; }
+        public int KLINE { get; set; }
         public int ProductID { get; set; }
         public string ProductName { get; set; }
         public string ProductDescription { get; set; }
@@ -27,45 +28,41 @@ namespace TestPortal.Models
         public string REVNUM { get; set; } //מהדורה
         public int REV { get; set; } //מהדורה - קוד
 
-        internal List<Product> GetOrderItems(int parentRowKey)
-        {
-            Dal d = new Dal();
-            List<Product> lst = new List<Product>();
-            Product obj = null;
-            try
-            {
-                SqlDataReader dr = d.GetRecordSet("LMNS_GetOrderItems", new SqlParameter("@ord", parentRowKey));
-                while (dr.Read())
-                {
-                    obj = new Product();
-                    obj.LINE = Convert.ToInt32(dr["LINE"].ToString());
-                    obj.OrderID = parentRowKey;
-                    obj.ProductID = Convert.ToInt32(dr["PART"].ToString());
-                    obj.ProductName = dr["PARTNAME"].ToString();
-                    obj.TYPE = dr["TYPE"].ToString();
-                    obj.ProductDescription = dr["PARTDES"].ToString();
-                    obj.TotalAmountInOrder = Convert.ToInt32(dr["TQUANT"].ToString());
-                    obj.LeftAmountToDeliver = Convert.ToInt32(dr["TBALANCE"].ToString());
-                    obj.SupplyDate = dr["REQDATE"].ToString();
-                    obj.EstimateSupplyDate = dr["ARRDATE"].ToString();
-                    obj.REVNUM = dr["REVNUM"].ToString();
-                    if (string.IsNullOrEmpty(dr["REV"].ToString()))
-                        obj.REV = 0;
-                    else
-                        obj.REV = Convert.ToInt32(dr["REV"].ToString());
-                    lst.Add(obj);
+        //internal List<Product> GetOrderItems(int parentRowKey)
+        //{
+        //    Dal d = new Dal();
+        //    List<Product> lst = new List<Product>();
+        //    Product obj = null;
+        //    try
+        //    {
+        //        SqlDataReader dr = d.GetRecordSet("LMNS_GetOrderItems", new SqlParameter("@ord", parentRowKey));
+        //        while (dr.Read())
+        //        {
+        //            obj = new Product();
+        //            obj.LINE = Convert.ToInt32(dr["LINE"].ToString());
+        //            obj.OrderID = parentRowKey;
+        //            obj.ProductID = Convert.ToInt32(dr["PART"].ToString());
+        //            obj.ProductName = dr["PARTNAME"].ToString();
+        //            obj.TYPE = dr["TYPE"].ToString();
+        //            obj.ProductDescription = dr["PARTDES"].ToString();
+        //            obj.TotalAmountInOrder = Convert.ToInt32(dr["TQUANT"].ToString());
+        //            obj.LeftAmountToDeliver = Convert.ToInt32(dr["TBALANCE"].ToString());
+        //            obj.SupplyDate = dr["REQDATE"].ToString();
+        //            obj.EstimateSupplyDate = dr["ARRDATE"].ToString();
+        //            obj.REVNUM = dr["REVNUM"].ToString();
+        //            if (string.IsNullOrEmpty(dr["REV"].ToString()))
+        //                obj.REV = 0;
+        //            else
+        //                obj.REV = Convert.ToInt32(dr["REV"].ToString());
+        //            lst.Add(obj);
 			
-                }
-            }
-            catch (Exception ex)
-            {
-                AppLogger.log.Error("GetOrderItems ==> SP = LMNS_GetOrderItems ==> ORD [key] = " + parentRowKey, ex);
-            }
-            return lst;
-        }
-        
-
-
-        
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        AppLogger.log.Error("GetOrderItems ==> SP = LMNS_GetOrderItems ==> ORD [key] = " + parentRowKey, ex);
+        //    }
+        //    return lst;
+        //}
     }
 }

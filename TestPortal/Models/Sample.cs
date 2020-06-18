@@ -241,10 +241,15 @@ namespace TestPortal.Models
                     sb.Append("\r\n\t\"NORMAL\":");
                     sb.Append("\"Y\",");
                 }
-                else
+                else if(data.txtQaNORMAL.ToLower().Equals("n"))
                 {
                     sb.Append("\r\n\t\"NORMAL\":");
                     sb.Append("\"N\",");
+                }
+                else
+                {
+                    sb.Append("\r\n\t\"NORMAL\":");
+                    sb.Append("\"\",");
                 }
             }
             sb.Append("\r\n\t\"EFI_MEASURESUPTOOLS\":");
