@@ -53,21 +53,21 @@ namespace TestPortal.Models
             }
         }
 
-        internal ResultAPI SaveUserProfile(string language, string fullName)
+        internal ResultAPI SaveUserProfile(string language, string fullName, string pass)
         {
-            string reqBody = CreateUpdateProfileMsg(language, fullName);
+            string reqBody = CreateUpdateProfileMsg(language, fullName, pass);
             ResultAPI ra = Call_PATCH_USER(reqBody);
             return ra;
         }
 
-        private string CreateUpdateProfileMsg(string language, string fullName)
+        private string CreateUpdateProfileMsg(string language, string fullName, string pass)
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("{");
             sb.Append("\r\n\t\"NAME\":");
             sb.Append("\"" + this.FullName + "\",");
             sb.Append("\r\n\t\"SUPNAME\":");
-            sb.Append("\"" + this.Supplier_ID + "\",");
+            sb.Append("\"" + this.Supplier_ID + "\","); 
             sb.Append("\r\n\t\"EMAIL\":");
             sb.Append("\"" + this.Email + "\",");
             sb.Append("\r\n\t\"EFI_PORTALDEF_SUBFORM\": ["); 
@@ -76,6 +76,8 @@ namespace TestPortal.Models
             sb.Append(this.LINE + ",");
             sb.Append("\r\n\t\"USEREMAIL\":");
             sb.Append("\"" + this.Email + "\",");
+            sb.Append("\r\n\t\"PASSWORD\":");
+            sb.Append("\"" + pass + "\",");
             sb.Append("\r\n\t\"LANGUAGE\":");
             sb.Append("\"" + language + "\"");
             sb.Append("\r\n\t}");

@@ -496,6 +496,8 @@
     <Content Include="Views\Home_IL\_OrderLineDetails.cshtml" />
     <Content Include="Views\Home_IL\_OrderDetails.cshtml" />
     <Content Include="Views\Home_IL\QA_Page.cshtml" />
+    <Content Include="Views\Home\UserProfile.cshtml" />
+    <Content Include="Views\Home_IL\UserProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

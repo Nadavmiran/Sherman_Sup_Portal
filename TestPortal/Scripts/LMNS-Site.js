@@ -2,15 +2,18 @@
     //let frm = $('#frmUsrProfile');
     let lang = $('#comboLang option:selected').text();
     let name = $('#txtFullName').val();
+    let password = $('#password-field').val();
     console.log("doSubmitUserProfile ==> lang = ", lang);
     console.log("doSubmitUserProfile ==> name = ", name);
+    console.log("doSubmitUserProfile ==> password = ", password);
 $.ajax(
     {
         type: "POST",
         url: window.location.origin + $('#navSaveUserProfile').data('url'), //'/SherPortal/Account/SaveUserProfile',
        data: {
                 lang: lang,
-                fullName: name
+           fullName: name,
+                pass: password
         },
         cache: false,
         success: function (response) {

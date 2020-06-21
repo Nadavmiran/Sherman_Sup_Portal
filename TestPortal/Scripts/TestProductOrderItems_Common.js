@@ -2,6 +2,10 @@
 var objSample = '';
 var pageSampleobject = '';
 var objSampleStandardList = '';
+var selectedORD = 0;
+var selectedPARTNAME = '';
+var selectedLINE = 0;
+var previewsSupplayDate = '';
 
 function pageSize() {
     $.jgrid.defaults.responsive = true;
@@ -155,6 +159,9 @@ function showSalesorderDetail(PARTNAME, ORD, LINE) {
     console.log('showSalesorderDetail ==> ORD = ', ORD);
     console.log('showSalesorderDetail ==> LINE = ', LINE);
     console.log('showSalesorderDetail ==> PARTNAME = ', PARTNAME);
+    selectedORD = ORD;
+    selectedPARTNAME = PARTNAME;
+    selectedLINE = LINE;
     $.ajax({
         type: "POST",
         url: $('#navGetSalesorderDetail').data('url'),//"PostTestProduct",
@@ -287,6 +294,7 @@ function setInputDate(_id, pageREQDATE) {
             y = hoy.getFullYear(),
             data;
         console.log(hoy);
+        
     }
     else {
         pageREQDATE = pageREQDATE.replace("/", "-").replace("/", "-");
@@ -323,9 +331,11 @@ function setInputDate(_id, pageREQDATE) {
     _dat.value = data;
     data = min_y + '-' + min_m + '-' + min_d;
     _dat.min = data;
+    previewsSupplayDate = _dat.value;
 }
 
 function showOrderLineDetail(objProduct) {
+    previewsSupplayDate = '';
     var dateControl = document.querySelector('input[type="date"]');
     console.log('showOrderLineDetail ==>  = dateControl', dateControl);
     document.getElementById('lbl_LINE').innerText = null === objProduct.KLINE ? '' : objProduct.KLINE;
@@ -334,8 +344,9 @@ function showOrderLineDetail(objProduct) {
     document.getElementById('lbl_pageREQDATE').innerText = null === objProduct.pageREQDATE ? '' : objProduct.pageREQDATE;
     if (objProduct.pageREQDATE === '')
         $('#txt_pageREQDATE').val('--/--/----');
-    else
+    else {
         setInputDate("#txt_pageREQDATE", objProduct.pageREQDATE);
+    }
     document.getElementById('lbl_SHR_SUP_REMARKS').value = null === objProduct.SHR_SUP_REMARKS ? '' : objProduct.SHR_SUP_REMARKS;
     document.getElementById('lbl_REQDATE2').innerText = null === objProduct.REQDATE2 ? '' : objProduct.pageREQDATE2;
     document.getElementById('lbl_PDES').innerText = null === objProduct.PDES ? '' : objProduct.PDES;
@@ -1063,7 +1074,7 @@ function OpenSampleModal(rowData) {
     if (document.getElementById('txtQaEFI_CRITICALFLAG').checked)
         document.getElementById('lblQaEFI_CRITICALFLAG').style.color = 'red';
     else
-        document.getElementById('lblQaEFI_CRITICALFLAG').style.color = '#000000';
+        document.getElementById('lblQaEFI_CRITICALFLAG').style.color = 'crimson';
     document.getElementById('txtQaRESULT').value = rowData.RESULT;
     document.getElementById('txtQaREMARK').value = rowData.REMARK;
     document.getElementById('hdnQaDOCNO').value = rowData.DOCNO;
@@ -1283,8 +1294,7 @@ function onSubmitCreateSampleList(e) {
     });
 }
 
-function onSubmit_UpdateOrderLineData() {
-    $("#loader").show();
+function onSubmit_UpdateOrderLineData(e) {
     let selectList = document.getElementById('combo_DELAYREASON');
     let SUPNAME = document.getElementById('lbl_SUPNAME').innerText;
     let PARTNAME = document.getElementById('lbl_PARTNAME').innerText;
@@ -1293,11 +1303,7 @@ function onSubmit_UpdateOrderLineData() {
     let DELAYREASON = '';
     let REQDATE = document.getElementById('txt_pageREQDATE').value;
     let SHR_SUP_REMARKS = document.getElementById('lbl_SHR_SUP_REMARKS').value;
-
-    if (selectList.options[selectList.selectedIndex].value === '-1')
-        DELAYREASON = document.getElementById("txt_ReasonRejection").value;
-    else
-        DELAYREASON = selectList.options[selectList.selectedIndex].text;
+    let res = 0;
 
     console.log("SHR_SUP_REMARKS", SUPNAME);
     console.log("SUPNAME", SUPNAME);
@@ -1306,6 +1312,42 @@ function onSubmit_UpdateOrderLineData() {
     console.log("LINE", LINE);
     console.log("DELAYREASON", DELAYREASON);
     console.log("REQDATE", REQDATE);
+    console.log("previewsSupplayDate", previewsSupplayDate);
+    
+    if (null === REQDATE || REQDATE === '') {
+        if (x === 'rtl') {
+            showErrorMessage('חובה לציין תאריך אספקה');
+        }
+        else
+            showErrorMessage('Supply date is mandatory field');
+
+        setTimeout(function () { showSalesorderDetail(selectedPARTNAME, selectedORD, selectedLINE); }, 5000);
+        return;
+    }
+
+    if (selectList.options[selectList.selectedIndex].value === '-1')
+        DELAYREASON = document.getElementById("txt_ReasonRejection").value;
+    else
+        DELAYREASON = selectList.options[selectList.selectedIndex].text;
+
+    if (selectList.options[selectList.selectedIndex].value === '-2' && previewsSupplayDate !== '')
+    {
+        if (REQDATE !== previewsSupplayDate) {
+            if (x === 'rtl')
+                showErrorMessage('בכוונתך לעדכן תאריך אספקה בפעם השנייה - חובה לציין סיבת דחייה');
+            else
+                showErrorMessage('You are about to change supply date again - Please add delay reason');
+
+            setTimeout(function () { showSalesorderDetail(selectedPARTNAME, selectedORD, selectedLINE); }, 4000);
+            return;
+        }
+        else
+            DELAYREASON = '';
+    }
+    else
+        DELAYREASON = '';
+
+    $("#loader").show();
     // DO AJAX HERE
     $.ajax(
         {
@@ -1328,18 +1370,18 @@ function onSubmit_UpdateOrderLineData() {
                 $("#loader").hide();
                 if (null !== response.ErrorDescription) {
                     showErrorMessage(response.ErrorDescription);
-                    //if (x === 'rtl') {
-                    //    $("#modal-error-text").html(response.ErrorDescription);
-                    //    $("#modal-2").trigger("click");
-                    //}
-                    //else {
-                    //    $("#modal-error-text").html(response.ErrorDescription);
-                    //    $("#modal-21").trigger("click");
-                    //}
                 }
-                refreshOrdersData(SUPNAME);
+                else
+                    res = 1;
             }
         });
+
+    console.log('onSubmit_UpdateOrderLineData - SUBMIT result = ' + res);
+    if (res == 0)
+        setTimeout(function () { showSalesorderDetail(selectedPARTNAME, selectedORD, selectedLINE); }, 4000);
+    else
+        refreshOrdersData(SUPNAME);
+    return 1;
 }
 
 function decode(str) {

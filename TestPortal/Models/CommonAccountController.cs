@@ -18,7 +18,7 @@ namespace TestPortal.Models
         }
 
         [HttpPost]
-        public ActionResult SaveUserProfile(string lang, string fullName)
+        public ActionResult SaveUserProfile(string lang, string fullName, string pass)
         {
             ResultAPI ra = null;
             if (Session["USER_LOGIN"] == null)
@@ -26,7 +26,7 @@ namespace TestPortal.Models
             else
             {
                 AppUser au = Session["USER_LOGIN"] as AppUser;
-                ra = au.SaveUserProfile(lang, fullName);
+                ra = au.SaveUserProfile(lang, fullName, pass);
             }
             return Json(ra);
         }
