@@ -83,7 +83,7 @@ namespace TestPortal.Models
         public string SAMPLE_TYPE_CODE { get; set; }
         public string SHR_ROHS { get; set; }
         public string EFI_PORDNAME { get; set; }
-
+        public List<SampleAttachments> MED_EXTFILES_SUBFORM { get; set; }
         public List<Sample_QA> MED_TRANSSAMPLEQA_SUBFORM { get; set; }
         #endregion
         internal Sample GetProductSamples(string supplierName, string orderName, string partName, int ordLine)
@@ -102,7 +102,7 @@ namespace TestPortal.Models
 
         internal Sample GetProductSamples(string DOCNO)
         {
-            string query = "MED_SAMPLE?$filter=DOCNO eq '" + DOCNO + "' and STATDES ne 'מבוטלת'&$expand=MED_TRANSSAMPLEQA_SUBFORM($expand=MED_RESULTDET_SUBFORM)";
+            string query = "MED_SAMPLE?$filter=DOCNO eq '" + DOCNO + "' and STATDES ne 'מבוטלת'&$expand=MED_TRANSSAMPLEQA_SUBFORM($expand=MED_RESULTDET_SUBFORM),MED_EXTFILES_SUBFORM";
             string res = Call_Get(query);
 
             SamplesWarpper ow = JsonConvert.DeserializeObject<SamplesWarpper>(res);
@@ -115,7 +115,7 @@ namespace TestPortal.Models
 
         internal List<Sample> GetOrderSamples(string ORDNAME, string SUPNAME, string PARTNAME)
         {
-            string query = "MED_SAMPLE?$filter=EFI_PORDNAME eq '" + ORDNAME + "' and SUPNAME eq '" + SUPNAME + "' and PARTNAME eq '" + PARTNAME + "' and STATDES ne 'מבוטלת'";
+            string query = "MED_SAMPLE?$filter=EFI_PORDNAME eq '" + ORDNAME + "' and SUPNAME eq '" + SUPNAME + "' and PARTNAME eq '" + PARTNAME + "' and STATDES ne 'מבוטלת'&$expand=MED_EXTFILES_SUBFORM";
             string res = Call_Get(query);
             SamplesWarpper ow = JsonConvert.DeserializeObject<SamplesWarpper>(res);
             return ow.Value;

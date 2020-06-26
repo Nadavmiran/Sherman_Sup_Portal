@@ -61,18 +61,6 @@ namespace TestPortal.Models
 
         private string CreateJsonMsg(SampleTestMsg sampleTestMsg, List<Attachments> files)
         {
-            /*
-              {
-	"DOCNO":"C2000000091",
-	"PARTNAME":"28609002",
-	"MED_EXTFILES_SUBFORM": [
-		{
-		"EXTFILEDES":"TEXT",
-		"EXTFILENAME":"C:\\Users\\orong\\Desktop\\DBconnection.txt"
-		}
-	]
-}
-             * */
             StringBuilder sb = new StringBuilder();
             int idx = 0;
             sb.Append("{");
@@ -91,9 +79,11 @@ namespace TestPortal.Models
 
                 sb.Append("\r\n\t{");
                 sb.Append("\r\n\t\"EXTFILEDES\":");
-                sb.Append("\"" + item.FILE_NAME + "\",");
+                sb.Append("\"" + sampleTestMsg.hdnQaDOCNO + "_" + item.FILE_NAME + "\",");
                 sb.Append("\r\n\t\"EXTFILENAME\":");
-                sb.Append("\"" + item.EXTFILENAME.Replace(@"\", @"\\") + "\"");
+                sb.Append("\"" + item.EXTFILENAME.Replace(@"\", @"\\") + "\",");
+                sb.Append("\r\n\t\"SUFFIX\":");
+                sb.Append("\"" + item.EXTFILENAME.Split('.')[1] + "\"");
                 sb.Append("\r\n\t}");
             }
             sb.Append("\r\n\t]"); //End Sub form

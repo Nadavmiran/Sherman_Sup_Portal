@@ -16,6 +16,10 @@ namespace TestPortal.Models
         /// <summary>
         /// הזמנה
         /// </summary>
+        public int ORDI { get; set; }
+        /// <summary>
+        /// הזמנה
+        /// </summary>
         public string ORDNAME { get; set; }
         /// <summary>
         /// שורה
@@ -134,6 +138,7 @@ namespace TestPortal.Models
         /// SHR_OPENSUPORDERS_T.SHR_SUP_REMARKS - הערות ספק
         /// </summary>
         public string SHR_SUP_REMARKS { get; set; }
+        public int SumOrdLineUpdates { get; set; }
         public OrdersItemText[] PORDERITEMSTEXT_SUBFORM { get; set; }
         #endregion
 
@@ -188,6 +193,9 @@ namespace TestPortal.Models
         internal string GerSupplierRemarks(string ORDNAME, int KLINE)
         {
             string res = Call_Get("/SHR_OPENSUPORDERS_T?$filter=ORDNAME eq '"+ ORDNAME + "' and KLINE eq " + KLINE +"&$select=SHR_SUP_REMARKS");
+            if (null == res)
+                return string.Empty;
+
             OrdersItemWarpper ow = JsonConvert.DeserializeObject<OrdersItemWarpper>(res);
             if (null == ow || ow.Value.Count == 0)
                 return string.Empty;

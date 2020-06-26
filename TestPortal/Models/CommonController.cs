@@ -9,6 +9,7 @@ using System.Web.Hosting;
 using System.Web;
 using System.Web.Mvc;
 using System.Net;
+using System.Configuration;
 
 namespace TestPortal.Models
 {
@@ -119,16 +120,34 @@ namespace TestPortal.Models
                 if (null == obj.PORDERITEMS_SUBFORM)
                     continue;
 
+                List<SHR_OPENSUPORDERS_T> lstLog = GetOrderLineUpdates(obj.ORDNAME);
                 for (int i = 0; i < obj.PORDERITEMS_SUBFORM.Length; i++)
                 {
+                    if (null == lstLog)
+                        obj.PORDERITEMS_SUBFORM[i].SumOrdLineUpdates = 0;
+                    else
+                        obj.PORDERITEMS_SUBFORM[i].SumOrdLineUpdates = lstLog.Where(x => x.ORDI == obj.PORDERITEMS_SUBFORM[i].ORDI).SingleOrDefault().SHR_DUEDATELOG_SUBFORM.Length;
+
                     obj.PORDERITEMS_SUBFORM[i].ORDNAME = obj.ORDNAME;
                     obj.PORDERITEMS_SUBFORM[i].ORD = obj.ORD;
+                    
                 }
                 po.lstItemsObject.AddRange(obj.PORDERITEMS_SUBFORM);
             }
             //PORDERS?$filter=SUPNAME eq '22000' and (STATDES eq 'מאושרת' or STATDES eq 'נשלחה-עדכון' or STATDES eq 'נשלחה' or STATDES eq 'אישור ספק' or STATDES eq 'פתיחה חוזרת' or STATDES eq 'מוקפאת')&$expand=PORDERITEMS_SUBFORM($expand=PORDERITEMSTEXT_SUBFORM)
 
             return Json(po);
+        }
+
+        private List<SHR_OPENSUPORDERS_T> GetOrderLineUpdates(string ORDNAME)
+        {
+            OrderItems oi = new OrderItems();
+            string res = oi.Call_Get("/SHR_OPENSUPORDERS_T?$filter=ORDNAME eq '" + ORDNAME + "'&$expand=SHR_DUEDATELOG_SUBFORM($filter=USERLOGIN eq '" + ConfigurationManager.AppSettings["AppAPI_U"].ToString() + "')");
+            SHR_OPENSUPORDERS_T_Warpper ow = JsonConvert.DeserializeObject<SHR_OPENSUPORDERS_T_Warpper>(res);
+            if (null == ow || ow.Value.Count == 0)
+                return null;
+
+            return  ow.Value;
         }
 
         public ActionResult TestProductItem(int orderID, string prodName, int ordLine)
@@ -488,6 +507,33 @@ namespace TestPortal.Models
                     }
                     ra.ResultData = s;
                 }
+                if(null != s && null != s.MED_EXTFILES_SUBFORM && s.MED_EXTFILES_SUBFORM.Count > 0)
+                {
+                    foreach (SampleAttachments item in s.MED_EXTFILES_SUBFORM)
+                    {
+                        string[] arr = item.EXTFILENAME.Split('\\');
+                        if (string.IsNullOrEmpty(arr[arr.Length - 1]))
+                        {
+                            //item.FILE_NAME = arr[0];
+                            item.FOLDER = arr[1];
+                        }
+                        else
+                        {
+                            switch (arr.Length)
+                            {
+                                case 3:
+                                    item.FOLDER = arr[arr.Length - 2];
+                                    break;
+                                case 4:
+                                    item.FOLDER = arr[arr.Length - 3] + @"\" + arr[arr.Length - 2];
+                                    break;
+                                default:
+                                    item.FOLDER = arr[arr.Length - 2];
+                                    break;
+                            }
+                        }
+                    }
+                }
             }
             return Json(ra);
         }
@@ -621,8 +667,10 @@ namespace TestPortal.Models
                     if (file != null && file.ContentLength > 0)
                     {
                         string fileName = Path.GetFileName(file.FileName);
-                        string dir = Path.Combine(Server.MapPath("~/PortalDocs/" + ow.form[0].hdnQaSUPNAME + "/" + ow.form[0].hdnQaDOCNO));
-                        var path = Path.Combine(Server.MapPath("~/PortalDocs/" + ow.form[0].hdnQaSUPNAME + "/" + ow.form[0].hdnQaDOCNO + "/"), fileName);
+                        //string dir = Path.Combine(Server.MapPath("~/SupDocs/" + ow.form[0].hdnQaSUPNAME + "/" + ow.form[0].hdnQaDOCNO));
+                        string dir = Path.Combine(Server.MapPath("~/SupDocs/" + ow.form[0].hdnQaSUPNAME));
+                        //var path = Path.Combine(Server.MapPath("~/SupDocs/" + ow.form[0].hdnQaSUPNAME + "/" + ow.form[0].hdnQaDOCNO + "/"), ow.form[0].hdnQaDOCNO + "_" + fileName);
+                        var path = Path.Combine(Server.MapPath("~/SupDocs/" + ow.form[0].hdnQaSUPNAME), ow.form[0].hdnQaDOCNO + "_" + fileName);
                         if (!Directory.Exists(dir))
                             Directory.CreateDirectory(dir);
 
@@ -788,6 +836,7 @@ namespace TestPortal.Models
             OrderItems oi = new OrderItems();
             PageObject po = new PageObject();
             Sample s = new Sample();
+            
             po.User = Session["USER_LOGIN"] as AppUser;
             s.UserLanguage = oi.UserLanguage = po.User.Language;
 
@@ -828,6 +877,7 @@ namespace TestPortal.Models
 
             po.objProduct = po.objOrder.PORDERITEMS_SUBFORM[0];
             po.lstSampleObject = s.GetOrderSamples(orderName, po.User.Supplier_ID, prodName);
+
             // Get Attachments
             if ((null == po.objOrder.EXTFILES_SUBFORM) || (po.objOrder.EXTFILES_SUBFORM.Length == 0))
             {
@@ -864,6 +914,7 @@ namespace TestPortal.Models
             PageObject po = new PageObject();
             po.User = Session["USER_LOGIN"] as AppUser;
             Sample s = new Sample();
+            SampleAttachments sa = new SampleAttachments();
             s.UserLanguage = po.User.Language;
             po.objSample = s.GetProductSamples(DOCNO);
             if(null != po.objSample && null != po.objSample.MED_TRANSSAMPLEQA_SUBFORM)
@@ -873,6 +924,34 @@ namespace TestPortal.Models
                     item.DOCNO = DOCNO;
                     item.SUPNAME = SUPNAME;
                     item.PARTNAME = PARTNAME;
+                }
+            }
+            po.lstSampleAttachments = sa.GetSampleAttachments(DOCNO);
+            if (null != po.lstSampleAttachments && null != po.lstSampleAttachments && po.lstSampleAttachments.Count > 0)
+            {
+                foreach (SampleAttachments item in po.lstSampleAttachments)
+                {
+                    string[] arr = item.EXTFILENAME.Split('\\');
+                    if (string.IsNullOrEmpty(arr[arr.Length - 1]))
+                    {
+                        //item.FILE_NAME = arr[0];
+                        item.FOLDER = arr[1];
+                    }
+                    else
+                    {
+                        switch (arr.Length)
+                        {
+                            case 3:
+                                item.FOLDER = arr[arr.Length - 2];
+                                break;
+                            case 4:
+                                item.FOLDER = arr[arr.Length - 3] + @"\" + arr[arr.Length - 2];
+                                break;
+                            default:
+                                item.FOLDER = arr[arr.Length - 2];
+                                break;
+                        }
+                    }
                 }
             }
             return Json(po);

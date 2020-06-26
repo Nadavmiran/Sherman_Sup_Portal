@@ -218,6 +218,38 @@ function showGridProdAttachments(grid_data) {
     });
 }
 
+function showGridSampleAttachments(grid_data) {
+    console.log("showGridSampleAttachments ==> grid_data", grid_data);
+    $("#jqGridSampleAttachments").jqGrid({
+        guiStyle: "bootstrap",
+        iconSet: "fontAwesome",
+        datatype: "local",
+        data: grid_data,
+        colModel: [
+            { label: 'תיקייה', name: 'FOLDER', align: 'center', hidden: true, width: 200 },
+            { label: 'נתיב', name: 'EXTFILENAME', align: 'center', hidden: true, width: 200 },
+            { label: '#', name: 'EXTFILENUM', align: 'center', key: true, hidden: false, width: 75 },
+            { label: 'שם קובץ', name: 'EXTFILEDES', align: 'center', hidden: false, width: 200 },
+            { label: 'קובץ', name: 'SUFFIX', align: 'center', width: 200, formatter: formatFileIcon }
+        ],
+        viewrecords: true,
+        altRows: true,
+        direction: 'rtl',
+        autowidth: true,
+        height: null,
+        rowNum: 30,
+        rowList: [10, 30, 50, 100],
+        pager: "#jqGridSampleAttachmentsPager",
+        loadonce: true,
+        subGrid: false,
+        onSelectRow: function (id, rowId, iCol, content, event) {
+            var rowData = $(this).getRowData(id);
+            console.log('showGridProdAttachments ==> rowData ', rowData);
+            downloadFile(rowData.FOLDER, rowData.EXTFILEDES + '.' + rowData.EXTFILENAME.split('.')[1]);
+        }
+    });
+}
+
 function showGridTestList(grid_data) {
     console.log("showGridSampleList ==> grid_data", grid_data);
     var $grid = $("#jqGridSampleQA"), idsOfSelectedRows = [],

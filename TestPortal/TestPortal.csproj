@@ -17,7 +17,7 @@
     <AssemblyName>TestPortal</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>true</UseIISExpress>
+    <UseIISExpress>false</UseIISExpress>
     <Use64BitIISExpress />
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
@@ -186,6 +186,7 @@
     <Compile Include="Models\CommonAccountController.cs" />
     <Compile Include="Models\CommonController.cs" />
     <Compile Include="Models\DelayReason.cs" />
+    <Compile Include="Models\DueDateLog.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\OrderItems.cs" />
     <Compile Include="Models\OrdersItemText.cs" />
@@ -196,10 +197,12 @@
     <Compile Include="Models\ProductRevisionTest.cs" />
     <Compile Include="Models\Revision.cs" />
     <Compile Include="Models\Sample.cs" />
+    <Compile Include="Models\SampleAttachments.cs" />
     <Compile Include="Models\SampleStandard.cs" />
     <Compile Include="Models\SampleStatus.cs" />
     <Compile Include="Models\SampleType.cs" />
     <Compile Include="Models\Sample_QA.cs" />
+    <Compile Include="Models\SHR_OPENSUPORDERS_T.cs" />
     <Compile Include="Models\Test.cs" />
     <Compile Include="PriorityAPI\PriorityAPI.cs" />
     <Compile Include="PriorityAPI\ResultAPI.cs" />
@@ -498,6 +501,10 @@
     <Content Include="Views\Home_IL\QA_Page.cshtml" />
     <Content Include="Views\Home\UserProfile.cshtml" />
     <Content Include="Views\Home_IL\UserProfile.cshtml" />
+    <Content Include="Views\Home_IL\_QA_Page.cshtml" />
+    <Content Include="Views\Home_IL\_TestProduct.cshtml" />
+    <Content Include="Views\Home\_QA_Page.cshtml" />
+    <Content Include="Views\Home\_TestProduct.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -532,7 +539,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>51668</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:51668/</IISUrl>
+          <IISUrl>http://localhost/TestPortal</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

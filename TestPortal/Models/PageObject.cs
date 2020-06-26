@@ -15,7 +15,7 @@ namespace TestPortal.Models
         public Sample_QA objSamplQA { get; set; }
         public List<DelayReason> lstDelayReason { get; set; }
         public List<Sample> lstSampleObject { get; set; }
-        //public List<Test> lstTestObject { get; set; }
+        public List<SampleAttachments> lstSampleAttachments { get; set; }
         public List<Order> lstOrderObject { get; set; }
         public List<OrderItems> lstItemsObject { get; set; }
         public List<Attachments> lstAttachments { get; set; }

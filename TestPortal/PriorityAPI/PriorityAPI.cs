@@ -435,7 +435,7 @@ namespace LMNS.Priority.API
                 }
                 else if (res.ResultStatus.ToLower().Equals("forbidden"))
                 {
-                    res.ErrorDescription = "Call Network system administrator, ned to reset 'Priority .NET Service'";
+                    res.ErrorDescription = response.Content;// "Call Network system administrator, ned to reset 'Priority .NET Service'";
                 }
                 else if(res.ResultStatus.ToLower().Equals("internal server error"))
                 {

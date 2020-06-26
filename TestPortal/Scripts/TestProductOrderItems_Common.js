@@ -215,13 +215,13 @@ function manageDelayReasonSelect(data)
     option.selected = true;
     selectList.appendChild(option);
 
-    option = document.createElement("option");
-    option.value = '-1';
-    if (x === 'rtl')
-        option.text = 'אחר';
-    else
-        option.text = 'Other';
-    selectList.appendChild(option);
+    //option = document.createElement("option");
+    //option.value = '-1';
+    //if (x === 'rtl')
+    //    option.text = 'אחר';
+    //else
+    //    option.text = 'Other';
+    //selectList.appendChild(option);
     if (null !== data.lstDelayReason && data.lstDelayReason.length > 0) {
         for (i = 0; i < data.lstDelayReason.length; i++) {
             option = document.createElement("option");
@@ -240,6 +240,13 @@ function manageDelayReasonSelect(data)
             selectList.appendChild(option);
         }
     }
+    option = document.createElement("option");
+    option.value = '-1';
+    if (x === 'rtl')
+        option.text = 'אחר';
+    else
+        option.text = 'Other';
+    selectList.appendChild(option);
     document.getElementById('lbl_pageREQDATE').style.display = 'none';
     document.getElementById('lbl_DELAYREASON').style.display = 'none';
 
@@ -714,7 +721,8 @@ function GetSampleTests(rowData) {
                 console.log("GetSampleTests ==> response", response);
                 if (null !== response && null !== response.objSample) {
                     pageSampleobject.objSample = response.objSample;
-                    //showGridSampleList(response.lstSamplQA);
+                    if (null !== response.lstSampleAttachments)
+                        showGridSampleAttachments(response.lstSampleAttachments);
                     $("#jqGridRevision").GridUnload();
                     if (null !== response.objSample && null !== response.objSample.MED_TRANSSAMPLEQA_SUBFORM && response.objSample.MED_TRANSSAMPLEQA_SUBFORM.length > 0)
                         showGridProdSamples(response.objSample.MED_TRANSSAMPLEQA_SUBFORM);
@@ -1121,6 +1129,28 @@ function onSubmit_TestForm(e) {
     }
 
     console.log(formdata);
+    fdata.append("sampleData", decode(createJson(fd)));
+    console.log("UploadFiles ==> fdata = ", fdata);
+    $.ajax(
+        {
+            type: "POST",
+            data: fdata,
+            url: $('#navUploadFiles').data('url'),//"/Home/UploadFiles",
+            contentType: false,
+            processData: false,
+            success: function (response) {
+                console.log("UploadFiles - response", response);
+                if (null !== response && null !== response.ResultData) {
+                    if (response.ResultStatus === 'OK')
+                        return;
+
+                    if (response.ErrorDescription !== '') {
+                        $("#modal-error-text").html(response.ErrorDescription);
+                        $("#modal-1").trigger("click");
+                    }
+                }
+            }
+        });
     // DO AJAX HERE
     $.ajax(
         {
@@ -1136,6 +1166,11 @@ function onSubmit_TestForm(e) {
                 if (null !== response && null !== response.ResultData)
                 {
                     pageSampleobject.objSample = response.ResultData;
+                    if (null !== response.ResultData.MED_EXTFILES_SUBFORM) {
+                        $("#jqGridSampleAttachments").GridUnload();
+                        showGridSampleAttachments(response.ResultData.MED_EXTFILES_SUBFORM);
+                    }
+
                     if (null !== response.ResultData.MED_TRANSSAMPLEQA_SUBFORM) {
                         $("#jqGridRevision").GridUnload();
                         showGridProdSamples(response.ResultData.MED_TRANSSAMPLEQA_SUBFORM);
@@ -1176,28 +1211,28 @@ function onSubmit_TestForm(e) {
             }
         });
 
-    fdata.append("sampleData", decode(createJson(fd)));
-    console.log("UploadFiles ==> fdata = ", fdata);
-    $.ajax(
-        {
-            type: "POST",
-            data: fdata,
-            url: $('#navUploadFiles').data('url'),//"/Home/UploadFiles",
-            contentType: false,
-            processData: false,
-            success: function (response) {
-                console.log("UploadFiles - response", response);
-                if (null !== response && null !== response.ResultData) {
-                    if (response.ResultStatus === 'OK')
-                        return;
+    //fdata.append("sampleData", decode(createJson(fd)));
+    //console.log("UploadFiles ==> fdata = ", fdata);
+    //$.ajax(
+    //    {
+    //        type: "POST",
+    //        data: fdata,
+    //        url: $('#navUploadFiles').data('url'),//"/Home/UploadFiles",
+    //        contentType: false,
+    //        processData: false,
+    //        success: function (response) {
+    //            console.log("UploadFiles - response", response);
+    //            if (null !== response && null !== response.ResultData) {
+    //                if (response.ResultStatus === 'OK')
+    //                    return;
 
-                    if (response.ErrorDescription !== '') {
-                        $("#modal-error-text").html(response.ErrorDescription);
-                        $("#modal-1").trigger("click");
-                    }
-                }
-            }
-        });
+    //                if (response.ErrorDescription !== '') {
+    //                    $("#modal-error-text").html(response.ErrorDescription);
+    //                    $("#modal-1").trigger("click");
+    //                }
+    //            }
+    //        }
+    //    });
 }
 
 function onSubmitCreateSampleList(e) {
@@ -1341,11 +1376,11 @@ function onSubmit_UpdateOrderLineData(e) {
             setTimeout(function () { showSalesorderDetail(selectedPARTNAME, selectedORD, selectedLINE); }, 4000);
             return;
         }
-        else
-            DELAYREASON = '';
+        //else
+        //    DELAYREASON = '';
     }
-    else
-        DELAYREASON = '';
+    //else
+    //    DELAYREASON = '';
 
     $("#loader").show();
     // DO AJAX HERE
@@ -1376,10 +1411,10 @@ function onSubmit_UpdateOrderLineData(e) {
             }
         });
 
-    console.log('onSubmit_UpdateOrderLineData - SUBMIT result = ' + res);
-    if (res == 0)
-        setTimeout(function () { showSalesorderDetail(selectedPARTNAME, selectedORD, selectedLINE); }, 4000);
-    else
+    //console.log('onSubmit_UpdateOrderLineData - SUBMIT result = ' + res);
+    //if (res == 0)
+    //    setTimeout(function () { showSalesorderDetail(selectedPARTNAME, selectedORD, selectedLINE); }, 4000);
+    //else
         refreshOrdersData(SUPNAME);
     return 1;
 }

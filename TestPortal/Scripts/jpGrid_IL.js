@@ -60,7 +60,8 @@
                 autowidth: true,
                 height: null,
                 colModel: [
-                    { label: '#', name: 'LINE', align: 'center', key: true, hidden: false, width: 75 },
+                    { label: '#', name: 'LINE', align: 'center', key: true, hidden: false, width: 75 }, 
+                    { label: 'SumOrdLineUpdates', name: 'SumOrdLineUpdates', align: 'center', key: false, hidden: true, width: 75 },
                     { label: 'ORD', name: 'ORD', align: 'center', hidden: true, width: 75 },
                     { label: 'ORDNAME', name: 'ORDNAME', align: 'center', hidden: true, width: 75 },
                     { label: 'מק"ט', name: 'PARTNAME', align: 'center', width: 100},//, formatter: formatProdLink
@@ -91,7 +92,10 @@
 }
 
 function formatBTNLink(cellValue, options, rowObject) {
-    return '<i class="fas fa-info-circle" style="font-size:14px;cursor:pointer;" onclick="showSalesorderDetail(\'' + rowObject.PARTNAME + '\',' + rowObject.ORD + ',' + rowObject.LINE + ')"></i>';
+    if (rowObject.SumOrdLineUpdates < 2)
+        return '<i class="fas fa-info-circle" style="font-size:14px;cursor:pointer;" onclick="showSalesorderDetail(\'' + rowObject.PARTNAME + '\',' + rowObject.ORD + ',' + rowObject.LINE + ')"></i>';
+    else
+        return '<i class="fas fa-info-circle" style="font-size:14px;color:crimson;" title="לא ניתן לעדכן - נא ליצור קשר עם עם שרמן לעזרה" onclick="showSalesorderDetail(\'' + rowObject.PARTNAME + '\',' + rowObject.ORD + ',' + rowObject.LINE + ')"></i>';
 }
 //function formatRPTLink(cellValue, options, rowObject) {
 //    //console.log("formatRPTLink ==> options", options);
