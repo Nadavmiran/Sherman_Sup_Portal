@@ -10,12 +10,12 @@
         colModel: [
             { label: 'OrderID', name: 'ORD', align: 'center', index: 'ORD', key: true, hidden: true, width: 75 },//, formatter: formatRPTLink
             { label: 'שם ספק', name: 'SHR_SUPTYPEDES', align: 'center', hidden: true },//, formatter: formatRPTLink
-            { label: 'הזמנה', name: 'ORDNAME', index: 'ORDNAME', align: 'center', width: 75, sorttype: 'string', searchtype: 'string', searchoptions: { sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge', 'bw', 'bn', 'in', 'ni', 'ew', 'en', 'cn', 'nc']}},//, formatter: formatRPTLink
-            { label: 'תאריך הזמנה', name: 'pageCURDATE', align: 'center', width: 150},//, formatter: formatRPTLink
-            { label: 'שם הקניין', name: 'OWNERLOGIN', align: 'center', width: 150},//, formatter: formatRPTLink
-            { label: 'סוג הזמנה ', name: 'TYPEDES', align: 'center', width: 150},
+            { label: 'הזמנה', name: 'ORDNAME', index: 'ORDNAME', align: 'center', width: 75, sorttype: 'string', searchtype: 'string', searchoptions: { sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge', 'bw', 'bn', 'in', 'ni', 'ew', 'en', 'cn', 'nc'] } },//, formatter: formatRPTLink
+            { label: 'מהדורה', name: 'CURVERSION', align: 'center', width: 90 },
+            { label: 'תאריך הזמנה', name: 'pageCURDATE', align: 'center', width: 150 },//, formatter: formatRPTLink
             { label: 'ססטוס הזמנה', name: 'STATDES', align: 'center', width: 150 },
-            { label: 'מהדורה', name: 'CURVERSION', align: 'center', width: 90 }
+            { label: 'סוג הזמנה ', name: 'TYPEDES', align: 'center', width: 150},
+            { label: 'שם הקניין', name: 'OWNERLOGIN', align: 'center', width: 150 }
         ],
         viewrecords: true,
         altRows: true,
@@ -68,13 +68,14 @@
                     { label: 'שרטוט', name: 'SHR_DRAW', align: 'center', width: 100 },
                     { label: 'תאור', name: 'PDES', align: 'center', width: 100 },
                     { label: 'כמות', name: 'TQUANT', align: 'center', width: 100 },
-                    { label: 'נותר לספק', name: 'TBALANCE', align: 'center', width: 100 },
+                    { label: 'נותר לספק', name: 'TBALANCE', align: 'center', width: 100 }, 
+                    { label: 'ת. אספקה מבוקש', name: 'pageREQDATE2', align: 'center', width: 100 },
                     { label: 'תאריך אספקה', name: 'pageREQDATE', align: 'center', width: 100 },
                     { label: 'סטטוס', name: 'PORDISTATUSDES', align: 'center', width: 100 },
                     { label: 'פרטי שורת הזמנה', name: 'Information', align: 'center', width: 150, formatter: formatBTNLink }
                 ],
                 onCellSelect: function (id, col, iCol, event) {
-                    if (col == 10) return;
+                    if (col == 12) return;
                     console.log("onSelectRow col = ", col);
                     console.log("onSelectRow iCol = ", iCol);
                     console.log("onSelectRow id = ", id);
@@ -92,10 +93,11 @@
 }
 
 function formatBTNLink(cellValue, options, rowObject) {
+    console.log("formatBTNLink rowObject.SumOrdLineUpdates = ", rowObject.SumOrdLineUpdates);
     if (rowObject.SumOrdLineUpdates < 2)
-        return '<i class="fas fa-info-circle" style="font-size:14px;cursor:pointer;" onclick="showSalesorderDetail(\'' + rowObject.PARTNAME + '\',' + rowObject.ORD + ',' + rowObject.LINE + ')"></i>';
+        return '<i class="fas fa-info-circle" style="font-size:20px;cursor:pointer;" onclick="showSalesorderDetail(\'' + rowObject.PARTNAME + '\',' + rowObject.ORD + ',' + rowObject.LINE + ')"></i>';
     else
-        return '<i class="fas fa-info-circle" style="font-size:14px;color:crimson;" title="לא ניתן לעדכן - נא ליצור קשר עם עם שרמן לעזרה" onclick="showSalesorderDetail(\'' + rowObject.PARTNAME + '\',' + rowObject.ORD + ',' + rowObject.LINE + ')"></i>';
+        return '<i class="fas fa-info-circle" style="font-size:20px;color:crimson;" title="לא ניתן לעדכן - נא ליצור קשר עם עם שרמן לעזרה" ></i>';
 }
 //function formatRPTLink(cellValue, options, rowObject) {
 //    //console.log("formatRPTLink ==> options", options);

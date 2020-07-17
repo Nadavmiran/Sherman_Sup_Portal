@@ -262,7 +262,9 @@ function manageDelayReasonSelect(data)
 }
 
 function comboDelayReasonOnChange() {
+    
     let selectList = document.getElementById('combo_DELAYREASON');
+    console.log('comboDelayReasonOnChange ==> selectList.options[selectList.selectedIndex].value', selectList.options[selectList.selectedIndex].value);
     if (selectList.options[selectList.selectedIndex].value === '-1')
         document.getElementById("txt_ReasonRejection").removeAttribute('disabled');
     else
@@ -273,14 +275,19 @@ function showOrderDetail(objOrder) {
     console.log('showOrderDetail ==> objOrder', objOrder);
     document.getElementById('lbl_ORDNAME').innerText = null === objOrder.ORDNAME ? '' : objOrder.ORDNAME;
     document.getElementById('lbl_pageCURDATE').innerText = null === objOrder.pageCURDATE ? '' : objOrder.pageCURDATE;
-    document.getElementById('lbl_STATDESE').innerText = null === objOrder.STATDES ? '' : objOrder.STATDES;
     document.getElementById('lbl_OWNERLOGIN').innerText = null === objOrder.OWNERLOGIN ? '' : objOrder.OWNERLOGIN;
     document.getElementById('lbl_CURVERSION').innerText = null === objOrder.CURVERSION ? '' : objOrder.CURVERSION;
     //document.getElementById('SHR_SUPTYPEDES').innerText = null == objOrder.SUPTYPEDES ? '' : objOrder.SUPTYPEDES;
     document.getElementById('lbl_SUPNAME').innerText = null === objOrder.SUPNAME ? '' : objOrder.SUPNAME;
     document.getElementById('lbl_CDES').innerText = null === objOrder.CDES ? '' : objOrder.CDES;
-    document.getElementById('lbl_TYPEDES').innerText = null === objOrder.TYPEDES ? '' : objOrder.TYPEDES;
-    
+    if (x === 'rtl') {
+        document.getElementById('lbl_STATDESE').innerText = null === objOrder.STATDES ? '' : objOrder.STATDES;
+        document.getElementById('lbl_TYPEDES').innerText = null === objOrder.TYPEDES ? '' : objOrder.TYPEDES;
+    }
+    else {
+        document.getElementById('lbl_STATDESE').innerText = null === objOrder.EFI_ESTATDES ? '' : objOrder.EFI_ESTATDES;
+        document.getElementById('lbl_TYPEDES').innerText = null === objOrder.EFI_ETYPEDES ? '' : objOrder.EFI_ETYPEDES;
+    }
 }
 
 function setInputDate(_id, pageREQDATE) {
@@ -356,19 +363,24 @@ function showOrderLineDetail(objProduct) {
     }
     document.getElementById('lbl_SHR_SUP_REMARKS').value = null === objProduct.SHR_SUP_REMARKS ? '' : objProduct.SHR_SUP_REMARKS;
     document.getElementById('lbl_REQDATE2').innerText = null === objProduct.REQDATE2 ? '' : objProduct.pageREQDATE2;
-    document.getElementById('lbl_PDES').innerText = null === objProduct.PDES ? '' : objProduct.PDES;
     document.getElementById('lbl_SERIALNAME').innerText = null === objProduct.SERIALNAME ? '' : objProduct.SERIALNAME;
     document.getElementById('lbl_TQUANT').innerText = null === objProduct.TQUANT ? '' : objProduct.TQUANT;
     document.getElementById('lbl_TBALANCE').innerText = null === objProduct.TBALANCE ? '' : objProduct.TBALANCE;
     document.getElementById('lbl_ACTNAME').innerText = null === objProduct.ACTNAME ? '' : objProduct.ACTNAME;
     document.getElementById('lbl_SHR_DRAW').innerText = null === objProduct.SHR_DRAW ? '' : objProduct.SHR_DRAW;
-    document.getElementById('lbl_SHR_MNFDES').innerText = null === objProduct.SHR_MNFDES ? '' : objProduct.SHR_MNFDES;
-    document.getElementById('lbl_SHR_MNFPARTNAME').innerText = null === objProduct.SHR_MNFPARTNAME ? '' : objProduct.SHR_MNFPARTNAME;
+    document.getElementById('lbl_MNFDES').innerText = null === objProduct.MNFDES ? '' : objProduct.MNFDES;
+    document.getElementById('lbl_SUPPARTNAME').innerText = null === objProduct.SUPPARTNAME ? '' : objProduct.SUPPARTNAME;
     document.getElementById('lbl_SHR_SERIAL_REVNUM').innerText = null === objProduct.SHR_SERIAL_REVNUM ? '' : objProduct.SHR_SERIAL_REVNUM;
     document.getElementById('lbl_REVNAME').innerText = null === objProduct.REVNAME ? '' : objProduct.REVNAME;
     document.getElementById('lbl_DELAYREASON').innerText = null === objProduct.EFI_DELAYREASON ? '' : objProduct.EFI_DELAYREASON;
+    document.getElementById('lbl_REMARK').innerText = null === objProduct.REMARK ? '' : objProduct.REMARK;
     
     document.getElementById('div_ReasonRejection').style.display = 'none';
+
+    if (x === 'rtl')
+        document.getElementById('lbl_PDES').innerText = null === objProduct.PDES ? '' : objProduct.PDES;
+    else
+        document.getElementById('lbl_PDES').innerText = null === objProduct.EFI_EPARTDES ? '' : objProduct.EFI_EPARTDES;
 }
 
 function showSampleDetails(objSample) {
@@ -391,6 +403,7 @@ function showSampleDetails(objSample) {
 }
 
 function GetSampleStandardList(objSample) {
+    x = document.getElementsByTagName("html")[0].getAttribute("dir");
     $.ajax(
         {
             type: "POST",
@@ -398,25 +411,32 @@ function GetSampleStandardList(objSample) {
             contentType: "application/x-www-form-urlencoded;charset=ISO-8859-15",
             success: function (response) {
                 console.log('GetSampleStandardList ==> response', response);
+                document.getElementById('lbl_SERIALNAME').value = null === objSample.SERIALNAME ? '' : objSample.SERIALNAME;
+                document.getElementById('lbl_PARTNAME').value = null === objSample.PARTNAME ? '' : objSample.PARTNAME;
                 document.getElementById('lbl_DOCNO').innerText = null === objSample.DOCNO ? '' : objSample.DOCNO;
                 document.getElementById('lbl_CURDATE').innerText = null === objSample.pageCURDATE ? '' : objSample.pageCURDATE;
                 document.getElementById('lbl_SHR_QUANT').value = null === objSample.SHR_QUANT ? 0 : objSample.SHR_QUANT;
                 document.getElementById('lbl_MAX_REJECT').innerText = null === objSample.MAX_REJECT ? '' : objSample.MAX_REJECT;
-                document.getElementById('lbl_EFI_SUPNO').value = null === objSample.EFI_SUPNO ? '' : objSample.EFI_SUPNO;
+                document.getElementById('lbl_EFI_SUPNO').value = null === objSample.SUPNAME ? '' : objSample.SUPNAME;
                 document.getElementById('lbl_SHR_SERIAL_QUANT').innerText = null === objSample.SHR_SERIAL_QUANT ? '' : objSample.SHR_SERIAL_QUANT;
                 document.getElementById('lbl_SHR_RAR').innerText = null === objSample.SHR_RAR ? '' : objSample.SHR_RAR;
                 document.getElementById('lbl_SHR_SAMPLE_STD_CODE').value = null === objSample.SHR_SAMPLE_STD_CODE ? '' : objSample.SHR_SAMPLE_STD_CODE;
                 document.getElementById('lbl_QUANT').innerText = null === objSample.QUANT ? '' : objSample.QUANT;
                 document.getElementById('lbl_SHR_ROHS').checked = null === objSample.SHR_ROHS || objSample.SHR_ROHS === 'N' ? false : true;
+                document.getElementById('lbl_SAMPLE_TYPE_CODE').value = null === objSample.SAMPLE_TYPE_CODE ? '' : objSample.SAMPLE_TYPE_CODE;
                 console.log('GetSampleStandardList ==> objSample.SAMPLE_TYPE_CODE', objSample.SAMPLE_TYPE_CODE);
                 objSampleStandardList = response.lstSampleStandard;
+                console.log('GetSampleStandardList ==> objSampleStandardList', objSampleStandardList);
                 let sl = document.getElementById('lbl_SHR_SAMPLE_STD_CODE');
+                console.log('GetSampleStandardList ==> sl = lbl_SHR_SAMPLE_STD_CODE', sl);
                 let i, L = sl.options.length - 1;
                 for (i = L; i >= 0; i--) {
                     sl.remove(i);
                 }
                 for (i = 0; i < objSampleStandardList.length; i++) {
                     let option = document.createElement("option");
+                    console.log('GetSampleStandardList ==> objSampleStandardList[i].SAMPLE_STD_CODE', objSampleStandardList[i].SAMPLE_STD_CODE);
+                    console.log('GetSampleStandardList ==> objSampleStandardList[i].SHR_SAMPLE_STD', objSampleStandardList[i].SHR_SAMPLE_STD);
                     option.value = objSampleStandardList[i].SHR_SAMPLE_STD;
                     option.text = objSampleStandardList[i].SAMPLE_STD_CODE;
                     
@@ -426,26 +446,40 @@ function GetSampleStandardList(objSample) {
                 }
                 // Fill sample status
                 sl = document.getElementById('lbl_STATDES');
-                i, L = sl.options.length - 1;
-                for (i = L; i >= 0; i--) {
-                    sl.remove(i);
+                console.log('GetSampleStandardList ==> sl = lbl_STATDES', sl);
+                if (null !== sl.options) {
+                    L = sl.options.length - 1;
+                    for (i = L; i >= 0; i--) {
+                        sl.remove(i);
+                    }
                 }
+                console.log('GetSampleStandardList ==> response.lstSampleStatus', response.lstSampleStatus);
+                console.log('GetSampleStandardList ==> x', x);
                 for (i = 0; i < response.lstSampleStatus.length; i++) {
                     let option = document.createElement("option");
                     option.value = response.lstSampleStatus[i].SAMPLESTATUS;
-                    option.text = response.lstSampleStatus[i].STATDES;
-
-
-                    if (objSample.STATDES === response.lstSampleStatus[i].STATDES)
+                    if (x === 'rtl')
                     {
-                        console.log('GetSampleStandardList ==> objSample.STATDES', objSample.STATDES);
-                        console.log('GetSampleStandardList ==> response.lstSampleStatus[i].STATDES', response.lstSampleStatus[i].STATDES);
-                        option.selected = true;
+                        option.text = response.lstSampleStatus[i].STATDES;
+                        if (objSample.STATDES === response.lstSampleStatus[i].STATDES) {
+                            console.log('GetSampleStandardList ==> objSample.STATDES', objSample.STATDES);
+                            console.log('GetSampleStandardList ==> response.lstSampleStatus[i].STATDES', response.lstSampleStatus[i].STATDES);
+                            option.selected = true;
+                        }
+                    }
+                    else
+                    {
+                        option.text = response.lstSampleStatus[i].ESTATDES;
+                        if (objSample.ESTATDES === response.lstSampleStatus[i].ESTATDES) {
+                            console.log('GetSampleStandardList ==> objSample.STATDES', objSample.ESTATDES);
+                            console.log('GetSampleStandardList ==> response.lstSampleStatus[i].STATDES', response.lstSampleStatus[i].ESTATDES);
+                            option.selected = true;
+                        }
                     }
                     sl.appendChild(option);
                 }
                 document.getElementById('sampleDetails').style.display = 'inline-block';
-                var x = document.getElementsByTagName("html")[0].getAttribute("dir");
+                //var x = document.getElementsByTagName("html")[0].getAttribute("dir");
                 if (x === 'rtl')
                     $("#modal-13").trigger("click");
                 else
@@ -458,6 +492,8 @@ function onSubmit_UpdateSampleDetails() {
     let EFI_SUPNO = document.getElementById('lbl_EFI_SUPNO').value;
     let SHR_QUANT = document.getElementById('lbl_SHR_QUANT').value;
     let SHR_ROHS = document.getElementById('lbl_SHR_ROHS').checked ? 'Y' : 'N';
+    let PARTNAME = document.getElementById('lbl_PARTNAME').value;
+    let SERIALNAME = document.getElementById('lbl_SERIALNAME').value;
     //let SHR_SAMPLE_STD_CODE = document.getElementById('lbl_SHR_SAMPLE_STD_CODE').value;
     let SAMPLE_TYPE_CODE = document.getElementById('lbl_SAMPLE_TYPE_CODE').value;
 
@@ -474,6 +510,8 @@ function onSubmit_UpdateSampleDetails() {
     console.log("onSubmit_UpdateSampleDetails ==> SHR_ROHS", SHR_ROHS);
     console.log("onSubmit_UpdateSampleDetails ==> SHR_SAMPLE_STD_CODE", SHR_SAMPLE_STD_CODE);
     console.log("onSubmit_UpdateSampleDetails ==> SAMPLE_TYPE_CODE", SAMPLE_TYPE_CODE);
+    console.log("onSubmit_UpdateSampleDetails ==> SERIALNAME", SERIALNAME);
+    console.log("onSubmit_UpdateSampleDetails ==> PARTNAME", PARTNAME);
     $.ajax(
         {
             type: "POST",
@@ -485,7 +523,9 @@ function onSubmit_UpdateSampleDetails() {
                 SHR_QUANT: SHR_QUANT,
                 SHR_ROHS: SHR_ROHS,
                 SHR_SAMPLE_STD_CODE: SHR_SAMPLE_STD_CODE,
-                DOCNO: DOCNO
+                DOCNO: DOCNO,
+                SERIALNAME: SERIALNAME,
+                PARTNAME: PARTNAME
             },
             url: $('#navUpdateSampleDetails').data('url'),//"/Home/UpdateSampleDetails",
             contentType: "application/x-www-form-urlencoded;charset=ISO-8859-15",
@@ -1039,7 +1079,7 @@ function OpenSampleModal(rowData) {
     var rasData = GetOrderProductTests(rowData.PARTNAME, rowData.SUPNAME, rowData.QACODE, rowData.REPETITION, rowData.DOCNO);
     document.getElementById('attachments').value = '';
     document.getElementById('txtQACODE').innerText = rowData.QACODE;
-    document.getElementById('txtQADES').innerText = rowData.QADES;
+    
     document.getElementById('txtQaLOCATION').innerText = rowData.LOCATION;
     document.getElementById('txtQaSHR_TEST').innerText = rowData.SHR_TEST;
     document.getElementById('txtQaRESULTMIN').innerText = rowData.RESULTMIN;
@@ -1093,6 +1133,14 @@ function OpenSampleModal(rowData) {
     document.getElementById('hdnQaPARTNAME').value = rowData.PARTNAME;
     document.getElementById('hdnQaREPETITION').value = rowData.REPETITION;
     document.getElementById('hdnQaSAMPQUANT').value = rowData.SAMPQUANT;
+    
+    if (x === 'rtl') {
+        document.getElementById('txtQADES').innerText = rowData.QADES;
+    }
+    else {
+        document.getElementById('txtQADES').innerText = rowData.SHR_QADES;
+    }
+    
 }
 
 function GetResultRecord(data, parentRowKey) {

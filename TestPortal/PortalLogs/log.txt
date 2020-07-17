@@ -49,3 +49,749 @@ System.IO.DirectoryNotFoundException: Could not find a part of the path 'H:\DEV\
    at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
    at System.IO.File.OpenRead(String path)
    at TestPortal.Models.CommonController.Download(String fileFolder, String fileName) in H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\Models\CommonController.cs:line 565
+DEBUG 2020-06-30 14:07:02,975   324ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 30/06/2020 0:00:00
+DEBUG 2020-06-30 14:07:50,842 48192ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 09/07/2020 0:00:00
+DEBUG 2020-07-08 11:06:28,787   205ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 08/07/2020 11:06:28
+DEBUG 2020-07-08 11:06:41,887 13306ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 08/07/2020 11:06:41
+INFO  2020-07-08 11:08:05,429 96848ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001644",
+	"PARTNAME":"0.0.370.01",
+	"SUPNAME":"21031",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":2,
+	"QACODE":"002",
+	"LOCATION":"0",
+	"NORMAL":"Y",
+	"EFI_MEASURESUPTOOLS":"",
+	"REMARK":"",
+	"EFI_CRITICALFLAG":"N"
+	}
+	]}
+INFO  2020-07-17 09:08:11,208   582ms eporting Portal Logger Download           - Function => Download ==> fileFolder = 26655000\26655001_A03
+INFO  2020-07-17 09:08:11,333   707ms eporting Portal Logger Download           - Function => Download ==> fileName = MEC01289-A03.pdf
+INFO  2020-07-17 09:08:19,879  9253ms eporting Portal Logger Download           - Function => Download ==> filePath = H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\PriorityDocs\26655000\26655001_A03/MEC01289-A03.pdf
+INFO  2020-07-17 09:08:19,944  9318ms eporting Portal Logger Download           - Function => Download ==> ReadAllBytes = H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\PriorityDocs\26655000\26655001_A03/MEC01289-A03.pdf
+INFO  2020-07-17 09:08:19,945  9319ms eporting Portal Logger Download           - filePath ==> ReadAllBytes ==> Exception
+System.IO.DirectoryNotFoundException: Could not find a part of the path 'H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\PriorityDocs\26655000\26655001_A03\MEC01289-A03.pdf'.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.OpenRead(String path)
+   at TestPortal.Models.CommonController.Download(String fileFolder, String fileName) in H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\Models\CommonController.cs:line 565
+INFO  2020-07-17 09:08:19,973  9347ms eporting Portal Logger DownloadFile       - Function => DownloadFile ==> Server.MapPath = H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\PriorityDocs\26655000\26655001_A03
+ERROR 2020-07-17 09:27:00,302 1129675ms eporting Portal Logger GetSupplierOrders  - GetSupplierOrders ==> supplier = 21673
+Newtonsoft.Json.JsonReaderException: Input string '2.02' is not a valid integer. Path 'value[8].PORDERITEMS_SUBFORM[1].TBALANCE', line 106, position 138.
+   at Newtonsoft.Json.JsonTextReader.ParseReadNumber(ReadType readType, Char firstChar, Int32 initialPosition)
+   at Newtonsoft.Json.JsonTextReader.ReadNumberValue(ReadType readType)
+   at Newtonsoft.Json.JsonTextReader.ReadAsInt32()
+   at Newtonsoft.Json.JsonReader.ReadForType(JsonContract contract, Boolean hasConverter)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.PopulateObject(Object newObject, JsonReader reader, JsonObjectContract contract, JsonProperty member, String id)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.CreateObject(JsonReader reader, Type objectType, JsonContract contract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerMember, Object existingValue)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.CreateValueInternal(JsonReader reader, Type objectType, JsonContract contract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerMember, Object existingValue)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.PopulateList(IList list, JsonReader reader, JsonArrayContract contract, JsonProperty containerProperty, String id)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.CreateList(JsonReader reader, Type objectType, JsonContract contract, JsonProperty member, Object existingValue, String id)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.CreateValueInternal(JsonReader reader, Type objectType, JsonContract contract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerMember, Object existingValue)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.SetPropertyValue(JsonProperty property, JsonConverter propertyConverter, JsonContainerContract containerContract, JsonProperty containerProperty, JsonReader reader, Object target)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.PopulateObject(Object newObject, JsonReader reader, JsonObjectContract contract, JsonProperty member, String id)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.CreateObject(JsonReader reader, Type objectType, JsonContract contract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerMember, Object existingValue)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.CreateValueInternal(JsonReader reader, Type objectType, JsonContract contract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerMember, Object existingValue)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.PopulateList(IList list, JsonReader reader, JsonArrayContract contract, JsonProperty containerProperty, String id)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.CreateList(JsonReader reader, Type objectType, JsonContract contract, JsonProperty member, Object existingValue, String id)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.CreateValueInternal(JsonReader reader, Type objectType, JsonContract contract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerMember, Object existingValue)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.SetPropertyValue(JsonProperty property, JsonConverter propertyConverter, JsonContainerContract containerContract, JsonProperty containerProperty, JsonReader reader, Object target)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.PopulateObject(Object newObject, JsonReader reader, JsonObjectContract contract, JsonProperty member, String id)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.CreateObject(JsonReader reader, Type objectType, JsonContract contract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerMember, Object existingValue)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.CreateValueInternal(JsonReader reader, Type objectType, JsonContract contract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerMember, Object existingValue)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.Deserialize(JsonReader reader, Type objectType, Boolean checkAdditionalContent)
+   at Newtonsoft.Json.JsonSerializer.DeserializeInternal(JsonReader reader, Type objectType)
+   at Newtonsoft.Json.JsonConvert.DeserializeObject(String value, Type type, JsonSerializerSettings settings)
+   at Newtonsoft.Json.JsonConvert.DeserializeObject[T](String value, JsonSerializerSettings settings)
+   at TestPortal.Models.Order.GetSupplierOrders(String supplier) in H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\Models\Order.cs:line 66
+ERROR 2020-07-17 09:30:32,734 1342108ms eporting Portal Logger GetSupplierOrders  - GetSupplierOrders ==> supplier = 21673
+Newtonsoft.Json.JsonReaderException: Input string '2.02' is not a valid integer. Path 'value[8].PORDERITEMS_SUBFORM[1].TBALANCE', line 106, position 138.
+   at Newtonsoft.Json.JsonTextReader.ParseReadNumber(ReadType readType, Char firstChar, Int32 initialPosition)
+   at Newtonsoft.Json.JsonTextReader.ReadNumberValue(ReadType readType)
+   at Newtonsoft.Json.JsonTextReader.ReadAsInt32()
+   at Newtonsoft.Json.JsonReader.ReadForType(JsonContract contract, Boolean hasConverter)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.PopulateObject(Object newObject, JsonReader reader, JsonObjectContract contract, JsonProperty member, String id)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.CreateObject(JsonReader reader, Type objectType, JsonContract contract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerMember, Object existingValue)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.CreateValueInternal(JsonReader reader, Type objectType, JsonContract contract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerMember, Object existingValue)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.PopulateList(IList list, JsonReader reader, JsonArrayContract contract, JsonProperty containerProperty, String id)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.CreateList(JsonReader reader, Type objectType, JsonContract contract, JsonProperty member, Object existingValue, String id)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.CreateValueInternal(JsonReader reader, Type objectType, JsonContract contract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerMember, Object existingValue)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.SetPropertyValue(JsonProperty property, JsonConverter propertyConverter, JsonContainerContract containerContract, JsonProperty containerProperty, JsonReader reader, Object target)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.PopulateObject(Object newObject, JsonReader reader, JsonObjectContract contract, JsonProperty member, String id)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.CreateObject(JsonReader reader, Type objectType, JsonContract contract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerMember, Object existingValue)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.CreateValueInternal(JsonReader reader, Type objectType, JsonContract contract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerMember, Object existingValue)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.PopulateList(IList list, JsonReader reader, JsonArrayContract contract, JsonProperty containerProperty, String id)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.CreateList(JsonReader reader, Type objectType, JsonContract contract, JsonProperty member, Object existingValue, String id)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.CreateValueInternal(JsonReader reader, Type objectType, JsonContract contract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerMember, Object existingValue)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.SetPropertyValue(JsonProperty property, JsonConverter propertyConverter, JsonContainerContract containerContract, JsonProperty containerProperty, JsonReader reader, Object target)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.PopulateObject(Object newObject, JsonReader reader, JsonObjectContract contract, JsonProperty member, String id)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.CreateObject(JsonReader reader, Type objectType, JsonContract contract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerMember, Object existingValue)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.CreateValueInternal(JsonReader reader, Type objectType, JsonContract contract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerMember, Object existingValue)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.Deserialize(JsonReader reader, Type objectType, Boolean checkAdditionalContent)
+   at Newtonsoft.Json.JsonSerializer.DeserializeInternal(JsonReader reader, Type objectType)
+   at Newtonsoft.Json.JsonConvert.DeserializeObject(String value, Type type, JsonSerializerSettings settings)
+   at Newtonsoft.Json.JsonConvert.DeserializeObject[T](String value, JsonSerializerSettings settings)
+   at TestPortal.Models.Order.GetSupplierOrders(String supplier) in H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\Models\Order.cs:line 66
+ERROR 2020-07-17 09:32:34,645 1464019ms eporting Portal Logger GetSupplierOrders  - GetSupplierOrders ==> supplier = 21673
+Newtonsoft.Json.JsonReaderException: Input string '2.02' is not a valid integer. Path 'value[8].PORDERITEMS_SUBFORM[1].TBALANCE', line 106, position 138.
+   at Newtonsoft.Json.JsonTextReader.ParseReadNumber(ReadType readType, Char firstChar, Int32 initialPosition)
+   at Newtonsoft.Json.JsonTextReader.ReadNumberValue(ReadType readType)
+   at Newtonsoft.Json.JsonTextReader.ReadAsInt32()
+   at Newtonsoft.Json.JsonReader.ReadForType(JsonContract contract, Boolean hasConverter)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.PopulateObject(Object newObject, JsonReader reader, JsonObjectContract contract, JsonProperty member, String id)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.CreateObject(JsonReader reader, Type objectType, JsonContract contract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerMember, Object existingValue)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.CreateValueInternal(JsonReader reader, Type objectType, JsonContract contract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerMember, Object existingValue)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.PopulateList(IList list, JsonReader reader, JsonArrayContract contract, JsonProperty containerProperty, String id)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.CreateList(JsonReader reader, Type objectType, JsonContract contract, JsonProperty member, Object existingValue, String id)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.CreateValueInternal(JsonReader reader, Type objectType, JsonContract contract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerMember, Object existingValue)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.SetPropertyValue(JsonProperty property, JsonConverter propertyConverter, JsonContainerContract containerContract, JsonProperty containerProperty, JsonReader reader, Object target)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.PopulateObject(Object newObject, JsonReader reader, JsonObjectContract contract, JsonProperty member, String id)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.CreateObject(JsonReader reader, Type objectType, JsonContract contract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerMember, Object existingValue)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.CreateValueInternal(JsonReader reader, Type objectType, JsonContract contract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerMember, Object existingValue)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.PopulateList(IList list, JsonReader reader, JsonArrayContract contract, JsonProperty containerProperty, String id)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.CreateList(JsonReader reader, Type objectType, JsonContract contract, JsonProperty member, Object existingValue, String id)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.CreateValueInternal(JsonReader reader, Type objectType, JsonContract contract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerMember, Object existingValue)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.SetPropertyValue(JsonProperty property, JsonConverter propertyConverter, JsonContainerContract containerContract, JsonProperty containerProperty, JsonReader reader, Object target)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.PopulateObject(Object newObject, JsonReader reader, JsonObjectContract contract, JsonProperty member, String id)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.CreateObject(JsonReader reader, Type objectType, JsonContract contract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerMember, Object existingValue)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.CreateValueInternal(JsonReader reader, Type objectType, JsonContract contract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerMember, Object existingValue)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.Deserialize(JsonReader reader, Type objectType, Boolean checkAdditionalContent)
+   at Newtonsoft.Json.JsonSerializer.DeserializeInternal(JsonReader reader, Type objectType)
+   at Newtonsoft.Json.JsonConvert.DeserializeObject(String value, Type type, JsonSerializerSettings settings)
+   at Newtonsoft.Json.JsonConvert.DeserializeObject[T](String value, JsonSerializerSettings settings)
+   at TestPortal.Models.Order.GetSupplierOrders(String supplier) in H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\Models\Order.cs:line 66
+DEBUG 2020-07-17 12:19:10,396   148ms eporting Portal Logger CreateResultApi    - FunctionName = CreateResultApi => Response XMLExceptionMsg = <FORM
+  TYPE="MED_SAMPLE">
+  <InterfaceErrors>
+    <text>??'? 23559000 ?????? C2000001553 ??? ????? ????? 001. ?? ???? ???? ?? ?????? ??????.</text>
+  </InterfaceErrors>
+</FORM>
+INFO  2020-07-17 12:20:19,633 69385ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001553",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"3",
+	"RESULT":1,
+	"EFI_MEASURESUPTOOLS":"",
+	"REMARK":"",
+	"EFI_CRITICALFLAG":"N"
+	}
+	]}
+INFO  2020-07-17 12:20:27,549 77301ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001553",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"4",
+	"RESULT":1,
+	"EFI_MEASURESUPTOOLS":"",
+	"REMARK":"",
+	"EFI_CRITICALFLAG":"N"
+	}
+	]}
+INFO  2020-07-17 12:20:35,589 85341ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001553",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"5",
+	"RESULT":1,
+	"EFI_MEASURESUPTOOLS":"",
+	"REMARK":"",
+	"EFI_CRITICALFLAG":"N"
+	}
+	]}
+INFO  2020-07-17 12:20:45,727 95479ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001553",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"6",
+	"RESULT":1,
+	"EFI_MEASURESUPTOOLS":"",
+	"REMARK":"",
+	"EFI_CRITICALFLAG":"N"
+	}
+	]}
+INFO  2020-07-17 12:20:51,424 101176ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001553",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"7",
+	"RESULT":1,
+	"EFI_MEASURESUPTOOLS":"",
+	"REMARK":"",
+	"EFI_CRITICALFLAG":"N"
+	}
+	]}
+INFO  2020-07-17 12:20:58,618 108370ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001553",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"8",
+	"RESULT":1,
+	"EFI_MEASURESUPTOOLS":"",
+	"REMARK":"",
+	"EFI_CRITICALFLAG":"N"
+	}
+	]}
+INFO  2020-07-17 12:21:03,618 113370ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001553",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"9",
+	"RESULT":1,
+	"EFI_MEASURESUPTOOLS":"",
+	"REMARK":"",
+	"EFI_CRITICALFLAG":"N"
+	}
+	]}
+INFO  2020-07-17 12:21:09,250 119002ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001553",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"10",
+	"RESULT":1,
+	"EFI_MEASURESUPTOOLS":"",
+	"REMARK":"",
+	"EFI_CRITICALFLAG":"N"
+	}
+	]}
+INFO  2020-07-17 12:21:16,697 126449ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001553",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"2",
+	"RESULT":1,
+	"EFI_MEASURESUPTOOLS":"",
+	"REMARK":"",
+	"EFI_CRITICALFLAG":"N"
+	}
+	]}
+DEBUG 2020-07-17 12:21:52,221 161974ms eporting Portal Logger CreateResultApi    - FunctionName = CreateResultApi => Response XMLExceptionMsg = <FORM
+  TYPE="MED_SAMPLE">
+  <InterfaceErrors>
+    <text>??'? 23559000 ?????? C2000001553 ??? ????? ????? 001. ?? ???? ???? ?? ?????? ??????.</text>
+  </InterfaceErrors>
+</FORM>
+INFO  2020-07-17 12:22:58,147 227899ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001597",
+	"PARTNAME":"17223001",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":5,
+	"QACODE":"005",
+	"LOCATION":"11",
+	"NORMAL":"Y",
+	"EFI_MEASURESUPTOOLS":"",
+	"REMARK":"",
+	"EFI_CRITICALFLAG":"N"
+	}
+	]}
+INFO  2020-07-17 12:23:03,805 233557ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001597",
+	"PARTNAME":"17223001",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":8,
+	"QACODE":"008",
+	"LOCATION":"10",
+	"NORMAL":"Y",
+	"EFI_MEASURESUPTOOLS":"",
+	"REMARK":"",
+	"EFI_CRITICALFLAG":"N"
+	}
+	]}
+INFO  2020-07-17 12:23:10,192 239944ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001597",
+	"PARTNAME":"17223001",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":13,
+	"QACODE":"014",
+	"LOCATION":"9",
+	"RESULT":1,
+	"EFI_MEASURESUPTOOLS":"",
+	"REMARK":"",
+	"EFI_CRITICALFLAG":"N"
+	}
+	]}
+INFO  2020-07-17 12:23:15,492 245244ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001597",
+	"PARTNAME":"17223001",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":2,
+	"QACODE":"002",
+	"LOCATION":"8",
+	"NORMAL":"Y",
+	"EFI_MEASURESUPTOOLS":"",
+	"REMARK":"",
+	"EFI_CRITICALFLAG":"Y"
+	}
+	]}
+INFO  2020-07-17 12:23:21,368 251120ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001597",
+	"PARTNAME":"17223001",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"7",
+	"RESULT":1,
+	"EFI_MEASURESUPTOOLS":"",
+	"REMARK":"",
+	"EFI_CRITICALFLAG":"N"
+	}
+	]}
+INFO  2020-07-17 12:23:25,563 255315ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001597",
+	"PARTNAME":"17223001",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"6",
+	"RESULT":1,
+	"EFI_MEASURESUPTOOLS":"",
+	"REMARK":"",
+	"EFI_CRITICALFLAG":"N"
+	}
+	]}
+INFO  2020-07-17 12:23:31,513 261265ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001597",
+	"PARTNAME":"17223001",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":5,
+	"QACODE":"005",
+	"LOCATION":"5",
+	"NORMAL":"N",
+	"EFI_MEASURESUPTOOLS":"",
+	"REMARK":"",
+	"EFI_CRITICALFLAG":"N"
+	}
+	]}
+INFO  2020-07-17 12:23:36,035 265787ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001597",
+	"PARTNAME":"17223001",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":5,
+	"QACODE":"005",
+	"LOCATION":"4",
+	"NORMAL":"Y",
+	"EFI_MEASURESUPTOOLS":"",
+	"REMARK":"",
+	"EFI_CRITICALFLAG":"N"
+	}
+	]}
+INFO  2020-07-17 12:23:42,284 272036ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001597",
+	"PARTNAME":"17223001",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":5,
+	"QACODE":"005",
+	"LOCATION":"3",
+	"NORMAL":"N",
+	"EFI_MEASURESUPTOOLS":"",
+	"REMARK":"",
+	"EFI_CRITICALFLAG":"N"
+	}
+	]}
+INFO  2020-07-17 12:23:47,284 277036ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001597",
+	"PARTNAME":"17223001",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":5,
+	"QACODE":"005",
+	"LOCATION":"2",
+	"NORMAL":"Y",
+	"EFI_MEASURESUPTOOLS":"",
+	"REMARK":"",
+	"EFI_CRITICALFLAG":"N"
+	}
+	]}
+INFO  2020-07-17 12:23:52,329 282081ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001597",
+	"PARTNAME":"17223001",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":5,
+	"QACODE":"005",
+	"LOCATION":"1",
+	"NORMAL":"Y",
+	"EFI_MEASURESUPTOOLS":"",
+	"REMARK":"",
+	"EFI_CRITICALFLAG":"N"
+	}
+	]}
+INFO  2020-07-17 12:31:40,493 750245ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001599",
+	"PARTNAME":"34279014",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":6,
+	"QACODE":"006",
+	"LOCATION":"1",
+	"NORMAL":"Y",
+	"EFI_MEASURESUPTOOLS":"",
+	"REMARK":"",
+	"EFI_CRITICALFLAG":"N"
+	}
+	]}
+INFO  2020-07-17 12:31:45,647 755399ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001599",
+	"PARTNAME":"34279014",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"2",
+	"RESULT":1,
+	"EFI_MEASURESUPTOOLS":"",
+	"REMARK":"",
+	"EFI_CRITICALFLAG":"N"
+	}
+	]}
+INFO  2020-07-17 12:31:53,218 762970ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001599",
+	"PARTNAME":"34279014",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":3,
+	"QACODE":"003",
+	"LOCATION":"3",
+	"RESULT":1,
+	"EFI_MEASURESUPTOOLS":"",
+	"REMARK":"",
+	"EFI_CRITICALFLAG":"N"
+	}
+	]}
+INFO  2020-07-17 12:32:02,360 772112ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001599",
+	"PARTNAME":"34279014",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":2,
+	"QACODE":"002",
+	"LOCATION":"4",
+	"NORMAL":"Y",
+	"EFI_MEASURESUPTOOLS":"",
+	"REMARK":"",
+	"EFI_CRITICALFLAG":"Y"
+	}
+	]}
+INFO  2020-07-17 12:32:08,373 778125ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001599",
+	"PARTNAME":"34279014",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":2,
+	"QACODE":"002",
+	"LOCATION":"5",
+	"NORMAL":"Y",
+	"EFI_MEASURESUPTOOLS":"",
+	"REMARK":"",
+	"EFI_CRITICALFLAG":"Y"
+	}
+	]}
+INFO  2020-07-17 12:32:20,572 790324ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001599",
+	"PARTNAME":"34279014",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"6",
+	"RESULT":1,
+	"EFI_MEASURESUPTOOLS":"",
+	"REMARK":"",
+	"EFI_CRITICALFLAG":"N"
+	}
+	]}
+INFO  2020-07-17 12:32:28,728 798480ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001599",
+	"PARTNAME":"34279014",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"7",
+	"RESULT":1,
+	"EFI_MEASURESUPTOOLS":"",
+	"REMARK":"",
+	"EFI_CRITICALFLAG":"N"
+	}
+	]}
+INFO  2020-07-17 12:32:34,166 803918ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001599",
+	"PARTNAME":"34279014",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":133,
+	"QACODE":"025",
+	"LOCATION":"8",
+	"NORMAL":"N",
+	"EFI_MEASURESUPTOOLS":"",
+	"REMARK":"",
+	"EFI_CRITICALFLAG":"N"
+	}
+	]}
+INFO  2020-07-17 12:32:48,740 818492ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001599",
+	"PARTNAME":"34279014",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":5,
+	"QACODE":"005",
+	"LOCATION":"9",
+	"NORMAL":"N",
+	"EFI_MEASURESUPTOOLS":"",
+	"REMARK":"",
+	"EFI_CRITICALFLAG":"N"
+	}
+	]}
+DEBUG 2020-07-17 13:40:19,710   277ms eporting Portal Logger CreateResultApi    - FunctionName = CreateResultApiExceptionMsg = Object reference not set to an instance of an object.
+DEBUG 2020-07-17 13:43:14,026 174593ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 17/07/2020 13:43:14
+DEBUG 2020-07-17 13:43:46,093 206661ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 17/07/2020 13:43:46
+INFO  2020-07-17 13:52:04,820 705387ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001571",
+	"PARTNAME":"33474034",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":6,
+	"QACODE":"006",
+	"LOCATION":"1",
+	"NORMAL":"Y",
+	"EFI_MEASURESUPTOOLS":"",
+	"REMARK":"",
+	"EFI_CRITICALFLAG":"N"
+	}
+	]}
+INFO  2020-07-17 13:52:10,158 710726ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001571",
+	"PARTNAME":"33474034",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"2",
+	"RESULT":1,
+	"EFI_MEASURESUPTOOLS":"",
+	"REMARK":"",
+	"EFI_CRITICALFLAG":"N"
+	}
+	]}
+INFO  2020-07-17 13:52:15,475 716043ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001571",
+	"PARTNAME":"33474034",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"3",
+	"RESULT":1,
+	"EFI_MEASURESUPTOOLS":"",
+	"REMARK":"",
+	"EFI_CRITICALFLAG":"N"
+	}
+	]}
+INFO  2020-07-17 13:52:20,564 721131ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001571",
+	"PARTNAME":"33474034",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"4",
+	"RESULT":1,
+	"EFI_MEASURESUPTOOLS":"",
+	"REMARK":"",
+	"EFI_CRITICALFLAG":"N"
+	}
+	]}
+INFO  2020-07-17 13:52:26,372 726940ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001571",
+	"PARTNAME":"33474034",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"5",
+	"RESULT":1,
+	"EFI_MEASURESUPTOOLS":"",
+	"REMARK":"",
+	"EFI_CRITICALFLAG":"N"
+	}
+	]}
+INFO  2020-07-17 13:52:31,821 732389ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001571",
+	"PARTNAME":"33474034",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"6",
+	"RESULT":1,
+	"EFI_MEASURESUPTOOLS":"",
+	"REMARK":"",
+	"EFI_CRITICALFLAG":"N"
+	}
+	]}
+INFO  2020-07-17 13:52:40,785 741352ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001571",
+	"PARTNAME":"33474034",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"7",
+	"RESULT":1,
+	"EFI_MEASURESUPTOOLS":"",
+	"REMARK":"",
+	"EFI_CRITICALFLAG":"N"
+	}
+	]}
+INFO  2020-07-17 13:52:46,821 747389ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001571",
+	"PARTNAME":"33474034",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":10,
+	"QACODE":"011",
+	"LOCATION":"8",
+	"NORMAL":"Y",
+	"EFI_MEASURESUPTOOLS":"",
+	"REMARK":"",
+	"EFI_CRITICALFLAG":"N"
+	}
+	]}
+INFO  2020-07-17 13:52:52,018 752585ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001571",
+	"PARTNAME":"33474034",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":1,
+	"QACODE":"001",
+	"LOCATION":"9",
+	"RESULT":1,
+	"EFI_MEASURESUPTOOLS":"",
+	"REMARK":"",
+	"EFI_CRITICALFLAG":"N"
+	}
+	]}
+INFO  2020-07-17 13:52:58,188 758755ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001571",
+	"PARTNAME":"33474034",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":5,
+	"QACODE":"005",
+	"LOCATION":"10",
+	"NORMAL":"N",
+	"EFI_MEASURESUPTOOLS":"",
+	"REMARK":"",
+	"EFI_CRITICALFLAG":"N"
+	}
+	]}
+INFO  2020-07-17 13:53:08,752 769320ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001571",
+	"PARTNAME":"33474034",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":6,
+	"QACODE":"006",
+	"LOCATION":"11",
+	"NORMAL":"Y",
+	"EFI_MEASURESUPTOOLS":"",
+	"REMARK":"",
+	"EFI_CRITICALFLAG":"N"
+	}
+	]}
+INFO  2020-07-17 13:53:16,401 776969ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001571",
+	"PARTNAME":"33474034",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":5,
+	"QACODE":"005",
+	"LOCATION":"12",
+	"NORMAL":"N",
+	"EFI_MEASURESUPTOOLS":"",
+	"REMARK":"",
+	"EFI_CRITICALFLAG":"N"
+	}
+	]}
+DEBUG 2020-07-17 14:23:16,785   182ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 17/07/2020 14:23:16

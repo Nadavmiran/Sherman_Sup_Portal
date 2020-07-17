@@ -109,6 +109,10 @@ namespace LMNS.Priority.API
                 request.AddHeader("authorization", "Basic " + Convert.ToBase64String(Encoding.ASCII.GetBytes((ConfigurationManager.AppSettings["AppAPI_U"].ToString() + ":" + (ConfigurationManager.AppSettings["AppAPI_P"].ToString())))));
 
                 response = client.Execute(request);
+                if(null == response)
+                {
+                    AppLogger.log.Debug(AppLogger.CreateLogText("Call_Get ==> response is NULL for query", query));
+                }
                 ra = CreateResultApi(response);
             }
             catch (Exception ex)

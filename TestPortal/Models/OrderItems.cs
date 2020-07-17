@@ -37,6 +37,7 @@ namespace TestPortal.Models
         /// תאור מוצר
         /// </summary>
         public string PDES { get; set; }
+        public string EFI_EPARTDES { get; set; }
         /// <summary>
         /// כמות
         /// </summary>
@@ -44,7 +45,7 @@ namespace TestPortal.Models
         /// <summary>
         /// יתרה לאספקה
         /// </summary>
-        public int TBALANCE { get; set; }
+        public decimal TBALANCE { get; set; }
         /// <summary>
         /// ת. אספקה
         /// </summary>
@@ -117,7 +118,7 @@ namespace TestPortal.Models
         /// <summary>
         /// שם יצרן לשורת הזמנה
         /// </summary>
-        public string SHR_MNFDES { get; set; }
+        public string MNFDES { get; set; }
         /// <summary>
         /// מק"ט יצרן
         /// </summary>
@@ -126,6 +127,7 @@ namespace TestPortal.Models
         /// סטטוס שורת הזמנה
         /// </summary>
         public string PORDISTATUSDES { get; set; }
+        public string EFI_STATEDES { get; set; }
         /// <summary>
         /// סיבת דחייה
         /// </summary>
@@ -138,6 +140,7 @@ namespace TestPortal.Models
         /// SHR_OPENSUPORDERS_T.SHR_SUP_REMARKS - הערות ספק
         /// </summary>
         public string SHR_SUP_REMARKS { get; set; }
+        public string REMARK { get; set; }
         public int SumOrdLineUpdates { get; set; }
         public OrdersItemText[] PORDERITEMSTEXT_SUBFORM { get; set; }
         #endregion
@@ -145,7 +148,7 @@ namespace TestPortal.Models
         internal Order GetProductDetailse(string SUPNAME, string ORDNAME, string PARTNAME)
         {
             //string query = "PORDERS?$filter=SUPNAME eq '" + SUPNAME + "' and ORDNAME eq '" + ORDNAME + "'&$expand=PORDERITEMS_SUBFORM($filter=PARTNAME eq '" + PARTNAME + "')";
-              string query = "PORDERS?$filter=SUPNAME eq '" + SUPNAME + "' and ORDNAME eq '" + ORDNAME + "'&$select=TYPECODE, TYPEDES, ORDNAME,STATDES,CURDATE,ORD,CODEDES,SUPNAME,CDES,SHR_SUPTYPEDES,OWNERLOGIN&$expand=PORDERITEMS_SUBFORM($filter=PARTNAME eq '" + PARTNAME + "';$expand=PORDERITEMSTEXT_SUBFORM)";
+              string query = "PORDERS?$filter=SUPNAME eq '" + SUPNAME + "' and ORDNAME eq '" + ORDNAME + "'&$select=EFI_ETYPEDES, EFI_ESTATDES,TYPECODE, TYPEDES, ORDNAME,STATDES,CURDATE,ORD,CODEDES,SUPNAME,CDES,SHR_SUPTYPEDES,OWNERLOGIN&$expand=PORDERITEMS_SUBFORM($filter=PARTNAME eq '" + PARTNAME + "';$expand=PORDERITEMSTEXT_SUBFORM)";
             string res = Call_Get(query);
 
             OrdersWarpper ow = JsonConvert.DeserializeObject<OrdersWarpper>(res);

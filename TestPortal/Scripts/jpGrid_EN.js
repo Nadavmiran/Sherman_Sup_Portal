@@ -10,12 +10,12 @@
         colModel: [
             { label: 'OrderID', name: 'ORD', align: 'center', index: 'ORD', key: true, hidden: true, width: 75 },//, formatter: formatRPTLink
             { label: 'Order', name: 'ORDNAME', align: 'center', width: 75, sorttype: 'string', searchtype: 'string', searchoptions: { sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge', 'bw', 'bn', 'in', 'ni', 'ew', 'en', 'cn', 'nc'] } },//, formatter: formatRPTLink
+            { label: 'Version', name: 'CURVERSION', align: 'center', width: 90 },
             { label: 'Order Date', name: 'pageCURDATE', align: 'center', width: 150, sorttype: "date" },
+            { label: 'Order ststus', name: 'EFI_ESTATDES', align: 'center', width: 150 }, //NOTE: This field is translated!!!!
             { label: 'Supplier', name: 'SHR_SUPTYPEDES', align: 'center', hidden: true, width: 150 },
-            { label: 'For treatment ', name: 'OWNERLOGIN', align: 'center', width: 150 },
-            { label: 'Order type ', name: 'TYPEDES', align: 'center', width: 150 },
-            { label: 'Order ststus', name: 'STATDES', align: 'center', width: 150 },
-            { label: 'Version', name: 'CURVERSION', align: 'center', width: 90 }
+            { label: 'Order type ', name: 'EFI_ETYPEDES', align: 'center', width: 150 }, //NOTE: This field is translated!!!!
+            { label: 'For treatment ', name: 'OWNERLOGIN', align: 'center', width: 150 }
         ],
         viewrecords: true,
         altRows: true,
@@ -68,15 +68,16 @@
                     { label: 'ORDNAME', name: 'ORDNAME', align: 'center', hidden: true, width: 75 },
                     { label: 'Serial No.', name: 'PARTNAME', align: 'center', width: 100 },//, formatter: formatProdLink
                     { label: 'Draw', name: 'SHR_DRAW', align: 'center', width: 100 },
-                    { label: 'Description', name: 'PDES', align: 'center', width: 100 },
+                    { label: 'Description', name: 'EFI_EPARTDES', align: 'center', width: 100 },
                     { label: 'Quntity', name: 'TQUANT', align: 'center', width: 100 },
                     { label: 'Left Quntity', name: 'TBALANCE', align: 'center', width: 100 },
+                    { label: 'req. supply date', name: 'pageREQDATE2', align: 'center', width: 100 },
                     { label: 'Supply Date', name: 'pageREQDATE', align: 'center', width: 100 },
-                    { label: 'Status', name: 'PORDISTATUSDES', align: 'center', width: 100 },
+                    { label: 'Status', name: 'EFI_STATEDES', align: 'center', width: 100 },
                     { label: 'Order details', name: 'Information', align: 'center', width: 150, formatter: formatBTNLink }
                 ],
                 onCellSelect: function (id, col, iCol, event) {
-                    if (col == 10) return;
+                    if (col == 12) return;
                     console.log("onSelectRow col = ", col);
                     console.log("onSelectRow iCol = ", iCol);
                     console.log("onSelectRow id = ", id);
@@ -94,10 +95,11 @@
 }
 
 function formatBTNLink(cellValue, options, rowObject) {
+    console.log("formatBTNLink rowObject.SumOrdLineUpdates = ", rowObject.SumOrdLineUpdates);
     if (rowObject.SumOrdLineUpdates < 2)
-        return '<i class="fas fa-info-circle" style="font-size:14px;cursor:pointer;" onclick="showSalesorderDetail(\'' + rowObject.PARTNAME + '\',' + rowObject.ORD + ',' + rowObject.LINE + ')"></i>';
+        return '<i class="fas fa-info-circle" style="font-size:20px;cursor:pointer;" onclick="showSalesorderDetail(\'' + rowObject.PARTNAME + '\',' + rowObject.ORD + ',' + rowObject.LINE + ')"></i>';
     else
-        return '<i class="fas fa-info-circle" style="font-size:14px;color:crimson;" title="Update forbidden - please contact Sherman customer service" onclick="showSalesorderDetail(\'' + rowObject.PARTNAME + '\',' + rowObject.ORD + ',' + rowObject.LINE + ')"></i>';
+        return '<i class="fas fa-info-circle" style="font-size:20px;color:crimson;" title="Update forbidden - please contact Sherman customer service" ></i>';
     
 }
 //function formatRPTLink(cellValue, options, rowObject)

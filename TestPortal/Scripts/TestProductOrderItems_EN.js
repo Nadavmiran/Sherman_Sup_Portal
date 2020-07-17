@@ -10,11 +10,11 @@
             { label: '#', name: 'LINE', align: 'center', hidden: false, width: 75 },
             { label: 'ProductID', name: 'PARTNAME', align: 'center', key: true, hidden: true, width: 75 },
             { label: 'Serial No.', name: 'PARTNAME', align: 'center', width: 100 }, //, formatter: formatProdLink
-            { label: 'Description', name: 'PDES', align: 'center', width: 100 },
+            { label: 'Description', name: 'EFI_EPARTDES', align: 'center', width: 100 },
             { label: 'Quntity', name: 'TQUANT', align: 'center', width: 100 },
             { label: 'Left Quntity', name: 'TBALANCE', align: 'center', width: 100 },
             { label: 'Supply Date', name: 'pageREQDATE', align: 'center', width: 100 },
-            { label: 'Status', name: 'PORDISTATUSDES', align: 'center', width: 100 }
+            { label: 'Status', name: 'EFI_STATEDES', align: 'center', width: 100 }
         ],
         viewrecords: true,
         //rownumbers: true, // show row numbers
@@ -63,7 +63,7 @@ function showGridProdSamples(grid_data) {
             { label: 'PARTNAME', name: 'PARTNAME', align: 'center', key: false, hidden: true, width: 75 },
             { label: 'Code', name: 'QACODE', align: 'center', key: true, hidden: false, width: 80 },
             { label: 'Location', name: 'LOCATION', align: 'center', hidden: false, width: 140 },
-            { label: 'Sample', name: 'QADES', align: 'center', hidden: false, width: 200 },
+            { label: 'Sample', name: 'SHR_QADES', align: 'center', hidden: false, width: 200 },
             { label: 'Repitition', name: 'REPETITION', align: 'center', width: 120 },
             { label: 'Resultant', name: 'RESULTANT', align: 'center', width: 120 }, 
             { label: 'Sample Qnt.', name: 'SAMPQUANT', align: 'center', width: 120 },
@@ -274,7 +274,7 @@ function showGridTestList(grid_data) {
             { label: 'SUPNAME', name: 'SUPNAME', align: 'center', key: false, hidden: true, width: 75 },
             { label: 'PARTNAME', name: 'PARTNAME', align: 'center', key: false, hidden: true, width: 75 },
             { label: 'Test code', name: 'QACODE', key: true, hidden: false, width: 85 },
-            { label: 'Description', name: 'QADES', align: 'right', hidden: false, width: 250 },
+            { label: 'Description', name: 'SHR_QADES', align: 'right', hidden: false, width: 250 },
             { label: 'Result Min.', name: 'RESULTMIN', align: 'center', editable: true, hidden: false, width: 80 },
             { label: 'Result Max.', name: 'RESULTMAX', align: 'center', editable: true, hidden: false, width: 80 },/*formatter: formatGetRevListLink,*/
             { label: 'Repitition', name: 'REPETITION', align: 'center', editable: true, width: 50 },
@@ -334,7 +334,7 @@ function showSelectedSampleQA(grid_data) {
             { label: 'SUPNAME', name: 'SUPNAME', align: 'center', key: false, hidden: true, width: 75 },
             { label: 'PARTNAME', name: 'PARTNAME', align: 'center', key: false, hidden: true, width: 75 },
             { label: 'Test code', name: 'QACODE', align: 'center', key: true, hidden: false, width: 85 },
-            { label: 'Description', name: 'QADES', align: 'right', hidden: false, width: 250 },
+            { label: 'Description', name: 'SHR_QADES', align: 'right', hidden: false, width: 250 },
             { label: 'Result Min.', name: 'RESULTMIN', align: 'center', hidden: false, width: 80 },
             { label: 'Result Max.', name: 'RESULTMAX', align: 'center', hidden: false, width: 80 },/*formatter: formatGetRevListLink,*/
             { label: 'Repitition', name: 'REPETITION', align: 'center', width: 50 },
@@ -367,7 +367,7 @@ function showPartSampls(grid_data) {
             { label: 'SERIALNAME', name: 'SERIALNAME', align: 'center', key: false, hidden: true, width: 75 },
             { label: 'DOCNO', name: 'DOCNO', align: 'center', key: true, hidden: false, width: 120 },
             { label: 'Date', name: 'pageCURDATE', align: 'center', key: false, hidden: false, width: 100 }, 
-            { label: 'Status', name: 'STATDES', align: 'center', hidden: false, width: 150 },
+            { label: 'Status', name: 'EFI_ESTATDES', align: 'center', hidden: false, width: 150 },
             { label: 'Sampling standard', name: 'SHR_SAMPLE_STD_CODE', align: 'center', hidden: false, width: 150 },
             //{ label: 'Portion size', name: 'SHR_QUANT', align: 'center', hidden: false, width: 90 },
             //{ label: 'Request quality', name: 'SHR_RAR', align: 'center', hidden: false, width: 150 },
@@ -420,7 +420,7 @@ function showGridSampleList(grid_data) {
             { label: 'SUPNAME', name: 'SUPNAME', align: 'center', key: false, hidden: true, width: 75 },
             { label: 'PARTNAME', name: 'PARTNAME', align: 'center', key: false, hidden: true, width: 75 },
             { label: 'Test code', name: 'QACODE', key: true, hidden: false, width: 85 },
-            { label: 'Description', name: 'QADES', align: 'right', hidden: false, width: 250 },
+            { label: 'Description', name: 'SHR_QADES', align: 'right', hidden: false, width: 250 },
             { label: 'Result Min.', name: 'RESULTMIN', align: 'center', editable: true, hidden: false, width: 80 },
             { label: 'Result Max.', name: 'RESULTMAX', align: 'center', editable: true, hidden: false, width: 80 },/*formatter: formatGetRevListLink,*/
             { label: 'Repitition', name: 'REPETITION', align: 'center', editable: true, width: 50 },

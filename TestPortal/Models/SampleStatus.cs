@@ -11,7 +11,7 @@ namespace TestPortal.Models
     {
         public int SAMPLESTATUS { get; set; }
         public string STATDES { get; set; }
-
+        public string ESTATDES { get; set; }
         internal List<SampleStatus> GetSampleStatusList()
         {
             string res = Call_Get("MED_SAMPLESTATUS?$filter=CANCELLED ne 'Y'");

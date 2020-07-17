@@ -638,7 +638,8 @@ namespace TestPortal.Models
         public virtual ActionResult DownloadFile(string fileFolder, string fileName)
         {
             AppLogger.log.Info("Function => DownloadFile ==> Server.MapPath = " + Server.MapPath("~/PriorityDocs/" + fileFolder));
-            string filePath = Path.Combine(Server.MapPath("~/Docs/PriorityDocs/"), fileFolder + "/" + fileName);
+            string filePath = Path.Combine(Server.MapPath("~/PriorityDocs/"), fileFolder + "/" + fileName);
+            //Path.Combine(Server.MapPath("~/Docs/PriorityDocs/"), fileFolder + "/" + fileName);
             return File(filePath, "application/force-download", fileName);
         }
 
@@ -993,13 +994,13 @@ namespace TestPortal.Models
         }
 
         [HttpPost]
-        public JsonResult UpdateSampleDetails(string STATDES,  string SAMPLE_TYPE_CODE, string EFI_SUPNO, int SHR_QUANT, string SHR_ROHS, string SHR_SAMPLE_STD_CODE, string DOCNO)
+        public JsonResult UpdateSampleDetails(string STATDES,  string SAMPLE_TYPE_CODE, string EFI_SUPNO, int SHR_QUANT, string SHR_ROHS, string SHR_SAMPLE_STD_CODE, string DOCNO, string SERIALNAME, string PARTNAME)
         {
             PageObject po = new PageObject();
             po.User = Session["USER_LOGIN"] as AppUser;
             Sample s = new Sample();
             s.UserLanguage = po.User.Language;
-            ResultAPI ra = s.UpdateSampleDetails(STATDES, SAMPLE_TYPE_CODE, EFI_SUPNO, SHR_QUANT, SHR_ROHS, SHR_SAMPLE_STD_CODE, DOCNO);
+            ResultAPI ra = s.UpdateSampleDetails(STATDES, SAMPLE_TYPE_CODE, EFI_SUPNO, SHR_QUANT, SHR_ROHS, SHR_SAMPLE_STD_CODE, DOCNO, SERIALNAME, PARTNAME);
             if (ra.ResultStatus.ToUpper() == "OK")
             {
                 s = JsonConvert.DeserializeObject<Sample>(ra.JsonResult);

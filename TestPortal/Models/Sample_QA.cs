@@ -30,6 +30,7 @@ namespace TestPortal.Models
         /// תאור בדיקה
         /// </summary>
         public string QADES { get; set; }
+        public string SHR_QADES { get; set; }
         /// <summary>
         /// מיקום
         /// </summary>
@@ -86,6 +87,8 @@ namespace TestPortal.Models
         /// מק"ט
         /// </summary>
         public string PARTNAME { get; set; }
+        public string EFI_CRITICALFLAG { get; set; }
+
         public List<Sample_QA_Resultdet> MED_RESULTDET_SUBFORM { get; set; }
         #endregion
 

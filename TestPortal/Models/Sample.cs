@@ -35,6 +35,7 @@ namespace TestPortal.Models
         /// סטאטוס
         /// </summary>
         public string STATDES { get; set; }
+        public string EFI_ESTATDES { get; set; }
         /// <summary>
         /// מק"ט
         /// </summary>
@@ -417,14 +418,14 @@ namespace TestPortal.Models
             return ra;
         }
 
-        internal ResultAPI UpdateSampleDetails(string STATDES, string SAMPLE_TYPE_CODE, string EFI_SUPNO, int SHR_QUANT, string SHR_ROHS, string SHR_SAMPLE_STD_CODE, string DOCNO)
+        internal ResultAPI UpdateSampleDetails(string STATDES, string SAMPLE_TYPE_CODE, string EFI_SUPNO, int SHR_QUANT, string SHR_ROHS, string SHR_SAMPLE_STD_CODE, string DOCNO, string SERIALNAME, string PARTNAME)
         {
-            string reqBody = CreateUpdateSampleDetailsMessage(STATDES, SAMPLE_TYPE_CODE, EFI_SUPNO, SHR_QUANT, SHR_ROHS, SHR_SAMPLE_STD_CODE, DOCNO);
+            string reqBody = CreateUpdateSampleDetailsMessage(STATDES, SAMPLE_TYPE_CODE, EFI_SUPNO, SHR_QUANT, SHR_ROHS, SHR_SAMPLE_STD_CODE, DOCNO, SERIALNAME, PARTNAME);
             ResultAPI ra = Call_Common_PATCH("/MED_SAMPLE", reqBody);
             return ra;
         }
 
-        private string CreateUpdateSampleDetailsMessage(string STATDES, string SAMPLE_TYPE_CODE, string EFI_SUPNO, int SHR_QUANT, string SHR_ROHS, string SHR_SAMPLE_STD_CODE, string DOCNO)
+        private string CreateUpdateSampleDetailsMessage(string STATDES, string SAMPLE_TYPE_CODE, string EFI_SUPNO, int SHR_QUANT, string SHR_ROHS, string SHR_SAMPLE_STD_CODE, string DOCNO, string SERIALNAME, string PARTNAME)
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("{");
@@ -432,6 +433,10 @@ namespace TestPortal.Models
             sb.Append("\"" + DOCNO + "\",");
             sb.Append("\r\n\t\"STATDES\":");
             sb.Append("\"" + STATDES + "\",");
+            sb.Append("\r\n\t\"SERIALNAME\":");
+            sb.Append("\"" + SERIALNAME + "\",");
+            sb.Append("\r\n\t\"PARTNAME\":");
+            sb.Append("\"" + PARTNAME + "\",");
             sb.Append("\r\n\t\"SHR_SAMPLE_STD_CODE\":");
             sb.Append("\"" + SHR_SAMPLE_STD_CODE + "\",");
             sb.Append("\r\n\t\"EFI_SUPNO\":");

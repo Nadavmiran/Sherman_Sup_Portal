@@ -28,8 +28,14 @@ namespace TestPortal.Models
         public string ENAME { get; set; }
         public string SUPNAME { get; set; }
         public string SUPDES { get; set; }
-        //public string EMAIL { get; set; }
+        public string ESUPDES { get; set; }
+        /// <summary>
+        /// שם חברה באנגלית
+        /// </summary>
+        public string FIRMA { get; set; }
+        public string FIRM { get; set; }
         public List<LoginData> EFI_PORTALDEF_SUBFORM { get; set; }
+        public string Error { get; set; }
 
         internal void DoLogin()
         {
@@ -46,6 +52,9 @@ namespace TestPortal.Models
                     SupplierName = ow.Value[0].SUPDES;
                     Supplier_ID = ow.Value[0].SUPNAME;
                     PRIORITY_ID = ow.Value[0].PHONE;
+                    ESUPDES = ow.Value[0].ESUPDES;
+                    FIRM = ow.Value[0].FIRM;
+                    FIRMA = ow.Value[0].FIRMA;
                     Language = ow.Value[0].EFI_PORTALDEF_SUBFORM[0].LANGUAGE;
                     LINE = ow.Value[0].EFI_PORTALDEF_SUBFORM[0].DEF;
                     IsAuthenticated = true;
@@ -103,32 +112,6 @@ namespace TestPortal.Models
 }             
              */
         }
-
-        public string Error { get; set; }
-
-        internal void UserLogin()
-        {
-            Dal d = new Dal();
-            IsAuthenticated = false;
-            try
-            {
-                SqlDataReader dr = d.GetRecordSet("LMNS_UserLogin", new SqlParameter("@email", Email), new SqlParameter("@pass", Password));
-                while (dr.Read())
-                {
-                    PRIORITY_ID = Convert.ToInt32(dr["PHONE"].ToString());
-                    LINE = Convert.ToInt32(dr["DEF"].ToString());
-                    Supplier_ID = dr["SUPNAME"].ToString();
-                    SupplierName = dr["SUPDES"].ToString();
-                    FullName = dr["NAME"].ToString();
-                    Language = dr["LANGUAGE"].ToString();
-                    IsAuthenticated = true;
-                }
-            }
-            catch (Exception ex)
-            {
-                AppLogger.log.Error("UserLogin ==> SP = LMNS_UserLogin ==> @email = " + Email + " @pass = " + Password, ex);
-            }
-        }
     }
 
     public class AppUserWarpper : ODataBase
@@ -145,3 +128,27 @@ namespace TestPortal.Models
         public string LANGUAGE { get; set; }
     }
 }
+
+//internal void UserLogin()
+//{
+//    Dal d = new Dal();
+//    IsAuthenticated = false;
+//    try
+//    {
+//        SqlDataReader dr = d.GetRecordSet("LMNS_UserLogin", new SqlParameter("@email", Email), new SqlParameter("@pass", Password));
+//        while (dr.Read())
+//        {
+//            PRIORITY_ID = Convert.ToInt32(dr["PHONE"].ToString());
+//            LINE = Convert.ToInt32(dr["DEF"].ToString());
+//            Supplier_ID = dr["SUPNAME"].ToString();
+//            SupplierName = dr["SUPDES"].ToString();
+//            FullName = dr["NAME"].ToString();
+//            Language = dr["LANGUAGE"].ToString();
+//            IsAuthenticated = true;
+//        }
+//    }
+//    catch (Exception ex)
+//    {
+//        AppLogger.log.Error("UserLogin ==> SP = LMNS_UserLogin ==> @email = " + Email + " @pass = " + Password, ex);
+//    }
+//}
