@@ -1394,6 +1394,7 @@ function onSubmit_UpdateOrderLineData(e) {
     console.log("ORDNAME", ORDNAME);
     console.log("LINE", LINE);
     console.log("DELAYREASON", DELAYREASON);
+    console.log("DELAYREASON - VALUE", selectList.options[selectList.selectedIndex].value);
     console.log("REQDATE", REQDATE);
     console.log("previewsSupplayDate", previewsSupplayDate);
     
@@ -1412,6 +1413,9 @@ function onSubmit_UpdateOrderLineData(e) {
         DELAYREASON = document.getElementById("txt_ReasonRejection").value;
     else
         DELAYREASON = selectList.options[selectList.selectedIndex].text;
+
+    if (selectList.options[selectList.selectedIndex].value === '-2')
+        DELAYREASON = '';
 
     if (selectList.options[selectList.selectedIndex].value === '-2' && previewsSupplayDate !== '')
     {

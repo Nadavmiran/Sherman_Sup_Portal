@@ -795,3 +795,29 @@ INFO  2020-07-17 13:53:16,401 776969ms eporting Portal Logger reateUpdateTestMsg
 	}
 	]}
 DEBUG 2020-07-17 14:23:16,785   182ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 17/07/2020 14:23:16
+INFO  2020-08-04 19:53:10,828   253ms eporting Portal Logger GetOrdersData      - IN GetOrdersData ==> Try to get sum of log chenges for order ORDNAME = PO194993
+System.InvalidOperationException: Sequence contains more than one element
+   at System.Linq.Enumerable.SingleOrDefault[TSource](IEnumerable`1 source)
+   at TestPortal.Models.CommonController.GetOrdersData(String supplier) in H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\Models\CommonController.cs:line 132
+INFO  2020-08-05 16:40:38,551   581ms eporting Portal Logger GetOrdersData      - IN GetOrdersData ==> Try to get sum of log chenges for order ORDNAME = PO194993
+System.InvalidOperationException: Sequence contains more than one element
+   at System.Linq.Enumerable.SingleOrDefault[TSource](IEnumerable`1 source)
+   at TestPortal.Models.CommonController.GetOrdersData(String supplier) in H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\Models\CommonController.cs:line 132
+DEBUG 2020-08-05 16:41:52,407 74438ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 05/08/2020 0:00:00
+INFO  2020-08-05 16:42:25,926 107956ms eporting Portal Logger GetOrdersData      - IN GetOrdersData ==> Try to get sum of log chenges for order ORDNAME = PO194993
+System.InvalidOperationException: Sequence contains more than one element
+   at System.Linq.Enumerable.SingleOrDefault[TSource](IEnumerable`1 source)
+   at TestPortal.Models.CommonController.GetOrdersData(String supplier) in H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\Models\CommonController.cs:line 132
+INFO  2020-08-05 16:46:32,032 354062ms eporting Portal Logger GetOrdersData      - IN GetOrdersData ==> Try to get sum of log chenges for order ORDNAME = PO194993
+System.InvalidOperationException: Sequence contains more than one element
+   at System.Linq.Enumerable.SingleOrDefault[TSource](IEnumerable`1 source)
+   at TestPortal.Models.CommonController.GetOrdersData(String supplier) in H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\Models\CommonController.cs:line 132
+DEBUG 2020-08-05 16:49:07,630 509660ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 05/08/2020 0:00:00
+INFO  2020-08-05 16:49:39,884 541914ms eporting Portal Logger GetOrdersData      - IN GetOrdersData ==> Try to get sum of log chenges for order ORDNAME = PO194993
+System.InvalidOperationException: Sequence contains more than one element
+   at System.Linq.Enumerable.SingleOrDefault[TSource](IEnumerable`1 source)
+   at TestPortal.Models.CommonController.GetOrdersData(String supplier) in H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\Models\CommonController.cs:line 132
+INFO  2020-08-05 16:59:40,903 1142933ms eporting Portal Logger GetOrdersData      - IN GetOrdersData ==> Try to get sum of log chenges for order ORDNAME = PO194993
+System.InvalidOperationException: Sequence contains more than one element
+   at System.Linq.Enumerable.SingleOrDefault[TSource](IEnumerable`1 source)
+   at TestPortal.Models.CommonController.GetOrdersData(String supplier) in H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\Models\CommonController.cs:line 132

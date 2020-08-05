@@ -126,8 +126,17 @@ namespace TestPortal.Models
                     if (null == lstLog)
                         obj.PORDERITEMS_SUBFORM[i].SumOrdLineUpdates = 0;
                     else
-                        obj.PORDERITEMS_SUBFORM[i].SumOrdLineUpdates = lstLog.Where(x => x.ORDI == obj.PORDERITEMS_SUBFORM[i].ORDI).SingleOrDefault().SHR_DUEDATELOG_SUBFORM.Length;
-
+                    {
+                        try
+                        {
+                            obj.PORDERITEMS_SUBFORM[i].SumOrdLineUpdates = lstLog.Where(x => x.ORDI == obj.PORDERITEMS_SUBFORM[i].ORDI).SingleOrDefault().SHR_DUEDATELOG_SUBFORM.Length;
+                        }
+                        catch (Exception ex)
+                        {
+                            AppLogger.log.Info("IN GetOrdersData ==> Try to get sum of log chenges for order ORDNAME = " + obj.ORDNAME, ex);
+                            obj.PORDERITEMS_SUBFORM[i].SumOrdLineUpdates = lstLog.Count(x => x.ORDI == obj.PORDERITEMS_SUBFORM[i].ORDI);
+                        }
+                    }
                     obj.PORDERITEMS_SUBFORM[i].ORDNAME = obj.ORDNAME;
                     obj.PORDERITEMS_SUBFORM[i].ORD = obj.ORD;
                     
