@@ -765,7 +765,7 @@ namespace TestPortal.Models
             ResultAPI ra = null;
             Sample s = new Sample();
             s.UserLanguage = po.User.Language;
-            ra = s.CreateSampleDocument(supName, ordName, partName, ordLine);
+            ra = s.CreateSampleDocument(po.User.FullName, supName, ordName, partName, ordLine);
             //Get the test list after creation or update
             po.objSample = s.GetProductSamples(supName, ordName, partName, ordLine);
             po.lstSampleObject = s.GetOrderSamples(ordName, supName, partName);

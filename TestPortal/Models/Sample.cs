@@ -318,12 +318,12 @@ namespace TestPortal.Models
 
         internal ResultAPI Createtest(string supName, string ordName, string partName, List<CreateSampleTestMsg> form, string supplierUsername, bool isNewSample, string DOCNO = "")
         {
-            string reqBody = CreateNewsampleMsg(supName, ordName, partName, form, supplierUsername, isNewSample);
+            string reqBody = CreateNewsampleMsg(string.Empty, supName, ordName, partName, form, supplierUsername, isNewSample);
             ResultAPI ra = Call_POST(reqBody);
             return ra;
         }
 
-        private string CreateNewsampleMsg(string supName, string ordName, string partName, List<CreateSampleTestMsg> form, string supplierUsername, bool isNewSample, string DOCNO = "")
+        private string CreateNewsampleMsg(string supUserName, string supName, string ordName, string partName, List<CreateSampleTestMsg> form, string supplierUsername, bool isNewSample, string DOCNO = "")
         {
             int indx = 0;
             StringBuilder sb = new StringBuilder();
@@ -334,6 +334,8 @@ namespace TestPortal.Models
                 sb.Append("\"" + GetDateTimeOffset(DateTime.Now.ToString(), "00:00") + "\",");
                 sb.Append("\r\n\t\"NAME\":");
                 sb.Append("\"" + supplierUsername + "\",");
+                sb.Append("\r\n\t\"EFI_CNAME\":");
+                sb.Append("\"" + supUserName + "\",");
             }
             else
             {
@@ -370,7 +372,7 @@ namespace TestPortal.Models
             return sb.ToString();
         }
 
-        private string CreateNewsampleMsg(string supName, string ordName, string partName, int ordLine)
+        private string CreateNewsampleMsg(string supUserName, string supName, string ordName, string partName, int ordLine)
         {
             StringBuilder sb = new StringBuilder();
             string SAMPLE_TYPE_CODE = string.Empty;
@@ -397,6 +399,8 @@ namespace TestPortal.Models
             sb.Append("\"" + partName + "\",");
             sb.Append("\r\n\t\"SUPNAME\":");
             sb.Append("\"" + supName + "\",");
+            sb.Append("\r\n\t\"EFI_CNAME\":");
+            sb.Append("\"" + supUserName + "\",");
             sb.Append("\r\n\t\"SAMPLE_TYPE_CODE\":");
             sb.Append("\"" + SAMPLE_TYPE_CODE + "\",");
             sb.Append("\r\n\t\"EFI_PILINE\":");
@@ -408,14 +412,14 @@ namespace TestPortal.Models
 
         internal ResultAPI AddSampleTests(string supName, string ordName, string partName, List<CreateSampleTestMsg> form, bool isNewSample, string DOCNO = "")
         {
-            string reqBody = CreateNewsampleMsg(supName, ordName, partName, form, string.Empty, isNewSample, DOCNO);
+            string reqBody = CreateNewsampleMsg(string.Empty, supName, ordName, partName, form, string.Empty, isNewSample, DOCNO);
             ResultAPI ra = Call_PATCH(reqBody);
             return ra;
         }
 
-        internal ResultAPI CreateSampleDocument(string supName, string ordName, string partName, int ordLine)
+        internal ResultAPI CreateSampleDocument(string supUserName, string supName, string ordName, string partName, int ordLine)
         {
-            string reqBody = CreateNewsampleMsg(supName, ordName, partName, ordLine);
+            string reqBody = CreateNewsampleMsg(supUserName, supName, ordName, partName, ordLine);
             ResultAPI ra = Call_POST(reqBody);
             return ra;
         }
