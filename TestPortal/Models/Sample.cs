@@ -316,14 +316,14 @@ namespace TestPortal.Models
             return new Sample();
         }
 
-        internal ResultAPI Createtest(string supName, string ordName, string partName, List<CreateSampleTestMsg> form, bool isNewSample, string DOCNO = "")
+        internal ResultAPI Createtest(string supName, string ordName, string partName, List<CreateSampleTestMsg> form, string supplierUsername, bool isNewSample, string DOCNO = "")
         {
-            string reqBody = CreateNewsampleMsg(supName, ordName, partName, form, isNewSample);
+            string reqBody = CreateNewsampleMsg(supName, ordName, partName, form, supplierUsername, isNewSample);
             ResultAPI ra = Call_POST(reqBody);
             return ra;
         }
 
-        private string CreateNewsampleMsg(string supName, string ordName, string partName, List<CreateSampleTestMsg> form, bool isNewSample, string DOCNO = "")
+        private string CreateNewsampleMsg(string supName, string ordName, string partName, List<CreateSampleTestMsg> form, string supplierUsername, bool isNewSample, string DOCNO = "")
         {
             int indx = 0;
             StringBuilder sb = new StringBuilder();
@@ -332,6 +332,8 @@ namespace TestPortal.Models
             {
                 sb.Append("\r\n\t\"CURDATE\":");
                 sb.Append("\"" + GetDateTimeOffset(DateTime.Now.ToString(), "00:00") + "\",");
+                sb.Append("\r\n\t\"NAME\":");
+                sb.Append("\"" + supplierUsername + "\",");
             }
             else
             {
@@ -406,7 +408,7 @@ namespace TestPortal.Models
 
         internal ResultAPI AddSampleTests(string supName, string ordName, string partName, List<CreateSampleTestMsg> form, bool isNewSample, string DOCNO = "")
         {
-            string reqBody = CreateNewsampleMsg(supName, ordName, partName, form, isNewSample, DOCNO);
+            string reqBody = CreateNewsampleMsg(supName, ordName, partName, form, string.Empty, isNewSample, DOCNO);
             ResultAPI ra = Call_PATCH(reqBody);
             return ra;
         }

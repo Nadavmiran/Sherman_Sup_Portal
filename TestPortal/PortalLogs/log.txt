@@ -821,3 +821,193 @@ INFO  2020-08-05 16:59:40,903 1142933ms eporting Portal Logger GetOrdersData    
 System.InvalidOperationException: Sequence contains more than one element
    at System.Linq.Enumerable.SingleOrDefault[TSource](IEnumerable`1 source)
    at TestPortal.Models.CommonController.GetOrdersData(String supplier) in H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\Models\CommonController.cs:line 132
+DEBUG 2020-08-11 12:38:50,833   377ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 19/05/2020 0:00:00
+DEBUG 2020-08-11 12:40:06,689 76232ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 19/08/2020 0:00:00
+INFO  2020-08-11 15:29:08,574   158ms eporting Portal Logger Download           - Function => Download ==> fileFolder = 23559000\23559000_C
+INFO  2020-08-11 15:29:08,607   191ms eporting Portal Logger Download           - Function => Download ==> fileName = MM602085C.pdf
+INFO  2020-08-11 15:29:16,493  8077ms eporting Portal Logger Download           - Function => Download ==> filePath = H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\PriorityDocs\23559000\23559000_C/MM602085C.pdf
+INFO  2020-08-11 15:29:16,581  8166ms eporting Portal Logger Download           - Function => Download ==> ReadAllBytes = H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\PriorityDocs\23559000\23559000_C/MM602085C.pdf
+INFO  2020-08-11 15:29:16,582  8167ms eporting Portal Logger Download           - filePath ==> ReadAllBytes ==> Exception
+System.IO.DirectoryNotFoundException: Could not find a part of the path 'H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\PriorityDocs\23559000\23559000_C\MM602085C.pdf'.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.OpenRead(String path)
+   at TestPortal.Models.CommonController.Download(String fileFolder, String fileName) in H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\Models\CommonController.cs:line 600
+INFO  2020-08-11 15:29:16,599  8184ms eporting Portal Logger DownloadFile       - Function => DownloadFile ==> Server.MapPath = H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\PriorityDocs\23559000\23559000_C
+INFO  2020-08-11 15:58:48,804   123ms eporting Portal Logger Download           - Function => Download ==> fileFolder = 23559000\23559000_C
+INFO  2020-08-11 15:58:48,831   150ms eporting Portal Logger Download           - Function => Download ==> fileName = MM602085C.pdf
+INFO  2020-08-11 15:58:48,834   153ms eporting Portal Logger Download           - Function => Download ==> filePath = H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\PriorityDocs\23559000\23559000_C/MM602085C.pdf
+INFO  2020-08-11 15:58:48,835   154ms eporting Portal Logger Download           - Function => Download ==> ReadAllBytes = H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\PriorityDocs\23559000\23559000_C/MM602085C.pdf
+INFO  2020-08-11 15:58:48,835   154ms eporting Portal Logger Download           - filePath ==> ReadAllBytes ==> Exception
+System.IO.DirectoryNotFoundException: Could not find a part of the path 'H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\PriorityDocs\23559000\23559000_C\MM602085C.pdf'.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.OpenRead(String path)
+   at TestPortal.Models.CommonController.Download(String fileFolder, String fileName) in H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\Models\CommonController.cs:line 600
+INFO  2020-08-11 15:58:48,932   251ms eporting Portal Logger DownloadFile       - Function => DownloadFile ==> Server.MapPath = H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\PriorityDocs\23559000\23559000_C
+INFO  2020-08-11 15:58:53,378  4697ms eporting Portal Logger Download           - Function => Download ==> fileFolder = 30136000\30136000_01
+INFO  2020-08-11 15:58:53,379  4698ms eporting Portal Logger Download           - Function => Download ==> fileName = MP010980105.pdf
+INFO  2020-08-11 15:58:53,380  4699ms eporting Portal Logger Download           - Function => Download ==> filePath = H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\PriorityDocs\30136000\30136000_01/MP010980105.pdf
+INFO  2020-08-11 15:58:53,381  4700ms eporting Portal Logger Download           - Function => Download ==> ReadAllBytes = H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\PriorityDocs\30136000\30136000_01/MP010980105.pdf
+INFO  2020-08-11 15:58:53,382  4701ms eporting Portal Logger Download           - filePath ==> ReadAllBytes ==> Exception
+System.IO.DirectoryNotFoundException: Could not find a part of the path 'H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\PriorityDocs\30136000\30136000_01\MP010980105.pdf'.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.OpenRead(String path)
+   at TestPortal.Models.CommonController.Download(String fileFolder, String fileName) in H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\Models\CommonController.cs:line 600
+INFO  2020-08-11 15:58:53,397  4716ms eporting Portal Logger DownloadFile       - Function => DownloadFile ==> Server.MapPath = H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\PriorityDocs\30136000\30136000_01
+INFO  2020-08-11 16:01:29,787 161106ms eporting Portal Logger Download           - Function => Download ==> fileFolder = 23559000\23559000_C
+INFO  2020-08-11 16:01:29,788 161107ms eporting Portal Logger Download           - Function => Download ==> fileName = MM602085C.pdf
+INFO  2020-08-11 16:01:29,789 161108ms eporting Portal Logger Download           - Function => Download ==> filePath = H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\PriorityDocs\23559000\23559000_C/MM602085C.pdf
+INFO  2020-08-11 16:01:29,790 161109ms eporting Portal Logger Download           - Function => Download ==> ReadAllBytes = H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\PriorityDocs\23559000\23559000_C/MM602085C.pdf
+INFO  2020-08-11 16:01:29,790 161109ms eporting Portal Logger Download           - filePath ==> ReadAllBytes ==> Exception
+System.IO.DirectoryNotFoundException: Could not find a part of the path 'H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\PriorityDocs\23559000\23559000_C\MM602085C.pdf'.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.OpenRead(String path)
+   at TestPortal.Models.CommonController.Download(String fileFolder, String fileName) in H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\Models\CommonController.cs:line 600
+INFO  2020-08-11 16:01:29,805 161124ms eporting Portal Logger DownloadFile       - Function => DownloadFile ==> Server.MapPath = H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\PriorityDocs\23559000\23559000_C
+INFO  2020-08-11 16:01:34,786 166105ms eporting Portal Logger Download           - Function => Download ==> fileFolder = 30136000\30136000_01
+INFO  2020-08-11 16:01:34,787 166106ms eporting Portal Logger Download           - Function => Download ==> fileName = MP010980105.pdf
+INFO  2020-08-11 16:01:34,787 166106ms eporting Portal Logger Download           - Function => Download ==> filePath = H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\PriorityDocs\30136000\30136000_01/MP010980105.pdf
+INFO  2020-08-11 16:01:34,788 166107ms eporting Portal Logger Download           - Function => Download ==> ReadAllBytes = H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\PriorityDocs\30136000\30136000_01/MP010980105.pdf
+INFO  2020-08-11 16:01:34,789 166108ms eporting Portal Logger Download           - filePath ==> ReadAllBytes ==> Exception
+System.IO.DirectoryNotFoundException: Could not find a part of the path 'H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\PriorityDocs\30136000\30136000_01\MP010980105.pdf'.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.OpenRead(String path)
+   at TestPortal.Models.CommonController.Download(String fileFolder, String fileName) in H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\Models\CommonController.cs:line 600
+INFO  2020-08-11 16:01:34,820 166139ms eporting Portal Logger DownloadFile       - Function => DownloadFile ==> Server.MapPath = H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\PriorityDocs\30136000\30136000_01
+INFO  2020-08-11 16:15:20,494 991814ms eporting Portal Logger Download           - Function => Download ==> fileFolder = 4022000\4022000_03\
+INFO  2020-08-11 16:15:20,495 991815ms eporting Portal Logger Download           - Function => Download ==> fileName = MP013310301-2.pdf
+INFO  2020-08-11 16:15:20,496 991816ms eporting Portal Logger Download           - Function => Download ==> filePath = H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\PriorityDocs\4022000\4022000_03\/MP013310301-2.pdf
+INFO  2020-08-11 16:15:20,573 991893ms eporting Portal Logger Download           - Function => Download ==> ReadAllBytes = H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\PriorityDocs\4022000\4022000_03\/MP013310301-2.pdf
+INFO  2020-08-11 16:15:20,574 991894ms eporting Portal Logger Download           - filePath ==> ReadAllBytes ==> Exception
+System.IO.DirectoryNotFoundException: Could not find a part of the path 'H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\PriorityDocs\4022000\4022000_03\MP013310301-2.pdf'.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.OpenRead(String path)
+   at TestPortal.Models.CommonController.Download(String fileFolder, String fileName) in H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\Models\CommonController.cs:line 600
+INFO  2020-08-11 16:15:20,592 991912ms eporting Portal Logger DownloadFile       - Function => DownloadFile ==> Server.MapPath = H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\PriorityDocs\4022000\4022000_03\
+INFO  2020-08-11 16:15:27,317 998637ms eporting Portal Logger Download           - Function => Download ==> fileFolder = 23208000\23208000_02\
+INFO  2020-08-11 16:15:27,317 998637ms eporting Portal Logger Download           - Function => Download ==> fileName = MP01606-38_REV02.pdf
+INFO  2020-08-11 16:15:27,318 998638ms eporting Portal Logger Download           - Function => Download ==> filePath = H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\PriorityDocs\23208000\23208000_02\/MP01606-38_REV02.pdf
+INFO  2020-08-11 16:15:27,389 998709ms eporting Portal Logger Download           - Function => Download ==> ReadAllBytes = H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\PriorityDocs\23208000\23208000_02\/MP01606-38_REV02.pdf
+INFO  2020-08-11 16:15:27,389 998709ms eporting Portal Logger Download           - filePath ==> ReadAllBytes ==> Exception
+System.IO.DirectoryNotFoundException: Could not find a part of the path 'H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\PriorityDocs\23208000\23208000_02\MP01606-38_REV02.pdf'.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.OpenRead(String path)
+   at TestPortal.Models.CommonController.Download(String fileFolder, String fileName) in H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\Models\CommonController.cs:line 600
+INFO  2020-08-11 16:15:27,400 998720ms eporting Portal Logger DownloadFile       - Function => DownloadFile ==> Server.MapPath = H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\PriorityDocs\23208000\23208000_02\
+INFO  2020-08-11 16:20:40,321   153ms eporting Portal Logger GetOrdersData      - IN GetOrdersData ==> Try to get sum of log chenges for order ORDNAME = PO194993
+System.InvalidOperationException: Sequence contains more than one element
+   at System.Linq.Enumerable.SingleOrDefault[TSource](IEnumerable`1 source)
+   at TestPortal.Models.CommonController.GetOrdersData(String supplier) in H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\Models\CommonController.cs:line 144
+INFO  2020-08-11 16:20:59,920 19753ms eporting Portal Logger Download           - Function => Download ==> fileFolder = 39236000\39236000_B
+INFO  2020-08-11 16:20:59,922 19755ms eporting Portal Logger Download           - Function => Download ==> fileName = MCP-28007_REV_B.PDF
+INFO  2020-08-11 16:20:59,923 19756ms eporting Portal Logger Download           - Function => Download ==> filePath = H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\PriorityDocs\39236000\39236000_B/MCP-28007_REV_B.PDF
+INFO  2020-08-11 16:20:59,986 19819ms eporting Portal Logger Download           - Function => Download ==> ReadAllBytes = H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\PriorityDocs\39236000\39236000_B/MCP-28007_REV_B.PDF
+INFO  2020-08-11 16:20:59,986 19819ms eporting Portal Logger Download           - filePath ==> ReadAllBytes ==> Exception
+System.IO.DirectoryNotFoundException: Could not find a part of the path 'H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\PriorityDocs\39236000\39236000_B\MCP-28007_REV_B.PDF'.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.OpenRead(String path)
+   at TestPortal.Models.CommonController.Download(String fileFolder, String fileName) in H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\Models\CommonController.cs:line 600
+INFO  2020-08-11 16:20:59,999 19832ms eporting Portal Logger DownloadFile       - Function => DownloadFile ==> Server.MapPath = H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\PriorityDocs\39236000\39236000_B
+INFO  2020-08-11 16:21:12,871 32703ms eporting Portal Logger Download           - Function => Download ==> fileFolder = 39236000\39236000_B
+INFO  2020-08-11 16:21:12,871 32703ms eporting Portal Logger Download           - Function => Download ==> fileName = MCP-28007_REV_B.PDF
+INFO  2020-08-11 16:21:12,872 32704ms eporting Portal Logger Download           - Function => Download ==> filePath = H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\PriorityDocs\39236000\39236000_B/MCP-28007_REV_B.PDF
+INFO  2020-08-11 16:21:12,938 32770ms eporting Portal Logger Download           - Function => Download ==> ReadAllBytes = H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\PriorityDocs\39236000\39236000_B/MCP-28007_REV_B.PDF
+INFO  2020-08-11 16:21:12,939 32771ms eporting Portal Logger Download           - filePath ==> ReadAllBytes ==> Exception
+System.IO.DirectoryNotFoundException: Could not find a part of the path 'H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\PriorityDocs\39236000\39236000_B\MCP-28007_REV_B.PDF'.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.OpenRead(String path)
+   at TestPortal.Models.CommonController.Download(String fileFolder, String fileName) in H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\Models\CommonController.cs:line 600
+INFO  2020-08-11 16:21:12,961 32793ms eporting Portal Logger DownloadFile       - Function => DownloadFile ==> Server.MapPath = H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\PriorityDocs\39236000\39236000_B
+INFO  2020-08-11 16:26:29,050 348883ms eporting Portal Logger Download           - Function => Download ==> fileFolder = 39236000\39236000_B
+INFO  2020-08-11 16:26:29,051 348884ms eporting Portal Logger Download           - Function => Download ==> fileName = MCP-28007_REV_B.PDF
+INFO  2020-08-11 16:26:29,052 348885ms eporting Portal Logger Download           - Function => Download ==> filePath = H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\PriorityDocs\39236000\39236000_B/MCP-28007_REV_B.PDF
+INFO  2020-08-11 16:26:29,109 348942ms eporting Portal Logger Download           - Function => Download ==> ReadAllBytes = H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\PriorityDocs\39236000\39236000_B/MCP-28007_REV_B.PDF
+INFO  2020-08-11 16:26:29,109 348942ms eporting Portal Logger Download           - filePath ==> ReadAllBytes ==> Exception
+System.IO.DirectoryNotFoundException: Could not find a part of the path 'H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\PriorityDocs\39236000\39236000_B\MCP-28007_REV_B.PDF'.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.OpenRead(String path)
+   at TestPortal.Models.CommonController.Download(String fileFolder, String fileName) in H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\Models\CommonController.cs:line 600
+INFO  2020-08-11 16:26:29,122 348955ms eporting Portal Logger DownloadFile       - Function => DownloadFile ==> Server.MapPath = H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\PriorityDocs\39236000\39236000_B
+INFO  2020-08-11 16:30:28,039   150ms eporting Portal Logger GetOrdersData      - IN GetOrdersData ==> Try to get sum of log chenges for order ORDNAME = PO194993
+System.InvalidOperationException: Sequence contains more than one element
+   at System.Linq.Enumerable.SingleOrDefault[TSource](IEnumerable`1 source)
+   at TestPortal.Models.CommonController.GetOrdersData(String supplier) in H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\Models\CommonController.cs:line 144
+INFO  2020-08-11 16:31:03,712 35823ms eporting Portal Logger Download           - Function => Download ==> fileFolder = 39236000\39236000_B
+INFO  2020-08-11 16:31:03,713 35824ms eporting Portal Logger Download           - Function => Download ==> fileName = MCP-28007_REV_B.X_T
+INFO  2020-08-11 16:31:03,714 35825ms eporting Portal Logger Download           - Function => Download ==> filePath = H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\PriorityDocs\39236000\39236000_B/MCP-28007_REV_B.X_T
+INFO  2020-08-11 16:31:03,779 35890ms eporting Portal Logger Download           - Function => Download ==> ReadAllBytes = H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\PriorityDocs\39236000\39236000_B/MCP-28007_REV_B.X_T
+INFO  2020-08-11 16:31:03,779 35890ms eporting Portal Logger Download           - filePath ==> ReadAllBytes ==> Exception
+System.IO.DirectoryNotFoundException: Could not find a part of the path 'H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\PriorityDocs\39236000\39236000_B\MCP-28007_REV_B.X_T'.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.OpenRead(String path)
+   at TestPortal.Models.CommonController.Download(String fileFolder, String fileName) in H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\Models\CommonController.cs:line 600
+INFO  2020-08-11 16:31:03,798 35909ms eporting Portal Logger DownloadFile       - Function => DownloadFile ==> Server.MapPath = H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\PriorityDocs\39236000\39236000_B
+INFO  2020-08-11 16:31:07,845 39956ms eporting Portal Logger Download           - Function => Download ==> fileFolder = 39236000\39236000_B
+INFO  2020-08-11 16:31:07,845 39956ms eporting Portal Logger Download           - Function => Download ==> fileName = MCP-28007_REV_B.PDF
+INFO  2020-08-11 16:31:07,846 39957ms eporting Portal Logger Download           - Function => Download ==> filePath = H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\PriorityDocs\39236000\39236000_B/MCP-28007_REV_B.PDF
+INFO  2020-08-11 16:31:07,904 40015ms eporting Portal Logger Download           - Function => Download ==> ReadAllBytes = H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\PriorityDocs\39236000\39236000_B/MCP-28007_REV_B.PDF
+INFO  2020-08-11 16:31:07,905 40016ms eporting Portal Logger Download           - filePath ==> ReadAllBytes ==> Exception
+System.IO.DirectoryNotFoundException: Could not find a part of the path 'H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\PriorityDocs\39236000\39236000_B\MCP-28007_REV_B.PDF'.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.OpenRead(String path)
+   at TestPortal.Models.CommonController.Download(String fileFolder, String fileName) in H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\Models\CommonController.cs:line 600
+INFO  2020-08-11 16:31:07,915 40026ms eporting Portal Logger DownloadFile       - Function => DownloadFile ==> Server.MapPath = H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\PriorityDocs\39236000\39236000_B
+DEBUG 2020-09-02 13:18:30,494   810ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 04/09/2020 0:00:00
+DEBUG 2020-09-02 14:22:48,570   255ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 25/09/2020 0:00:00
+DEBUG 2020-09-02 14:25:45,837 177523ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 25/09/2020 0:00:00
+DEBUG 2020-09-02 18:00:14,126   192ms eporting Portal Logger CreateResultApi    - FunctionName = CreateResultApi => Response XMLExceptionMsg = <FORM
+  TYPE="MED_SAMPLE">
+  <InterfaceErrors>
+    <text>- ??? ?????</text>
+  </InterfaceErrors>
+</FORM>
+DEBUG 2020-09-02 18:01:23,482 69548ms eporting Portal Logger CreateResultApi    - FunctionName = CreateResultApi => Response XMLExceptionMsg = <FORM
+  TYPE="MED_SAMPLE">
+  <InterfaceErrors>
+    <text>- ??? ?????</text>
+  </InterfaceErrors>
+</FORM>
+DEBUG 2020-09-02 18:04:21,609 247675ms eporting Portal Logger CreateResultApi    - FunctionName = CreateResultApi => Response XMLExceptionMsg = <FORM
+  TYPE="MED_SAMPLE">
+  <InterfaceErrors>
+    <text>- ??? ?????</text>
+  </InterfaceErrors>
+</FORM>
+DEBUG 2020-09-02 18:07:31,963 438030ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 02/09/2020 18:07:31
+INFO  2020-09-02 20:50:21,161   167ms eporting Portal Logger Download           - Function => Download ==> fileFolder = Provider\20523
+INFO  2020-09-02 20:50:21,201   207ms eporting Portal Logger Download           - Function => Download ==> fileName = C2000001554_7385452-3.pdf
+INFO  2020-09-02 20:50:21,203   209ms eporting Portal Logger Download           - Function => Download ==> filePath = H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\PriorityDocs\Provider\20523/C2000001554_7385452-3.pdf
+INFO  2020-09-02 20:50:21,274   280ms eporting Portal Logger Download           - Function => Download ==> ReadAllBytes = H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\PriorityDocs\Provider\20523/C2000001554_7385452-3.pdf
+INFO  2020-09-02 20:50:21,275   281ms eporting Portal Logger Download           - filePath ==> ReadAllBytes ==> Exception
+System.IO.DirectoryNotFoundException: Could not find a part of the path 'H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\PriorityDocs\Provider\20523\C2000001554_7385452-3.pdf'.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.OpenRead(String path)
+   at TestPortal.Models.CommonController.Download(String fileFolder, String fileName) in H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\Models\CommonController.cs:line 600
+INFO  2020-09-02 20:50:21,290   296ms eporting Portal Logger DownloadFile       - Function => DownloadFile ==> Server.MapPath = H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\PriorityDocs\Provider\20523
+DEBUG 2020-09-11 17:35:53,058   314ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 11/09/2020 17:35:52
+DEBUG 2020-09-11 17:36:32,825 40081ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 11/09/2020 17:36:32

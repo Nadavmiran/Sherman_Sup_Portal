@@ -14,6 +14,7 @@ namespace TestPortal.Models
         public string EXTFILENAME { get; set; }
         public string FOLDER { get; set; }
         public string SUFFIX { get; set; }
+        public string SUFFIX_TEXT { get; set; }
 
         internal List<SampleAttachments> GetSampleAttachments(string DOCNO)
         {

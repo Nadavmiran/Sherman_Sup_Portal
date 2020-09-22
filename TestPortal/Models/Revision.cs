@@ -20,7 +20,11 @@ namespace TestPortal.Models
         public string QADES { get; set; }
         public string SHR_TEST { get; set; }
         public string MEASURECODE { get; set; }
+        /// <summary>
+        /// תאור כלי מדידה
+        /// </summary>
         public string MEASUREDES { get; set; }
+
         public string REQUIRED_RESULT { get; set; }
         public string REMARKS { get; set; }
         public string EXTFILENAME { get; set; }

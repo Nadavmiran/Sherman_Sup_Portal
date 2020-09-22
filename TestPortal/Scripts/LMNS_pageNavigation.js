@@ -15,7 +15,6 @@
     });
     setTimeout(function () {
         $.ajax({
-
             type: "POST",
             url: $('#navPostTestProduct').data('url'),
             data: {

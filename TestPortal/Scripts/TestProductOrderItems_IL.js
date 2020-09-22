@@ -185,9 +185,9 @@ function showGridProdTests(grid_data) {
     });
 }
 
-function showGridProdAttachments(grid_data) {
+function showGridProdAttachments(grid_data, tblName) {
     console.log("showGridProdAttachments ==> grid_data", grid_data);
-    $("#jqGridAttachments").jqGrid({
+    $(tblName).jqGrid({
         guiStyle: "bootstrap",
         iconSet: "fontAwesome",
         datatype: "local",
@@ -196,8 +196,9 @@ function showGridProdAttachments(grid_data) {
             { label: 'תג רכש', name: 'SHR_PURCH_FLAG', align: 'center', hidden: true, width: 200 },
             { label: 'תיקייה', name: 'FOLDER', align: 'center', hidden: true, width: 200 },
             { label: 'שם קובץ', name: 'FILE_NAME', align: 'center', hidden: true, width: 200 },
-            { label: '#', name: 'SHR_LINE', align: 'center', key: true, hidden: false, width: 75 },
+            { label: '#', name: 'EXTFILENUM', align: 'center', key: true, hidden: false, width: 75 }, //SHR_LINE
             { label: 'נושא', name: 'SHR_EXTFILEDESTEXT', align: 'center', hidden: false, width: 200 },
+            { label: 'מק"ט', name: 'SHR_PARTNAME', align: 'center', hidden: false, width: 200 },
             { label: 'קובץ', name: 'SUFFIX', align: 'center', width: 200, formatter: formatFileIcon}
         ],
         viewrecords: true,
@@ -228,6 +229,7 @@ function showGridSampleAttachments(grid_data) {
         colModel: [
             { label: 'תיקייה', name: 'FOLDER', align: 'center', hidden: true, width: 200 },
             { label: 'נתיב', name: 'EXTFILENAME', align: 'center', hidden: true, width: 200 },
+            { label: 'Sufix - Text', name: 'SUFFIX_TEXT', align: 'center', hidden: true, width: 200 },
             { label: '#', name: 'EXTFILENUM', align: 'center', key: true, hidden: false, width: 75 },
             { label: 'שם קובץ', name: 'EXTFILEDES', align: 'center', hidden: false, width: 200 },
             { label: 'קובץ', name: 'SUFFIX', align: 'center', width: 200, formatter: formatFileIcon }
@@ -245,7 +247,7 @@ function showGridSampleAttachments(grid_data) {
         onSelectRow: function (id, rowId, iCol, content, event) {
             var rowData = $(this).getRowData(id);
             console.log('showGridProdAttachments ==> rowData ', rowData);
-            downloadFile(rowData.FOLDER, rowData.EXTFILEDES + '.' + rowData.EXTFILENAME.split('.')[1]);
+            downloadFile(rowData.FOLDER, rowData.EXTFILEDES + '.' + rowData.SUFFIX_TEXT);
         }
     });
 }

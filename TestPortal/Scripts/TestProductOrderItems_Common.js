@@ -71,6 +71,10 @@ function refreshOrdersData(supplier) {
 function InitTestPageData(data) {
     var OrdId = document.getElementById('hdnOrdId').value;
     var pordId = document.getElementById('hdnPrdId').value;
+
+    document.getElementById('salesViewTabs').style.display = 'none';
+    document.getElementById('ordViewTabs').style.display = 'inline';
+
     if (x === 'rtl') {
         document.getElementById('pageTitle').innerHTML = "דגימות";
     }
@@ -87,15 +91,18 @@ function InitTestPageData(data) {
     console.log('$(document).ready ==> data.lstAttachments = ', data.lstAttachments);
 
     showOrderDetail(data.objOrder);
-    document.getElementById('orderAlert').innerHTML = null === data.htmlText ? '' : data.htmlText;
+    document.getElementById('orderAlert1').innerHTML = null === data.htmlText ? '' : data.htmlText;
+    console.log('data.objOrderText ==> ', data.objOrderText);
+    document.getElementById('ordCommonTextAlert1').innerHTML = null === data.objOrderText ? '' : data.objOrderText;
     if (null === data.lstItemsObject)
         GetOrderProducts(OrdId);
     else
         showGridProd(data.lstItemsObject);
 
+    $("#jqGridAttachments_Ord").GridUnload();
     if (null !== data.lstOrderAttachments && null !== data.lstOrderAttachments.EXTFILES_SUBFORM && data.lstOrderAttachments.length > 0)
         if (null !== data.lstOrderAttachments[0].EXTFILES_SUBFORM && data.lstOrderAttachments[0].EXTFILES_SUBFORM.length > 0)
-            showGridProdAttachments(data.lstOrderAttachments[0].EXTFILES_SUBFORM);
+            showGridProdAttachments(data.lstOrderAttachments[0].EXTFILES_SUBFORM, '#jqGridAttachments_Ord');
 }
 
 function InitQAPageData(data) {
@@ -147,9 +154,10 @@ function InitQAPageData(data) {
             $("#modal-error-text").html('Sample document was not found. Click "Tests" button to create sample document.');
         }
     }
+    $("#jqGridAttachments").GridUnload();
 
     if (null !== data.lstAttachments)
-        showGridProdAttachments(data.lstAttachments);
+        showGridProdAttachments(data.lstAttachments, '#jqGridAttachments');
 
     $("#loader").hide();
 }
@@ -176,16 +184,21 @@ function showSalesorderDetail(PARTNAME, ORD, LINE) {
             showOrderDetail(data.objOrder);
             //Show order comments
             document.getElementById('orderAlert').innerHTML = null === data.htmlText ? '' : data.htmlText;
+            document.getElementById('orderAlert1').innerHTML = null === data.htmlText ? '' : data.htmlText;
             showOrderLineDetail(data.objProduct);
+            document.getElementById('ordCommonTextAlert').innerHTML = null === data.objOrderText ? '' : data.objOrderText;
             //Show order line comments
             console.log("showSalesorderDetail ==> data.objItemText", data.objItemText);
             document.getElementById('orderLineAlert').innerHTML = null === data.objItemText || null === data.objItemText.TEXT ? '' : data.objItemText.TEXT;
             //if (null !== data.objSample.MED_TRANSSAMPLEQA_SUBFORM)
             //    showGridProdSamples(data.objSample.MED_TRANSSAMPLEQA_SUBFORM);
+            $("#jqGridAttachments").GridUnload();
             if (null !== data.lstOrderAttachments && null !== data.lstOrderAttachments.EXTFILES_SUBFORM && data.lstOrderAttachments.length > 0)
                 if (null !== data.lstOrderAttachments[0].EXTFILES_SUBFORM && data.lstOrderAttachments[0].EXTFILES_SUBFORM.length > 0)
-                    showGridProdAttachments(data.lstOrderAttachments[0].EXTFILES_SUBFORM);
+                    showGridProdAttachments(data.lstOrderAttachments[0].EXTFILES_SUBFORM, '#jqGridAttachments');
 
+            document.getElementById('salesViewTabs').style.display = 'inline';
+            document.getElementById('ordViewTabs').style.display = 'none';
             manageDelayReasonSelect(data);
             $("#loader").hide();
             if (x === 'rtl')
@@ -349,6 +362,7 @@ function setInputDate(_id, pageREQDATE) {
 }
 
 function showOrderLineDetail(objProduct) {
+    console.log('showOrderLineDetail ==>  = objProduct', objProduct);
     previewsSupplayDate = '';
     var dateControl = document.querySelector('input[type="date"]');
     console.log('showOrderLineDetail ==>  = dateControl', dateControl);
@@ -366,7 +380,8 @@ function showOrderLineDetail(objProduct) {
     document.getElementById('lbl_SERIALNAME').innerText = null === objProduct.SERIALNAME ? '' : objProduct.SERIALNAME;
     document.getElementById('lbl_TQUANT').innerText = null === objProduct.TQUANT ? '' : objProduct.TQUANT;
     document.getElementById('lbl_TBALANCE').innerText = null === objProduct.TBALANCE ? '' : objProduct.TBALANCE;
-    document.getElementById('lbl_ACTNAME').innerText = null === objProduct.ACTNAME ? '' : objProduct.ACTNAME;
+    document.getElementById('lbl_ACTNAME').innerText = null === objProduct.ACTDES ? '' : objProduct.ACTDES;
+    //document.getElementById('lbl_ACTNAME').innerText = null === objProduct.ACTNAME ? '' : objProduct.ACTNAME;
     document.getElementById('lbl_SHR_DRAW').innerText = null === objProduct.SHR_DRAW ? '' : objProduct.SHR_DRAW;
     document.getElementById('lbl_MNFDES').innerText = null === objProduct.MNFDES ? '' : objProduct.MNFDES;
     document.getElementById('lbl_SUPPARTNAME').innerText = null === objProduct.SUPPARTNAME ? '' : objProduct.SUPPARTNAME;
@@ -458,6 +473,7 @@ function GetSampleStandardList(objSample) {
                 for (i = 0; i < response.lstSampleStatus.length; i++) {
                     let option = document.createElement("option");
                     option.value = response.lstSampleStatus[i].SAMPLESTATUS;
+                    option.setAttribute('heb_Status', response.lstSampleStatus[i].STATDES);
                     if (x === 'rtl')
                     {
                         option.text = response.lstSampleStatus[i].STATDES;
@@ -502,8 +518,10 @@ function onSubmit_UpdateSampleDetails() {
     let SHR_SAMPLE_STD_CODE = sl.options[sl.selectedIndex].text;
 
     sl = document.getElementById('lbl_STATDES');
+    console.log("onSubmit_UpdateSampleDetails ==> lbl_STATDES => sl.options[sl.selectedIndex]", sl.options[sl.selectedIndex].attributes.heb_status.nodeValue);
     console.log("onSubmit_UpdateSampleDetails ==> lbl_STATDES => sl.options[sl.selectedIndex].text", sl.options[sl.selectedIndex].text);
-    let STATDES = sl.options[sl.selectedIndex].text;
+    //let STATDES = sl.options[sl.selectedIndex].text;
+    let STATDES = sl.options[sl.selectedIndex].attributes.heb_status.nodeValue;
     console.log("onSubmit_UpdateSampleDetails ==> DOCNO", DOCNO);
     console.log("onSubmit_UpdateSampleDetails ==> EFI_SUPNO", EFI_SUPNO);
     console.log("onSubmit_UpdateSampleDetails ==> SHR_QUANT", SHR_QUANT);
@@ -759,7 +777,7 @@ function GetSampleTests(rowData) {
             contentType: "application/x-www-form-urlencoded;charset=ISO-8859-15",
             success: function (response) {
                 console.log("GetSampleTests ==> response", response);
-                if (null !== response && null !== response.objSample) {
+                if (null != response && null != response.objSample) {
                     pageSampleobject.objSample = response.objSample;
                     if (null !== response.lstSampleAttachments)
                         showGridSampleAttachments(response.lstSampleAttachments);
@@ -785,6 +803,27 @@ function GetSampleTests(rowData) {
                         $('.modal').removeClass('show');
                         $("#modal-error-text").html(response.ErrorDescription);
                         $("#modal-1").trigger("click");
+                    }
+                    else
+                    {
+                        if (null != response && null != response.RouteValues && response.RouteValues.length > 0)
+                        {
+                            $.ajax(
+                                {
+                                    type: "POST",
+                                    data:
+                                    {
+                                        supName: supName,
+                                        partName: partName,
+                                        ordName: ordNAME,
+                                        ordLine: ordLINE
+                                    },
+                                    url: $('#navLogOff').data('url'),//"/Account/Logoff",
+                                    contentType: "application/x-www-form-urlencoded;charset=ISO-8859-15",
+                                    success: function (response) {
+                                    }
+                                });
+                        }
                     }
                 }
             }
@@ -1116,8 +1155,7 @@ function OpenSampleModal(rowData) {
     document.getElementById('txtQaREPETITION').innerText = rowData.REPETITION;
     document.getElementById('txtQaREQUIRED_RESULT').innerText = rowData.REQUIRED_RESULT;
     document.getElementById('txtQaSAMPQUANT').innerText = rowData.SAMPQUANT;
-    document.getElementById('txtQaMEASUREDES').innerText = rowData.MEASUREDES;
-    document.getElementById('txtQaEFI_MEASURESUPTOOLS').value = rowData.EFI_MEASURESUPTOOLS;
+    
     document.getElementById('txtQaEFI_CRITICALFLAG').checked = null === rowData.EFI_CRITICALFLAG || rowData.EFI_CRITICALFLAG === '' || rowData.EFI_CRITICALFLAG === 'N' ? false : true;
     if (document.getElementById('txtQaEFI_CRITICALFLAG').checked)
         document.getElementById('lblQaEFI_CRITICALFLAG').style.color = 'red';
@@ -1136,9 +1174,13 @@ function OpenSampleModal(rowData) {
     
     if (x === 'rtl') {
         document.getElementById('txtQADES').innerText = rowData.QADES;
+        document.getElementById('txtQaMEASUREDES').innerText = rowData.MEASUREDES;
+        document.getElementById('txtQaEFI_MEASURESUPTOOLS').value = rowData.EFI_MEASURESUPTOOLS;
     }
     else {
-        document.getElementById('txtQADES').innerText = rowData.SHR_QADES;
+        document.getElementById('txtQADES').innerText = rowData.EFI_QADES;//SHR_QADES;
+        document.getElementById('txtQaMEASUREDES').innerText = rowData.EFI_EDES;
+        document.getElementById('txtQaEFI_MEASURESUPTOOLS').value = rowData.EFI_EDES;
     }
     
 }
@@ -1377,7 +1419,93 @@ function onSubmitCreateSampleList(e) {
     });
 }
 
-function onSubmit_UpdateOrderLineData(e) {
+function compareDates() {
+    let REQDATE = document.getElementById('txt_pageREQDATE').value;
+    let REQDATE2 = document.getElementById('lbl_REQDATE2').innerText;
+    console.log("compareDates => REQDATE", REQDATE);
+    console.log("compareDates => REQDATE2", REQDATE2);
+    if ((null !== REQDATE || REQDATE !== '') && (null != REQDATE2 || REQDATE2 !== '')) {
+        let REQDATE_dateFormat = REQDATE.replace(/(\d+)\/(\d+)\/(\d+)/, "$3/$2/$1");
+        console.log("REQDATE_dateFormat", REQDATE_dateFormat);
+        let REQDATE_Date = new Date(REQDATE_dateFormat);
+        REQDATE_Date.setHours(0, 0, 0, 0);
+        console.log("REQDATE_Date", REQDATE_Date);
+        console.log("REQDATE2", REQDATE2);
+        let REQDATE2_dateFormat = REQDATE2.replace(/(\d+)\/(\d+)\/(\d+)/, "$3/$2/$1");
+        console.log("REQDATE2_dateFormat", REQDATE_dateFormat);
+        let REQDATE2_Date = new Date(REQDATE2_dateFormat);
+        REQDATE2_Date.setHours(0, 0, 0, 0);
+        console.log("REQDATE2_Date", REQDATE_Date);
+
+        if (REQDATE_Date > REQDATE2_Date) {
+            //alert(REQDATE_Date < REQDATE2_Date);
+            if (x === 'rtl')
+                document.getElementById('lbl_pageREQDATE_Err').innerText = 'שים לב: תאריך אספקה מאוחר יותר מתאריך אספקה מבוקש';
+            else
+                document.getElementById('lbl_pageREQDATE_Err').innerText = 'NOTE: Delivery date later than requested delivery date';
+        }
+        else
+            document.getElementById('lbl_pageREQDATE_Err').innerText = '';
+    }
+}
+
+
+function validateOrderLineDetailsOnSubmit() {
+    let selectList = document.getElementById('combo_DELAYREASON');
+    let SUPNAME = document.getElementById('lbl_SUPNAME').innerText;
+    let PARTNAME = document.getElementById('lbl_PARTNAME').innerText;
+    let ORDNAME = document.getElementById('lbl_ORDNAME').innerText;
+    let LINE = document.getElementById('lbl_LINE').innerText;
+    let DELAYREASON = '';
+    let REQDATE = document.getElementById('txt_pageREQDATE').value;
+    let SHR_SUP_REMARKS = document.getElementById('lbl_SHR_SUP_REMARKS').value;
+    let res = 0;
+
+    console.log("SHR_SUP_REMARKS", SUPNAME);
+    console.log("SUPNAME", SUPNAME);
+    console.log("PARTNAME", PARTNAME);
+    console.log("ORDNAME", ORDNAME);
+    console.log("LINE", LINE);
+    console.log("DELAYREASON", DELAYREASON);
+    console.log("DELAYREASON - VALUE", selectList.options[selectList.selectedIndex].value);
+    console.log("REQDATE", REQDATE);
+    console.log("previewsSupplayDate", previewsSupplayDate);
+
+    if (null === REQDATE || REQDATE === '') {
+        if (x === 'rtl') {
+            showErrorMessage('חובה לציין תאריך אספקה');
+        }
+        else
+            showErrorMessage('Supply date is mandatory field');
+
+        setTimeout(function () { showSalesorderDetail(selectedPARTNAME, selectedORD, selectedLINE); }, 5000);
+        return false;
+    }
+
+    if (selectList.options[selectList.selectedIndex].value === '-1')
+        DELAYREASON = document.getElementById("txt_ReasonRejection").value;
+    else
+        DELAYREASON = selectList.options[selectList.selectedIndex].text;
+
+    if (selectList.options[selectList.selectedIndex].value === '-2')
+        DELAYREASON = '';
+
+    if (selectList.options[selectList.selectedIndex].value === '-2' && previewsSupplayDate !== '')
+    {
+        if (REQDATE !== previewsSupplayDate) {
+            if (x === 'rtl')
+                showErrorMessage('בכוונתך לעדכן תאריך אספקה בפעם השנייה - חובה לציין סיבת דחייה');
+            else
+                showErrorMessage('You are about to change supply date again - Please add delay reason');
+
+            return false;
+            //(function () { showSalesorderDetail(selectedPARTNAME, selectedORD, selectedLINE); }, 4000);
+            // false;
+        }
+    }
+    return true;
+}
+function onSubmit_UpdateOrderLineData(e, form) {
     let selectList = document.getElementById('combo_DELAYREASON');
     let SUPNAME = document.getElementById('lbl_SUPNAME').innerText;
     let PARTNAME = document.getElementById('lbl_PARTNAME').innerText;
@@ -1398,39 +1526,41 @@ function onSubmit_UpdateOrderLineData(e) {
     console.log("REQDATE", REQDATE);
     console.log("previewsSupplayDate", previewsSupplayDate);
     
-    if (null === REQDATE || REQDATE === '') {
-        if (x === 'rtl') {
-            showErrorMessage('חובה לציין תאריך אספקה');
-        }
-        else
-            showErrorMessage('Supply date is mandatory field');
+    //if (null === REQDATE || REQDATE === '') {
+    //    if (x === 'rtl') {
+    //        showErrorMessage('חובה לציין תאריך אספקה');
+    //    }
+    //    else
+    //        showErrorMessage('Supply date is mandatory field');
 
-        setTimeout(function () { showSalesorderDetail(selectedPARTNAME, selectedORD, selectedLINE); }, 5000);
-        return;
-    }
+    //    setTimeout(function () { showSalesorderDetail(selectedPARTNAME, selectedORD, selectedLINE); }, 5000);
+    //    return false;
+    //}
 
-    if (selectList.options[selectList.selectedIndex].value === '-1')
-        DELAYREASON = document.getElementById("txt_ReasonRejection").value;
-    else
-        DELAYREASON = selectList.options[selectList.selectedIndex].text;
+    //if (selectList.options[selectList.selectedIndex].value === '-1')
+    //    DELAYREASON = document.getElementById("txt_ReasonRejection").value;
+    //else
+    //    DELAYREASON = selectList.options[selectList.selectedIndex].text;
 
-    if (selectList.options[selectList.selectedIndex].value === '-2')
-        DELAYREASON = '';
+    //if (selectList.options[selectList.selectedIndex].value === '-2')
+    //    DELAYREASON = '';
 
-    if (selectList.options[selectList.selectedIndex].value === '-2' && previewsSupplayDate !== '')
-    {
-        if (REQDATE !== previewsSupplayDate) {
-            if (x === 'rtl')
-                showErrorMessage('בכוונתך לעדכן תאריך אספקה בפעם השנייה - חובה לציין סיבת דחייה');
-            else
-                showErrorMessage('You are about to change supply date again - Please add delay reason');
+    //if (selectList.options[selectList.selectedIndex].value === '-2' && previewsSupplayDate !== '')
+    //{
+    //    if (REQDATE !== previewsSupplayDate) {
+    //        if (x === 'rtl')
+    //            showErrorMessage('בכוונתך לעדכן תאריך אספקה בפעם השנייה - חובה לציין סיבת דחייה');
+    //        else
+    //            showErrorMessage('You are about to change supply date again - Please add delay reason');
 
-            setTimeout(function () { showSalesorderDetail(selectedPARTNAME, selectedORD, selectedLINE); }, 4000);
-            return;
-        }
-        //else
-        //    DELAYREASON = '';
-    }
+
+    //        //(function () { showSalesorderDetail(selectedPARTNAME, selectedORD, selectedLINE); }, 4000);
+    //        // false;
+    //    }
+    //    //else
+    //    //    DELAYREASON = '';
+    //}
+    /****************************************************************************/
     //else
     //    DELAYREASON = '';
 
@@ -1468,7 +1598,7 @@ function onSubmit_UpdateOrderLineData(e) {
     //    setTimeout(function () { showSalesorderDetail(selectedPARTNAME, selectedORD, selectedLINE); }, 4000);
     //else
         refreshOrdersData(SUPNAME);
-    return 1;
+    return true;
 }
 
 function decode(str) {

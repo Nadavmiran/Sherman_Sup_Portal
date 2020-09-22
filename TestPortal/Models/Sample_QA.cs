@@ -31,6 +31,7 @@ namespace TestPortal.Models
         /// </summary>
         public string QADES { get; set; }
         public string SHR_QADES { get; set; }
+        public string EFI_QADES { get; set; }
         /// <summary>
         /// מיקום
         /// </summary>
@@ -71,6 +72,10 @@ namespace TestPortal.Models
         /// תאור כלי מדידה - ספק
         /// </summary>
         public string EFI_MEASURESUPTOOLS { get; set; }
+        /// <summary>
+        ///  אנגלית תאור כלי מדידה
+        /// </summary>
+        public string EFI_EDES { get; set; }
         /// <summary>
         /// תוצאת בדיקה
         /// </summary>

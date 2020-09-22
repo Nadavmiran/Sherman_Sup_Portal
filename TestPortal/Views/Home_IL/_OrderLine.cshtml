@@ -1,0 +1,132 @@
+﻿<div class="card">
+    <div class="col-12">
+        <input type="hidden" id="hdnOrdId" value="" />
+        <input type="hidden" id="hdnPrdId" value="" />
+        <input type="hidden" id="hdnSUPNAME" value="" />
+        <input type="hidden" id="hdnORDNAME" value="" />
+        <input type="hidden" id="hdnIsNewDocument" value="-1" />
+        <div class="card-body">
+            <div class="row">
+                <div class="form-group col-md-2 col-12">
+                    <label class="control-label" style="color:#01416F; font-weight:bolder;">שורה # </label>
+                    <div class="col-sm-12">
+                        <label class="control-label" id="lbl_LINE"></label>
+                    </div>
+                </div>
+                <div class="form-group col-md-2 col-12">
+                    <label class="control-label" style="color:#01416F; font-weight:bolder;">מק"ט </label>
+                    <div class="col-sm-12">
+                        <label class="control-label" id="lbl_PARTNAME"></label>
+                    </div>
+                </div>
+                <div class="form-group col-md-3 col-12">
+                    <label class="control-label" style="color:#01416F; font-weight:bolder;">תאור המוצר</label>
+                    <div class="col-sm-12">
+                        <label class="control-label" id="lbl_PDES"></label>
+                    </div>
+                </div>
+                <div class="form-group col-md-2 col-12">
+                    <label class="control-label" style="color:#01416F; font-weight:bolder;">כמות</label>
+                    <div class="col-sm-12">
+                        <label class="control-label" id="lbl_TQUANT"></label>
+                    </div>
+                </div>
+                <div class="form-group col-md-2 col-12">
+                    <label class="control-label" style="color:#01416F; font-weight:bolder;">נותר לספק</label>
+                    <div class="col-sm-12">
+                        <label class="control-label" id="lbl_TBALANCE"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-2 col-12">
+                    <label class="control-label" style="color:#01416F; font-weight:bolder;">ת. אספקה מבוקש</label>
+                    <div class="col-sm-12">
+                        <label class="control-label" id="lbl_REQDATE2"></label>
+                    </div>
+                </div>
+                <div class="form-group col-md-2 col-12">
+                    <label class="control-label" style="color:#01416F; font-weight:bolder;">ת. אספקה</label>
+                    <div class="col-sm-12 input-container">
+                        <label class="control-label" id="lbl_pageREQDATE" style="display:none;"></label>
+                        <input type="date" class="form-control" id="txt_pageREQDATE" style="display:none;" onchange="compareDates();"/>
+                        <div class="error-msg" id="lbl_pageREQDATE_Err"></div>
+                    </div>
+                </div>
+                <div class="form-group col-md-3 col-12">
+                    <label class="control-label " style="color:#01416F; font-weight:bolder;">פק"ע</label>
+                    <div class="col-sm-12">
+                        <label class="control-label" id="lbl_SERIALNAME"></label>
+                    </div>
+                </div>
+                <div class="form-group col-md-2 col-12">
+                    <label class="control-label" style="color:#01416F; font-weight:bolder;">פעולה</label>
+                    <div class="col-sm-12">
+                        <label class="control-label" id="lbl_ACTNAME"></label>
+                    </div>
+                </div>
+                <div class="form-group col-md-3 col-12">
+                    <label class="control-label" style="color:#01416F; font-weight:bolder;">שרטוט</label>
+                    <div class="col-sm-12">
+                        <label class="control-label" id="lbl_SHR_DRAW"></label>
+                    </div>
+                </div>
+                <div class="form-group col-md-2 col-12">
+                    <label class="control-label" style="color:#01416F; font-weight:bolder;">מק"ט יצרן</label>
+                    <div class="col-sm-12">
+                        <label class="control-label" id="lbl_SUPPARTNAME"></label>
+                    </div>
+                </div>
+                <div class="form-group col-md-2 col-12">
+                    <label class="control-label" style="color:#01416F; font-weight:bolder;">שם יצרן</label>
+                    <div class="col-sm-12">
+                        <label class="control-label" id="lbl_MNFDES"></label>
+                    </div>
+                </div>
+                <div class="form-group col-md-3 col-12">
+                    <label class="control-label" style="color:#01416F; font-weight:bolder;">מהדורת מוצר</label>
+                    <div class="col-sm-12">
+                        <label class="control-label" id="lbl_REVNAME"></label>
+                    </div>
+                </div>
+                <div class="form-group col-md-2 col-12">
+                    <label class="control-label" style="color:#01416F; font-weight:bolder;">מהדורת עץ מוצר</label>
+                    <div class="col-sm-12">
+                        <label class="control-label" id="lbl_SHR_SERIAL_REVNUM"></label>
+                    </div>
+                </div>
+                <div class="form-group col-md-3 col-12">
+                    <label class="control-label" style="color:#01416F; font-weight:bolder;">סיבת דחיה</label>
+                    <div class="col-sm-12">
+                        <select class="form-control" id="combo_DELAYREASON" style="display:none;" onchange="comboDelayReasonOnChange();"></select>
+                        <label class="control-label" id="lbl_DELAYREASON" style="display:none;"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="row" id="div_ReasonRejection">
+                <div class="form-group col-md-12 col-12">
+                    <label class="control-label" style="color:#01416F; font-weight:bolder;">סיבת דחיה (אחר)</label>
+                    <div class="col-sm-12">
+                        <input class="form-control" id="txt_ReasonRejection" maxlength="120" />
+                    </div>
+                </div>
+            </div>
+            <div class="row" id="div_ReasonRejection">
+                <div class="form-group col-md-12 col-12">
+                    <label class="control-label" style="color:#01416F; font-weight:bolder;">הערה</label>
+                    <div class="col-sm-12">
+                        <label class="control-label" id="lbl_REMARK"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-12 col-12">
+                    <label class="control-label" style="color:#01416F; font-weight:bolder;">הערות ספק</label>
+                    <div class="col-sm-12">
+                        <input class="form-control" id="lbl_SHR_SUP_REMARKS" maxlength="120" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

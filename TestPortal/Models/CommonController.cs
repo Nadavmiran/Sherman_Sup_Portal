@@ -58,6 +58,7 @@ namespace TestPortal.Models
             {
                 po.lstOrderAttachments = o.GetOrderAttachments(po.objOrder.ORDNAME);
                 if (null != po.lstOrderAttachments && po.lstOrderAttachments.Count > 0)
+                {
                     if (null != po.lstOrderAttachments[0].EXTFILES_SUBFORM && po.lstOrderAttachments[0].EXTFILES_SUBFORM.Count > 0)
                     {
                         foreach (Attachments item in po.lstOrderAttachments[0].EXTFILES_SUBFORM)
@@ -83,6 +84,15 @@ namespace TestPortal.Models
                             }
                         }
                     }
+                }
+                if ((null != po.objOrder.PORDERSTEXT_SUBFORM) && (po.objOrder.PORDERSTEXT_SUBFORM.Length > 0))
+                {
+                    foreach (PORDERSTEXT item in po.objOrder.PORDERSTEXT_SUBFORM)
+                    {
+                        po.objOrderText += item.TEXT.Replace("Pdir", "P dir").Replace("dir", " dir");
+                        //po.objOrderText += item.TEXT.Replace(" ", "&nbsp;").Replace("Pdir", "P dir").Replace("dir", " dir");
+                    }
+                }
                 if (null != po.objOrder.PORDERITEMS_SUBFORM)
                 {
                     po.lstItemsObject = new List<OrderItems>();
@@ -97,8 +107,10 @@ namespace TestPortal.Models
                 if(!string.IsNullOrEmpty(po.objOrder.TYPECODE))
                 {
                     oi = new OrderType();
-                    oi.UserLanguage = po.User.Language;
-                    po.htmlText = oi.GetOrderTypeText(po.objOrder.TYPECODE);
+                    if (po.User.Language.Equals("English"))
+                        po.htmlText = oi.GetOrderTypeText_EN(po.objOrder.TYPECODE);
+                    else
+                        po.htmlText = oi.GetOrderTypeText(po.objOrder.TYPECODE);
                 }
             }
             return po;
@@ -216,8 +228,19 @@ namespace TestPortal.Models
             if (!string.IsNullOrEmpty(po.objOrder.TYPECODE))
             {
                 OrderType oi = new OrderType();
-                oi.UserLanguage = po.User.Language;
-                po.htmlText = oi.GetOrderTypeText(po.objOrder.TYPECODE);
+                if(po.User.Language.Equals("English"))
+                    po.htmlText = oi.GetOrderTypeText_EN(po.objOrder.TYPECODE);
+                else
+                    po.htmlText = oi.GetOrderTypeText(po.objOrder.TYPECODE);
+            }
+
+            if ((null != po.objOrder.PORDERSTEXT_SUBFORM) && (po.objOrder.PORDERSTEXT_SUBFORM.Length > 0))
+            {
+                foreach (PORDERSTEXT item in po.objOrder.PORDERSTEXT_SUBFORM)
+                {
+                    po.objOrderText += item.TEXT.Replace("Pdir", "P dir").Replace("dir", " dir");
+                    //po.objOrderText += item.TEXT.Replace(" ", "&nbsp;").Replace("Pdir", "P dir").Replace("dir", " dir");
+                }
             }
 
             if ((null != po.objOrder.PORDERITEMS_SUBFORM) && (po.objOrder.PORDERITEMS_SUBFORM.Length > 0))
@@ -292,7 +315,10 @@ namespace TestPortal.Models
             if (!string.IsNullOrEmpty(po.objOrder.TYPECODE))
             {
                 OrderType oi = new OrderType();
-                po.htmlText = oi.GetOrderTypeText(po.objOrder.TYPECODE);
+                if (po.User.Language.Equals("English"))
+                    po.htmlText = oi.GetOrderTypeText_EN(po.objOrder.TYPECODE);
+                else
+                    po.htmlText = oi.GetOrderTypeText(po.objOrder.TYPECODE);
             }
 
             if ((null != po.objOrder.PORDERITEMS_SUBFORM) && (po.objOrder.PORDERITEMS_SUBFORM.Length > 0))
@@ -711,7 +737,7 @@ namespace TestPortal.Models
             {
                 if (string.IsNullOrEmpty(DOCNO))
                 {
-                    ra = s.Createtest(supName, ordName, partName, ow.form, true);
+                    ra = s.Createtest(supName, ordName, partName, ow.form, po.User.FullName, true);
                 }
                 else
                 {
@@ -940,7 +966,8 @@ namespace TestPortal.Models
             if (null != po.lstSampleAttachments && null != po.lstSampleAttachments && po.lstSampleAttachments.Count > 0)
             {
                 foreach (SampleAttachments item in po.lstSampleAttachments)
-                {
+                { 
+                    item.SUFFIX_TEXT = item.SUFFIX;
                     string[] arr = item.EXTFILENAME.Split('\\');
                     if (string.IsNullOrEmpty(arr[arr.Length - 1]))
                     {

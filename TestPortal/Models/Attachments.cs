@@ -15,6 +15,7 @@ namespace TestPortal.Models
         /// שורה
         /// </summary>
         public int SHR_LINE { get; set; }
+        public int EXTFILENUM { get; set; }
         /// <summary>
         /// טקסט נושא למסמך
         /// </summary>
@@ -31,7 +32,10 @@ namespace TestPortal.Models
         /// תג רכש
         /// </summary>
         public string SHR_PURCH_FLAG { get; set; }
-
+        /// <summary>
+        /// מק"ט
+        /// </summary>
+        public string SHR_PARTNAME { get; set; }
         public string FOLDER { get; set; }
         public string FILE_NAME { get; set; }
         #endregion

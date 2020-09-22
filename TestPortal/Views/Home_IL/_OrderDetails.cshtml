@@ -62,7 +62,82 @@
             </div>
         </div>
     </div>
-    <div id="accOrdMsg">
+
+    <div class="col-12 col-sm-12 col-lg-12" id="salesViewTabs">
+        <div class="card">
+            <div class="card-body">
+                <ul class="nav nav-tabs" id="myTab2" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="ordLine-tab2" data-toggle="tab" href="#ordLine" role="tab" aria-controls="ordLine" aria-selected="true">שורת הזמנה</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="ordText-tab2" data-toggle="tab" href="#ordText" role="tab" aria-controls="ordText" aria-selected="false">הערה להזמנה</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="ordCommonText-tab2" data-toggle="tab" href="#ordCommonText" role="tab" aria-controls="ordCommonText" aria-selected="false">הערות הזמנה - כלליות</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="ordFiles-tab2" data-toggle="tab" href="#ordFiles" role="tab" aria-controls="ordFiles" aria-selected="false">קבצים להזמנה</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="ordLineComment-tab2" data-toggle="tab" href="#ordLineComment" role="tab" aria-controls="ordLineComment" aria-selected="false">הערה לשורת הזמנה</a>
+                    </li>
+                </ul>
+                <div class="tab-content tab-bordered" id="myTab3Content">
+                    <div class="tab-pane fade show active" id="ordLine" role="tabpanel" aria-labelledby="ordLine-tab2">
+                        @Html.Partial("_OrderLine")
+                    </div>
+                    <div class="tab-pane fade" id="ordText" role="tabpanel" aria-labelledby="ordText-tab2">
+                        <div class="col-sm-12" id="orderAlert"></div>
+                    </div>
+                    <div class="tab-pane fade" id="ordCommonText" role="tabpanel" aria-labelledby="ordCommonText-tab2">
+                        <div class="col-sm-12" id="ordCommonTextAlert"></div>
+                    </div>
+                    <div class="tab-pane fade" id="ordFiles" role="tabpanel" aria-labelledby="ordFiles-tab2">
+                        <table id="jqGridAttachments"></table>
+                    </div>
+                    <div class="tab-pane fade" id="ordLineComment" role="tabpanel" aria-labelledby="ordLineComment-tab2">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="form-group col-md-12 col-12">
+                                    <div class="col-sm-12" id="orderLineAlert"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-sm-12 col-lg-12" id="ordViewTabs">
+        <div class="card">
+            <div class="card-body">
+                <ul class="nav nav-tabs" id="myTab2" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="ordText-tab4" data-toggle="tab" href="#ordText1" role="tab" aria-controls="ordText1" aria-selected="true">הערה להזמנה</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="ordCommonText-tab4" data-toggle="tab" href="#ordCommonText1" role="tab" aria-controls="ordCommonText1" aria-selected="false">הערות הזמנה - כלליות</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="ordFiles-tab4" data-toggle="tab" href="#ordFiles1" role="tab" aria-controls="ordFiles1" aria-selected="false">קבצים להזמנה</a>
+                    </li>
+                </ul>
+                <div class="tab-content tab-bordered" id="myTab4Content">
+                    <div class="tab-pane fade show active" id="ordText1" role="tabpanel" aria-labelledby="ordText-tab4">
+                        <div class="col-sm-12" id="orderAlert1"></div>
+                    </div>
+                    <div class="tab-pane fade" id="ordCommonText1" role="tabpanel" aria-labelledby="ordCommonText-tab4">
+                        <div class="col-sm-12" id="ordCommonTextAlert1"></div>
+                    </div>
+                    <div class="tab-pane fade" id="ordFiles1" role="tabpanel" aria-labelledby="ordFiles-tab4">
+                        <table id="jqGridAttachments_Ord"></table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*<div id="accOrdMsg">
         <div class="card">
             <div class="col-12">
                 <div class="card-header" id="headingOne">
@@ -75,42 +150,42 @@
                 @*<div class="card-header">
                         <h4><i class="fas fa-exclamation-triangle" style="font-size: 20px;"></i> הערה להזמנה</h4>
                     </div>*@
-                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accOrdMsg">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="form-group col-md-12 col-12">
-                                <div class="col-sm-12" id="orderAlert"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div id="accOrdAttachments">
-        <div class="card">
-            <div class="col-12">
-                <div class="card-header" id="headingAttach">
-                    <h5 class="mb-12">
-                        <span style="color:#34395e;cursor:pointer;" data-toggle="collapse" data-target="#collapseAttach" aria-expanded="true" aria-controls="collapseAttach">
-                            <i class="fas fa-download" style="font-size: 20px;"></i>  קבצים להזמנה
-                        </span>
-                    </h5>
-                </div>
-                <div id="collapseAttach" class="collapse show" aria-labelledby="headingAttach" data-parent="#accOrdAttachments">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="form-group col-md-12 col-12">
-                                <div>
-                                    <table id="jqGridAttachments"></table>
+    @*<div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accOrdMsg">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="form-group col-md-12 col-12">
+                                    <div class="col-sm-12" id="orderAlert"></div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
+        </div>*@
+    @*<div id="accOrdAttachments">
+            <div class="card">
+                <div class="col-12">
+                    <div class="card-header" id="headingAttach">
+                        <h5 class="mb-12">
+                            <span style="color:#34395e;cursor:pointer;" data-toggle="collapse" data-target="#collapseAttach" aria-expanded="true" aria-controls="collapseAttach">
+                                <i class="fas fa-download" style="font-size: 20px;"></i>  קבצים להזמנה
+                            </span>
+                        </h5>
+                    </div>
+                    <div id="collapseAttach" class="collapse show" aria-labelledby="headingAttach" data-parent="#accOrdAttachments">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="form-group col-md-12 col-12">
+                                    <div>
+                                        <table id="jqGridAttachments"></table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>*@
 </div>
 <script>
     $(document).ready(function () {

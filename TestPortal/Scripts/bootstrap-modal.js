@@ -250,13 +250,13 @@ $("#modal-10").fireModal({
 });
 
 $("#modal-11").fireModal({
-    title: 'פרטי שורת הזמנה',
+    title: '',//'פרטי שורת הזמנה',
     body: $("#modal-order-part"),
     footerClass: 'bg-whitesmoke',
     autoFocus: true,
     onFormSubmit: function (modal, e, form) {
         // Form Data
-        onSubmit_UpdateOrderLineData();
+        onSubmit_UpdateOrderLineData(e, form);
         //onSubmitCreateSampleList(e);
         let fake_ajax = setTimeout(function () {
             form.stopProgress();
@@ -265,7 +265,7 @@ $("#modal-11").fireModal({
             clearInterval(fake_ajax);
         }, 1500);
 
-        e.preventDefault();
+        event.preventDefault();
     },
     shown: function (modal, form) {
         console.log(form);
@@ -276,13 +276,17 @@ $("#modal-11").fireModal({
             submit: true,
             class: 'btn btn-primary btn-shadow',
             handler: function (modal) {
+                if (!validateOrderLineDetailsOnSubmit()) {
+                    form.stopProgress();
+                    event.preventDefault();
+                }
             }
         }
     ]
 });
 
 $("#modal-12").fireModal({
-    title: 'Order Line',
+    title: '',//'Order Line',
     body: $("#modal-order-part"),
     footerClass: 'bg-whitesmoke',
     autoFocus: true,
@@ -297,7 +301,7 @@ $("#modal-12").fireModal({
             clearInterval(fake_ajax);
         }, 1500);
 
-        e.preventDefault();
+        event.preventDefault();
     },
     shown: function (modal, form) {
         console.log(form);

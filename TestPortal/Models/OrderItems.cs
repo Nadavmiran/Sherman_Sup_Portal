@@ -112,6 +112,10 @@ namespace TestPortal.Models
         /// </summary>
         public string ACTNAME { get; set; }
         /// <summary>
+        /// תאור פעולה
+        /// </summary>
+        public string ACTDES { get; set; }
+        /// <summary>
         /// מק"ט ספק/יצרן
         /// </summary>
         public string SUPPARTNAME { get; set; }

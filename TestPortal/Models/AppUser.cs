@@ -22,7 +22,7 @@ namespace TestPortal.Models
         public string Language { get; set; }
         public string Supplier_ID { get; set; }
         public string SupplierName { get; set; }
-
+        public string USERLOGIN { get; set; }
         public int PHONE { get; set; }
         public string NAME { get; set; }
         public string ENAME { get; set; }
@@ -49,6 +49,7 @@ namespace TestPortal.Models
                 {
                     ENAME = ow.Value[0].ENAME;
                     FullName = ow.Value[0].NAME;
+                    USERLOGIN = ow.Value[0].USERLOGIN;
                     SupplierName = ow.Value[0].SUPDES;
                     Supplier_ID = ow.Value[0].SUPNAME;
                     PRIORITY_ID = ow.Value[0].PHONE;

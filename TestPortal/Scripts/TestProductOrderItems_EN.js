@@ -54,8 +54,8 @@ function showGridProdSamples(grid_data) {
             { label: 'Result - Min', name: 'RESULTMIN', align: 'center', hidden: true, width: 80 },
             { label: 'Result - Max', name: 'RESULTMAX', align: 'center', hidden: true, width: 80 },/*formatter: formatGetRevListLink,*/ 
             { label: 'Requird Result', name: 'REQUIRED_RESULT', align: 'center', hidden: true, width: 80 },
-            { label: 'EFI_MEASURESUPTOOLS', name: 'EFI_MEASURESUPTOOLS', align: 'center', hidden: true, width: 200 },
-            { label: 'Measure Tool', name: 'MEASUREDES', align: 'center', hidden: true, width: 200 },
+            { label: 'EFI_MEASURESUPTOOLS', name: 'EFI_EDES', align: 'center', hidden: true, width: 200 },
+            { label: 'Measure Tool', name: 'EFI_EDES', align: 'center', hidden: true, width: 200 },
             { label: 'EFI_CRITICALFLAG', name: 'EFI_CRITICALFLAG', align: 'center', hidden: true, width: 200 },
             { label: 'QA', name: 'QA', align: 'center', key: false, hidden: true, width: 75 },
             { label: 'DOCNO', name: 'DOCNO', align: 'center', key: false, hidden: true, width: 75 },
@@ -63,7 +63,7 @@ function showGridProdSamples(grid_data) {
             { label: 'PARTNAME', name: 'PARTNAME', align: 'center', key: false, hidden: true, width: 75 },
             { label: 'Code', name: 'QACODE', align: 'center', key: true, hidden: false, width: 80 },
             { label: 'Location', name: 'LOCATION', align: 'center', hidden: false, width: 140 },
-            { label: 'Sample', name: 'SHR_QADES', align: 'center', hidden: false, width: 200 },
+            { label: 'Sample', name: 'EFI_QADES', align: 'left', hidden: false, width: 200 },//SHR_QADES
             { label: 'Repitition', name: 'REPETITION', align: 'center', width: 120 },
             { label: 'Resultant', name: 'RESULTANT', align: 'center', width: 120 }, 
             { label: 'Sample Qnt.', name: 'SAMPQUANT', align: 'center', width: 120 },
@@ -185,9 +185,9 @@ function showGridProdTests(grid_data) {
 
 }
 
-function showGridProdAttachments(grid_data) {
+function showGridProdAttachments(grid_data, tblName) {
     console.log("showGridProdAttachments ==> grid_data", grid_data);
-    $("#jqGridAttachments").jqGrid({
+    $(tblName).jqGrid({
         guiStyle: "bootstrap",
         iconSet: "fontAwesome",
         datatype: "local",
@@ -196,8 +196,9 @@ function showGridProdAttachments(grid_data) {
             { label: 'Purchase tag', name: 'SHR_PURCH_FLAG', align: 'center', width: 200, hidden: true },
             { label: 'Folder', name: 'FOLDER', align: 'center', hidden: true, width: 200 },
             { label: 'File name', name: 'FILE_NAME', align: 'center', hidden: true, width: 200 },
-            { label: '#', name: 'SHR_LINE', align: 'center', key: true, hidden: false, width: 75 },
+            { label: '#', name: 'EXTFILENUM', align: 'center', key: true, hidden: false, width: 75 },//SHR_LINE
             { label: 'Subject', name: 'SHR_EXTFILEDESTEXT', align: 'center', hidden: false, width: 200 },
+            { label: 'Serial No.', name: 'SHR_PARTNAME', align: 'center', hidden: false, width: 200 },
             { label: 'File type', name: 'SUFFIX', align: 'center', width: 200, formatter: formatFileIcon }
         ],
         viewrecords: true,
@@ -229,6 +230,7 @@ function showGridSampleAttachments(grid_data) {
             { label: 'Folder', name: 'FOLDER', align: 'center', hidden: true, width: 200 },
             { label: '#', name: 'EXTFILENUM', align: 'center', key: true, hidden: false, width: 75 },
             { label: 'File name', name: 'EXTFILEDES', align: 'center', hidden: false, width: 200 },
+            { label: 'Sufix - Text', name: 'SUFFIX_TEXT', align: 'center', hidden: true, width: 200 },
             //{ label: 'נושא', name: 'SHR_EXTFILEDESTEXT', align: 'center', hidden: false, width: 200 },
             { label: 'Sufix', name: 'SUFFIX', align: 'center', width: 200, formatter: formatFileIcon }
         ],
@@ -245,7 +247,7 @@ function showGridSampleAttachments(grid_data) {
         onSelectRow: function (id, rowId, iCol, content, event) {
             var rowData = $(this).getRowData(id);
             console.log('showGridProdAttachments ==> rowData ', rowData);
-            downloadFile(rowData.FOLDER, rowData.EXTFILEDES + '.' + rowData.SUFFIX);
+            downloadFile(rowData.FOLDER, rowData.EXTFILEDES + '.' + rowData.SUFFIX_TEXT);
         }
     });
 }
@@ -274,7 +276,7 @@ function showGridTestList(grid_data) {
             { label: 'SUPNAME', name: 'SUPNAME', align: 'center', key: false, hidden: true, width: 75 },
             { label: 'PARTNAME', name: 'PARTNAME', align: 'center', key: false, hidden: true, width: 75 },
             { label: 'Test code', name: 'QACODE', key: true, hidden: false, width: 85 },
-            { label: 'Description', name: 'SHR_QADES', align: 'right', hidden: false, width: 250 },
+            { label: 'Description', name: 'SHR_QADES', align: 'left', hidden: false, width: 250 },//SHR_QADES
             { label: 'Result Min.', name: 'RESULTMIN', align: 'center', editable: true, hidden: false, width: 80 },
             { label: 'Result Max.', name: 'RESULTMAX', align: 'center', editable: true, hidden: false, width: 80 },/*formatter: formatGetRevListLink,*/
             { label: 'Repitition', name: 'REPETITION', align: 'center', editable: true, width: 50 },
@@ -334,7 +336,7 @@ function showSelectedSampleQA(grid_data) {
             { label: 'SUPNAME', name: 'SUPNAME', align: 'center', key: false, hidden: true, width: 75 },
             { label: 'PARTNAME', name: 'PARTNAME', align: 'center', key: false, hidden: true, width: 75 },
             { label: 'Test code', name: 'QACODE', align: 'center', key: true, hidden: false, width: 85 },
-            { label: 'Description', name: 'SHR_QADES', align: 'right', hidden: false, width: 250 },
+            { label: 'Description', name: 'SHR_QADES', align: 'left', hidden: false, width: 250 },//SHR_QADES
             { label: 'Result Min.', name: 'RESULTMIN', align: 'center', hidden: false, width: 80 },
             { label: 'Result Max.', name: 'RESULTMAX', align: 'center', hidden: false, width: 80 },/*formatter: formatGetRevListLink,*/
             { label: 'Repitition', name: 'REPETITION', align: 'center', width: 50 },
@@ -420,7 +422,7 @@ function showGridSampleList(grid_data) {
             { label: 'SUPNAME', name: 'SUPNAME', align: 'center', key: false, hidden: true, width: 75 },
             { label: 'PARTNAME', name: 'PARTNAME', align: 'center', key: false, hidden: true, width: 75 },
             { label: 'Test code', name: 'QACODE', key: true, hidden: false, width: 85 },
-            { label: 'Description', name: 'SHR_QADES', align: 'right', hidden: false, width: 250 },
+            { label: 'Description', name: 'SHR_QADES', align: 'left', hidden: false, width: 250 },//SHR_QADES
             { label: 'Result Min.', name: 'RESULTMIN', align: 'center', editable: true, hidden: false, width: 80 },
             { label: 'Result Max.', name: 'RESULTMAX', align: 'center', editable: true, hidden: false, width: 80 },/*formatter: formatGetRevListLink,*/
             { label: 'Repitition', name: 'REPETITION', align: 'center', editable: true, width: 50 },

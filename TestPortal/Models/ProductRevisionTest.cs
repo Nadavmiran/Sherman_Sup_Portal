@@ -19,6 +19,10 @@ namespace TestPortal.Models
         /// </summary>
         public string QADES { get; set; }
         /// <summary>
+        /// תאור בדיקה באנגלית
+        /// </summary>
+        public string EFI_QADES { get; set; }
+        /// <summary>
         /// בדיקה - טקסט
         /// </summary>
         public string SHR_TEST { get; set; }
