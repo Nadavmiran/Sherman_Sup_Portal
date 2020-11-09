@@ -181,6 +181,11 @@ function showSalesorderDetail(PARTNAME, ORD, LINE) {
         cache: false,
         success: function (data) {
             console.log("showSalesorderDetail ==> data", data);
+            if (null == data.objOrder.PORDERITEMS_SUBFORM || data.objOrder.PORDERITEMS_SUBFORM.length == 0 ) {
+                $("#loader").hide();
+                showErrorMessage(data.ErrorDescription);
+                return;
+            }
             showOrderDetail(data.objOrder);
             //Show order comments
             document.getElementById('orderAlert').innerHTML = null === data.htmlText ? '' : data.htmlText;
@@ -1230,13 +1235,17 @@ function onSubmit_TestForm(e) {
             processData: false,
             success: function (response) {
                 console.log("UploadFiles - response", response);
-                if (null !== response && null !== response.ResultData) {
-                    if (response.ResultStatus === 'OK')
-                        return;
-
+                if (null !== response)
+                {
+                    if (null !== response.ResultData)
+                    {
+                        if (response.ResultStatus === 'OK')
+                            return;
+                    }
                     if (response.ErrorDescription !== '') {
-                        $("#modal-error-text").html(response.ErrorDescription);
-                        $("#modal-1").trigger("click");
+                        //$("#modal-error-text").html(response.ErrorDescription);
+                        //$("#modal-1").trigger("click");
+                        showErrorMessage(response.ErrorDescription);
                     }
                 }
             }

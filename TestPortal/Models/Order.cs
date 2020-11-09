@@ -112,7 +112,11 @@ namespace TestPortal.Models
             //"/PORDERS?$filter=ORD eq " + orderID + "&$expand=EXTFILES_SUBFORM,PORDERITEMS_SUBFORM($expand=PORDERITEMSTEXT_SUBFORM)";
             string query = "/PORDERS?$filter=ORD eq " + orderID + "&$select=EFI_ETYPEDES, EFI_ESTATDES, CURVERSION, TYPECODE, TYPEDES, ORDNAME,STATDES,CURDATE,ORD,CODEDES,SUPNAME,CDES,SHR_SUPTYPEDES,OWNERLOGIN&$expand=PORDERITEMS_SUBFORM($filter=CLOSEDBOOL ne 'Y';$expand=PORDERITEMSTEXT_SUBFORM),PORDERSTEXT_SUBFORM";
             string res = Call_Get(query);
-
+            if (null == res)
+            {
+                AppLogger.log.Info("GetOrderDetails ERROR ==> query = " + query);
+                return null;
+            }
             OrdersWarpper ow = JsonConvert.DeserializeObject<OrdersWarpper>(res);
             return ow.Value[0];
         }
@@ -131,6 +135,11 @@ namespace TestPortal.Models
             string query = "/PORDERS?$filter=ORDNAME eq '" + ORDNAME + "'&$select=ORDNAME&$expand=EXTFILES_SUBFORM&($filter=SHR_PURCH_FLAG eq 'Y')";
             string res = Call_Get(query);
 
+            if (null == res)
+            {
+                AppLogger.log.Info("GetOrderAttachments ERROR ==> query = " + query);
+                return null;
+            }
             AttachmentWarpper ow = JsonConvert.DeserializeObject<AttachmentWarpper>(res);
             return ow.Value;
         }
@@ -139,6 +148,12 @@ namespace TestPortal.Models
         {
             string query = "/PORDERS?$filter=ORD eq  " + orderID + "&$select=EFI_ETYPEDES, EFI_ESTATDES,CURVERSION, TYPECODE, TYPEDES, ORDNAME,STATDES,CURDATE,ORD,CODEDES,SUPNAME,CDES,SHR_SUPTYPEDES,OWNERLOGIN&$expand=EXTFILES_SUBFORM($filter=SHR_PARTNAME eq '" + prodName + "'),PORDERITEMS_SUBFORM($filter=PARTNAME eq '" + prodName + "' and LINE eq " + ordLine + ";$expand=PORDERITEMSTEXT_SUBFORM),PORDERSTEXT_SUBFORM";
             string res = Call_Get(query);
+
+            if (null == res)
+            {
+                AppLogger.log.Info("GetOrderProductDetailsByLine ERROR ==> query = " + query);
+                return null;
+            }
 
             OrdersWarpper ow = JsonConvert.DeserializeObject<OrdersWarpper>(res);
             return ow.Value[0];

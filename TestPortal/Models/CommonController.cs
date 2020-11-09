@@ -195,7 +195,15 @@ namespace TestPortal.Models
             o.UserLanguage = po.User.Language;
             d.UserLanguage = po.User.Language;
             s.UserLanguage = po.User.Language;
+            string tmpProdName = prodName;
+            prodName = prodName.Replace("#", "");
+            
             po.objOrder = o.GetOrderProductDetailsByLine(orderID, prodName, ordLine);
+            if (null == po.objOrder || null == po.objOrder.PORDERITEMS_SUBFORM || po.objOrder.PORDERITEMS_SUBFORM.Length == 0)
+            {
+                po.ErrorDescription = "Bed request ==> PART NAME was not found => PARTNAME = " + tmpProdName;
+                return Json(po);
+            }
             po.lstDelayReason = d.GetDelayReasons();
             po.lstOrderAttachments = o.GetOrderAttachments(po.objOrder.ORDNAME);
 

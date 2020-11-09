@@ -1045,3 +1045,127 @@ DEBUG 2020-09-22 09:28:15,775   172ms eporting Portal Logger TestDateFormat     
 DEBUG 2020-09-22 09:30:01,593 105991ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 22/09/2020 9:30:01
 DEBUG 2020-09-22 09:32:12,703   311ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 22/09/2020 9:32:12
 DEBUG 2020-09-22 09:39:12,795 420403ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 22/09/2020 9:39:12
+DEBUG 2020-11-02 14:04:10,351   453ms eporting Portal Logger CreateResultApi    - FunctionName = CreateResultApiExceptionMsg = Object reference not set to an instance of an object.
+DEBUG 2020-11-02 16:51:52,788   224ms eporting Portal Logger CreateResultApi    - FunctionName = CreateResultApiExceptionMsg = '"' is an unexpected token. Expecting white space. Line 1, position 50.
+DEBUG 2020-11-08 15:11:27,998   220ms eporting Portal Logger CreateResultApi    - FunctionName = CreateResultApi => Response XMLExceptionMsg = <FORM
+  TYPE="MED_SAMPLE">
+  <InterfaceErrors>
+    <text>??? ????? ????? ?????? ?????? '??????'.</text>
+  </InterfaceErrors>
+</FORM>
+INFO  2020-11-08 15:11:30,667  2889ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001527",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":3,
+	"QACODE":"003",
+	"LOCATION":"0",
+	"RESULT":1,
+	"EFI_MEASURESUPTOOLS":"",
+	"REMARK":"",
+	"EFI_CRITICALFLAG":"N"
+	}
+	]}
+INFO  2020-11-08 15:14:55,011 207233ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001527",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":3,
+	"QACODE":"003",
+	"LOCATION":"0",
+	"RESULT":1,
+	"EFI_MEASURESUPTOOLS":"",
+	"REMARK":"",
+	"EFI_CRITICALFLAG":"N"
+	}
+	]}
+DEBUG 2020-11-08 15:16:42,972 315194ms eporting Portal Logger CreateResultApi    - FunctionName = CreateResultApi => Response XMLExceptionMsg = <FORM
+  TYPE="MED_SAMPLE">
+  <InterfaceErrors>
+    <text>??? ????? ????? ?????? ?????? '??????'.</text>
+  </InterfaceErrors>
+</FORM>
+INFO  2020-11-08 15:17:08,535 340757ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001527",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":3,
+	"QACODE":"003",
+	"LOCATION":"0",
+	"RESULT":1,
+	"EFI_MEASURESUPTOOLS":"",
+	"REMARK":"",
+	"EFI_CRITICALFLAG":"N"
+	}
+	]}
+DEBUG 2020-11-08 15:20:03,965 516187ms eporting Portal Logger CreateResultApi    - FunctionName = CreateResultApi => Response XMLExceptionMsg = <FORM
+  TYPE="MED_SAMPLE">
+  <InterfaceErrors>
+    <text>??? ????? ????? ?????? ?????? '??????'.</text>
+  </InterfaceErrors>
+</FORM>
+INFO  2020-11-08 15:20:04,963 517185ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001527",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":3,
+	"QACODE":"003",
+	"LOCATION":"0",
+	"RESULT":1,
+	"EFI_MEASURESUPTOOLS":"",
+	"REMARK":"",
+	"EFI_CRITICALFLAG":"N"
+	}
+	]}
+DEBUG 2020-11-08 15:21:25,368 597590ms eporting Portal Logger CreateResultApi    - FunctionName = CreateResultApi => Response XMLExceptionMsg = <FORM
+  TYPE="MED_SAMPLE">
+  <InterfaceErrors>
+    <text>??? ????? ????? ?????? ?????? '??????'.</text>
+  </InterfaceErrors>
+</FORM>
+INFO  2020-11-08 15:21:25,403 597625ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001527",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":3,
+	"QACODE":"003",
+	"LOCATION":"0",
+	"RESULT":1,
+	"EFI_MEASURESUPTOOLS":"",
+	"REMARK":"",
+	"EFI_CRITICALFLAG":"N"
+	}
+	]}
+DEBUG 2020-11-08 15:23:24,270 716492ms eporting Portal Logger CreateResultApi    - FunctionName = CreateResultApi => Response XMLExceptionMsg = <FORM
+  TYPE="MED_SAMPLE">
+  <InterfaceErrors>
+    <text>??? ????? ????? ?????? ?????? '??????'.</text>
+  </InterfaceErrors>
+</FORM>
+INFO  2020-11-08 15:23:24,375 716597ms eporting Portal Logger reateUpdateTestMsg - CreateUpdateTestMsg ==> msg = {
+	"DOCNO":"C2000001527",
+	"PARTNAME":"23559000",
+	"SUPNAME":"20523",
+	"MED_TRANSSAMPLEQA_SUBFORM": [
+	{
+	"QA":3,
+	"QACODE":"003",
+	"LOCATION":"0",
+	"RESULT":1,
+	"EFI_MEASURESUPTOOLS":"",
+	"REMARK":"",
+	"EFI_CRITICALFLAG":"N"
+	}
+	]}
+INFO  2020-11-09 13:31:56,167   220ms eporting Portal Logger oductDetailsByLine - GetOrderProductDetailsByLine ERROR ==> query = /PORDERS?$filter=ORD eq  126021&$select=EFI_ETYPEDES, EFI_ESTATDES,CURVERSION, TYPECODE, TYPEDES, ORDNAME,STATDES,CURDATE,ORD,CODEDES,SUPNAME,CDES,SHR_SUPTYPEDES,OWNERLOGIN&$expand=EXTFILES_SUBFORM($filter=SHR_PARTNAME eq 'FNCLA-V25-D32-L29#'),PORDERITEMS_SUBFORM($filter=PARTNAME eq 'FNCLA-V25-D32-L29#' and LINE eq 1;$expand=PORDERITEMSTEXT_SUBFORM),PORDERSTEXT_SUBFORM
+INFO  2020-11-09 13:32:44,184 48236ms eporting Portal Logger oductDetailsByLine - GetOrderProductDetailsByLine ERROR ==> query = /PORDERS?$filter=ORD eq  126021&$select=EFI_ETYPEDES, EFI_ESTATDES,CURVERSION, TYPECODE, TYPEDES, ORDNAME,STATDES,CURDATE,ORD,CODEDES,SUPNAME,CDES,SHR_SUPTYPEDES,OWNERLOGIN&$expand=EXTFILES_SUBFORM($filter=SHR_PARTNAME eq 'FNCLA-V25-D32-L29#'),PORDERITEMS_SUBFORM($filter=PARTNAME eq 'FNCLA-V25-D32-L29#' and LINE eq 1;$expand=PORDERITEMSTEXT_SUBFORM),PORDERSTEXT_SUBFORM

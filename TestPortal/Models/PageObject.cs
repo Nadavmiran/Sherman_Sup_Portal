@@ -29,5 +29,6 @@ namespace TestPortal.Models
         public AppUser User { get; set; }
         public string htmlText { get; set; }
         public string apiResultMessage { get; set; }
+        public string ErrorDescription { get; set; }
     }
 }
