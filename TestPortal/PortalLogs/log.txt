@@ -1169,3 +1169,328 @@ INFO  2020-11-08 15:23:24,375 716597ms eporting Portal Logger reateUpdateTestMsg
 	]}
 INFO  2020-11-09 13:31:56,167   220ms eporting Portal Logger oductDetailsByLine - GetOrderProductDetailsByLine ERROR ==> query = /PORDERS?$filter=ORD eq  126021&$select=EFI_ETYPEDES, EFI_ESTATDES,CURVERSION, TYPECODE, TYPEDES, ORDNAME,STATDES,CURDATE,ORD,CODEDES,SUPNAME,CDES,SHR_SUPTYPEDES,OWNERLOGIN&$expand=EXTFILES_SUBFORM($filter=SHR_PARTNAME eq 'FNCLA-V25-D32-L29#'),PORDERITEMS_SUBFORM($filter=PARTNAME eq 'FNCLA-V25-D32-L29#' and LINE eq 1;$expand=PORDERITEMSTEXT_SUBFORM),PORDERSTEXT_SUBFORM
 INFO  2020-11-09 13:32:44,184 48236ms eporting Portal Logger oductDetailsByLine - GetOrderProductDetailsByLine ERROR ==> query = /PORDERS?$filter=ORD eq  126021&$select=EFI_ETYPEDES, EFI_ESTATDES,CURVERSION, TYPECODE, TYPEDES, ORDNAME,STATDES,CURDATE,ORD,CODEDES,SUPNAME,CDES,SHR_SUPTYPEDES,OWNERLOGIN&$expand=EXTFILES_SUBFORM($filter=SHR_PARTNAME eq 'FNCLA-V25-D32-L29#'),PORDERITEMS_SUBFORM($filter=PARTNAME eq 'FNCLA-V25-D32-L29#' and LINE eq 1;$expand=PORDERITEMSTEXT_SUBFORM),PORDERSTEXT_SUBFORM
+DEBUG 2020-11-11 15:23:11,921   364ms eporting Portal Logger CreateResultApi    - FunctionName = CreateResultApi => Response XMLExceptionMsg = <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+<title>401 - Unauthorized: Access is denied due to invalid credentials.</title>
+<style type="text/css">
+<!--
+body{margin:0;font-size:.7em;font-family:Verdana, Arial, Helvetica, sans-serif;background:#EEEEEE;}
+fieldset{padding:0 15px 10px 15px;} 
+h1{font-size:2.4em;margin:0;color:#FFF;}
+h2{font-size:1.7em;margin:0;color:#CC0000;} 
+h3{font-size:1.2em;margin:10px 0 0 0;color:#000000;} 
+#header{width:96%;margin:0 0 0 0;padding:6px 2% 6px 2%;font-family:"trebuchet MS", Verdana, sans-serif;color:#FFF;
+background-color:#555555;}
+#content{margin:0 0 0 2%;position:relative;}
+.content-container{background:#FFF;width:96%;margin-top:8px;padding:10px;position:relative;}
+-->
+</style>
+</head>
+<body>
+<div id="header"><h1>Server Error</h1></div>
+<div id="content">
+ <div class="content-container"><fieldset>
+  <h2>401 - Unauthorized: Access is denied due to invalid credentials.</h2>
+  <h3>You do not have permission to view this directory or page using the credentials that you supplied.</h3>
+ </fieldset></div>
+</div>
+</body>
+</html>
+
+DEBUG 2020-11-16 09:14:31,035   423ms eporting Portal Logger CreateResultApi    - FunctionName = CreateResultApi => Response XMLExceptionMsg = <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+<title>401 - Unauthorized: Access is denied due to invalid credentials.</title>
+<style type="text/css">
+<!--
+body{margin:0;font-size:.7em;font-family:Verdana, Arial, Helvetica, sans-serif;background:#EEEEEE;}
+fieldset{padding:0 15px 10px 15px;} 
+h1{font-size:2.4em;margin:0;color:#FFF;}
+h2{font-size:1.7em;margin:0;color:#CC0000;} 
+h3{font-size:1.2em;margin:10px 0 0 0;color:#000000;} 
+#header{width:96%;margin:0 0 0 0;padding:6px 2% 6px 2%;font-family:"trebuchet MS", Verdana, sans-serif;color:#FFF;
+background-color:#555555;}
+#content{margin:0 0 0 2%;position:relative;}
+.content-container{background:#FFF;width:96%;margin-top:8px;padding:10px;position:relative;}
+-->
+</style>
+</head>
+<body>
+<div id="header"><h1>Server Error</h1></div>
+<div id="content">
+ <div class="content-container"><fieldset>
+  <h2>401 - Unauthorized: Access is denied due to invalid credentials.</h2>
+  <h3>You do not have permission to view this directory or page using the credentials that you supplied.</h3>
+ </fieldset></div>
+</div>
+</body>
+</html>
+
+DEBUG 2020-11-16 09:17:50,705 200094ms eporting Portal Logger CreateResultApi    - FunctionName = CreateResultApi => Response XMLExceptionMsg = <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+<title>401 - Unauthorized: Access is denied due to invalid credentials.</title>
+<style type="text/css">
+<!--
+body{margin:0;font-size:.7em;font-family:Verdana, Arial, Helvetica, sans-serif;background:#EEEEEE;}
+fieldset{padding:0 15px 10px 15px;} 
+h1{font-size:2.4em;margin:0;color:#FFF;}
+h2{font-size:1.7em;margin:0;color:#CC0000;} 
+h3{font-size:1.2em;margin:10px 0 0 0;color:#000000;} 
+#header{width:96%;margin:0 0 0 0;padding:6px 2% 6px 2%;font-family:"trebuchet MS", Verdana, sans-serif;color:#FFF;
+background-color:#555555;}
+#content{margin:0 0 0 2%;position:relative;}
+.content-container{background:#FFF;width:96%;margin-top:8px;padding:10px;position:relative;}
+-->
+</style>
+</head>
+<body>
+<div id="header"><h1>Server Error</h1></div>
+<div id="content">
+ <div class="content-container"><fieldset>
+  <h2>401 - Unauthorized: Access is denied due to invalid credentials.</h2>
+  <h3>You do not have permission to view this directory or page using the credentials that you supplied.</h3>
+ </fieldset></div>
+</div>
+</body>
+</html>
+
+DEBUG 2020-11-16 09:25:56,459 685848ms eporting Portal Logger CreateResultApi    - FunctionName = CreateResultApi => Response XMLExceptionMsg = <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+<title>401 - Unauthorized: Access is denied due to invalid credentials.</title>
+<style type="text/css">
+<!--
+body{margin:0;font-size:.7em;font-family:Verdana, Arial, Helvetica, sans-serif;background:#EEEEEE;}
+fieldset{padding:0 15px 10px 15px;} 
+h1{font-size:2.4em;margin:0;color:#FFF;}
+h2{font-size:1.7em;margin:0;color:#CC0000;} 
+h3{font-size:1.2em;margin:10px 0 0 0;color:#000000;} 
+#header{width:96%;margin:0 0 0 0;padding:6px 2% 6px 2%;font-family:"trebuchet MS", Verdana, sans-serif;color:#FFF;
+background-color:#555555;}
+#content{margin:0 0 0 2%;position:relative;}
+.content-container{background:#FFF;width:96%;margin-top:8px;padding:10px;position:relative;}
+-->
+</style>
+</head>
+<body>
+<div id="header"><h1>Server Error</h1></div>
+<div id="content">
+ <div class="content-container"><fieldset>
+  <h2>401 - Unauthorized: Access is denied due to invalid credentials.</h2>
+  <h3>You do not have permission to view this directory or page using the credentials that you supplied.</h3>
+ </fieldset></div>
+</div>
+</body>
+</html>
+
+DEBUG 2020-11-16 09:26:43,064 732452ms eporting Portal Logger CreateResultApi    - FunctionName = CreateResultApi => Response XMLExceptionMsg = <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+<title>401 - Unauthorized: Access is denied due to invalid credentials.</title>
+<style type="text/css">
+<!--
+body{margin:0;font-size:.7em;font-family:Verdana, Arial, Helvetica, sans-serif;background:#EEEEEE;}
+fieldset{padding:0 15px 10px 15px;} 
+h1{font-size:2.4em;margin:0;color:#FFF;}
+h2{font-size:1.7em;margin:0;color:#CC0000;} 
+h3{font-size:1.2em;margin:10px 0 0 0;color:#000000;} 
+#header{width:96%;margin:0 0 0 0;padding:6px 2% 6px 2%;font-family:"trebuchet MS", Verdana, sans-serif;color:#FFF;
+background-color:#555555;}
+#content{margin:0 0 0 2%;position:relative;}
+.content-container{background:#FFF;width:96%;margin-top:8px;padding:10px;position:relative;}
+-->
+</style>
+</head>
+<body>
+<div id="header"><h1>Server Error</h1></div>
+<div id="content">
+ <div class="content-container"><fieldset>
+  <h2>401 - Unauthorized: Access is denied due to invalid credentials.</h2>
+  <h3>You do not have permission to view this directory or page using the credentials that you supplied.</h3>
+ </fieldset></div>
+</div>
+</body>
+</html>
+
+DEBUG 2020-11-16 09:27:28,249 777638ms eporting Portal Logger CreateResultApi    - FunctionName = CreateResultApi => Response XMLExceptionMsg = <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+<title>401 - Unauthorized: Access is denied due to invalid credentials.</title>
+<style type="text/css">
+<!--
+body{margin:0;font-size:.7em;font-family:Verdana, Arial, Helvetica, sans-serif;background:#EEEEEE;}
+fieldset{padding:0 15px 10px 15px;} 
+h1{font-size:2.4em;margin:0;color:#FFF;}
+h2{font-size:1.7em;margin:0;color:#CC0000;} 
+h3{font-size:1.2em;margin:10px 0 0 0;color:#000000;} 
+#header{width:96%;margin:0 0 0 0;padding:6px 2% 6px 2%;font-family:"trebuchet MS", Verdana, sans-serif;color:#FFF;
+background-color:#555555;}
+#content{margin:0 0 0 2%;position:relative;}
+.content-container{background:#FFF;width:96%;margin-top:8px;padding:10px;position:relative;}
+-->
+</style>
+</head>
+<body>
+<div id="header"><h1>Server Error</h1></div>
+<div id="content">
+ <div class="content-container"><fieldset>
+  <h2>401 - Unauthorized: Access is denied due to invalid credentials.</h2>
+  <h3>You do not have permission to view this directory or page using the credentials that you supplied.</h3>
+ </fieldset></div>
+</div>
+</body>
+</html>
+
+DEBUG 2020-11-16 09:28:54,553 863941ms eporting Portal Logger CreateResultApi    - FunctionName = CreateResultApi => Response XMLExceptionMsg = <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+<title>401 - Unauthorized: Access is denied due to invalid credentials.</title>
+<style type="text/css">
+<!--
+body{margin:0;font-size:.7em;font-family:Verdana, Arial, Helvetica, sans-serif;background:#EEEEEE;}
+fieldset{padding:0 15px 10px 15px;} 
+h1{font-size:2.4em;margin:0;color:#FFF;}
+h2{font-size:1.7em;margin:0;color:#CC0000;} 
+h3{font-size:1.2em;margin:10px 0 0 0;color:#000000;} 
+#header{width:96%;margin:0 0 0 0;padding:6px 2% 6px 2%;font-family:"trebuchet MS", Verdana, sans-serif;color:#FFF;
+background-color:#555555;}
+#content{margin:0 0 0 2%;position:relative;}
+.content-container{background:#FFF;width:96%;margin-top:8px;padding:10px;position:relative;}
+-->
+</style>
+</head>
+<body>
+<div id="header"><h1>Server Error</h1></div>
+<div id="content">
+ <div class="content-container"><fieldset>
+  <h2>401 - Unauthorized: Access is denied due to invalid credentials.</h2>
+  <h3>You do not have permission to view this directory or page using the credentials that you supplied.</h3>
+ </fieldset></div>
+</div>
+</body>
+</html>
+
+DEBUG 2020-11-16 09:29:38,629 908018ms eporting Portal Logger CreateResultApi    - FunctionName = CreateResultApi => Response XMLExceptionMsg = <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+<title>401 - Unauthorized: Access is denied due to invalid credentials.</title>
+<style type="text/css">
+<!--
+body{margin:0;font-size:.7em;font-family:Verdana, Arial, Helvetica, sans-serif;background:#EEEEEE;}
+fieldset{padding:0 15px 10px 15px;} 
+h1{font-size:2.4em;margin:0;color:#FFF;}
+h2{font-size:1.7em;margin:0;color:#CC0000;} 
+h3{font-size:1.2em;margin:10px 0 0 0;color:#000000;} 
+#header{width:96%;margin:0 0 0 0;padding:6px 2% 6px 2%;font-family:"trebuchet MS", Verdana, sans-serif;color:#FFF;
+background-color:#555555;}
+#content{margin:0 0 0 2%;position:relative;}
+.content-container{background:#FFF;width:96%;margin-top:8px;padding:10px;position:relative;}
+-->
+</style>
+</head>
+<body>
+<div id="header"><h1>Server Error</h1></div>
+<div id="content">
+ <div class="content-container"><fieldset>
+  <h2>401 - Unauthorized: Access is denied due to invalid credentials.</h2>
+  <h3>You do not have permission to view this directory or page using the credentials that you supplied.</h3>
+ </fieldset></div>
+</div>
+</body>
+</html>
+
+DEBUG 2020-11-16 09:30:36,576 965964ms eporting Portal Logger CreateResultApi    - FunctionName = CreateResultApi => Response XMLExceptionMsg = <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+<title>401 - Unauthorized: Access is denied due to invalid credentials.</title>
+<style type="text/css">
+<!--
+body{margin:0;font-size:.7em;font-family:Verdana, Arial, Helvetica, sans-serif;background:#EEEEEE;}
+fieldset{padding:0 15px 10px 15px;} 
+h1{font-size:2.4em;margin:0;color:#FFF;}
+h2{font-size:1.7em;margin:0;color:#CC0000;} 
+h3{font-size:1.2em;margin:10px 0 0 0;color:#000000;} 
+#header{width:96%;margin:0 0 0 0;padding:6px 2% 6px 2%;font-family:"trebuchet MS", Verdana, sans-serif;color:#FFF;
+background-color:#555555;}
+#content{margin:0 0 0 2%;position:relative;}
+.content-container{background:#FFF;width:96%;margin-top:8px;padding:10px;position:relative;}
+-->
+</style>
+</head>
+<body>
+<div id="header"><h1>Server Error</h1></div>
+<div id="content">
+ <div class="content-container"><fieldset>
+  <h2>401 - Unauthorized: Access is denied due to invalid credentials.</h2>
+  <h3>You do not have permission to view this directory or page using the credentials that you supplied.</h3>
+ </fieldset></div>
+</div>
+</body>
+</html>
+
+DEBUG 2020-11-30 10:43:50,622   503ms eporting Portal Logger CreateResultApi    - FunctionName = CreateResultApiExceptionMsg = Data at the root level is invalid. Line 1, position 1.
+DEBUG 2020-11-30 10:44:39,652 49533ms eporting Portal Logger CreateResultApi    - FunctionName = CreateResultApiExceptionMsg = Data at the root level is invalid. Line 1, position 1.
+DEBUG 2020-11-30 10:45:55,826   208ms eporting Portal Logger CreateResultApi    - FunctionName = CreateResultApiExceptionMsg = Data at the root level is invalid. Line 1, position 1.
+DEBUG 2020-11-30 10:46:22,579 26962ms eporting Portal Logger CreateResultApi    - FunctionName = CreateResultApiExceptionMsg = Data at the root level is invalid. Line 1, position 1.
+DEBUG 2020-12-02 11:07:00,466 174064848ms eporting Portal Logger CreateResultApi    - FunctionName = CreateResultApiExceptionMsg = Data at the root level is invalid. Line 1, position 1.
+DEBUG 2021-12-17 11:53:17,968  1084ms eporting Portal Logger CreateResultApi    - FunctionName = CreateResultApiExceptionMsg = Root element is missing.
+DEBUG 2021-12-17 11:55:54,547   200ms eporting Portal Logger CreateResultApi    - FunctionName = CreateResultApiExceptionMsg = Root element is missing.
+DEBUG 2021-12-17 11:57:51,729   286ms eporting Portal Logger CreateResultApi    - FunctionName = CreateResultApiExceptionMsg = Root element is missing.
+ERROR 2021-12-17 11:57:52,103   660ms eporting Portal Logger GetOrderStatus     - GetOrderStatus ==> Error!! => 
+System.ArgumentNullException: Value cannot be null.
+Parameter name: value
+   at Newtonsoft.Json.JsonConvert.DeserializeObject(String value, Type type, JsonSerializerSettings settings)
+   at Newtonsoft.Json.JsonConvert.DeserializeObject[T](String value, JsonSerializerSettings settings)
+   at TestPortal.Models.Order.GetOrderStatus() in H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\Models\Order.cs:line 89
+ERROR 2021-12-17 11:57:52,112   669ms eporting Portal Logger GetSupplierOrders  - GetSupplierOrders ==> No oreders status were found!!!
+DEBUG 2021-12-17 13:25:52,231   307ms eporting Portal Logger CreateResultApi    - FunctionName = CreateResultApiExceptionMsg = Root element is missing.
+ERROR 2021-12-17 13:25:52,370   446ms eporting Portal Logger GetOrderStatus     - GetOrderStatus ==> Error!! => 
+System.ArgumentNullException: Value cannot be null.
+Parameter name: value
+   at Newtonsoft.Json.JsonConvert.DeserializeObject(String value, Type type, JsonSerializerSettings settings)
+   at Newtonsoft.Json.JsonConvert.DeserializeObject[T](String value, JsonSerializerSettings settings)
+   at TestPortal.Models.Order.GetOrderStatus() in H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\Models\Order.cs:line 89
+ERROR 2021-12-17 13:25:52,380   456ms eporting Portal Logger GetSupplierOrders  - GetSupplierOrders ==> No oreders status were found!!!
+DEBUG 2021-12-17 13:30:30,060 278137ms eporting Portal Logger CreateResultApi    - FunctionName = CreateResultApiExceptionMsg = Root element is missing.
+ERROR 2021-12-17 13:30:30,127 278204ms eporting Portal Logger GetOrderStatus     - GetOrderStatus ==> Error!! => 
+System.ArgumentNullException: Value cannot be null.
+Parameter name: value
+   at Newtonsoft.Json.JsonConvert.DeserializeObject(String value, Type type, JsonSerializerSettings settings)
+   at Newtonsoft.Json.JsonConvert.DeserializeObject[T](String value, JsonSerializerSettings settings)
+   at TestPortal.Models.Order.GetOrderStatus() in H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\Models\Order.cs:line 89
+ERROR 2021-12-17 13:30:30,127 278204ms eporting Portal Logger GetSupplierOrders  - GetSupplierOrders ==> No oreders status were found!!!
+DEBUG 2021-12-17 13:30:41,804 289880ms eporting Portal Logger CreateResultApi    - FunctionName = CreateResultApiExceptionMsg = Root element is missing.
+ERROR 2021-12-17 13:30:41,866 289942ms eporting Portal Logger GetOrderStatus     - GetOrderStatus ==> Error!! => 
+System.ArgumentNullException: Value cannot be null.
+Parameter name: value
+   at Newtonsoft.Json.JsonConvert.DeserializeObject(String value, Type type, JsonSerializerSettings settings)
+   at Newtonsoft.Json.JsonConvert.DeserializeObject[T](String value, JsonSerializerSettings settings)
+   at TestPortal.Models.Order.GetOrderStatus() in H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\Models\Order.cs:line 89
+DEBUG 2021-12-17 13:30:56,799 304875ms eporting Portal Logger CreateResultApi    - FunctionName = CreateResultApiExceptionMsg = Root element is missing.
+DEBUG 2021-12-17 13:31:23,079 331155ms eporting Portal Logger CreateResultApi    - FunctionName = CreateResultApiExceptionMsg = Root element is missing.
+ERROR 2021-12-17 13:31:23,081 331157ms eporting Portal Logger GetOrderStatus     - GetOrderStatus ==> Error!! => 
+System.ArgumentNullException: Value cannot be null.
+Parameter name: value
+   at Newtonsoft.Json.JsonConvert.DeserializeObject(String value, Type type, JsonSerializerSettings settings)
+   at Newtonsoft.Json.JsonConvert.DeserializeObject[T](String value, JsonSerializerSettings settings)
+   at TestPortal.Models.Order.GetOrderStatus() in H:\DEV\EfectiveImlemantation\TestPortal\TestPortal\Models\Order.cs:line 89
+ERROR 2021-12-17 13:31:23,082 331158ms eporting Portal Logger GetSupplierOrders  - GetSupplierOrders ==> No oreders status were found!!!
+DEBUG 2021-12-17 13:32:21,793   216ms eporting Portal Logger CreateResultApi    - FunctionName = CreateResultApiExceptionMsg = Data at the root level is invalid. Line 1, position 1.
+DEBUG 2021-12-17 13:32:55,714 34138ms eporting Portal Logger CreateResultApi    - FunctionName = CreateResultApiExceptionMsg = Data at the root level is invalid. Line 1, position 1.
+DEBUG 2021-12-17 13:34:52,496   209ms eporting Portal Logger CreateResultApi    - FunctionName = CreateResultApiExceptionMsg = Data at the root level is invalid. Line 1, position 1.
+DEBUG 2021-12-17 13:35:47,377 55091ms eporting Portal Logger CreateResultApi    - FunctionName = CreateResultApiExceptionMsg = Data at the root level is invalid. Line 1, position 1.
+DEBUG 2021-12-17 13:38:42,693   190ms eporting Portal Logger CreateResultApi    - FunctionName = CreateResultApiExceptionMsg = Root element is missing.
+DEBUG 2021-12-17 13:40:57,627   180ms eporting Portal Logger CreateResultApi    - FunctionName = CreateResultApiExceptionMsg = Root element is missing.
+DEBUG 2021-12-17 13:46:00,469   215ms eporting Portal Logger TestDateFormat     - FunctionName = TestDateFormat => Date Value:ExceptionMsg = 17/12/2021 13:46:00
+DEBUG 2021-12-17 14:06:03,263   217ms eporting Portal Logger CreateResultApi    - FunctionName = CreateResultApiExceptionMsg = Root element is missing.

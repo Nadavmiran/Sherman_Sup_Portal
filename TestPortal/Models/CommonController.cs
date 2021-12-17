@@ -85,13 +85,13 @@ namespace TestPortal.Models
                         }
                     }
                 }
-                if ((null != po.objOrder.PORDERSTEXT_SUBFORM) && (po.objOrder.PORDERSTEXT_SUBFORM.Length > 0))
+                if ((null != po.objOrder.PORDERSTEXT_SUBFORM)/* && (po.objOrder.PORDERSTEXT_SUBFORM.Count/*Length > 0)*/)
                 {
-                    foreach (PORDERSTEXT item in po.objOrder.PORDERSTEXT_SUBFORM)
-                    {
-                        po.objOrderText += item.TEXT.Replace("Pdir", "P dir").Replace("dir", " dir");
+                    //foreach (PORDERSTEXT item in po.objOrder.PORDERSTEXT_SUBFORM)
+                    //{
+                        po.objOrderText += po.objOrder.PORDERSTEXT_SUBFORM.TEXT.Replace("Pdir", "P dir").Replace("dir", " dir");
                         //po.objOrderText += item.TEXT.Replace(" ", "&nbsp;").Replace("Pdir", "P dir").Replace("dir", " dir");
-                    }
+                    //}
                 }
                 if (null != po.objOrder.PORDERITEMS_SUBFORM)
                 {
@@ -133,7 +133,7 @@ namespace TestPortal.Models
                     continue;
 
                 List<SHR_OPENSUPORDERS_T> lstLog = GetOrderLineUpdates(obj.ORDNAME);
-                for (int i = 0; i < obj.PORDERITEMS_SUBFORM.Length; i++)
+                for (int i = 0; i < obj.PORDERITEMS_SUBFORM.Count/*Length*/; i++)
                 {
                     if (null == lstLog)
                         obj.PORDERITEMS_SUBFORM[i].SumOrdLineUpdates = 0;
@@ -163,7 +163,7 @@ namespace TestPortal.Models
         private List<SHR_OPENSUPORDERS_T> GetOrderLineUpdates(string ORDNAME)
         {
             OrderItems oi = new OrderItems();
-            string res = oi.Call_Get("/SHR_OPENSUPORDERS_T?$filter=ORDNAME eq '" + ORDNAME + "'&$expand=SHR_DUEDATELOG_SUBFORM($filter=USERLOGIN eq '" + ConfigurationManager.AppSettings["AppAPI_U"].ToString() + "')");
+            string res = oi.Call_Get("SHR_OPENSUPORDERS_T?$filter=ORDNAME eq '" + ORDNAME + "'&$expand=SHR_DUEDATELOG_SUBFORM($filter=USERLOGIN eq '" + ConfigurationManager.AppSettings["AppAPI_U"].ToString() + "')");
             SHR_OPENSUPORDERS_T_Warpper ow = JsonConvert.DeserializeObject<SHR_OPENSUPORDERS_T_Warpper>(res);
             if (null == ow || ow.Value.Count == 0)
                 return null;
@@ -199,7 +199,7 @@ namespace TestPortal.Models
             prodName = prodName.Replace("#", "");
             
             po.objOrder = o.GetOrderProductDetailsByLine(orderID, prodName, ordLine);
-            if (null == po.objOrder || null == po.objOrder.PORDERITEMS_SUBFORM || po.objOrder.PORDERITEMS_SUBFORM.Length == 0)
+            if (null == po.objOrder || null == po.objOrder.PORDERITEMS_SUBFORM || po.objOrder.PORDERITEMS_SUBFORM.Count/*Length*/ == 0)
             {
                 po.ErrorDescription = "Bed request ==> PART NAME was not found => PARTNAME = " + tmpProdName;
                 return Json(po);
@@ -242,16 +242,16 @@ namespace TestPortal.Models
                     po.htmlText = oi.GetOrderTypeText(po.objOrder.TYPECODE);
             }
 
-            if ((null != po.objOrder.PORDERSTEXT_SUBFORM) && (po.objOrder.PORDERSTEXT_SUBFORM.Length > 0))
+            if ((null != po.objOrder.PORDERSTEXT_SUBFORM)/* && (po.objOrder.PORDERSTEXT_SUBFORM.Count/*Length > 0)*/)
             {
-                foreach (PORDERSTEXT item in po.objOrder.PORDERSTEXT_SUBFORM)
-                {
-                    po.objOrderText += item.TEXT.Replace("Pdir", "P dir").Replace("dir", " dir");
+                //foreach (PORDERSTEXT item in po.objOrder.PORDERSTEXT_SUBFORM)
+                //{
+                    po.objOrderText += po.objOrder.PORDERSTEXT_SUBFORM.TEXT.Replace("Pdir", "P dir").Replace("dir", " dir");
                     //po.objOrderText += item.TEXT.Replace(" ", "&nbsp;").Replace("Pdir", "P dir").Replace("dir", " dir");
-                }
+                //}
             }
 
-            if ((null != po.objOrder.PORDERITEMS_SUBFORM) && (po.objOrder.PORDERITEMS_SUBFORM.Length > 0))
+            if ((null != po.objOrder.PORDERITEMS_SUBFORM) && (po.objOrder.PORDERITEMS_SUBFORM.Count/*Length*/ > 0))
             {
                 po.objProduct = po.objOrder.PORDERITEMS_SUBFORM[0];
                 po.objProduct.ORD = po.objOrder.ORD;
@@ -329,7 +329,7 @@ namespace TestPortal.Models
                     po.htmlText = oi.GetOrderTypeText(po.objOrder.TYPECODE);
             }
 
-            if ((null != po.objOrder.PORDERITEMS_SUBFORM) && (po.objOrder.PORDERITEMS_SUBFORM.Length > 0))
+            if ((null != po.objOrder.PORDERITEMS_SUBFORM) && (po.objOrder.PORDERITEMS_SUBFORM.Count/*Length*/ > 0))
             {
                 po.objProduct = po.objOrder.PORDERITEMS_SUBFORM[0];
                 po.objProduct.ORD = po.objOrder.ORD;
@@ -361,7 +361,7 @@ namespace TestPortal.Models
                 }
             }
             // Get Attachments
-            if ((null == po.objOrder.EXTFILES_SUBFORM) || (po.objOrder.EXTFILES_SUBFORM.Length == 0))
+            if ((null == po.objOrder.EXTFILES_SUBFORM) || (po.objOrder.EXTFILES_SUBFORM.Count/*.Length*/ == 0))
             {
                 GetProductAttachments(orderID, prodName, ref po);
             }
@@ -403,9 +403,9 @@ namespace TestPortal.Models
             po.objOrder = o.GetOrderDetails(orderID);
             po.lstItemsObject = new List<OrderItems>();
 
-            if ((null != po.objOrder.PORDERITEMS_SUBFORM) && (po.objOrder.PORDERITEMS_SUBFORM.Length > 0))
+            if ((null != po.objOrder.PORDERITEMS_SUBFORM) && (po.objOrder.PORDERITEMS_SUBFORM.Count/*Length*/ > 0))
             {
-                for (int i = 0; i < po.objOrder.PORDERITEMS_SUBFORM.Length; i++)
+                for (int i = 0; i < po.objOrder.PORDERITEMS_SUBFORM.Count/*Length*/; i++)
                 {
                     po.objOrder.PORDERITEMS_SUBFORM[i].ORD = po.objOrder.ORD;
                     po.objOrder.PORDERITEMS_SUBFORM[i].ORDNAME = po.objOrder.ORDNAME;
@@ -419,7 +419,7 @@ namespace TestPortal.Models
                 GetProductObjAndSamples(po.objOrder.OrderID, po.objOrder.OrderNumber, po.objProduct.PARTNAME, ordLine, ref po);
             }
             // Get Attachments
-            if ((null == po.objOrder.EXTFILES_SUBFORM) || (po.objOrder.EXTFILES_SUBFORM.Length == 0))
+            if ((null == po.objOrder.EXTFILES_SUBFORM) || (po.objOrder.EXTFILES_SUBFORM.Count/*Length*/ == 0))
             {
                 GetProductAttachments(orderID, prodName, ref po);
             }
@@ -435,7 +435,7 @@ namespace TestPortal.Models
             {
                 try
                 {
-                    if ((null != po.objOrder.PORDERITEMS_SUBFORM) && (po.objOrder.PORDERITEMS_SUBFORM.Length > 0))
+                    if ((null != po.objOrder.PORDERITEMS_SUBFORM) && (po.objOrder.PORDERITEMS_SUBFORM.Count/*Length*/ > 0))
                     {
                         po.objProduct = po.objOrder.PORDERITEMS_SUBFORM[0];
                         po.objProduct.ORD = po.objOrder.ORD;
@@ -839,7 +839,7 @@ namespace TestPortal.Models
             po.objProduct = po.objOrder.PORDERITEMS_SUBFORM[0];
             po.lstSampleObject = s.GetOrderSamples(orderName, po.User.Supplier_ID, prodName);
             // Get Attachments
-            if ((null == po.objOrder.EXTFILES_SUBFORM) || (po.objOrder.EXTFILES_SUBFORM.Length == 0))
+            if ((null == po.objOrder.EXTFILES_SUBFORM) || (po.objOrder.EXTFILES_SUBFORM.Count/*Length*/ == 0))
             {
                 GetProductAttachments(orderID, prodName, ref po);
             }
@@ -923,7 +923,7 @@ namespace TestPortal.Models
             po.lstSampleObject = s.GetOrderSamples(orderName, po.User.Supplier_ID, prodName);
 
             // Get Attachments
-            if ((null == po.objOrder.EXTFILES_SUBFORM) || (po.objOrder.EXTFILES_SUBFORM.Length == 0))
+            if ((null == po.objOrder.EXTFILES_SUBFORM) || (po.objOrder.EXTFILES_SUBFORM.Count/*Length*/ == 0))
             {
                 GetProductAttachments(orderID, prodName, ref po);
             }

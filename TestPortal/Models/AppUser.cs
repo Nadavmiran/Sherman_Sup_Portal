@@ -40,7 +40,7 @@ namespace TestPortal.Models
         internal void DoLogin()
         {
             IsAuthenticated = false;
-            string query = "/PHONEBOOK?$filter=EMAIL eq '" + Email + "'&$expand=EFI_PORTALDEF_SUBFORM($filter=USEREMAIL eq '" + Email + "' and PASSWORD eq '" + Password + "')";
+            string query = "PHONEBOOK?$filter=EMAIL eq '" + Email + "'&$expand=EFI_PORTALDEF_SUBFORM($filter=USEREMAIL eq '" + Email + "' and PASSWORD eq '" + Password + "')";
             ResultAPI ra = Do_Call_Get(query);
             AppUserWarpper ow = JsonConvert.DeserializeObject<AppUserWarpper>(ra.JsonResult);
             if (null != ow && null != ow.Value && ow.Value.Count > 0)

@@ -42,7 +42,7 @@ namespace TestPortal.Models
 
         internal List<Attachments> GetProductAttachments(int orderID, string prodName)
         {
-            string query = "/PORDERS?$filter=ORD eq " + orderID + "&$expand=EXTFILES_SUBFORM($filter=SHR_PARTNAME eq '" + prodName + "')";
+            string query = "PORDERS?$filter=ORD eq " + orderID + "&$expand=EXTFILES_SUBFORM($filter=SHR_PARTNAME eq '" + prodName + "')";
             query = query.Replace("\"", "");
 
             string res = Call_Get(query);
